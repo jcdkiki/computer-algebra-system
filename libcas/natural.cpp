@@ -41,7 +41,7 @@ std::istream& operator>>(std::istream& is, Natural& number)
     return is;
 }
 
-int cmp(Natural n1, Natural n2) {
+int Natural::cmp(const Natural &n1, const Natural &n2) {
     if (n1.digits.size() > n2.digits.size()) {
         return 2; // n1 > n2
     }
@@ -61,4 +61,36 @@ int cmp(Natural n1, Natural n2) {
         }
     }
     return 0; // n1 == n2
+}
+
+bool Natural::operator==(const Natural &rhs) const
+{
+    return (Natural::cmp(*this, rhs) == 0);
+}
+
+bool Natural::operator!=(const Natural &rhs) const
+{
+    return (Natural::cmp(*this, rhs) != 0);
+}
+
+bool Natural::operator>(const Natural &rhs) const
+{
+    return (Natural::cmp(*this, rhs) == 2);
+}
+
+bool Natural::operator<(const Natural &rhs) const
+{
+    return (Natural::cmp(*this, rhs) == 1);
+}
+
+bool Natural::operator>=(const Natural &rhs) const
+{
+    int res = Natural::cmp(*this, rhs);
+    return (res == 2) || (res == 0);
+}
+
+bool Natural::operator<=(const Natural &rhs) const
+{
+    int res = Natural::cmp(*this, rhs);
+    return (res == 1) || (res == 0);
 }

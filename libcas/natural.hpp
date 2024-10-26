@@ -4,12 +4,15 @@
 #include <vector>
 #include <ostream>
 #include <istream>
+#include <string>
 
 class Natural {
     using Digit = unsigned char;
     std::vector<Digit> digits;
 public:
     Natural();
+    explicit Natural(const char *str);
+    std::string asString();
 
     friend std::ostream& operator<<(std::ostream& os, const Natural& number);
     friend std::istream& operator>>(std::istream& is, Natural& number);

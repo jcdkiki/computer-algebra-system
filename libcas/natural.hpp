@@ -14,7 +14,6 @@ public:
     friend std::ostream& operator<<(std::ostream& os, const Natural& number);
     friend std::istream& operator>>(std::istream& is, Natural& number);
 
-    friend int cmp(Natural n1, Natural n2);
     friend bool cmp_with_zero(Natural n1);
     friend void inc(Natural& n);
     friend Natural add(Natural n1, Natural n2);
@@ -33,7 +32,6 @@ public:
 std::ostream& operator<<(std::ostream& os, const Natural& number);
 std::istream& operator>>(std::istream& is, Natural& number);
 
-int cmp(Natural n1, Natural n2);
 bool cmp_with_zero(Natural n1);
 void inc(Natural& n);
 Natural add(Natural n1, Natural n2);

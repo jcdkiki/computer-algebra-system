@@ -15,11 +15,12 @@ public:
     friend std::istream& operator>>(std::istream& is, Natural& number);
 
     friend int cmp(Natural n1, Natural n2);
+    friend bool cmp_with_zero(Natural n1);
 };
 
 std::ostream& operator<<(std::ostream& os, const Natural& number);
 std::istream& operator>>(std::istream& is, Natural& number);
 
 int cmp(Natural n1, Natural n2);
-
+bool cmp_with_zero(Natural n1);
 #endif

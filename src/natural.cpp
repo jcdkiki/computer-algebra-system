@@ -62,3 +62,13 @@ int cmp(Natural n1, Natural n2) {
     }
     return 0; // n1 == n2
 }
+
+bool cmp_with_zero(Natural n1) {
+    for (size_t i = 0; i < n1.digits.size(); ++i) {
+        if (n1.digits[i] != 0) {
+            return true;
+        }
+    }
+    return false;
+}
+

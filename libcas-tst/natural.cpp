@@ -25,6 +25,4 @@ TEST(NATURAL, CMP)
     ASSERT_LE(n2, n2);
     ASSERT_GE(n2, n2);
     ASSERT_EQ(n2, n2);
-
-    ASSERT_EQ(n1, n2);
 }

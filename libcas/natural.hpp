@@ -18,6 +18,16 @@ public:
     friend bool cmp_with_zero(Natural n1);
     friend void inc(Natural& n);
     friend Natural add(Natural n1, Natural n2);
+    
+    Natural operator+(const Natural &number) const;
+    static int cmp(const Natural &n1, const Natural &n2);
+
+    bool operator==(const Natural &rhs) const;
+    bool operator!=(const Natural &rhs) const;
+    bool operator>(const Natural &rhs) const;
+    bool operator<(const Natural &rhs) const;
+    bool operator>=(const Natural &rhs) const;
+    bool operator<=(const Natural &rhs) const;
 };
 
 std::ostream& operator<<(std::ostream& os, const Natural& number);
@@ -27,4 +37,5 @@ int cmp(Natural n1, Natural n2);
 bool cmp_with_zero(Natural n1);
 void inc(Natural& n);
 Natural add(Natural n1, Natural n2);
+
 #endif

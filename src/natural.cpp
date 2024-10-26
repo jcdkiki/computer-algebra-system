@@ -87,3 +87,21 @@ void inc(Natural& n) {
     }
     std::reverse(n.digits.begin(), n.digits.end());
 }
+
+Natural add(Natural n1, Natural n2) {
+    Natural::Digit carry = 0;
+    
+    std::reverse(n1.digits.begin(), n1.digits.end());
+    std::reverse(n2.digits.begin(), n2.digits.end());
+
+    for (size_t i = 0; i < std::max(n1.digits.size(), n2.digits.size()) || carry; ++i) {
+        if (i == n1.digits.size())
+            n1.digits.push_back (0);
+        n1.digits[i] += carry + (i < n2.digits.size() ? n2.digits[i] : 0);
+        carry = n1.digits[i] >= BASE;
+        if (carry)  n1.digits[i] -= BASE;
+    }
+
+    std::reverse(n1.digits.begin(), n1.digits.end());
+    return n1;
+}

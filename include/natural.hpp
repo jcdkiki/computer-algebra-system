@@ -13,9 +13,13 @@ public:
 
     friend std::ostream& operator<<(std::ostream& os, const Natural& number);
     friend std::istream& operator>>(std::istream& is, Natural& number);
+
+    friend int cmp(Natural n1, Natural n2);
 };
 
 std::ostream& operator<<(std::ostream& os, const Natural& number);
 std::istream& operator>>(std::istream& is, Natural& number);
+
+int cmp(Natural n1, Natural n2);
 
 #endif

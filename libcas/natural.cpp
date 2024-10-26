@@ -7,7 +7,7 @@ Natural::Natural() : digits(1, 0) {}
 
 std::ostream& operator<<(std::ostream& os, const Natural& number)
 {
-    for (ssize_t i = 0; i < number.digits.size(); ++i) {
+    for (ssize_t i = number.digits.size() - 1; i >= 0; --i) {
         os << (char)(number.digits[i] + '0');
     }
     return os;
@@ -38,6 +38,8 @@ std::istream& operator>>(std::istream& is, Natural& number)
         number.digits.push_back(0);
     }
 
+    std::reverse(number.digits.begin(), number.digits.end());
+
     return is;
 }
 
@@ -51,7 +53,7 @@ int Natural::cmp(const Natural &n1, const Natural &n2) {
     }
 
     else {
-        for (size_t i = 0; i < n1.digits.size(); ++i) {
+        for (size_t i = n1.digits.size(); i > 0; --i) {
             if (n1.digits[i] > n2.digits[i]) {
                 return 2; // n1 > n2
             } 

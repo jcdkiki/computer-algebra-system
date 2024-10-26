@@ -5,7 +5,7 @@
 TEST(NATURAL, CMP)
 {
     std::stringstream input;
-    input << "100 200";
+    input << "123 321";
 
     Natural n1, n2;
     input >> n1 >> n2;

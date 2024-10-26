@@ -2,6 +2,7 @@
 #include <algorithm>
 #include <iostream>
 #include <cctype>
+#define BASE 10;
 
 Natural::Natural() : digits(1, 0) {}
 
@@ -72,3 +73,17 @@ bool cmp_with_zero(Natural n1) {
     return false;
 }
 
+void inc(Natural& n) {
+    Natural::Digit carry = 1;
+    std::reverse(n.digits.begin(), n.digits.end());
+    for (size_t i = 0; i < n.digits.size() || carry; ++i) {
+        if (i == n.digits.size())
+            n.digits.push_back(0);
+        
+        n.digits[i] += carry;
+
+        carry = n.digits[i] >= BASE;
+        if (carry) n.digits[i] -= BASE;  
+    }
+    std::reverse(n.digits.begin(), n.digits.end());
+}

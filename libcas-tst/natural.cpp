@@ -26,3 +26,19 @@ TEST(NATURAL, CMP)
     ASSERT_GE(n2, n2);
     ASSERT_EQ(n2, n2);
 }
+
+TEST(NATURAL, MULBY10K) 
+{
+    std::stringstream input;
+    input << "123";
+
+    Natural n1;
+    input >> n1;
+
+    Natural res = mul_natural_by_10_in_k(n1, 3);
+
+    std::stringstream output;
+    output << res;
+
+    ASSERT_EQ(output.str(), "123000");
+}

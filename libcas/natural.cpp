@@ -98,10 +98,6 @@ bool Natural::operator<=(const Natural &rhs) const
 }
 
 Natural mul_natural_by_10_in_k(Natural n, size_t k) {
-    std::reverse(n.digits.begin(), n.digits.end());
-    for (size_t i = 0; i < k; ++i) {
-        n.digits.push_back(0);
-    }
-    std::reverse(n.digits.begin(), n.digits.end());
+    n.digits.insert(n.digits.begin(), k, 0);
     return n;
 }

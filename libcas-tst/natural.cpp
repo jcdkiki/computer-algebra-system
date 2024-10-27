@@ -26,3 +26,15 @@ TEST(NATURAL, CMP)
     ASSERT_GE(n2, n2);
     ASSERT_EQ(n2, n2);
 }
+
+TEST(NATURAL, ADDITION) 
+{
+    std::stringstream input;
+    input << "123 321";
+
+    Natural n1, n2;
+    input >> n1 >> n2;
+    std::stringstream output;
+    output << n1 + n2;
+    EXPECT_EQ(output.str(), "444");
+}

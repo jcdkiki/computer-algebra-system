@@ -9,13 +9,16 @@ class Natural {
     using Digit = unsigned char;
     std::vector<Digit> digits;
 public:
+    constexpr static int BASE = 10;
+
     Natural();
+    Natural(std::vector<Natural::Digit> digits);
 
     friend std::ostream& operator<<(std::ostream& os, const Natural& number);
     friend std::istream& operator>>(std::istream& is, Natural& number);
 
     friend bool cmp_with_zero(Natural n1);
-    friend void inc(Natural& n);
+    friend void inc(Natural &n);
     friend Natural add(Natural n1, Natural n2);
     
     Natural operator+(const Natural &number) const;

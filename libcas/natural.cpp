@@ -2,9 +2,10 @@
 #include <algorithm>
 #include <iostream>
 #include <cctype>
-#define BASE 10;
 
 Natural::Natural() : digits(1, 0) {}
+
+Natural::Natural(std::vector<Natural::Digit> digits): digits(digits) {}
 
 std::ostream& operator<<(std::ostream& os, const Natural& number)
 {
@@ -77,34 +78,29 @@ bool cmp_with_zero(Natural n1) {
 
 void inc(Natural& n) {
     Natural::Digit carry = 1;
-    std::reverse(n.digits.begin(), n.digits.end());
+
     for (size_t i = 0; i < n.digits.size() || carry; ++i) {
         if (i == n.digits.size())
             n.digits.push_back(0);
         
         n.digits[i] += carry;
 
-        carry = n.digits[i] >= BASE;
-        if (carry) n.digits[i] -= BASE;  
+        carry = n.digits[i] >= Natural::BASE;
+        if (carry) n.digits[i] -= Natural::BASE;  
     }
-    std::reverse(n.digits.begin(), n.digits.end());
 }
 
 Natural add(Natural n1, Natural n2) {
     Natural::Digit carry = 0;
-    
-    std::reverse(n1.digits.begin(), n1.digits.end());
-    std::reverse(n2.digits.begin(), n2.digits.end());
 
     for (size_t i = 0; i < std::max(n1.digits.size(), n2.digits.size()) || carry; ++i) {
         if (i == n1.digits.size())
             n1.digits.push_back (0);
         n1.digits[i] += carry + (i < n2.digits.size() ? n2.digits[i] : 0);
-        carry = n1.digits[i] >= BASE;
-        if (carry)  n1.digits[i] -= BASE;
+        carry = n1.digits[i] >= Natural::BASE;
+        if (carry) n1.digits[i] -= Natural::BASE;
     }
 
-    std::reverse(n1.digits.begin(), n1.digits.end());
     return n1;
 }
 
@@ -138,4 +134,8 @@ bool Natural::operator<=(const Natural &rhs) const
 {
     int res = Natural::cmp(*this, rhs);
     return (res == 1) || (res == 0);
+}
+
+Natural Natural::operator+(const Natural &number) const {
+    return add(Natural(this->digits), number);
 }

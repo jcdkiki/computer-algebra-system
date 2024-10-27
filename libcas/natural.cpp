@@ -96,3 +96,25 @@ bool Natural::operator<=(const Natural &rhs) const
     int res = Natural::cmp(*this, rhs);
     return (res == 1) || (res == 0);
 }
+
+Natural mul_natural_by_digit(Natural n, Natural::Digit d) {
+    Natural::Digit carry = 0;
+    for (size_t i = 0; i < n.digits.size() || carry; ++i) {
+        if (i == n.digits.size()) {
+            n.digits.push_back(0);
+        }
+
+        size_t temp = carry + n.digits[i] * d;
+
+        n.digits[i] = temp % Natural::BASE;
+        carry = temp / Natural::BASE;
+    }
+
+
+    //strip insignificant zeros 00001 => 1
+    while (n.digits.size() > 1 && n.digits.back() == 0) {
+        n.digits.pop_back();
+    }
+
+    return n;
+}

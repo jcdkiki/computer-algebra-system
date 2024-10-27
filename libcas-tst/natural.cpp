@@ -26,3 +26,21 @@ TEST(NATURAL, CMP)
     ASSERT_GE(n2, n2);
     ASSERT_EQ(n2, n2);
 }
+
+TEST(NATURAL, SUB) 
+{
+    std::stringstream input;
+    input << "321 123 123 321";
+
+    Natural n1, n2, n3, n4;
+    input >> n1 >> n2 >> n3 >> n4;
+
+    Natural res1 = n1 - n2;
+    Natural res2 = n3 - n4;
+    std::stringstream output1;
+    std::stringstream output2;
+    output1 << res1;
+    output2 << res2;
+    ASSERT_EQ(output1.str(), "198");
+    ASSERT_EQ(output2.str(), "198");
+}

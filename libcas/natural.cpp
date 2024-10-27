@@ -5,6 +5,8 @@
 
 Natural::Natural() : digits(1, 0) {}
 
+Natural::Natural(std::vector<Digit> digits): digits(digits) {}
+
 std::ostream& operator<<(std::ostream& os, const Natural& number)
 {
     for (ssize_t i = number.digits.size() - 1; i >= 0; --i) {
@@ -53,7 +55,7 @@ int Natural::cmp(const Natural &n1, const Natural &n2) {
     }
 
     else {
-        for (size_t i = n1.digits.size(); i > 0; --i) {
+        for (size_t i = n1.digits.size() - 1; i > 0; --i) {
             if (n1.digits[i] > n2.digits[i]) {
                 return 2; // n1 > n2
             } 
@@ -63,6 +65,30 @@ int Natural::cmp(const Natural &n1, const Natural &n2) {
         }
     }
     return 0; // n1 == n2
+}
+
+Natural sub(Natural n1, Natural n2) {
+    if (n1 < n2) {
+        std::swap(n1, n2); // n1 must be greater than n2
+    } 
+
+    Natural::Digit carry = 0;
+    for (size_t i = 0; i < n2.digits.size() || carry; ++i) {
+        n1.digits[i] -= carry + ((i < n2.digits.size()) ? n2.digits[i]: 0);
+        carry = n1.digits[i] < 0;
+        if (carry) n1.digits[i] += Natural::BASE;
+    }
+
+    // strip insignificant zeros
+    while (n1.digits.size() > 1 && n1.digits.back() == 0) {
+        n1.digits.pop_back();
+    }
+
+    return n1;
+}
+
+Natural Natural::operator-(const Natural &number) const {
+    return sub(Natural(this->digits), number);
 }
 
 bool Natural::operator==(const Natural &rhs) const

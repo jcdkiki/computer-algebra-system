@@ -29,12 +29,26 @@ TEST(NATURAL, CMP)
 
 TEST(NATURAL, ADDITION) 
 {
-    std::stringstream input;
-    input << "123 321";
+    using pair = std::pair<const char*, const char*>;
+    for (auto [input, expected] : {
+        pair { "123 321", "444" },
+        pair { "0 521", "521" },
+        pair { "521 0", "521" },
+        pair { "12 987654321", "987654333" },
+        pair { "123456789 98", "123456887" },
+        pair { "900 101", "1001" },
+        pair { "999 1", "1000" },
+        pair { "0 0", "0" }
+    })
+    {
+        std::stringstream ss;
+        ss << input;
 
-    Natural n1, n2;
-    input >> n1 >> n2;
-    std::stringstream output;
-    output << n1 + n2;
-    EXPECT_EQ(output.str(), "444");
+        Natural n1, n2;
+        ss >> n1 >> n2;
+
+        std::stringstream output;
+        output << (n1 + n2);
+        EXPECT_EQ(output.str(), expected);
+    }
 }

@@ -5,8 +5,6 @@
 
 Natural::Natural() : digits(1, 0) {}
 
-Natural::Natural(std::vector<Natural::Digit> digits): digits(digits) {}
-
 std::ostream& operator<<(std::ostream& os, const Natural& number)
 {
     for (ssize_t i = number.digits.size() - 1; i >= 0; --i) {
@@ -76,34 +74,6 @@ bool cmp_with_zero(Natural n1) {
     return false;
 }
 
-void inc(Natural& n) {
-    Natural::Digit carry = 1;
-
-    for (size_t i = 0; i < n.digits.size() || carry; ++i) {
-        if (i == n.digits.size())
-            n.digits.push_back(0);
-        
-        n.digits[i] += carry;
-
-        carry = n.digits[i] >= Natural::BASE;
-        if (carry) n.digits[i] -= Natural::BASE;  
-    }
-}
-
-Natural add(Natural n1, Natural n2) {
-    Natural::Digit carry = 0;
-
-    for (size_t i = 0; i < std::max(n1.digits.size(), n2.digits.size()) || carry; ++i) {
-        if (i == n1.digits.size())
-            n1.digits.push_back (0);
-        n1.digits[i] += carry + (i < n2.digits.size() ? n2.digits[i] : 0);
-        carry = n1.digits[i] >= Natural::BASE;
-        if (carry) n1.digits[i] -= Natural::BASE;
-    }
-
-    return n1;
-}
-
 bool Natural::operator==(const Natural &rhs) const
 {
     return (Natural::cmp(*this, rhs) == 0);
@@ -137,5 +107,53 @@ bool Natural::operator<=(const Natural &rhs) const
 }
 
 Natural Natural::operator+(const Natural &number) const {
-    return add(Natural(this->digits), number);
+    Natural res(*this);
+    Natural::Digit carry = 0;
+
+    for (size_t i = 0; i < std::max(res.digits.size(), number.digits.size()) || carry; ++i) {
+        if (i == res.digits.size()) {
+            res.digits.push_back (0);
+        }
+        res.digits[i] += carry + (i < number.digits.size() ? number.digits[i] : 0);
+        carry = res.digits[i] >= Natural::BASE;
+        if (carry) res.digits[i] -= Natural::BASE;
+    }
+
+    return res;
+}
+
+Natural& Natural::operator+=(const Natural &number) {
+    Natural::Digit carry = 0;
+
+    for (size_t i = 0; i < std::max(this->digits.size(), number.digits.size()) || carry; ++i) {
+        if (i == this->digits.size()) {
+            this->digits.push_back (0);
+        }
+        this->digits[i] += carry + (i < number.digits.size() ? number.digits[i] : 0);
+        carry = this->digits[i] >= Natural::BASE;
+        if (carry) this->digits[i] -= Natural::BASE;
+    }
+
+    return *this;
+}
+
+Natural& Natural::operator++() {
+    Natural::Digit carry = 1;
+
+    for (size_t i = 0; i < this->digits.size() || carry; ++i) {
+        if (i == this->digits.size())
+            this->digits.push_back(0);
+        
+        this->digits[i] += carry;
+
+        carry = this->digits[i] >= Natural::BASE;
+        if (carry) this->digits[i] -= Natural::BASE;  
+    }
+    return *this;
+}
+
+Natural Natural::operator++(int) {
+    Natural old = *this;
+    operator++();
+    return old;
 }

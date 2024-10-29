@@ -52,3 +52,28 @@ TEST(NATURAL, ADDITION)
         EXPECT_EQ(output.str(), expected);
     }
 }
+
+TEST(NATURAL, INC) 
+{
+    using pair = std::pair<const char*, const char*>;
+    for (auto [input, expected] : {
+        pair { "321", "322" },
+        pair { "521", "522" },
+        pair { "0", "1" },
+        pair { "987654321", "987654322" },
+        pair { "123456789", "123456790" },
+        pair { "99", "100" },
+        pair { "999", "1000" }
+    })
+    {
+        std::stringstream ss;
+        ss << input;
+
+        Natural n1;
+        ss >> n1;
+        n1++;
+        std::stringstream output;
+        output << n1;
+        EXPECT_EQ(output.str(), expected);
+    }
+}

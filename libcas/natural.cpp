@@ -5,8 +5,6 @@
 
 Natural::Natural() : digits(1, 0) {}
 
-Natural::Natural(std::vector<Digit> digits): digits(digits) {}
-
 std::ostream& operator<<(std::ostream& os, const Natural& number)
 {
     for (ssize_t i = number.digits.size() - 1; i >= 0; --i) {
@@ -99,14 +97,14 @@ bool Natural::operator<=(const Natural &rhs) const
     return (res == 1) || (res == 0);
 }
 
-Natural mul(Natural n1, Natural n2) {
+Natural Natural::operator*(const Natural &number) const {
     Natural::Digit carry = 0;
     Natural res;
-    res.digits.resize(n1.digits.size() + n2.digits.size());
+    res.digits.resize(this->digits.size() + number.digits.size());
 
-    for (size_t i = 0; i < n1.digits.size(); ++i) {
-        for (size_t j = 0; j < n2.digits.size() || carry; ++j) {
-            size_t temp = res.digits[i + j] + n1.digits[i] * (j < n2.digits.size() ? n2.digits[j]: 0) + carry;
+    for (size_t i = 0; i < this->digits.size(); ++i) {
+        for (size_t j = 0; j < number.digits.size() || carry; ++j) {
+            size_t temp = res.digits[i + j] + this->digits[i] * (j < number.digits.size() ? number.digits[j]: 0) + carry;
             res.digits[i + j] = temp % Natural::BASE;
             carry = temp / Natural::BASE;
         }
@@ -119,6 +117,6 @@ Natural mul(Natural n1, Natural n2) {
     return res;
 }
 
-Natural Natural::operator*(const Natural &number) const {
-    return mul(Natural(this->digits), number);
+Natural Natural::operator*=(const Natural &number) {
+    return (*this) * number;
 }

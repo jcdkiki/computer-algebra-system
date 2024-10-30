@@ -27,17 +27,28 @@ TEST(NATURAL, CMP)
     ASSERT_EQ(n2, n2);
 }
 
-TEST(NATURAL, MUL) 
+TEST(NATURAL, MUL)
 {
-    std::stringstream input;
-    input << "123 123";
+    using pair = std::pair<const char*, const char*>;
+    for (auto [input, expected] : {
+        pair { "100 10", "1000" },
+        pair { "12 12", "144" },
+        pair { "12 0", "0" },
+        pair { "0 0", "0" },
+        pair { "12 123", "1476" },
+        pair { "123 12", "1476" },
+        pair { "1 1", "1" },
+        pair { "999 1", "999" },
+    })
+    {
+        std::stringstream ss;
+        ss << input;
 
-    Natural n1, n2;
-    input >> n1 >> n2;
+        Natural n1, n2;
+        ss >> n1 >> n2;
 
-    std::stringstream output;
-    Natural res = n1 * n2;
-    output << res;
-
-    ASSERT_EQ(output.str(), "15129");
+        std::stringstream output;
+        output << (n1 * n2);
+        EXPECT_EQ(output.str(), expected);
+    }
 }

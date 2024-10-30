@@ -18,6 +18,7 @@ public:
     Natural operator+(const Natural &number) const;
     static int cmp(const Natural &n1, const Natural &n2);
     friend Natural mul_natural_by_10_in_k(Natural n, size_t k);
+    Natural operator<<(size_t k);
 
 
     bool operator==(const Natural &rhs) const;

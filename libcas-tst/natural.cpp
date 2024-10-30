@@ -27,18 +27,27 @@ TEST(NATURAL, CMP)
     ASSERT_EQ(n2, n2);
 }
 
-TEST(NATURAL, MULBY10K) 
+TEST(NATURAL, MULBY10K)
 {
-    std::stringstream input;
-    input << "123";
+    using pair = std::pair<const char*, const char*>;
+    for (auto [input, expected] : {
+        pair { "100 1", "1000" },
+        pair { "1 1", "10" },
+        pair { "123 0", "123" },
+        pair { "137 2", "13700" },
+        pair { "321 2", "32100" },
+        pair { "0 2", "0" },
+    })
+    {
+        std::stringstream ss;
+        ss << input;
 
-    Natural n1;
-    input >> n1;
+        Natural n;
+        size_t k;
+        ss >> n >> k;
 
-    Natural res = mul_natural_by_10_in_k(n1, 3);
-
-    std::stringstream output;
-    output << res;
-
-    ASSERT_EQ(output.str(), "123000");
+        std::stringstream output;
+        output << (n << k);
+        EXPECT_EQ(output.str(), expected);
+    }
 }

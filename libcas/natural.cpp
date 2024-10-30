@@ -99,5 +99,13 @@ bool Natural::operator<=(const Natural &rhs) const
 
 Natural mul_natural_by_10_in_k(Natural n, size_t k) {
     n.digits.insert(n.digits.begin(), k, 0);
+    //strip insignificant zeros 000 => 0
+    while (n.digits.size() > 1 && n.digits.back() == 0) {
+        n.digits.pop_back();
+    }
     return n;
+}
+
+Natural Natural::operator<<(size_t k) {
+    return mul_natural_by_10_in_k(*this, k);
 }

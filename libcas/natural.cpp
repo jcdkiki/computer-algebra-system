@@ -5,8 +5,6 @@
 
 Natural::Natural() : digits(1, 0) {}
 
-Natural::Natural(std::vector<Digit> digits): digits(digits) {}
-
 std::ostream& operator<<(std::ostream& os, const Natural& number)
 {
     for (ssize_t i = number.digits.size() - 1; i >= 0; --i) {
@@ -67,28 +65,67 @@ int Natural::cmp(const Natural &n1, const Natural &n2) {
     return 0; // n1 == n2
 }
 
-Natural sub(Natural n1, Natural n2) {
-    if (n1 < n2) {
-        std::swap(n1, n2); // n1 must be greater than n2
-    } 
+Natural Natural::operator-(const Natural &number) const {
+    Natural res(*this);
+    if (number > res) {
+        throw std::runtime_error("cannot sub from fewer number");
+    }
 
     Natural::Digit carry = 0;
-    for (size_t i = 0; i < n2.digits.size() || carry; ++i) {
-        n1.digits[i] -= carry + ((i < n2.digits.size()) ? n2.digits[i]: 0);
-        carry = n1.digits[i] < 0;
-        if (carry) n1.digits[i] += Natural::BASE;
+    for (size_t i = 0; i < number.digits.size() || carry; ++i) {
+        res.digits[i] -= carry + ((i < number.digits.size()) ? number.digits[i]: 0);
+        carry = res.digits[i] < 0;
+        if (carry) res.digits[i] += Natural::BASE;
     }
 
     // strip insignificant zeros
-    while (n1.digits.size() > 1 && n1.digits.back() == 0) {
-        n1.digits.pop_back();
+    while (res.digits.size() > 1 && res.digits.back() == 0) {
+        res.digits.pop_back();
     }
 
-    return n1;
+    return res;
 }
 
-Natural Natural::operator-(const Natural &number) const {
-    return sub(Natural(this->digits), number);
+Natural& Natural::operator-=(const Natural &number) {
+    if (number > *this) {
+        throw std::runtime_error("cannot sub from fewer number");
+    }
+
+    Natural::Digit carry = 0;
+    for (size_t i = 0; i < this->digits.size() || carry; ++i) {
+        this->digits[i] -= carry + ((i < number.digits.size()) ? number.digits[i]: 0);
+        carry = this->digits[i] < 0;
+        if (carry) this->digits[i] += Natural::BASE;
+    }
+
+    // strip insignificant zeros
+    while (this->digits.size() > 1 && this->digits.back() == 0) {
+        this->digits.pop_back();
+    }
+
+    return *this;
+}
+
+Natural& Natural::operator--() {
+    Natural::Digit carry = 1;
+    for (size_t i = 0; i < this->digits.size() || carry; ++i) {
+        this->digits[i] -= carry;
+        carry = this->digits[i] < 0;
+        if (carry) this->digits[i] += Natural::BASE;
+    }
+
+    // strip insignificant zeros
+    while (this->digits.size() > 1 && this->digits.back() == 0) {
+        this->digits.pop_back();
+    }
+
+    return *this;
+}
+
+Natural Natural::operator--(int) {
+    Natural old = *this;
+    operator--();
+    return old;
 }
 
 bool Natural::operator==(const Natural &rhs) const

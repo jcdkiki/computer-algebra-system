@@ -27,20 +27,52 @@ TEST(NATURAL, CMP)
     ASSERT_EQ(n2, n2);
 }
 
-TEST(NATURAL, SUB) 
+TEST(NATURAL, SUB)
 {
-    std::stringstream input;
-    input << "321 123 123 321";
+    using pair = std::pair<const char*, const char*>;
+    for (auto [input, expected] : {
+        pair { "100 1", "99" },
+        pair { "1 1", "0" },
+        pair { "0 0", "0" },
+        pair { "137 0", "137" },
+        pair { "321 123", "198" },
+        pair { "900 101", "799" },
+        pair { "228 137", "91" },
+        pair { "999 1", "998" },
+    })
+    {
+        std::stringstream ss;
+        ss << input;
 
-    Natural n1, n2, n3, n4;
-    input >> n1 >> n2 >> n3 >> n4;
+        Natural n1, n2;
+        ss >> n1 >> n2;
 
-    Natural res1 = n1 - n2;
-    Natural res2 = n3 - n4;
-    std::stringstream output1;
-    std::stringstream output2;
-    output1 << res1;
-    output2 << res2;
-    ASSERT_EQ(output1.str(), "198");
-    ASSERT_EQ(output2.str(), "198");
+        std::stringstream output;
+        output << (n1 - n2);
+        EXPECT_EQ(output.str(), expected);
+    }
+}
+
+TEST(NATURAL, DEC)
+{
+    using pair = std::pair<const char*, const char*>;
+    for (auto [input, expected] : {
+        pair { "100", "99" },
+        pair { "1", "0" },
+        pair { "321", "320" },
+        pair { "10", "9" },
+        pair { "999 1", "998" },
+    })
+    {
+        std::stringstream ss;
+        ss << input;
+
+        Natural n1;
+        ss >> n1;
+
+        std::stringstream output;
+        n1--;
+        output << n1;
+        EXPECT_EQ(output.str(), expected);
+    }
 }

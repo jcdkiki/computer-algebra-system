@@ -97,8 +97,9 @@ bool Natural::operator<=(const Natural &rhs) const
     return (res == 1) || (res == 0);
 }
 
-Natural mul_natural_by_digit(Natural n, Natural::Digit d) {
+Natural Natural::operator*(const Natural::Digit& d) const {
     Natural::Digit carry = 0;
+    Natural n(*this);
     for (size_t i = 0; i < n.digits.size() || carry; ++i) {
         if (i == n.digits.size()) {
             n.digits.push_back(0);
@@ -117,4 +118,8 @@ Natural mul_natural_by_digit(Natural n, Natural::Digit d) {
     }
 
     return n;
+}
+
+Natural Natural::operator*=(const Natural::Digit& d) {
+    return (*this) * d;
 }

@@ -27,27 +27,28 @@ TEST(NATURAL, CMP)
     ASSERT_EQ(n2, n2);
 }
 
-TEST(NATURAL, MUL_BY_DIGIT) 
+TEST(NATURAL, MULBYDIGIT) 
 {
-    std::stringstream input;
-    input << "123";
+    using pair = std::pair<const char*, const char*>;
+    for (auto [input, expected] : {
+        pair { "123 9", "1107" },
+        pair { "521 0", "0" },
+        pair { "0 0", "0" },
+        pair { "0 5", "0" },
+        pair { "5 5", "25" },
+        pair { "10 6", "60" },
+        pair { "999 1", "999" },
+    })
+    {
+        std::stringstream ss;
+        ss << input;
+        Natural n1;
+        char n2;
+        ss >> n1 >> n2;
 
-    Natural n1;
-    input >> n1;
-
-    Natural res1 = mul_natural_by_digit(n1, 0);
-    Natural res2 = mul_natural_by_digit(n1, 1);
-    Natural res3 = mul_natural_by_digit(n1, 2);
-
-    std::stringstream output1;
-    std::stringstream output2;
-    std::stringstream output3;
-
-    output1 << res1;
-    output2 << res2;
-    output3 << res3;
-
-    ASSERT_EQ(output1.str(), "0");
-    ASSERT_EQ(output2.str(), "123");
-    ASSERT_EQ(output3.str(), "246");
+        std::stringstream output;
+        n2 -= '0';
+        output << (n1 *= n2);
+        EXPECT_EQ(output.str(), expected);
+    }
 }

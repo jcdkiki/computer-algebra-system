@@ -6,7 +6,7 @@
 #include <istream>
 
 class Natural {
-    using Digit = unsigned char;
+    using Digit = char;
     std::vector<Digit> digits;
 public:
     static constexpr int BASE = 10;
@@ -17,7 +17,8 @@ public:
 
     Natural operator+(const Natural &number) const;
     static int cmp(const Natural &n1, const Natural &n2);
-    friend Natural mul_natural_by_digit(Natural n, Natural::Digit d);
+    Natural operator*(const Natural::Digit& d) const;
+    Natural operator*=(const Natural::Digit& d);
 
     bool operator==(const Natural &rhs) const;
     bool operator!=(const Natural &rhs) const;
@@ -29,6 +30,5 @@ public:
 
 std::ostream& operator<<(std::ostream& os, const Natural& number);
 std::istream& operator>>(std::istream& is, Natural& number);
-Natural mul_natural_by_digit(Natural n, Natural::Digit d);
 
 #endif

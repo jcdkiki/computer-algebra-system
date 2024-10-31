@@ -5,12 +5,43 @@
 
 Natural::Natural() : digits(1, 0) {}
 
+Natural::Natural(const char *str)
+{
+    while (std::isdigit(*str)) {
+        digits.push_back(*str - '0');
+        str++;
+    }
+
+    if (digits.size() == 0) {
+        digits.push_back(0);
+    }
+
+    std::reverse(digits.begin(), digits.end());
+    this->strip();
+}
+
+void Natural::strip()
+{
+    while (digits.size() > 1 && digits.back() == 0) {
+        digits.pop_back();
+    }
+}
+
 std::ostream& operator<<(std::ostream& os, const Natural& number)
 {
     for (ssize_t i = number.digits.size() - 1; i >= 0; --i) {
         os << (char)(number.digits[i] + '0');
     }
     return os;
+}
+
+std::string Natural::asString()
+{
+    std::string res;
+    for (ssize_t i = digits.size() - 1; i >= 0; --i) {
+        res += (char)(digits[i] + '0');
+    }
+    return res;
 }
 
 std::istream& operator>>(std::istream& is, Natural& number)
@@ -39,7 +70,8 @@ std::istream& operator>>(std::istream& is, Natural& number)
     }
 
     std::reverse(number.digits.begin(), number.digits.end());
-
+    number.strip();
+    
     return is;
 }
 
@@ -48,30 +80,20 @@ int Natural::cmp(const Natural &n1, const Natural &n2) {
         return 2; // n1 > n2
     }
 
-    else if (n1.digits.size() < n2.digits.size()) {
+    if (n1.digits.size() < n2.digits.size()) {
         return 1; // n1 < n2
     }
 
-    else {
-        for (size_t i = n1.digits.size(); i > 0; --i) {
-            if (n1.digits[i] > n2.digits[i]) {
-                return 2; // n1 > n2
-            } 
-            else if (n1.digits[i] < n2.digits[i]) {
-                return 1; // n1 < n2
-            }
+    for (ssize_t i = n1.digits.size() - 1; i >= 0; --i) {
+        if (n1.digits[i] > n2.digits[i]) {
+            return 2; // n1 > n2
+        } 
+        else if (n1.digits[i] < n2.digits[i]) {
+            return 1; // n1 < n2
         }
     }
-    return 0; // n1 == n2
-}
 
-bool cmp_with_zero(Natural n1) {
-    for (size_t i = 0; i < n1.digits.size(); ++i) {
-        if (n1.digits[i] != 0) {
-            return true;
-        }
-    }
-    return false;
+    return 0; // n1 == n2
 }
 
 bool Natural::operator==(const Natural &rhs) const
@@ -156,4 +178,9 @@ Natural Natural::operator++(int) {
     Natural old = *this;
     operator++();
     return old;
+}
+
+Natural::operator bool()
+{
+    return (digits.size() > 1) || (digits[0] != 0);
 }

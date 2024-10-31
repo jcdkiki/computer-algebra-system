@@ -1,14 +1,9 @@
 #include "natural.hpp"
 #include <gtest/gtest.h>
-#include <sstream>
 
 TEST(NATURAL, CMP)
 {
-    std::stringstream input;
-    input << "123 321";
-
-    Natural n1, n2;
-    input >> n1 >> n2;
+    Natural n1("123"), n2("321");
 
     ASSERT_LT(n1, n2);
     ASSERT_LE(n1, n2);
@@ -76,4 +71,15 @@ TEST(NATURAL, INC)
         output << n1;
         EXPECT_EQ(output.str(), expected);
     }
+}
+
+TEST(NATURAL, IO)
+{
+    for (const char *str : { "0", "200", "999999999999999999999999999999999999999999" }) {
+        Natural number(str);
+        ASSERT_EQ(number.asString(), str);
+    }
+
+    ASSERT_EQ(Natural("00001337").asString(), "1337");
+    ASSERT_EQ(Natural("000000000").asString(), "0");
 }

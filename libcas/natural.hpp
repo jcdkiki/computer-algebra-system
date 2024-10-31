@@ -4,14 +4,20 @@
 #include <vector>
 #include <ostream>
 #include <istream>
+#include <string>
 
 class Natural {
     using Digit = char;
     std::vector<Digit> digits;
+
+    void strip();
+
 public:
     constexpr static int BASE = 10;
 
     Natural();
+    explicit Natural(const char *str);
+    std::string asString();
 
     friend std::ostream& operator<<(std::ostream& os, const Natural& number);
     friend std::istream& operator>>(std::istream& is, Natural& number);
@@ -22,7 +28,7 @@ public:
     Natural& operator++();
     Natural operator++(int);
     static int cmp(const Natural &n1, const Natural &n2);
-    friend bool cmp_with_zero(Natural n1);
+    operator bool();
 
     bool operator==(const Natural &rhs) const;
     bool operator!=(const Natural &rhs) const;

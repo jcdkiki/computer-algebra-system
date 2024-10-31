@@ -19,3 +19,5 @@ jobs:
       run: cd build && make libcas-tst
     - name: Run Test
       run: build/libcas-tst
+    - name: Build HTML docs
+      uses: mattnotmitt/doxygen-action@v1.9.5

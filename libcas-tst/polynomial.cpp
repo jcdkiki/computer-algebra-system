@@ -18,7 +18,7 @@ TEST(POLYNOMIAL, IO)
             pair { "5 - 2 + 3x - 5x", "3 - 2x" }
         })  
     {
-        Polynomial<int, 1> polynomial(input);
+        Polynomial<int, 0, 1> polynomial(input);
         ASSERT_EQ(polynomial.asString(), expected);
     }
 }

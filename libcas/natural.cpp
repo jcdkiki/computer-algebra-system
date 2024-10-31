@@ -128,9 +128,9 @@ bool Natural::operator<=(const Natural &rhs) const
     return (res == 1) || (res == 0);
 }
 
-Natural Natural::operator+(const Natural &number) const {
-    Natural res(*this);
-    return res += number;
+Natural operator+(const Natural &lhs, const Natural &rhs) {
+    Natural res(lhs);
+    return res += rhs;
 }
 
 Natural& Natural::operator+=(const Natural &number) {

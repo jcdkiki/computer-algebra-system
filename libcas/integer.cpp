@@ -22,7 +22,7 @@ Integer::Integer(const char *str)
 
     std::reverse(digits.begin(), digits.end());
 
-    if (isZero()) {
+    if (!(*this)) {
         sign = false;
     }
 }
@@ -84,14 +84,14 @@ std::istream& operator>>(std::istream& is, Integer& number)
 
     std::reverse(number.digits.begin(), number.digits.end());
 
-    if (number.isZero()) {
+    if (!number) {
         number.sign = false;
     }
 
     return is;
 }
 
-bool Integer::isZero()
+Integer::operator bool()
 {
-    return (digits.size() == 1) && (digits[0] == 0);
+    return (digits.size() > 1) || (digits[0] != 0);
 }

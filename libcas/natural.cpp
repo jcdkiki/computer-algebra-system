@@ -130,18 +130,7 @@ bool Natural::operator<=(const Natural &rhs) const
 
 Natural Natural::operator+(const Natural &number) const {
     Natural res(*this);
-    Natural::Digit carry = 0;
-
-    for (size_t i = 0; i < std::max(res.digits.size(), number.digits.size()) || carry; ++i) {
-        if (i == res.digits.size()) {
-            res.digits.push_back (0);
-        }
-        res.digits[i] += carry + (i < number.digits.size() ? number.digits[i] : 0);
-        carry = res.digits[i] >= Natural::BASE;
-        if (carry) res.digits[i] -= Natural::BASE;
-    }
-
-    return res;
+    return res += number;
 }
 
 Natural& Natural::operator+=(const Natural &number) {

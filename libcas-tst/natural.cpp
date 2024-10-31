@@ -24,27 +24,21 @@ TEST(NATURAL, CMP)
 
 TEST(NATURAL, ADDITION) 
 {
-    using pair = std::pair<const char*, const char*>;
-    for (auto [input, expected] : {
-        pair { "123 321", "444" },
-        pair { "0 521", "521" },
-        pair { "521 0", "521" },
-        pair { "12 987654321", "987654333" },
-        pair { "123456789 98", "123456887" },
-        pair { "900 101", "1001" },
-        pair { "999 1", "1000" },
-        pair { "0 0", "0" }
+    using tuple = std::tuple<const char*, const char*, const char*>;
+    for (auto [input1, input2, expected] : {
+        tuple { "123",          "321",          "444" },
+        tuple { "0",            "521",          "521" },
+        tuple { "521",          "0",            "521" },
+        tuple { "12",           "987654321",    "987654333" },
+        tuple { "123456789",    "98",           "123456887" },
+        tuple { "900",          "101",          "1001" },
+        tuple { "999",          "1",            "1000" },
+        tuple { "0",            "0",            "0" }
     })
     {
-        std::stringstream ss;
-        ss << input;
-
-        Natural n1, n2;
-        ss >> n1 >> n2;
-
-        std::stringstream output;
-        output << (n1 + n2);
-        EXPECT_EQ(output.str(), expected);
+        Natural n1(input1), n2(input2);
+        Natural result = n1 + n2;
+        EXPECT_EQ(result.asString(), expected);
     }
 }
 
@@ -52,24 +46,20 @@ TEST(NATURAL, INC)
 {
     using pair = std::pair<const char*, const char*>;
     for (auto [input, expected] : {
-        pair { "321", "322" },
-        pair { "521", "522" },
-        pair { "0", "1" },
+        pair { "321",       "322" },
+        pair { "521",       "522" },
+        pair { "0",         "1" },
         pair { "987654321", "987654322" },
         pair { "123456789", "123456790" },
-        pair { "99", "100" },
-        pair { "999", "1000" }
+        pair { "99",        "100" },
+        pair { "999",       "1000" }
     })
     {
-        std::stringstream ss;
-        ss << input;
+        Natural n1(input);
+        Natural n2(input);
 
-        Natural n1;
-        ss >> n1;
-        n1++;
-        std::stringstream output;
-        output << n1;
-        EXPECT_EQ(output.str(), expected);
+        EXPECT_EQ(n1++, n2);
+        EXPECT_EQ((++n2).asString(), expected);
     }
 }
 

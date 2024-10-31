@@ -128,6 +128,47 @@ bool Natural::operator<=(const Natural &rhs) const
     return (res == 1) || (res == 0);
 }
 
+Natural Natural::operator+(const Natural &number) const {
+    Natural res(*this);
+    return res += number;
+}
+
+Natural& Natural::operator+=(const Natural &number) {
+    Natural::Digit carry = 0;
+
+    for (size_t i = 0; i < std::max(this->digits.size(), number.digits.size()) || carry; ++i) {
+        if (i == this->digits.size()) {
+            this->digits.push_back (0);
+        }
+        this->digits[i] += carry + (i < number.digits.size() ? number.digits[i] : 0);
+        carry = this->digits[i] >= Natural::BASE;
+        if (carry) this->digits[i] -= Natural::BASE;
+    }
+
+    return *this;
+}
+
+Natural& Natural::operator++() {
+    Natural::Digit carry = 1;
+
+    for (size_t i = 0; i < this->digits.size() || carry; ++i) {
+        if (i == this->digits.size())
+            this->digits.push_back(0);
+        
+        this->digits[i] += carry;
+
+        carry = this->digits[i] >= Natural::BASE;
+        if (carry) this->digits[i] -= Natural::BASE;  
+    }
+    return *this;
+}
+
+Natural Natural::operator++(int) {
+    Natural old = *this;
+    operator++();
+    return old;
+}
+
 Natural::operator bool()
 {
     return (digits.size() > 1) || (digits[0] != 0);

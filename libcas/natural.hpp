@@ -9,6 +9,9 @@
 class Natural {
     using Digit = unsigned char;
     std::vector<Digit> digits;
+
+    void strip();
+
 public:
     Natural();
     explicit Natural(const char *str);
@@ -19,6 +22,7 @@ public:
 
     Natural operator+(const Natural &number) const;
     static int cmp(const Natural &n1, const Natural &n2);
+    operator bool();
 
     bool operator==(const Natural &rhs) const;
     bool operator!=(const Natural &rhs) const;

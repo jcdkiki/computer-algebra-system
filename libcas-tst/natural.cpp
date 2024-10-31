@@ -28,4 +28,6 @@ TEST(NATURAL, IO)
         Natural number(str);
         ASSERT_EQ(number.asString(), str);
     }
+
+    ASSERT_EQ(Natural("000000000").asString(), "0");
 }

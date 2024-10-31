@@ -1,6 +1,7 @@
 #include "rational.hpp"
 #include "natural.hpp"
 #include <sstream>
+#include <stdexcept>
 
 Rational::Rational() : numerator("0"), denominator("1") {}
 
@@ -13,13 +14,18 @@ Rational::Rational(const char *str)
 
 std::string Rational::asString()
 {
+    if (denominator == Natural("1")) {
+        return numerator.asString();
+    }
     return numerator.asString() + '/' + denominator.asString();
 }
 
 std::ostream& operator<<(std::ostream& os, const Rational& number)
 {
-    os << number.numerator << '/' << number.denominator;
-    return os;
+    if (number.denominator == Natural("1")) {
+        return (os << number.numerator);
+    }
+    return (os << number.numerator << '/' << number.denominator);
 }
 
 std::istream& operator>>(std::istream& is, Rational& number)
@@ -30,10 +36,14 @@ std::istream& operator>>(std::istream& is, Rational& number)
     is >> c;
     if (c != '/') {
         is.unget();
-        number.numerator = Integer("0");       // indeterminate form
-        number.denominator = Natural("0");     // TODO: change later??????
+        number.denominator = Natural("1");
+        return is;
     }
     
     is >> number.denominator;
+
+    if (!number.denominator) {
+        throw std::runtime_error("denominator cannot be zero");
+    }
     return is;
 }

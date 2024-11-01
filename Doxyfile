@@ -1,0 +1,18 @@
+PROJECT_NAME = "Computer Algebra System"
+PROJECT_BRIEF = "Задание коллоквиума до ДМиТИ. 2024 год."
+OUTPUT_DIRECTORY = docs
+GENERATE_LATEX = NO
+INPUT = cas libcas
+RECURSIVE = YES
+OUTPUT_LANGUAGE = Russian
+WARN_AS_ERROR = Yes
+
+LAYOUT_FILE = DoxygenLayout.xml
+
+# required by doxygen-awesome-css
+GENERATE_TREEVIEW      = YES # required!
+DISABLE_INDEX          = NO
+FULL_SIDEBAR           = NO
+HTML_EXTRA_STYLESHEET  = doxygen-awesome-css/doxygen-awesome.css \
+                         doxygen-awesome-css/doxygen-awesome-sidebar-only.css
+HTML_COLORSTYLE        = LIGHT # required with Doxygen >= 1.9.5

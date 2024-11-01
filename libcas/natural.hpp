@@ -72,8 +72,8 @@ public:
      * @returns 2, если n1 > n2
      */
     static int cmp(const Natural &n1, const Natural &n2);
-    Natural operator*(const Natural::Digit& d) const;
-    Natural operator*=(const Natural::Digit& d);
+    Natural operator*(const Natural::Digit& digit) const;
+    Natural &operator*=(const Natural::Digit& digit);
     
     /**
      * @brief NZER_N_B - Выполняет проверку на ноль

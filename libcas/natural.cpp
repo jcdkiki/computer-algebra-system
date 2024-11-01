@@ -128,31 +128,26 @@ bool Natural::operator<=(const Natural &rhs) const
     return (res == 1) || (res == 0);
 }
 
-Natural Natural::operator*(const Natural::Digit& d) const {
+Natural Natural::operator*(const Natural::Digit& digit) const {
+    Natural res(*this);
+    return res *= digit;
+}
+
+Natural &Natural::operator*=(const Natural::Digit& digit) {
     Natural::Digit carry = 0;
-    Natural n(*this);
-    for (size_t i = 0; i < n.digits.size() || carry; ++i) {
-        if (i == n.digits.size()) {
-            n.digits.push_back(0);
+    for (size_t i = 0; i < this->digits.size() || carry; ++i) {
+        if (i == this->digits.size()) {
+            this->digits.push_back(0);
         }
 
-        size_t temp = carry + n.digits[i] * d;
+        size_t temp = carry + this->digits[i] * digit;
 
-        n.digits[i] = temp % Natural::BASE;
+        this->digits[i] = temp % Natural::BASE;
         carry = temp / Natural::BASE;
     }
 
-
-    //strip insignificant zeros 00001 => 1
-    while (n.digits.size() > 1 && n.digits.back() == 0) {
-        n.digits.pop_back();
-    }
-
-    return n;
-}
-
-Natural Natural::operator*=(const Natural::Digit& d) {
-    return (*this) * d;
+    this->strip();
+    return *this;
 }
 
 Natural operator+(const Natural &lhs, const Natural &rhs) {

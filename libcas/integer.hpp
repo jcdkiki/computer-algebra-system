@@ -7,7 +7,6 @@
 #define CAS_NUMBERS_INTEGER_HPP_
 
 #include "natural.hpp"
-#include <vector>
 #include <string>
 #include <ostream>
 #include <istream>

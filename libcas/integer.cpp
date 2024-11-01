@@ -1,5 +1,4 @@
 #include "integer.hpp"
-#include <algorithm>
 #include <cctype>
 
 Integer::Integer() : sign(false), natural(Natural()) {}
@@ -13,7 +12,7 @@ Integer::Integer(const char *str) : sign(false)
     }
     
     natural = Natural(str);
-    if (!(*this)) {
+    if (!natural) {
         sign = false;
     }
 }

@@ -10,6 +10,7 @@
 #include <ostream>
 #include <istream>
 #include <string>
+
 /**
  * @brief Длинное натуральное число.
  *
@@ -20,8 +21,6 @@
  */
 
 /** @brief оператор преобразования должен знать о классе, чтобы в него преобразовывать*/
-class Integer;
-
 class Natural {
 protected:
     using Digit = char;         /**< Тип цифры */
@@ -106,9 +105,6 @@ public:
     /** @brief Первое число меньше либо равно второго */
     bool operator<=(const Natural &rhs) const;
     ///@}
-
-    /** @brief Оператор преобразования преобразует из натурального в целочисленное*/ 
-    operator Integer() const;
 };
 
 /**

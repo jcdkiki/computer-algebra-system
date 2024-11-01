@@ -28,7 +28,8 @@ public:
     explicit Integer(const char *str);
 
     /** @brief Создает новое целое число из натурального числа */
-    explicit Integer(const Natural & number);
+    Integer(const Natural & number);
+
     /** @brief Преобразует число в его строковое представление */
     std::string asString();
 

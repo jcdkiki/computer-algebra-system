@@ -6,7 +6,7 @@
 #ifndef CAS_NUMBERS_INTEGER_HPP_
 #define CAS_NUMBERS_INTEGER_HPP_
 
-#include <vector>
+#include "natural.hpp"
 #include <string>
 #include <ostream>
 #include <istream>
@@ -18,8 +18,7 @@
  * Для этого класса перегружены основные арифметические операторы, что позволяет красиво записывать различные вычисления.
  */
 class Integer {
-    using Digit = unsigned char;
-    std::vector<Digit> digits;
+    Natural natural;
     bool sign;
 public:
     /** @brief Создает новое целое число, равное нулю */

@@ -17,6 +17,9 @@ Integer::Integer(const char *str) : sign(false)
     }
 }
 
+Integer::Integer(const Natural & number) : sign(false){
+    natural = number;
+}
 std::string Integer::asString()
 {
     std::string res;

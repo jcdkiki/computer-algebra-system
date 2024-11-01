@@ -1,4 +1,8 @@
 #include "natural.hpp"
+
+/** @brief оператор преобразования должен знать о классе, чтобы в него преобразовывать*/
+#include "integer.hpp"
+
 #include <algorithm>
 #include <iostream>
 #include <cctype>
@@ -172,4 +176,8 @@ Natural Natural::operator++(int) {
 Natural::operator bool()
 {
     return (digits.size() > 1) || (digits[0] != 0);
+}
+
+Natural::operator Integer() const{
+    return Integer(*this);
 }

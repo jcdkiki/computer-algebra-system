@@ -43,8 +43,8 @@ public:
     friend std::ostream& operator<<(std::ostream& os, const Natural& number);
     friend std::istream& operator>>(std::istream& is, Natural& number);
     friend Natural operator+(const Natural &lhs, const Natural &rhs);
+    friend Natural operator-(const Natural &lhs, const Natural &rhs);
 
-    Natural operator-(const Natural &number) const;
     Natural& operator-=(const Natural &number);
     Natural& operator--();
     Natural operator--(int); 
@@ -131,5 +131,7 @@ std::istream& operator>>(std::istream& is, Natural& number);
  * @returns Cумму двух чисел
  */
 Natural operator+(const Natural &lhs, const Natural &rhs);
+
+Natural operator-(const Natural &lhs, const Natural &rhs);
 
 #endif

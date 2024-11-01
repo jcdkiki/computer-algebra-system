@@ -1,5 +1,6 @@
 #include "natural.hpp"
 #include <gtest/gtest.h>
+#include <stdexcept>
 
 TEST(NATURAL, CMP)
 {
@@ -70,6 +71,8 @@ TEST(NATURAL, DEC)
         output << n1;
         EXPECT_EQ(output.str(), expected);
     }
+
+    EXPECT_THROW(Natural("0")--, std::runtime_error);
 }
 TEST(NATURAL, ADDITION) 
 {

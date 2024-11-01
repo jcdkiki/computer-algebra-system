@@ -96,30 +96,14 @@ int Natural::cmp(const Natural &n1, const Natural &n2) {
     return 0; // n1 == n2
 }
 
-Natural Natural::operator-(const Natural &number) const {
-    Natural res(*this);
-    if (number > res) {
-        throw std::runtime_error("cannot sub from fewer number");
-    }
-
-    Natural::Digit carry = 0;
-    for (size_t i = 0; i < number.digits.size() || carry; ++i) {
-        res.digits[i] -= carry + ((i < number.digits.size()) ? number.digits[i]: 0);
-        carry = res.digits[i] < 0;
-        if (carry) res.digits[i] += Natural::BASE;
-    }
-
-    // strip insignificant zeros
-    while (res.digits.size() > 1 && res.digits.back() == 0) {
-        res.digits.pop_back();
-    }
-
-    return res;
+Natural operator-(const Natural &lhs, const Natural &rhs) {
+    Natural res(lhs);
+    return res -= rhs;
 }
 
 Natural& Natural::operator-=(const Natural &number) {
     if (number > *this) {
-        throw std::runtime_error("cannot sub from fewer number");
+        throw std::runtime_error("cannot sub from a smaller number");
     }
 
     Natural::Digit carry = 0;
@@ -129,15 +113,15 @@ Natural& Natural::operator-=(const Natural &number) {
         if (carry) this->digits[i] += Natural::BASE;
     }
 
-    // strip insignificant zeros
-    while (this->digits.size() > 1 && this->digits.back() == 0) {
-        this->digits.pop_back();
-    }
-
+    this->strip();
     return *this;
 }
 
 Natural& Natural::operator--() {
+    if (!(*this)) {
+        throw std::runtime_error("cannot decrement zero");
+    }
+
     Natural::Digit carry = 1;
     for (size_t i = 0; i < this->digits.size() || carry; ++i) {
         this->digits[i] -= carry;

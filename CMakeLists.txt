@@ -16,3 +16,6 @@ target_link_libraries(libcas-tst PRIVATE gtest gtest_main libcas)
 add_executable(cas ${CAS_SOURCES})
 target_include_directories(cas PRIVATE "libcas")
 target_link_libraries(cas PRIVATE libcas)
+
+enable_testing()
+add_test(NAME libcas-tst COMMAND libcas-tst)

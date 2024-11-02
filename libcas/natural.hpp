@@ -87,6 +87,24 @@ public:
      * @returns 2, если n1 > n2
      */
     static int cmp(const Natural &n1, const Natural &n2);
+
+    /**
+     * @brief MUL_Nk_N - Умножает натуральное число на 10^k. Не создает копию.
+     * @param[in] k - Натуральное число, степень 10.
+     * @returns Возвращает натуральное число, умноженное на 10^k.
+     */
+    Natural &mul_by_10_in_k(size_t k);
+
+    /**
+     * @brief Аналог битового сдвига для натуральных чисел с основанием 10. Создает копию.
+     */
+    Natural operator<<(size_t k) const;
+
+    /**
+     * @brief Аналог битового сдвига для натуральных чисел с основанием 10. Не создает копию.
+     */
+    Natural &operator<<=(size_t k);
+
     friend Natural operator*(const Natural &lhs, const Natural &rhs);
     /**
      * @brief MUL_NN_N - Вычисляет произведение двух натуральных чисел

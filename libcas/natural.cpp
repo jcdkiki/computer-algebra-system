@@ -176,6 +176,22 @@ bool Natural::operator<=(const Natural &rhs) const
     return (res == 1) || (res == 0);
 }
 
+Natural &Natural::mul_by_10_in_k(size_t k) {
+    this->digits.insert(this->digits.begin(), k, 0);
+    this->strip();
+    return *this;
+}
+
+Natural Natural::operator<<(size_t k) const {
+    Natural res(*this);
+    return res <<= k;
+}
+
+Natural &Natural::operator<<=(size_t k) {
+    this->mul_by_10_in_k(k);
+    return *this;
+}
+
 Natural operator*(const Natural &lhs, const Natural &rhs) {
     Natural::Digit carry = 0;
     Natural res;

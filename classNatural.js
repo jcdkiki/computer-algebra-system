@@ -7,7 +7,9 @@ var classNatural =
     [ "mul_by_10_in_k", "classNatural.html#a767666849d38af5218da4fedb186e05f", null ],
     [ "operator bool", "classNatural.html#a456574bc99990434411bf5b0208e1269", null ],
     [ "operator!=", "classNatural.html#a45e22689757f4b5ab77d9f02b289ec16", null ],
+    [ "operator*", "classNatural.html#aad60892e9335bbdbb5f1dd4a118ae4da", null ],
     [ "operator*=", "classNatural.html#a80522cf0d08017bc336a7b1e5fd39da1", null ],
+    [ "operator*=", "classNatural.html#ad6b16110c2400e4c16e6c81ca5632a2d", null ],
     [ "operator++", "classNatural.html#a7e07d7cabbbdf986e56470bcdc94e043", null ],
     [ "operator++", "classNatural.html#a43255f4998cce52819c9f0dca8939b96", null ],
     [ "operator+=", "classNatural.html#a64ff12e4f2b335c8f4723f7d3bcb7633", null ],
@@ -21,11 +23,9 @@ var classNatural =
     [ "operator==", "classNatural.html#a44eb5728b0d47d6af5363425fd64e2c3", null ],
     [ "operator>", "classNatural.html#a1d619dbfc1d47d06c47759d3c6853988", null ],
     [ "operator>=", "classNatural.html#a43b222a288335a9df3d795bd2d99b26e", null ],
-    [ "strip", "classNatural.html#a687028998d0741ace8bd8276144a91b5", null ],
     [ "operator*", "classNatural.html#a33b7b6db3a076468847c41bf6bc420eb", null ],
     [ "operator+", "classNatural.html#aeb3428745d0811066099a6cfb09ef2c4", null ],
     [ "operator-", "classNatural.html#a7202bc20f86303e93687035afe343b89", null ],
     [ "operator<<", "classNatural.html#a5507c0ccac2ef7932f2d0b0bbce238a5", null ],
-    [ "operator>>", "classNatural.html#af50e755a822231379576e166fbb883a3", null ],
-    [ "digits", "classNatural.html#aecf52e0f1da4a0e0d3be1882a4c4af3e", null ]
+    [ "operator>>", "classNatural.html#af50e755a822231379576e166fbb883a3", null ]
 ];

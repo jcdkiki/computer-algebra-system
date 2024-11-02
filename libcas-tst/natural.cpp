@@ -23,6 +23,28 @@ TEST(NATURAL, CMP)
     ASSERT_EQ(n2, n2);
 }
 
+TEST(NATURAL, MUL)
+{
+    using tuple = std::tuple<const char*, const char*, const char*>;
+    for (auto [input1, input2, expected] : {
+        tuple { "100", "10", "1000" },
+        tuple { "12", "12", "144" },
+        tuple { "12", "0", "0" },
+        tuple { "0", "0", "0" },
+        tuple { "12", "123", "1476" },
+        tuple { "123", "12", "1476" },
+        tuple { "1", "1", "1" },
+        tuple { "999", "1", "999" },
+    })
+    {
+        Natural n1(input1), n2(input2);
+        EXPECT_EQ((n1 * n2).asString(), expected);
+
+        n1 *= n2;
+        EXPECT_EQ(n1.asString(), expected);
+    }
+}
+
 TEST(NATURAL, SUB)
 {
     using pair = std::pair<const char*, const char*>;
@@ -74,6 +96,7 @@ TEST(NATURAL, DEC)
 
     EXPECT_THROW(Natural("0")--, std::runtime_error);
 }
+
 TEST(NATURAL, ADDITION) 
 {
     using tuple = std::tuple<const char*, const char*, const char*>;

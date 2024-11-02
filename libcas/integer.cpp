@@ -85,15 +85,13 @@ Integer& Integer::operator+=(const Integer &n){
         natural += n.natural;
         return *this;
     }
-    if(natural > n.natural){
+    if(natural >= n.natural){
         natural -= n.natural;
         return *this;
     }
     else{
-        Natural temp = n.natural;
+        natural = n.natural - natural;
         sign = n.sign;
-        temp -= natural;
-        natural = temp;
         return *this;
     }
 }

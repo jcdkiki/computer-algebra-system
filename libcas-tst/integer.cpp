@@ -44,22 +44,15 @@ TEST(NATURAL_TO_INTEGER, CONVERT)
 
 TEST(INTEGER, POZ)
 {
-    using pair = std::pair<const char*, const char*>;
+    using pair = std::pair<const char*, int>;
     for (auto [input, expected] : {
-        pair { "1", "2" },
-        pair { "-1", "1" },
-        pair { "0", "0" },
-        pair { "-0", "0" },
+        pair { "1", 2 },
+        pair { "-1", 1 },
+        pair { "0", 0 },
+        pair { "-0", 0 },
     })
     {
-        std::stringstream ss;
-        ss << input;
-
-        Integer number;
-        ss >> number;
-
-        std::stringstream output;
-        output << number.positivity();
-        EXPECT_EQ(output.str(), expected);
+        Integer number(input);
+        EXPECT_EQ(number.positivity(), expected);
     }
 }

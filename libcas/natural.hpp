@@ -72,6 +72,11 @@ public:
      */
     static int cmp(const Natural &n1, const Natural &n2);
     friend Natural operator*(const Natural &lhs, const Natural &rhs);
+    /**
+     * @brief MUL_NN_N - Вычисляет произведение двух натуральных чисел
+     * @param[in] number Число, на которое мы умножаем наше текущее
+     * @returns Произведение, которое сохраняется в текущую переменную
+     */
     Natural operator*=(const Natural &number);
     
     /**
@@ -130,6 +135,11 @@ std::istream& operator>>(std::istream& is, Natural& number);
  */
 Natural operator+(const Natural &lhs, const Natural &rhs);
 
+/**
+ * @brief MUL_NN_N - Вычисляет произведение двух натуральных чисел
+ * @param[in] lhs,rhs Умножаемые числа
+ * @returns Произведение двух чисел
+ */
 Natural operator*(const Natural &lhs, const Natural &rhs);
 
 #endif

@@ -146,8 +146,10 @@ Natural operator*(const Natural &lhs, const Natural &rhs) {
 }
 
 Natural Natural::operator*=(const Natural &number) {
-    return (*this) * number;
+    *this = *this * number;
+    return *this;
 }
+
 Natural operator+(const Natural &lhs, const Natural &rhs) {
     Natural res(lhs);
     return res += rhs;

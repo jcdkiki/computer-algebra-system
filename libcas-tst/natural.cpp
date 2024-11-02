@@ -24,6 +24,27 @@ TEST(NATURAL, CMP)
     ASSERT_EQ(n2, n2);
 }
 
+TEST(NATURAL, MULBYDIGIT) 
+{
+    using tuple = std::tuple<const char*, Natural::Digit, const char*>;
+    for (auto [input, digit, expected] : {
+        tuple { "123", 9, "1107" },
+        tuple { "521", 0, "0" },
+        tuple { "0", 0, "0" },
+        tuple { "0", 5, "0" },
+        tuple { "5", 5, "25" },
+        tuple { "10", 6, "60" },
+        tuple { "999", 1, "999" },
+    })
+    {
+        Natural n(input);
+        EXPECT_EQ((n * digit).asString(), expected);
+        
+        n *= digit;
+        EXPECT_EQ(n.asString(), expected);
+    }
+}
+
 TEST(NATURAL, MULBY10K)
 {
     using pair = std::pair<const char*, const char*>;

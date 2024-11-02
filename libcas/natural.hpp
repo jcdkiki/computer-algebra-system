@@ -22,8 +22,9 @@
 
 /** @brief оператор преобразования должен знать о классе, чтобы в него преобразовывать*/
 class Natural {
-protected:
+public:
     using Digit = char;         /**< Тип цифры */
+private:
     std::vector<Digit> digits;  /**< Вектор цифр */
 
     /** @brief Убирает незначащие нули */
@@ -87,6 +88,18 @@ public:
      * @returns 2, если n1 > n2
      */
     static int cmp(const Natural &n1, const Natural &n2);
+
+    /**
+     * @brief MUL_ND_N - Умножение натурального числа на цифру.
+     * @param[in] digit - Цифра, на которую умножаем.
+     * @returns Возвращает натуральное число умноженное на цифру. Создается копия.
+     */
+    Natural operator*(const Natural::Digit& digit) const;
+
+    /**
+     * @brief Возвращает натуральное число умноженное на цифру. Не создается копия.
+     */
+    Natural &operator*=(const Natural::Digit& digit);
 
     /**
      * @brief MUL_Nk_N - Умножает натуральное число на 10^k. Не создает копию.

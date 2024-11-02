@@ -5,7 +5,6 @@ Integer::Integer() : sign(false), natural(Natural()) {}
 
 Integer::Integer(const char *str) : sign(false)
 {
-
     if (*str == '-') {
         sign = true;
         str++;
@@ -16,6 +15,8 @@ Integer::Integer(const char *str) : sign(false)
         sign = false;
     }
 }
+
+Integer::Integer(const Natural &number) : sign(false), natural(number) {}
 
 std::string Integer::asString()
 {
@@ -46,12 +47,14 @@ std::istream& operator>>(std::istream& is, Integer& number)
         if (is.fail() || !std::isspace(c))
             break;
     }
-    is.unget();
+    
     if (c == '-') {
         number.sign = true;
-        c = is.get();
     }
-    
+    else {
+        is.unget();
+    }
+
     is >> number.natural;
 
     if (!number.natural) {
@@ -64,4 +67,14 @@ std::istream& operator>>(std::istream& is, Integer& number)
 Integer::operator bool()
 {
     return bool(natural);
+}
+
+int Integer::positivity(){
+    if (sign){
+        return 1; // number < 0
+    }
+    if (natural){
+        return 2; // number > 0
+    }
+    return 0; //number == 0
 }

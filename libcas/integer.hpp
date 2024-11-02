@@ -27,6 +27,9 @@ public:
     /** @brief Создает новое целое число из строки */
     explicit Integer(const char *str);
 
+    /** @brief Создает новое целое число из натурального числа */
+    Integer(const Natural & number);
+
     /** @brief Преобразует число в его строковое представление */
     std::string asString();
 
@@ -39,6 +42,14 @@ public:
 
     friend std::ostream& operator<<(std::ostream& os, const Integer& number);
     friend std::istream& operator>>(std::istream& is, Integer& number);
+
+    /**
+     * @brief POZ_Z_D - Определяет положительность числа
+     * @returns 2, если число положительное
+     * @returns 1, если число отрицательное
+     * @returns 0, если число равно 0
+     */
+    int positivity();
 };
 
 /**
@@ -56,5 +67,6 @@ std::ostream& operator<<(std::ostream& os, const Integer& number);
  * @param[out] number   Ссылка на число, в которое будет записан результат
  */
 std::istream& operator>>(std::istream& is, Integer& number);
+
 
 #endif

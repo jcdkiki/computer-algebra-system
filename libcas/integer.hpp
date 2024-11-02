@@ -42,6 +42,32 @@ public:
 
     friend std::ostream& operator<<(std::ostream& os, const Integer& number);
     friend std::istream& operator>>(std::istream& is, Integer& number);
+
+    /**
+     * @brief ADD_1I_I - Увеличивает целое число на единицу
+     * @returns Себя \b после увеличения
+     */
+    Integer& operator++();
+
+    /**
+     * @brief ADD_1I_I - Увеличивает целое число на единицу
+     * @returns Себя \b перед увеличением
+     */
+    Integer operator++(int);
+
+    /**
+     * @brief ADD_II_I - Прибавляет целое число
+     * @param[in] n Число, которое нужно прибавить
+     * @returns Результат прибавления \a n
+     */
+    Integer& operator+=(const Integer &n);
+
+    /**
+     * @brief ADD_II_I - Вычисляет сумму двух целых чисел
+     * @param[in] lhs,rhs Складываемые числа
+     * @returns Cумму двух чисел
+     */
+    friend Integer operator+(const Integer &lhs, const Integer &rhs);
 };
 
 /**
@@ -59,6 +85,5 @@ std::ostream& operator<<(std::ostream& os, const Integer& number);
  * @param[out] number   Ссылка на число, в которое будет записан результат
  */
 std::istream& operator>>(std::istream& is, Integer& number);
-
 
 #endif

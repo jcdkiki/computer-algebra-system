@@ -1,4 +1,5 @@
 #include "integer.hpp"
+#include <iostream>
 #include <cctype>
 
 Integer::Integer() : sign(false), natural(Natural()) {}
@@ -67,4 +68,40 @@ std::istream& operator>>(std::istream& is, Integer& number)
 Integer::operator bool()
 {
     return bool(natural);
+}
+
+Integer& Integer::operator++(){
+    natural++;
+    return *this;
+}
+
+Integer Integer::operator++(int){
+    Integer old = *this;
+    natural++;
+    return old;
+}
+
+Integer& Integer::operator+=(const Integer &n){
+    if(sign == n.sign){
+        natural += n.natural;
+        return *this;
+    }
+    if(natural > n.natural){
+        natural -= n.natural;
+        return *this;
+    }
+    else{
+        Natural temp = n.natural;
+        sign = n.sign;
+        temp -= natural;
+        natural = temp;
+        return *this;
+    }
+}
+
+
+Integer operator+(const Integer &lhs, const Integer &rhs)
+{
+    Integer res(lhs);
+    return res += rhs;
 }

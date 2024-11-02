@@ -41,3 +41,18 @@ TEST(NATURAL_TO_INTEGER, CONVERT)
         ASSERT_EQ(number2.asString(), number1.asString());
     }
 }
+
+TEST(INTEGER, POZ)
+{
+    using pair = std::pair<const char*, int>;
+    for (auto [input, expected] : {
+        pair { "1", 2 },
+        pair { "-1", 1 },
+        pair { "0", 0 },
+        pair { "-0", 0 },
+    })
+    {
+        Integer number(input);
+        EXPECT_EQ(number.positivity(), expected);
+    }
+}

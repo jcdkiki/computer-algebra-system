@@ -19,6 +19,8 @@
  * 
  * @authors Берлет Максим (гр. 3384)
  */
+
+/** @brief оператор преобразования должен знать о классе, чтобы в него преобразовывать*/
 class Natural {
 public:
     using Digit = char;         /**< Тип цифры */
@@ -44,6 +46,20 @@ public:
     friend std::ostream& operator<<(std::ostream& os, const Natural& number);
     friend std::istream& operator>>(std::istream& is, Natural& number);
     friend Natural operator+(const Natural &lhs, const Natural &rhs);
+    friend Natural operator-(const Natural &lhs, const Natural &rhs);
+
+    /**
+     * @brief SUB_NN_N - Вычисляет разность двух натуральных чисел
+     * @param[in] number Вычитаемое число
+     * @returns Разность, которая сохраняется в текущем левом числе
+     */
+    Natural& operator-=(const Natural &number);
+
+    /** @brief Префиксный декремент */
+    Natural& operator--();
+
+    /** @brief Постфиксный декремент */
+    Natural operator--(int); 
 
     /**
      * @brief ADD_NN_N - Прибавляет натуральное число
@@ -84,6 +100,31 @@ public:
      * @brief Возвращает натуральное число умноженное на цифру. Не создается копия.
      */
     Natural &operator*=(const Natural::Digit& digit);
+
+    /**
+     * @brief MUL_Nk_N - Умножает натуральное число на 10^k. Не создает копию.
+     * @param[in] k - Натуральное число, степень 10.
+     * @returns Возвращает натуральное число, умноженное на 10^k.
+     */
+    Natural &mul_by_10_in_k(size_t k);
+
+    /**
+     * @brief Аналог битового сдвига для натуральных чисел с основанием 10. Создает копию.
+     */
+    Natural operator<<(size_t k) const;
+
+    /**
+     * @brief Аналог битового сдвига для натуральных чисел с основанием 10. Не создает копию.
+     */
+    Natural &operator<<=(size_t k);
+
+    friend Natural operator*(const Natural &lhs, const Natural &rhs);
+    /**
+     * @brief MUL_NN_N - Вычисляет произведение двух натуральных чисел
+     * @param[in] number Число, на которое мы умножаем наше текущее
+     * @returns Произведение, которое сохраняется в текущую переменную
+     */
+    Natural operator*=(const Natural &number);
     
     /**
      * @brief NZER_N_B - Выполняет проверку на ноль
@@ -140,5 +181,19 @@ std::istream& operator>>(std::istream& is, Natural& number);
  * @returns Cумму двух чисел
  */
 Natural operator+(const Natural &lhs, const Natural &rhs);
+
+/**
+ * @brief MUL_NN_N - Вычисляет произведение двух натуральных чисел
+ * @param[in] lhs,rhs Умножаемые числа
+ * @returns Произведение двух чисел
+ */
+Natural operator*(const Natural &lhs, const Natural &rhs);
+
+/**
+ * @brief SUB_NN_N - Вычисляет разность двух натуральных чисел
+ * @param[in] lhs,rhs Вычитаемые числа
+ * @returns Разность двух чисел
+ */
+Natural operator-(const Natural &lhs, const Natural &rhs);
 
 #endif

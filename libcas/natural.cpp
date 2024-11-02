@@ -1,4 +1,5 @@
 #include "natural.hpp"
+
 #include <algorithm>
 #include <iostream>
 #include <cctype>
@@ -96,6 +97,53 @@ int Natural::cmp(const Natural &n1, const Natural &n2) {
     return 0; // n1 == n2
 }
 
+Natural operator-(const Natural &lhs, const Natural &rhs) {
+    Natural res(lhs);
+    return res -= rhs;
+}
+
+Natural& Natural::operator-=(const Natural &number) {
+    if (number > *this) {
+        throw std::runtime_error("cannot sub from a smaller number");
+    }
+
+    Natural::Digit carry = 0;
+    for (size_t i = 0; i < this->digits.size() || carry; ++i) {
+        this->digits[i] -= carry + ((i < number.digits.size()) ? number.digits[i]: 0);
+        carry = this->digits[i] < 0;
+        if (carry) this->digits[i] += Natural::BASE;
+    }
+
+    this->strip();
+    return *this;
+}
+
+Natural& Natural::operator--() {
+    if (!(*this)) {
+        throw std::runtime_error("cannot decrement zero");
+    }
+
+    Natural::Digit carry = 1;
+    for (size_t i = 0; i < this->digits.size() || carry; ++i) {
+        this->digits[i] -= carry;
+        carry = this->digits[i] < 0;
+        if (carry) this->digits[i] += Natural::BASE;
+    }
+
+    // strip insignificant zeros
+    while (this->digits.size() > 1 && this->digits.back() == 0) {
+        this->digits.pop_back();
+    }
+
+    return *this;
+}
+
+Natural Natural::operator--(int) {
+    Natural old = *this;
+    operator--();
+    return old;
+}
+
 bool Natural::operator==(const Natural &rhs) const
 {
     return (Natural::cmp(*this, rhs) == 0);
@@ -147,6 +195,44 @@ Natural &Natural::operator*=(const Natural::Digit& digit) {
     }
 
     this->strip();
+    return *this;
+}
+
+Natural &Natural::mul_by_10_in_k(size_t k) {
+    this->digits.insert(this->digits.begin(), k, 0);
+    this->strip();
+    return *this;
+}
+
+Natural Natural::operator<<(size_t k) const {
+    Natural res(*this);
+    return res <<= k;
+}
+
+Natural &Natural::operator<<=(size_t k) {
+    this->mul_by_10_in_k(k);
+    return *this;
+}
+
+Natural operator*(const Natural &lhs, const Natural &rhs) {
+    Natural::Digit carry = 0;
+    Natural res;
+    res.digits.resize(lhs.digits.size() + rhs.digits.size());
+
+    for (size_t i = 0; i < lhs.digits.size(); ++i) {
+        for (size_t j = 0; j < rhs.digits.size() || carry; ++j) {
+            size_t temp = res.digits[i + j] + lhs.digits[i] * (j < rhs.digits.size() ? rhs.digits[j]: 0) + carry;
+            res.digits[i + j] = temp % Natural::BASE;
+            carry = temp / Natural::BASE;
+        }
+    }
+
+    res.strip();
+    return res;
+}
+
+Natural Natural::operator*=(const Natural &number) {
+    *this = *this * number;
     return *this;
 }
 

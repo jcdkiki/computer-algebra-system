@@ -14,8 +14,13 @@ target_include_directories(libcas-tst PRIVATE "libcas")
 target_link_libraries(libcas-tst PRIVATE gtest gtest_main libcas)
 
 add_executable(cas ${CAS_SOURCES})
+
+find_package(wxWidgets REQUIRED COMPONENTS net core base)
+if(wxWidgets_USE_FILE) # not defined in CONFIG mode
+    include(${wxWidgets_USE_FILE})
+endif()
+target_link_libraries(cas ${wxWidgets_LIBRARIES} "libcas")
 target_include_directories(cas PRIVATE "libcas")
-target_link_libraries(cas PRIVATE libcas)
 
 enable_testing()
 add_test(NAME libcas-tst COMMAND libcas-tst)

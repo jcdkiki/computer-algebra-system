@@ -1,5 +1,6 @@
 #include "natural.hpp"
 #include <gtest/gtest.h>
+#include <stdexcept>
 
 TEST(NATURAL, CMP)
 {
@@ -42,6 +43,58 @@ TEST(NATURAL, MUL)
         n1 *= n2;
         EXPECT_EQ(n1.asString(), expected);
     }
+}
+
+TEST(NATURAL, SUB)
+{
+    using pair = std::pair<const char*, const char*>;
+    for (auto [input, expected] : {
+        pair { "100 1", "99" },
+        pair { "1 1", "0" },
+        pair { "0 0", "0" },
+        pair { "137 0", "137" },
+        pair { "321 123", "198" },
+        pair { "900 101", "799" },
+        pair { "228 137", "91" },
+        pair { "999 1", "998" },
+    })
+    {
+        std::stringstream ss;
+        ss << input;
+
+        Natural n1, n2;
+        ss >> n1 >> n2;
+
+        std::stringstream output;
+        output << (n1 - n2);
+        EXPECT_EQ(output.str(), expected);
+    }
+}
+
+TEST(NATURAL, DEC)
+{
+    using pair = std::pair<const char*, const char*>;
+    for (auto [input, expected] : {
+        pair { "100", "99" },
+        pair { "1", "0" },
+        pair { "321", "320" },
+        pair { "10", "9" },
+        pair { "999 1", "998" },
+    })
+    {
+        std::stringstream ss;
+        ss << input;
+
+        Natural n1;
+        ss >> n1;
+
+        std::stringstream output;
+        n1--;
+        output << n1;
+        EXPECT_EQ(output.str(), expected);
+    }
+
+    EXPECT_THROW(Natural("0")--, std::runtime_error);
 }
 
 TEST(NATURAL, ADDITION) 

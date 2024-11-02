@@ -43,6 +43,20 @@ public:
     friend std::ostream& operator<<(std::ostream& os, const Natural& number);
     friend std::istream& operator>>(std::istream& is, Natural& number);
     friend Natural operator+(const Natural &lhs, const Natural &rhs);
+    friend Natural operator-(const Natural &lhs, const Natural &rhs);
+
+    /**
+     * @brief SUB_NN_N - Вычисляет разность двух натуральных чисел
+     * @param[in] number Вычитаемое число
+     * @returns Разность, которая сохраняется в текущем левом числе
+     */
+    Natural& operator-=(const Natural &number);
+
+    /** @brief Префиксный декремент */
+    Natural& operator--();
+
+    /** @brief Постфиксный декремент */
+    Natural operator--(int); 
 
     /**
      * @brief ADD_NN_N - Прибавляет натуральное число
@@ -141,5 +155,12 @@ Natural operator+(const Natural &lhs, const Natural &rhs);
  * @returns Произведение двух чисел
  */
 Natural operator*(const Natural &lhs, const Natural &rhs);
+
+/**
+ * @brief SUB_NN_N - Вычисляет разность двух натуральных чисел
+ * @param[in] lhs,rhs Вычитаемые числа
+ * @returns Разность двух чисел
+ */
+Natural operator-(const Natural &lhs, const Natural &rhs);
 
 #endif

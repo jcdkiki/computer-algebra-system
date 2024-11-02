@@ -48,6 +48,7 @@ public:
     Natural& operator-=(const Natural &number);
     Natural& operator--();
     Natural operator--(int); 
+    
     /**
      * @brief ADD_NN_N - Прибавляет натуральное число
      * @param[in] n Число, которое нужно прибавить
@@ -132,6 +133,11 @@ std::istream& operator>>(std::istream& is, Natural& number);
  */
 Natural operator+(const Natural &lhs, const Natural &rhs);
 
+/**
+ * @brief SUB_NN_N - Вычисляет разность двух натуральных чисел
+ * @param[in] lhs,rhs Вычитаемые числа
+ * @returns Разность двух чисел
+ */
 Natural operator-(const Natural &lhs, const Natural &rhs);
 
 #endif

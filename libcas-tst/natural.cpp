@@ -1,5 +1,6 @@
 #include "natural.hpp"
 #include <gtest/gtest.h>
+#include <sstream>
 #include <stdexcept>
 
 TEST(NATURAL, CMP)
@@ -35,6 +36,9 @@ TEST(NATURAL, MULBY10K)
         pair { "0 2", "0" },
     })
     {
+        std::stringstream ss;
+        ss << input;
+        
         Natural n;
         size_t k;
         ss >> n >> k;

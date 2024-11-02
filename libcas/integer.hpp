@@ -27,6 +27,9 @@ public:
     /** @brief Создает новое целое число из строки */
     explicit Integer(const char *str);
 
+    /** @brief Создает новое целое число из натурального числа */
+    Integer(const Natural & number);
+
     /** @brief Преобразует число в его строковое представление */
     std::string asString();
 
@@ -56,5 +59,6 @@ std::ostream& operator<<(std::ostream& os, const Integer& number);
  * @param[out] number   Ссылка на число, в которое будет записан результат
  */
 std::istream& operator>>(std::istream& is, Integer& number);
+
 
 #endif

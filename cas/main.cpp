@@ -15,4 +15,5 @@ int main()
         std::cin >> number3 >> number4;
         std::cout << "You typed: " << number3 << " and " << number4 << std::endl;
     }
+
 }

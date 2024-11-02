@@ -47,14 +47,14 @@ public:
 
     /**
      * @brief SUB_NN_N - Вычисляет разность двух натуральных чисел
-     * @param[in] lhs,rhs Вычитаемые числа числа
+     * @param[in] number Вычитаемое число
      * @returns Разность, которая сохраняется в текущем левом числе
      */
     Natural& operator-=(const Natural &number);
 
     /** @brief Префиксный декремент */
     Natural& operator--();
-    
+
     /** @brief Постфиксный декремент */
     Natural operator--(int); 
 

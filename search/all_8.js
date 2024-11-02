@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['rational_0',['Rational',['../classRational.html',1,'Rational'],['../classRational.html#a3bbd6ff67c590da76ddfcbd48cd3de0a',1,'Rational::Rational()'],['../classRational.html#a32a09888b437d30cc0c2496845242c2e',1,'Rational::Rational(const char *str)']]],
-  ['rational_2ehpp_1',['rational.hpp',['../rational_8hpp.html',1,'']]]
+  ['polynomial_0',['Polynomial',['../classPolynomial.html',1,'Polynomial&lt; T, zero, one &gt;'],['../classPolynomial.html#aebe967fce64512817070c9241e9a961d',1,'Polynomial::Polynomial()'],['../classPolynomial.html#a698ce5a408ab7fdace3ac7e79348e386',1,'Polynomial::Polynomial(const char *str)']]],
+  ['polynomial_2ehpp_1',['polynomial.hpp',['../polynomial_8hpp.html',1,'']]],
+  ['positivity_2',['positivity',['../classInteger.html#a3b35642b7b52b87cf8995143015df5b4',1,'Integer']]]
 ];

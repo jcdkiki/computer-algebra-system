@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['strip_0',['strip',['../classNatural.html#a687028998d0741ace8bd8276144a91b5',1,'Natural']]]
+  ['rational_0',['Rational',['../classRational.html',1,'Rational'],['../classRational.html#a3bbd6ff67c590da76ddfcbd48cd3de0a',1,'Rational::Rational()'],['../classRational.html#a32a09888b437d30cc0c2496845242c2e',1,'Rational::Rational(const char *str)']]],
+  ['rational_2ehpp_1',['rational.hpp',['../rational_8hpp.html',1,'']]]
 ];

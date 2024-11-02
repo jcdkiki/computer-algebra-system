@@ -149,6 +149,17 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>asString</b> (
 <tr class="memitem:a43255f4998cce52819c9f0dca8939b96"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classNatural.html">Natural</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNatural.html#a43255f4998cce52819c9f0dca8939b96">operator++</a> (int)</td></tr>
 <tr class="memdesc:a43255f4998cce52819c9f0dca8939b96"><td class="mdescLeft">&#160;</td><td class="mdescRight">ADD_1N_N - Увеличивает натуральное число на единицу  <br /></td></tr>
 <tr class="separator:a43255f4998cce52819c9f0dca8939b96"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a767666849d38af5218da4fedb186e05f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classNatural.html">Natural</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNatural.html#a767666849d38af5218da4fedb186e05f">mul_by_10_in_k</a> (size_t k)</td></tr>
+<tr class="memdesc:a767666849d38af5218da4fedb186e05f"><td class="mdescLeft">&#160;</td><td class="mdescRight">MUL_Nk_N - Умножает натуральное число на 10^k. Не создает копию.  <br /></td></tr>
+<tr class="separator:a767666849d38af5218da4fedb186e05f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9db772e271fa4bdcf11d1ad7ebe74954"><td class="memItemLeft" align="right" valign="top"><a id="a9db772e271fa4bdcf11d1ad7ebe74954" name="a9db772e271fa4bdcf11d1ad7ebe74954"></a>
+<a class="el" href="classNatural.html">Natural</a>&#160;</td><td class="memItemRight" valign="bottom"><b>operator&lt;&lt;</b> (size_t k) const</td></tr>
+<tr class="memdesc:a9db772e271fa4bdcf11d1ad7ebe74954"><td class="mdescLeft">&#160;</td><td class="mdescRight">Аналог битового сдвига для натуральных чисел с основанием 10. Создает копию. <br /></td></tr>
+<tr class="separator:a9db772e271fa4bdcf11d1ad7ebe74954"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8559a414ce2c5f4795d9267779431feb"><td class="memItemLeft" align="right" valign="top"><a id="a8559a414ce2c5f4795d9267779431feb" name="a8559a414ce2c5f4795d9267779431feb"></a>
+<a class="el" href="classNatural.html">Natural</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator&lt;&lt;=</b> (size_t k)</td></tr>
+<tr class="memdesc:a8559a414ce2c5f4795d9267779431feb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Аналог битового сдвига для натуральных чисел с основанием 10. Не создает копию. <br /></td></tr>
+<tr class="separator:a8559a414ce2c5f4795d9267779431feb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a80522cf0d08017bc336a7b1e5fd39da1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classNatural.html">Natural</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNatural.html#a80522cf0d08017bc336a7b1e5fd39da1">operator*=</a> (const <a class="el" href="classNatural.html">Natural</a> &amp;number)</td></tr>
 <tr class="memdesc:a80522cf0d08017bc336a7b1e5fd39da1"><td class="mdescLeft">&#160;</td><td class="mdescRight">MUL_NN_N - Вычисляет произведение двух натуральных чисел  <br /></td></tr>
 <tr class="separator:a80522cf0d08017bc336a7b1e5fd39da1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -310,6 +321,33 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>strip</b> ()</td></tr
 1, если n1 &lt; n2 </dd>
 <dd>
 2, если n1 &gt; n2 </dd></dl>
+
+</div>
+</div>
+<a id="a767666849d38af5218da4fedb186e05f" name="a767666849d38af5218da4fedb186e05f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a767666849d38af5218da4fedb186e05f">&#9670;&#160;</a></span>mul_by_10_in_k()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classNatural.html">Natural</a> &amp; Natural::mul_by_10_in_k </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>k</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>MUL_Nk_N - Умножает натуральное число на 10^k. Не создает копию. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">k</td><td>- Натуральное число, степень 10. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает натуральное число, умноженное на 10^k. </dd></dl>
 
 </div>
 </div>

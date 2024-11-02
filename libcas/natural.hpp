@@ -45,10 +45,19 @@ public:
     friend Natural operator+(const Natural &lhs, const Natural &rhs);
     friend Natural operator-(const Natural &lhs, const Natural &rhs);
 
+    /**
+     * @brief SUB_NN_N - Вычисляет разность двух натуральных чисел
+     * @param[in] lhs,rhs Вычитаемые числа числа
+     * @returns Разность, которая сохраняется в текущем левом числе
+     */
     Natural& operator-=(const Natural &number);
+
+    /** @brief Префиксный декремент */
     Natural& operator--();
-    Natural operator--(int); 
     
+    /** @brief Постфиксный декремент */
+    Natural operator--(int); 
+
     /**
      * @brief ADD_NN_N - Прибавляет натуральное число
      * @param[in] n Число, которое нужно прибавить

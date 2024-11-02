@@ -68,3 +68,13 @@ Integer::operator bool()
 {
     return bool(natural);
 }
+
+int Integer::positivity(){
+    if (sign){
+        return 1; // number < 0
+    }
+    if (natural){
+        return 2; // number > 0
+    }
+    return 0; //number == 0
+}

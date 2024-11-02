@@ -42,6 +42,14 @@ public:
 
     friend std::ostream& operator<<(std::ostream& os, const Integer& number);
     friend std::istream& operator>>(std::istream& is, Integer& number);
+
+    /**
+     * @brief POZ_Z_D - Определяет положительность числа
+     * @returns 2, если число положительное
+     * @returns 1, если число отрицательное
+     * @returns 0, если число равно 0
+     */
+    int positivity();
 };
 
 /**

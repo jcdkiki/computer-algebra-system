@@ -1,5 +1,4 @@
 #include "integer.hpp"
-#include <iostream>
 #include <cctype>
 
 Integer::Integer() : sign(false), natural(Natural()) {}

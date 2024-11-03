@@ -80,6 +80,8 @@ public:
      * @returns 0, если число равно 0
      */
     int positivity();
+
+    friend Natural abs(const Integer&number);
 };
 
 /**
@@ -97,5 +99,12 @@ std::ostream& operator<<(std::ostream& os, const Integer& number);
  * @param[out] number   Ссылка на число, в которое будет записан результат
  */
 std::istream& operator>>(std::istream& is, Integer& number);
+
+/**
+ * @brief ABS_Z_N -  Возвращает абсолютную величину числа
+ * @param[in] number Целое число, абсолютную вечличину которого нужно вернуть
+ * @returns Натуральное число
+ */
+Natural abs(const Integer&number);
 
 #endif

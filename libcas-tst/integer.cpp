@@ -101,3 +101,18 @@ TEST(INTEGER, POZ)
         EXPECT_EQ(number.positivity(), expected);
     }
 }
+
+TEST(INTEGER, ABS) 
+{
+    using pair = std::pair<const char*, const char*>;
+    for (auto [input, expected] : {
+        pair { "1",  "1" },
+        pair { "0",  "0" },
+        pair { "-1", "1" },
+    })
+    {
+        Integer number(input);
+        Natural res = abs(number);
+        EXPECT_EQ(res.asString(), expected);
+    }
+}

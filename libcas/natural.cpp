@@ -277,7 +277,7 @@ Natural Natural::operator++(int) {
     return old;
 }
 
-Natural::operator bool()
+Natural::operator bool() const
 {
     return (digits.size() > 1) || (digits[0] != 0);
 }

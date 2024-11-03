@@ -131,7 +131,7 @@ public:
      * @returns true, если число не равно нулю.
      * @returns false, если число равно нулю. 
      */
-    operator bool();
+    operator bool() const;
 
     /** @name Операторы сравнения (обёртка над методом cmp)
      * @param[in] this,rhs Сравниваемые числа

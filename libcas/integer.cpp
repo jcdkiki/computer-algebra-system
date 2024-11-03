@@ -70,13 +70,29 @@ Integer::operator bool()
 }
 
 Integer& Integer::operator++(){
-    natural++;
+    if(sign){
+        natural--;
+    }
+    else{
+        natural++;
+    }
+    if(!natural){
+        sign = false;
+    }
     return *this;
 }
 
 Integer Integer::operator++(int){
     Integer old = *this;
-    natural++;
+    if(sign){
+        natural--;
+    }
+    else{
+        natural++;
+    }
+    if(!natural){
+        sign = false;
+    }
     return old;
 }
 

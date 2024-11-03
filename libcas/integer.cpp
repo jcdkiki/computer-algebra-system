@@ -103,6 +103,9 @@ Integer& Integer::operator+=(const Integer &n){
     }
     if(natural >= n.natural){
         natural -= n.natural;
+        if(!natural){
+            sign = false;
+        }
         return *this;
     }
     else{

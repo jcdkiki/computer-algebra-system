@@ -15,7 +15,7 @@ int main()
         std::cout << "Type two integer numbers: " << std::endl;
         std::cin >> number3 >> number4;
         std::cout << "You typed: " << number3 << " and " << number4 << std::endl;
-        std::cout << "Sum of int numbers: " << number3+number4 << std::endl;
+        std::cout << "Sum of integer numbers: " << number3+number4 << std::endl;
         
     }
 

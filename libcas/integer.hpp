@@ -20,6 +20,10 @@
 class Integer {
     Natural natural;
     bool sign;
+
+    /** @brief Если число равно нулю, устанавливает ему знак плюс */
+    void fix_zero();
+
 public:
     /** @brief Создает новое целое число, равное нулю */
     Integer();
@@ -44,6 +48,32 @@ public:
     friend std::istream& operator>>(std::istream& is, Integer& number);
 
     /**
+     * @brief ADD_1I_I - Увеличивает целое число на единицу
+     * @returns Себя \b после увеличения
+     */
+    Integer& operator++();
+
+    /**
+     * @brief ADD_1I_I - Увеличивает целое число на единицу
+     * @returns Себя \b перед увеличением
+     */
+    Integer operator++(int);
+
+    /**
+     * @brief ADD_II_I - Прибавляет целое число
+     * @param[in] n Число, которое нужно прибавить
+     * @returns Результат прибавления \a n
+     */
+    Integer& operator+=(const Integer &n);
+
+    /**
+     * @brief ADD_II_I - Вычисляет сумму двух целых чисел
+     * @param[in] lhs,rhs Складываемые числа
+     * @returns Cумму двух чисел
+     */
+    friend Integer operator+(const Integer &lhs, const Integer &rhs);
+    
+    /**
      * @brief POZ_Z_D - Определяет положительность числа
      * @returns 2, если число положительное
      * @returns 1, если число отрицательное
@@ -67,6 +97,5 @@ std::ostream& operator<<(std::ostream& os, const Integer& number);
  * @param[out] number   Ссылка на число, в которое будет записан результат
  */
 std::istream& operator>>(std::istream& is, Integer& number);
-
 
 #endif

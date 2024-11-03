@@ -11,9 +11,7 @@ Integer::Integer(const char *str) : sign(false)
     }
     
     natural = Natural(str);
-    if (!natural) {
-        sign = false;
-    }
+    this->fix_zero();
 }
 
 Integer::Integer(const Natural &number) : sign(false), natural(number) {}
@@ -64,12 +62,61 @@ std::istream& operator>>(std::istream& is, Integer& number)
     return is;
 }
 
+void Integer::fix_zero()
+{
+    if(!natural){
+        sign = false;
+    }
+}
+
 Integer::operator bool()
 {
     return bool(natural);
 }
 
-int Integer::positivity(){
+Integer& Integer::operator++(){
+    if(sign){
+        natural--;
+    }
+    else{
+        natural++;
+    }
+    this->fix_zero();
+    return *this;
+}
+
+Integer Integer::operator++(int){
+    Integer old = *this;
+    ++(*this);
+    return old;
+}
+
+Integer& Integer::operator+=(const Integer &n){
+    if(sign == n.sign){
+        natural += n.natural;
+        return *this;
+    }
+    if(natural >= n.natural){
+        natural -= n.natural;
+        this->fix_zero();
+        return *this;
+    }
+    else{
+        natural = n.natural - natural;
+        sign = n.sign;
+        return *this;
+    }
+}
+
+
+Integer operator+(const Integer &lhs, const Integer &rhs)
+{
+    Integer res(lhs);
+    return res += rhs;
+}
+
+int Integer::positivity()
+{
     if (sign){
         return 1; // number < 0
     }

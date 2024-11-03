@@ -20,6 +20,10 @@
 class Integer {
     Natural natural;
     bool sign;
+
+    /** @brief Если число равно нулю, устанавливает ему знак плюс */
+    void fix_zero();
+
 public:
     /** @brief Создает новое целое число, равное нулю */
     Integer();

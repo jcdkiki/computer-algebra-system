@@ -53,7 +53,9 @@ TEST(INTEGER, ADDITION)
         tuple { "-123456789",    "98",           "-123456691" },
         tuple { "900",          "101",          "1001" },
         tuple { "999",          "-1",            "998" },
-        tuple { "0",            "0",            "0" }
+        tuple { "0",            "0",            "0" },
+        tuple { "-67",          "67",           "0" },
+        tuple { "67",           "-67",          "0" }
     })
     {
         Integer n1(input1), n2(input2);

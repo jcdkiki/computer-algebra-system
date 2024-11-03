@@ -86,3 +86,18 @@ TEST(INTEGER, INC)
         EXPECT_EQ((++n2).asString(), expected);
     }
 }
+
+TEST(INTEGER, POZ)
+{
+    using pair = std::pair<const char*, int>;
+    for (auto [input, expected] : {
+        pair { "1", 2 },
+        pair { "-1", 1 },
+        pair { "0", 0 },
+        pair { "-0", 0 },
+    })
+    {
+        Integer number(input);
+        EXPECT_EQ(number.positivity(), expected);
+    }
+}

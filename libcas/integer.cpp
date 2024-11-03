@@ -114,3 +114,14 @@ Integer operator+(const Integer &lhs, const Integer &rhs)
     Integer res(lhs);
     return res += rhs;
 }
+
+int Integer::positivity()
+{
+    if (sign){
+        return 1; // number < 0
+    }
+    if (natural){
+        return 2; // number > 0
+    }
+    return 0; //number == 0
+}

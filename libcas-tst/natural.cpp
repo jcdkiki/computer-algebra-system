@@ -1,5 +1,6 @@
 #include "natural.hpp"
 #include <gtest/gtest.h>
+#include <sstream>
 #include <stdexcept>
 
 TEST(NATURAL, CMP)
@@ -21,6 +22,52 @@ TEST(NATURAL, CMP)
     ASSERT_LE(n2, n2);
     ASSERT_GE(n2, n2);
     ASSERT_EQ(n2, n2);
+}
+
+TEST(NATURAL, MULBYDIGIT) 
+{
+    using tuple = std::tuple<const char*, Natural::Digit, const char*>;
+    for (auto [input, digit, expected] : {
+        tuple { "123", 9, "1107" },
+        tuple { "521", 0, "0" },
+        tuple { "0", 0, "0" },
+        tuple { "0", 5, "0" },
+        tuple { "5", 5, "25" },
+        tuple { "10", 6, "60" },
+        tuple { "999", 1, "999" },
+    })
+    {
+        Natural n(input);
+        EXPECT_EQ((n * digit).asString(), expected);
+        
+        n *= digit;
+        EXPECT_EQ(n.asString(), expected);
+    }
+}
+
+TEST(NATURAL, MULBY10K)
+{
+    using pair = std::pair<const char*, const char*>;
+    for (auto [input, expected] : {
+        pair { "100 1", "1000" },
+        pair { "1 1", "10" },
+        pair { "123 0", "123" },
+        pair { "137 2", "13700" },
+        pair { "321 2", "32100" },
+        pair { "0 2", "0" },
+    })
+    {
+        std::stringstream ss;
+        ss << input;
+        
+        Natural n;
+        size_t k;
+        ss >> n >> k;
+
+        std::stringstream output;
+        output << (n << k);
+        EXPECT_EQ(output.str(), expected);
+    }
 }
 
 TEST(NATURAL, MUL)
@@ -84,7 +131,7 @@ TEST(NATURAL, DEC)
     {
         std::stringstream ss;
         ss << input;
-
+      
         Natural n1;
         ss >> n1;
 

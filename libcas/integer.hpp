@@ -72,6 +72,14 @@ public:
      * @returns Cумму двух чисел
      */
     friend Integer operator+(const Integer &lhs, const Integer &rhs);
+    
+    /**
+     * @brief POZ_Z_D - Определяет положительность числа
+     * @returns 2, если число положительное
+     * @returns 1, если число отрицательное
+     * @returns 0, если число равно 0
+     */
+    int positivity();
 };
 
 /**

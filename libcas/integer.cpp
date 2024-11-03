@@ -146,10 +146,10 @@ bool Integer::operator>(const Integer &rhs) const{
 
 bool Integer::operator<(const Integer &rhs) const{
     // первый знак отрицательный и второй положительный
-    bool diff_sing = (sign && !rhs.sign);
+    bool diff_sign = (sign && !rhs.sign);
     //отрицательные знаки и первый больше второго или положительные знаки первый меньше второго
     bool same_sign = ((natural > rhs.natural && rhs.sign && sign) || (natural < rhs.natural && !rhs.sign && !sign));
-    return diff_sing || same_sign;
+    return diff_sign || same_sign;
 }
 
 bool Integer::operator>=(const Integer &rhs) const{

@@ -102,19 +102,19 @@ Natural getDivDigitInPower(const Natural &lhs, const Natural &rhs){
         throw std::runtime_error("cannot div from a smaller number");
     }
 
-    Natural sub = rhs;
-    if (!sub){
+    if (!rhs){
         throw std::runtime_error("cannot div from a null");
     }
 
-    size_t k = 0;
-    while (lhs > (sub << size_t(1))){
-        k++;
-        sub = sub << size_t(1);
+    size_t k = lhs.digits.size() - rhs.digits.size();
+    if (lhs < (rhs << k)){
+        k -= 1;
     }
 
+    Natural sub = rhs << k;
     Natural minuend = lhs;
     Natural res("0");
+    
     while (minuend >= sub){
         res++;
         minuend -= sub;
@@ -303,7 +303,7 @@ Natural Natural::operator++(int) {
     return old;
 }
 
-Natural::operator bool()
+Natural::operator bool() const
 {
     return (digits.size() > 1) || (digits[0] != 0);
 }

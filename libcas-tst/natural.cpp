@@ -204,6 +204,7 @@ TEST(NATURAL, DIVDK)
         tuple { "1", "1", "1" },
         tuple { "50", "3", "10" },
         tuple { "39900", "5", "7000" },
+        tuple { "1019", "34", "20" },
     })
     {
         Natural n1(input1), n2(input2);

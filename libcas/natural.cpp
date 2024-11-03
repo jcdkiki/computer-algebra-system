@@ -97,6 +97,32 @@ int Natural::cmp(const Natural &n1, const Natural &n2) {
     return 0; // n1 == n2
 }
 
+Natural getDivDigitInPower(const Natural &lhs, const Natural &rhs){
+    if (lhs < rhs){
+        throw std::runtime_error("cannot div from a smaller number");
+    }
+
+    Natural sub = rhs;
+    if (!sub){
+        throw std::runtime_error("cannot div from a null");
+    }
+
+    size_t k = 0;
+    while (lhs > (sub << size_t(1))){
+        k++;
+        sub = sub << size_t(1);
+    }
+
+    Natural minuend = lhs;
+    Natural res("0");
+    while (minuend >= sub){
+        res++;
+        minuend -= sub;
+    }
+
+    return res << k;
+}
+
 Natural operator-(const Natural &lhs, const Natural &rhs) {
     Natural res(lhs);
     return res -= rhs;

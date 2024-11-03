@@ -195,3 +195,18 @@ TEST(NATURAL, IO)
     ASSERT_EQ(Natural("00001337").asString(), "1337");
     ASSERT_EQ(Natural("000000000").asString(), "0");
 }
+
+TEST(NATURAL, DIVDK)
+{
+    using tuple = std::tuple<const char*, const char*, const char*>;
+    for (auto [input1, input2, expected] : {
+        tuple { "100", "10", "10" },
+        tuple { "1", "1", "1" },
+        tuple { "50", "3", "10" },
+        tuple { "39900", "5", "7000" },
+    })
+    {
+        Natural n1(input1), n2(input2);
+        EXPECT_EQ((getDivDigitInPower(n1, n2)).asString(), expected);
+    }
+}

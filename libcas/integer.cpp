@@ -125,3 +125,43 @@ int Integer::positivity()
     }
     return 0; //number == 0
 }
+
+Integer& Integer::operator--(){
+    if(sign){
+        natural++;
+    }
+    else{
+        natural--;
+    }
+    this->fix_zero();
+    return *this;
+}
+
+Integer Integer::operator--(int){
+    Integer old = *this;
+    --(*this);
+    return old;
+}
+
+Integer& Integer::operator-=(const Integer &n){
+    if(sign != n.sign){
+        natural += n.natural;
+        return *this;
+    }
+    if(natural >= n.natural){
+        natural -= n.natural;
+        this->fix_zero();
+        return *this;
+    }
+    else{
+        natural = n.natural - natural;
+        sign = !sign;
+        return *this;
+    }
+}
+
+Integer operator-(const Integer &lhs, const Integer &rhs)
+{
+    Integer res(lhs);
+    return res -= rhs;
+}

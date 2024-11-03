@@ -16,6 +16,7 @@ int main()
         std::cin >> number3 >> number4;
         std::cout << "You typed: " << number3 << " and " << number4 << std::endl;
         std::cout << "Sum of integer numbers: " << number3+number4 << std::endl;
+        std::cout << "Sub of integers: " << number3-number4 << std::endl;
         
     }
 

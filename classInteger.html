@@ -129,6 +129,15 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>asString</b> (
 <tr class="memitem:ae8fc1288d02b104e8c0fd9b05bed948f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInteger.html#ae8fc1288d02b104e8c0fd9b05bed948f">operator bool</a> ()</td></tr>
 <tr class="memdesc:ae8fc1288d02b104e8c0fd9b05bed948f"><td class="mdescLeft">&#160;</td><td class="mdescRight">NZER_N_B - Выполняет проверку на ноль для целого числа  <br /></td></tr>
 <tr class="separator:ae8fc1288d02b104e8c0fd9b05bed948f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4290bf7f6763b27a51e216bdbfdea68f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classInteger.html">Integer</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInteger.html#a4290bf7f6763b27a51e216bdbfdea68f">operator++</a> ()</td></tr>
+<tr class="memdesc:a4290bf7f6763b27a51e216bdbfdea68f"><td class="mdescLeft">&#160;</td><td class="mdescRight">ADD_1I_I - Увеличивает целое число на единицу  <br /></td></tr>
+<tr class="separator:a4290bf7f6763b27a51e216bdbfdea68f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1666444f09484e482b2f94dd263c7dc9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classInteger.html">Integer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInteger.html#a1666444f09484e482b2f94dd263c7dc9">operator++</a> (int)</td></tr>
+<tr class="memdesc:a1666444f09484e482b2f94dd263c7dc9"><td class="mdescLeft">&#160;</td><td class="mdescRight">ADD_1I_I - Увеличивает целое число на единицу  <br /></td></tr>
+<tr class="separator:a1666444f09484e482b2f94dd263c7dc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a29960a3ed21b3584db73ad22782f62ff"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classInteger.html">Integer</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInteger.html#a29960a3ed21b3584db73ad22782f62ff">operator+=</a> (const <a class="el" href="classInteger.html">Integer</a> &amp;n)</td></tr>
+<tr class="memdesc:a29960a3ed21b3584db73ad22782f62ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">ADD_II_I - Прибавляет целое число  <br /></td></tr>
+<tr class="separator:a29960a3ed21b3584db73ad22782f62ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3b35642b7b52b87cf8995143015df5b4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInteger.html#a3b35642b7b52b87cf8995143015df5b4">positivity</a> ()</td></tr>
 <tr class="memdesc:a3b35642b7b52b87cf8995143015df5b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">POZ_Z_D - Определяет положительность числа  <br /></td></tr>
 <tr class="separator:a3b35642b7b52b87cf8995143015df5b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -141,6 +150,9 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>asString</b> (
 <tr class="memitem:a992423e53ec0794560e902ebfe04d4bb"><td class="memItemLeft" align="right" valign="top">std::istream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInteger.html#a992423e53ec0794560e902ebfe04d4bb">operator&gt;&gt;</a> (std::istream &amp;is, <a class="el" href="classInteger.html">Integer</a> &amp;number)</td></tr>
 <tr class="memdesc:a992423e53ec0794560e902ebfe04d4bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Вводит целое число из потока ввода  <br /></td></tr>
 <tr class="separator:a992423e53ec0794560e902ebfe04d4bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad69a5b95379d5daa962a3f8d9042909b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classInteger.html">Integer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInteger.html#ad69a5b95379d5daa962a3f8d9042909b">operator+</a> (const <a class="el" href="classInteger.html">Integer</a> &amp;lhs, const <a class="el" href="classInteger.html">Integer</a> &amp;rhs)</td></tr>
+<tr class="memdesc:ad69a5b95379d5daa962a3f8d9042909b"><td class="mdescLeft">&#160;</td><td class="mdescRight">ADD_II_I - Вычисляет сумму двух целых чисел  <br /></td></tr>
+<tr class="separator:ad69a5b95379d5daa962a3f8d9042909b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Методы</h2>
 <a id="ae8fc1288d02b104e8c0fd9b05bed948f" name="ae8fc1288d02b104e8c0fd9b05bed948f"></a>
@@ -162,6 +174,74 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>asString</b> (
 <dl class="section return"><dt>Возвращает</dt><dd>true, если число не равно нулю. </dd>
 <dd>
 false, если число равно нулю. </dd></dl>
+
+</div>
+</div>
+<a id="a4290bf7f6763b27a51e216bdbfdea68f" name="a4290bf7f6763b27a51e216bdbfdea68f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4290bf7f6763b27a51e216bdbfdea68f">&#9670;&#160;</a></span>operator++() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classInteger.html">Integer</a> &amp; Integer::operator++ </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>ADD_1I_I - Увеличивает целое число на единицу </p>
+<dl class="section return"><dt>Возвращает</dt><dd>Себя <b>после</b> увеличения </dd></dl>
+
+</div>
+</div>
+<a id="a1666444f09484e482b2f94dd263c7dc9" name="a1666444f09484e482b2f94dd263c7dc9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1666444f09484e482b2f94dd263c7dc9">&#9670;&#160;</a></span>operator++() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classInteger.html">Integer</a> Integer::operator++ </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>ADD_1I_I - Увеличивает целое число на единицу </p>
+<dl class="section return"><dt>Возвращает</dt><dd>Себя <b>перед</b> увеличением </dd></dl>
+
+</div>
+</div>
+<a id="a29960a3ed21b3584db73ad22782f62ff" name="a29960a3ed21b3584db73ad22782f62ff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a29960a3ed21b3584db73ad22782f62ff">&#9670;&#160;</a></span>operator+=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classInteger.html">Integer</a> &amp; Integer::operator+= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classInteger.html">Integer</a> &amp;&#160;</td>
+          <td class="paramname"><em>n</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>ADD_II_I - Прибавляет целое число </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">n</td><td>Число, которое нужно прибавить </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>Результат прибавления <em>n</em> </dd></dl>
 
 </div>
 </div>
@@ -190,6 +270,51 @@ false, если число равно нулю. </dd></dl>
 </div>
 </div>
 <h2 class="groupheader">Документация по друзьям класса и функциям, относящимся к классу</h2>
+<a id="ad69a5b95379d5daa962a3f8d9042909b" name="ad69a5b95379d5daa962a3f8d9042909b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad69a5b95379d5daa962a3f8d9042909b">&#9670;&#160;</a></span>operator+</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classInteger.html">Integer</a> operator+ </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classInteger.html">Integer</a> &amp;&#160;</td>
+          <td class="paramname"><em>lhs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classInteger.html">Integer</a> &amp;&#160;</td>
+          <td class="paramname"><em>rhs</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>ADD_II_I - Вычисляет сумму двух целых чисел </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">lhs,rhs</td><td>Складываемые числа </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>Cумму двух чисел </dd></dl>
+
+</div>
+</div>
 <a id="a5921c24569de78d9d4e9214926761484" name="a5921c24569de78d9d4e9214926761484"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5921c24569de78d9d4e9214926761484">&#9670;&#160;</a></span>operator&lt;&lt;</h2>
 

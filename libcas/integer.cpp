@@ -125,3 +125,8 @@ int Integer::positivity()
     }
     return 0; //number == 0
 }
+
+Natural abs(const Integer&number){
+    Natural res = number.natural;
+    return res;
+}

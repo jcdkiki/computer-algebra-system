@@ -9,6 +9,7 @@ var classInteger =
     [ "operator++", "classInteger.html#a1666444f09484e482b2f94dd263c7dc9", null ],
     [ "operator+=", "classInteger.html#a29960a3ed21b3584db73ad22782f62ff", null ],
     [ "positivity", "classInteger.html#a3b35642b7b52b87cf8995143015df5b4", null ],
+    [ "abs", "classInteger.html#a69139ffe1a5f920adfa1302b63d6c424", null ],
     [ "operator+", "classInteger.html#ad69a5b95379d5daa962a3f8d9042909b", null ],
     [ "operator<<", "classInteger.html#a5921c24569de78d9d4e9214926761484", null ],
     [ "operator>>", "classInteger.html#a992423e53ec0794560e902ebfe04d4bb", null ]

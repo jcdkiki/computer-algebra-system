@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['getdivdigitinpower_0',['getDivDigitInPower',['../classNatural.html#a56fab5de99caafc6435dda4259a859a7',1,'Natural']]]
+  ['abs_0',['abs',['../classInteger.html#a69139ffe1a5f920adfa1302b63d6c424',1,'Integer']]]
 ];

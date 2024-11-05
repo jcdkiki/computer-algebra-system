@@ -308,10 +308,7 @@ Natural::operator bool() const
     return (digits.size() > 1) || (digits[0] != 0);
 }
 
-Natural subNDN(const Natural &rhs, const Natural &lhs, const Natural::Digit& digit){
-    if (rhs < lhs * digit){
-        throw std::runtime_error("cannot sub from a smaller number");
-    }
-    Natural res = rhs - (lhs * digit);
+Natural subNDN(const Natural &lhs, const Natural &rhs, const Natural::Digit& digit){
+    Natural res = lhs - (rhs * digit);
     return res;
 }

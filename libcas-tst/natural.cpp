@@ -225,4 +225,7 @@ TEST(NATURAL, SUBNDN)
         Natural n2(input2);
         EXPECT_EQ(subNDN(n1, n2, digit).asString(), expected);
     }
+
+    Natural n1("100"), n2("50");
+    EXPECT_THROW(subNDN(n1, n2, 3), std::runtime_error);
 }

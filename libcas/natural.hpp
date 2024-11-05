@@ -208,9 +208,9 @@ Natural getDivDigitInPower(const Natural &lhs, const Natural &rhs);
 
 /**
  * @brief SUB_NDN_N - Вычисляет разность натурального большего и натурального меньшего, умноженного на цифру
- * @param[in] rhs,lhs,digit Уменьшаемое, вычитаемое и цифра, на которую надо умножить вычитаемое
+ * @param[in] lhs,rhs,digit Уменьшаемое, вычитаемое и цифра, на которую надо умножить вычитаемое
  * @returns Разность натурального и натурального, умноженного на цифру
  */
-Natural subNDN(const Natural &rhs, const Natural &lhs, const Natural::Digit& digit);
+Natural subNDN(const Natural &lhs, const Natural &rhs, const Natural::Digit& digit);
 
 #endif

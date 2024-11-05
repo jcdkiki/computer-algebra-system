@@ -137,19 +137,37 @@ bool Integer::operator!=(const Integer &rhs) const{
 }
 
 bool Integer::operator>(const Integer &rhs) const{
-    // первый знак положительный и второй отрицательный
-    bool diff_sign = (!sign && rhs.sign); 
-    //отрицательые знаки и первый меньше второго или положительные знаки и первый больше второго
-    bool same_sign = ((natural < rhs.natural && rhs.sign && sign) || (natural > rhs.natural && !rhs.sign && !sign));
-    return diff_sign || same_sign;
+    // если первый знак отрицательный и второй положительный
+    if (sign && !rhs.sign)
+        return false;
+    
+    // если первый положительный и второй отрицательный
+    if (!sign && rhs.sign)
+        return true;
+    
+    // если оба отрицательные
+    if (sign && rhs.sign)
+        return natural < rhs.natural;
+
+    // если оба положительные
+    return natural > rhs.natural;
 }
 
-bool Integer::operator<(const Integer &rhs) const{
-    // первый знак отрицательный и второй положительный
-    bool diff_sign = (sign && !rhs.sign);
-    //отрицательные знаки и первый больше второго или положительные знаки первый меньше второго
-    bool same_sign = ((natural > rhs.natural && rhs.sign && sign) || (natural < rhs.natural && !rhs.sign && !sign));
-    return diff_sign || same_sign;
+bool Integer::operator<(const Integer &rhs) const {
+    // если первый знак отрицательный и второй положительный
+    if (sign && !rhs.sign)
+        return true;
+    
+    // если первый положительный и второй отрицательный
+    if (!sign && rhs.sign)
+        return false;
+    
+    // если оба отрицательные
+    if (sign && rhs.sign)
+        return natural > rhs.natural;
+
+    // если оба положительные
+    return natural < rhs.natural;
 }
 
 bool Integer::operator>=(const Integer &rhs) const{

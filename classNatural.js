@@ -16,6 +16,7 @@ var classNatural =
     [ "operator--", "classNatural.html#a344536efea5776d77bd830fb40387047", null ],
     [ "operator--", "classNatural.html#a9aef10c849363413c415498c9da67b44", null ],
     [ "operator-=", "classNatural.html#abfb9c59b49643214685a5feec6eb486c", null ],
+    [ "operator/=", "classNatural.html#a9b7a1cd134dee10ee08cb2c3c0314d75", null ],
     [ "operator<", "classNatural.html#a3e0025cdafd48d4e00db69d46f8e3cf6", null ],
     [ "operator<<", "classNatural.html#a9db772e271fa4bdcf11d1ad7ebe74954", null ],
     [ "operator<<=", "classNatural.html#a8559a414ce2c5f4795d9267779431feb", null ],
@@ -27,6 +28,7 @@ var classNatural =
     [ "operator*", "classNatural.html#a33b7b6db3a076468847c41bf6bc420eb", null ],
     [ "operator+", "classNatural.html#aeb3428745d0811066099a6cfb09ef2c4", null ],
     [ "operator-", "classNatural.html#a7202bc20f86303e93687035afe343b89", null ],
+    [ "operator/", "classNatural.html#a7134514f505f3986195e31b43325278c", null ],
     [ "operator<<", "classNatural.html#a5507c0ccac2ef7932f2d0b0bbce238a5", null ],
     [ "operator>>", "classNatural.html#af50e755a822231379576e166fbb883a3", null ],
     [ "subNDN", "classNatural.html#a92a658293a1cd285c4bb4b615adc8b6e", null ]

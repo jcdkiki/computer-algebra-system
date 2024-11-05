@@ -101,6 +101,20 @@ public:
     bool operator<=(const Integer &rhs) const;
 
     friend Natural abs(const Integer&number);
+
+    /**
+     * @brief MUL_ZZ_Z - Вычисляет произведение двух натуральных чисел
+     * @param[in] number Число, на которое мы умножаем наше текущее
+     * @returns Произведение, которое сохраняется в текущую переменную
+     */
+    Integer operator*=(const Integer &number);
+
+    /**
+     * @brief MUL_ZZ_Z - Вычисляет произведение двух натуральных чисел
+     * @param[in] lhs,rhs Умножаемые числа
+     * @returns Произведение двух чисел
+     */
+    friend Integer operator*(const Integer &lhs, const Integer &rhs);
 };
 
 /**

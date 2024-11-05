@@ -184,3 +184,20 @@ Natural abs(const Integer&number) {
     Natural res = number.natural;
     return res;
 }
+
+Integer Integer::operator*=(const Integer &number) {
+    natural *= number.natural;
+    if(sign == number.sign){
+        sign = false;
+    }
+    else{
+        sign = true;
+    }
+    fix_zero();
+    return *this;
+}
+
+Integer operator * (const Integer &lhs, const Integer &rhs){
+    Integer res(lhs);
+    return res*=rhs;
+}

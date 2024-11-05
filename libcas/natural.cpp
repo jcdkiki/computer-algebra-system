@@ -348,3 +348,18 @@ Natural subNDN(const Natural &lhs, const Natural &rhs, const Natural::Digit& dig
     Natural res = lhs - (rhs * digit);
     return res;
 }
+
+Natural greatCommDiv(const Natural &lhs, const Natural &rhs){
+    Natural left(lhs), right(rhs);
+
+    while (left && right){
+        if (left > right){
+            left %= right;
+        }
+        else{
+            right %= left;
+        }
+    }
+    
+    return left + right;
+}

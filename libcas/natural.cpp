@@ -307,3 +307,8 @@ Natural::operator bool() const
 {
     return (digits.size() > 1) || (digits[0] != 0);
 }
+
+Natural subNDN(const Natural &lhs, const Natural &rhs, const Natural::Digit& digit){
+    Natural res = lhs - (rhs * digit);
+    return res;
+}

@@ -42,7 +42,7 @@ public:
      * @returns true, если число не равно нулю.
      * @returns false, если число равно нулю. 
      */
-    operator bool();
+    operator bool() const;
 
     friend std::ostream& operator<<(std::ostream& os, const Integer& number);
     friend std::istream& operator>>(std::istream& is, Integer& number);
@@ -94,7 +94,28 @@ public:
      * @returns 1, если число отрицательное
      * @returns 0, если число равно 0
      */
-    int positivity();
+    int positivity() const;
+
+
+     /** @brief Два числа равны */
+    bool operator==(const Integer &rhs) const;
+    
+    /** @brief Два числа не равны */
+    bool operator!=(const Integer &rhs) const;
+    
+    /** @brief Первое число больше второго */
+    bool operator>(const Integer &rhs) const;
+    
+    /** @brief Первое число меньше второго */
+    bool operator<(const Integer &rhs) const;
+    
+    /** @brief Первое число больше либо равно второго */
+    bool operator>=(const Integer &rhs) const;
+    
+    /** @brief Первое число меньше либо равно второго */
+    bool operator<=(const Integer &rhs) const;
+
+    friend Natural abs(const Integer&number);
 };
 
 /**
@@ -112,5 +133,12 @@ std::ostream& operator<<(std::ostream& os, const Integer& number);
  * @param[out] number   Ссылка на число, в которое будет записан результат
  */
 std::istream& operator>>(std::istream& is, Integer& number);
+
+/**
+ * @brief ABS_Z_N -  Возвращает абсолютную величину числа
+ * @param[in] number Целое число, абсолютную вечличину которого нужно вернуть
+ * @returns Натуральное число
+ */
+Natural abs(const Integer&number);
 
 #endif

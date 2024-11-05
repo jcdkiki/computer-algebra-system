@@ -69,7 +69,7 @@ void Integer::fix_zero()
     }
 }
 
-Integer::operator bool()
+Integer::operator bool() const
 {
     return bool(natural);
 }
@@ -115,7 +115,7 @@ Integer operator+(const Integer &lhs, const Integer &rhs)
     return res += rhs;
 }
 
-int Integer::positivity()
+int Integer::positivity() const
 {
     if (sign){
         return 1; // number < 0
@@ -164,4 +164,62 @@ Integer operator-(const Integer &lhs, const Integer &rhs)
 {
     Integer res(lhs);
     return res -= rhs;
+}
+bool Integer::operator==(const Integer &rhs) const{
+    // знаки одинаковые и числа одинаковые
+    return (sign == rhs.sign) && (natural == rhs.natural);
+}
+
+bool Integer::operator!=(const Integer &rhs) const{
+    // первый не равен второму
+    return !(*this == rhs);
+}
+
+bool Integer::operator>(const Integer &rhs) const{
+    // если первый знак отрицательный и второй положительный
+    if (sign && !rhs.sign)
+        return false;
+    
+    // если первый положительный и второй отрицательный
+    if (!sign && rhs.sign)
+        return true;
+    
+    // если оба отрицательные
+    if (sign && rhs.sign)
+        return natural < rhs.natural;
+
+    // если оба положительные
+    return natural > rhs.natural;
+}
+
+bool Integer::operator<(const Integer &rhs) const {
+    // если первый знак отрицательный и второй положительный
+    if (sign && !rhs.sign)
+        return true;
+    
+    // если первый положительный и второй отрицательный
+    if (!sign && rhs.sign)
+        return false;
+    
+    // если оба отрицательные
+    if (sign && rhs.sign)
+        return natural > rhs.natural;
+
+    // если оба положительные
+    return natural < rhs.natural;
+}
+
+bool Integer::operator>=(const Integer &rhs) const{
+    // первый не меньше второго
+    return !(*this < rhs);
+}
+
+bool Integer::operator<=(const Integer &rhs) const{
+    // первый не больше второго
+    return !(*this > rhs);
+}
+
+Natural abs(const Integer&number) {
+    Natural res = number.natural;
+    return res;
 }

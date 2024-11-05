@@ -47,6 +47,7 @@ public:
     friend std::istream& operator>>(std::istream& is, Natural& number);
     friend Natural operator+(const Natural &lhs, const Natural &rhs);
     friend Natural operator-(const Natural &lhs, const Natural &rhs);
+    friend Natural getDivDigitInPower(const Natural &lhs, const Natural &rhs);
 
     /**
      * @brief SUB_NN_N - Вычисляет разность двух натуральных чисел
@@ -131,7 +132,7 @@ public:
      * @returns true, если число не равно нулю.
      * @returns false, если число равно нулю. 
      */
-    operator bool();
+    operator bool() const;
 
     /** @name Операторы сравнения (обёртка над методом cmp)
      * @param[in] this,rhs Сравниваемые числа
@@ -195,5 +196,12 @@ Natural operator*(const Natural &lhs, const Natural &rhs);
  * @returns Разность двух чисел
  */
 Natural operator-(const Natural &lhs, const Natural &rhs);
+
+/**
+ * @brief DIV_NN_Dk - Вычисляет первую цифру деления большего натурального на меньшее, домноженное на 10^k
+ * @param[in] lhs,rhs Делимое и делитель
+ * @returns Первая цифра деления, домноженная на 10^k
+ */
+Natural getDivDigitInPower(const Natural &lhs, const Natural &rhs);
 
 #endif

@@ -49,6 +49,7 @@ public:
     friend Natural operator-(const Natural &lhs, const Natural &rhs);
     friend Natural getDivDigitInPower(const Natural &lhs, const Natural &rhs);
     friend Natural operator/(const Natural &lhs, const Natural &rhs);
+    friend Natural operator%(const Natural &lhs, const Natural &rhs);
 
     /**
      * @brief DIV_NN_N - Вычисляет неполное частное от деления на поданное число
@@ -56,6 +57,13 @@ public:
      * @returns Неполное частное от деления двух чисел
      */
     Natural& operator/=(const Natural &number);
+
+    /**
+     * @brief MOD_NN_N - Вычисляет остаток от деления на поданное число
+     * @param[in] number Делитель
+     * @returns Остаток от деления двух чисел
+     */
+    Natural& operator%=(const Natural &number);
 
     /**
      * @brief SUB_NN_N - Вычисляет разность двух натуральных чисел
@@ -192,6 +200,13 @@ std::istream& operator>>(std::istream& is, Natural& number);
  * @returns Неполное частное от деления двух чисел
  */
 Natural operator/(const Natural &lhs, const Natural &rhs);
+
+/**
+ * @brief MOD_NN_N - Вычисляет остаток от деления двух натуральных чисел
+ * @param[in] lhs,rhs Делимое и делитель
+ * @returns Остаток от деления двух чисел
+ */
+Natural operator%(const Natural &lhs, const Natural &rhs);
 
 /**
  * @brief ADD_NN_N - Вычисляет сумму двух натуральных чисел

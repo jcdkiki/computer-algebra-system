@@ -141,6 +141,19 @@ Natural& Natural::operator/=(const Natural &number) {
     return *this;
 }
 
+Natural& Natural::operator%=(const Natural &number) {
+    if(!number){
+        throw std::runtime_error("cannot div from a null");
+    }
+    *this -= (*this / number) * number;
+    return *this;
+}
+
+Natural operator%(const Natural &lhs, const Natural &rhs) {
+    Natural res(lhs);
+    return res %= rhs;
+}
+
 Natural operator/(const Natural &lhs, const Natural &rhs) {
     Natural res(lhs);
     return res /= rhs;

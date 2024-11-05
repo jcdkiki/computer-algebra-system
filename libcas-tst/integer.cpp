@@ -78,23 +78,23 @@ TEST(Integer, CMP)
         pair { "-100",      "-99" },
         pair { "0",        "124" },
     }){
-    Integer n1(input1), n2(input2);
+        Integer n1(input1), n2(input2);
 
-    ASSERT_LT(n1, n2);
-    ASSERT_LE(n1, n2);
-    ASSERT_NE(n1, n2);
+        ASSERT_LT(n1, n2);
+        ASSERT_LE(n1, n2);
+        ASSERT_NE(n1, n2);
 
-    ASSERT_GT(n2, n1);
-    ASSERT_GE(n2, n1);
-    ASSERT_NE(n2, n1);
-    
-    ASSERT_LE(n1, n1);
-    ASSERT_GE(n1, n1);
-    ASSERT_EQ(n1, n1);
+        ASSERT_GT(n2, n1);
+        ASSERT_GE(n2, n1);
+        ASSERT_NE(n2, n1);
+        
+        ASSERT_LE(n1, n1);
+        ASSERT_GE(n1, n1);
+        ASSERT_EQ(n1, n1);
 
-    ASSERT_LE(n2, n2);
-    ASSERT_GE(n2, n2);
-    ASSERT_EQ(n2, n2);
+        ASSERT_LE(n2, n2);
+        ASSERT_GE(n2, n2);
+        ASSERT_EQ(n2, n2);
     }
 }
 
@@ -133,5 +133,20 @@ TEST(INTEGER, POZ)
     {
         Integer number(input);
         EXPECT_EQ(number.positivity(), expected);
+    }
+}
+
+TEST(INTEGER, ABS) 
+{
+    using pair = std::pair<const char*, const char*>;
+    for (auto [input, expected] : {
+        pair { "1",  "1" },
+        pair { "0",  "0" },
+        pair { "-1", "1" },
+    })
+    {
+        Integer number(input);
+        Natural res = abs(number);
+        EXPECT_EQ(res.asString(), expected);
     }
 }

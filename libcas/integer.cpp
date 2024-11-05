@@ -179,3 +179,8 @@ bool Integer::operator<=(const Integer &rhs) const{
     // первый не больше второго
     return !(*this > rhs);
 }
+
+Natural abs(const Integer&number) {
+    Natural res = number.natural;
+    return res;
+}

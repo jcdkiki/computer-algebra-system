@@ -197,3 +197,20 @@ TEST(INTEGER, NEG)
         EXPECT_EQ(number.asString(), expected);
     }
 }
+
+TEST(INTEGER_TO_NATURAL, CONVERT)
+{
+    for (Integer number1 :
+        {
+            Integer("0"), Integer("200"), Integer("999999999999999999999999999999999999999999"),
+            Integer("0123"), Integer("123457"), Integer("000000000")
+        })
+    {
+        Natural number2 = number1;
+        ASSERT_EQ(number2.asString(), number1.asString());
+    }
+    Natural number2;
+    EXPECT_THROW((number2 = Integer("-12")), std::runtime_error);
+    EXPECT_THROW((number2 = Integer("-999999999999999999")), std::runtime_error);
+}
+

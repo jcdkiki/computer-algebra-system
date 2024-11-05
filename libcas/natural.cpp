@@ -123,6 +123,31 @@ Natural getDivDigitInPower(const Natural &lhs, const Natural &rhs){
     return res << k;
 }
 
+Natural& Natural::operator/=(const Natural &number) {
+    if(!number){
+        throw std::runtime_error("cannot div from a null");
+    }
+
+    Natural current = *this;
+    *this -= *this;
+    
+    if (number <= current){
+        Natural part;
+        while (current >= number){
+            part = getDivDigitInPower(current, number);
+            *this += part;
+            current -= part * number;
+        }
+    }
+    
+    return *this;
+}
+
+Natural operator/(const Natural &lhs, const Natural &rhs) {
+    Natural res(lhs);
+    return res /= rhs;
+}
+
 Natural operator-(const Natural &lhs, const Natural &rhs) {
     Natural res(lhs);
     return res -= rhs;

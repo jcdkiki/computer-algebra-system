@@ -48,6 +48,14 @@ public:
     friend Natural operator+(const Natural &lhs, const Natural &rhs);
     friend Natural operator-(const Natural &lhs, const Natural &rhs);
     friend Natural getDivDigitInPower(const Natural &lhs, const Natural &rhs);
+    friend Natural operator/(const Natural &lhs, const Natural &rhs);
+
+    /**
+     * @brief DIV_NN_N - Вычисляет неполное частное от деления на поданное число
+     * @param[in] n Число, на которое делится
+     * @returns Неполное частное \a number
+     */
+    Natural& operator/=(const Natural &number);
 
     /**
      * @brief SUB_NN_N - Вычисляет разность двух натуральных чисел
@@ -177,6 +185,13 @@ std::ostream& operator<<(std::ostream& os, const Natural& number);
  * @param[out] number   Ссылка на число, в которое будет записан результат
  */
 std::istream& operator>>(std::istream& is, Natural& number);
+
+/**
+ * @brief DIV_NN_N - Вычисляет неполное частное двух натуральных чисел
+ * @param[in] lhs,rhs Делимое и делитель
+ * @returns Неполное частное двух чисел двух чисел
+ */
+Natural operator/(const Natural &lhs, const Natural &rhs);
 
 /**
  * @brief ADD_NN_N - Вычисляет сумму двух натуральных чисел

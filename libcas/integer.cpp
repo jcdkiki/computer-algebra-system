@@ -223,3 +223,10 @@ Natural abs(const Integer&number) {
     Natural res = number.natural;
     return res;
 }
+
+Integer Integer::operator-() const{
+    Integer new_int(natural);
+    new_int.sign = !sign;
+    new_int.fix_zero();
+    return std::move(new_int);
+}

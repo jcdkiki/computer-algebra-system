@@ -28,5 +28,6 @@ var classNatural =
     [ "operator+", "classNatural.html#aeb3428745d0811066099a6cfb09ef2c4", null ],
     [ "operator-", "classNatural.html#a7202bc20f86303e93687035afe343b89", null ],
     [ "operator<<", "classNatural.html#a5507c0ccac2ef7932f2d0b0bbce238a5", null ],
-    [ "operator>>", "classNatural.html#af50e755a822231379576e166fbb883a3", null ]
+    [ "operator>>", "classNatural.html#af50e755a822231379576e166fbb883a3", null ],
+    [ "subNDN", "classNatural.html#a92a658293a1cd285c4bb4b615adc8b6e", null ]
 ];

@@ -100,7 +100,13 @@ public:
     /** @brief Первое число меньше либо равно второго */
     bool operator<=(const Integer &rhs) const;
 
-    friend Natural abs(const Integer&number);
+    friend Natural abs(const Integer &number);
+
+    
+    /** @brief MUL_ZM_Z - Меняет знак числа 
+     * @returns возвращает копию числа
+    */
+    Integer operator-() const;
 };
 
 /**

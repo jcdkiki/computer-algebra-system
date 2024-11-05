@@ -150,3 +150,20 @@ TEST(INTEGER, ABS)
         EXPECT_EQ(res.asString(), expected);
     }
 }
+
+TEST(INTEGER, NEG) 
+{
+    using pair = std::pair<const char*, const char*>;
+    for (auto [input, expected] : {
+        pair { "1",  "-1" },
+        pair { "0",  "0" },
+        pair { "-1", "1" },
+        pair { "12551251", "-12551251" },
+        pair { "-99999999", "99999999" },
+    })
+    {
+        Integer number(input);
+        number = -number;
+        EXPECT_EQ(number.asString(), expected);
+    }
+}

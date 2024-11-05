@@ -260,6 +260,9 @@ static constexpr int&#160;</td><td class="memItemRight" valign="bottom"><b>BASE<
 <tr class="memitem:a92a658293a1cd285c4bb4b615adc8b6e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classNatural.html">Natural</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNatural.html#a92a658293a1cd285c4bb4b615adc8b6e">subNDN</a> (const <a class="el" href="classNatural.html">Natural</a> &amp;rhs, const <a class="el" href="classNatural.html">Natural</a> &amp;lhs, const <a class="el" href="classNatural.html#a2f6cfcb259f7b6a1bafb9242257e8fb5">Natural::Digit</a> &amp;digit)</td></tr>
 <tr class="memdesc:a92a658293a1cd285c4bb4b615adc8b6e"><td class="mdescLeft">&#160;</td><td class="mdescRight">SUB_NDN_N - Вычисляет разность натурального большего и натурального меньшего, умноженного на цифру  <br /></td></tr>
 <tr class="separator:a92a658293a1cd285c4bb4b615adc8b6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad9db39e985a8da26ebd5eea3087aeb6a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classNatural.html">Natural</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNatural.html#ad9db39e985a8da26ebd5eea3087aeb6a">greatCommDiv</a> (const <a class="el" href="classNatural.html">Natural</a> &amp;lhs, const <a class="el" href="classNatural.html">Natural</a> &amp;rhs)</td></tr>
+<tr class="memdesc:ad9db39e985a8da26ebd5eea3087aeb6a"><td class="mdescLeft">&#160;</td><td class="mdescRight">GCF_NN_N - НОД натуральных чисел  <br /></td></tr>
+<tr class="separator:ad9db39e985a8da26ebd5eea3087aeb6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Определения типов</h2>
 <a id="a2f6cfcb259f7b6a1bafb9242257e8fb5" name="a2f6cfcb259f7b6a1bafb9242257e8fb5"></a>
@@ -622,6 +625,51 @@ false, если число равно нулю. </dd></dl>
   </dd>
 </dl>
 <dl class="section return"><dt>Возвращает</dt><dd>Первая цифра деления, домноженная на 10^k </dd></dl>
+
+</div>
+</div>
+<a id="ad9db39e985a8da26ebd5eea3087aeb6a" name="ad9db39e985a8da26ebd5eea3087aeb6a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad9db39e985a8da26ebd5eea3087aeb6a">&#9670;&#160;</a></span>greatCommDiv</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classNatural.html">Natural</a> greatCommDiv </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classNatural.html">Natural</a> &amp;&#160;</td>
+          <td class="paramname"><em>lhs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classNatural.html">Natural</a> &amp;&#160;</td>
+          <td class="paramname"><em>rhs</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>GCF_NN_N - НОД натуральных чисел </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">lhs,rhs</td><td>- Натуральные числа, НОД которых требуется найти </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>НОД двух чисел </dd></dl>
 
 </div>
 </div>

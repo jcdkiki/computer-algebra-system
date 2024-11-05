@@ -26,6 +26,7 @@ var classNatural =
     [ "operator>", "classNatural.html#a1d619dbfc1d47d06c47759d3c6853988", null ],
     [ "operator>=", "classNatural.html#a43b222a288335a9df3d795bd2d99b26e", null ],
     [ "getDivDigitInPower", "classNatural.html#a56fab5de99caafc6435dda4259a859a7", null ],
+    [ "greatCommDiv", "classNatural.html#ad9db39e985a8da26ebd5eea3087aeb6a", null ],
     [ "operator%", "classNatural.html#a10d694b4546539b2d785c354e8fea847", null ],
     [ "operator*", "classNatural.html#a33b7b6db3a076468847c41bf6bc420eb", null ],
     [ "operator+", "classNatural.html#aeb3428745d0811066099a6cfb09ef2c4", null ],

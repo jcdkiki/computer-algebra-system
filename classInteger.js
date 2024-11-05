@@ -9,6 +9,9 @@ var classInteger =
     [ "operator++", "classInteger.html#a4290bf7f6763b27a51e216bdbfdea68f", null ],
     [ "operator++", "classInteger.html#a1666444f09484e482b2f94dd263c7dc9", null ],
     [ "operator+=", "classInteger.html#a29960a3ed21b3584db73ad22782f62ff", null ],
+    [ "operator--", "classInteger.html#a5b3dd03530b31f3839c75dcdc4322ee6", null ],
+    [ "operator--", "classInteger.html#a000120734ad8ba84af5c5ac7f5f84925", null ],
+    [ "operator-=", "classInteger.html#a68746de07b3ddc4cad22add0e2017eae", null ],
     [ "operator<", "classInteger.html#a75fa8d5f314fe9beb94551c8d5992fee", null ],
     [ "operator<=", "classInteger.html#a8c7f79130c285fde09deb495f4cf83f4", null ],
     [ "operator==", "classInteger.html#ad240f86fa2603aa874f43996b2240d8a", null ],
@@ -17,6 +20,7 @@ var classInteger =
     [ "positivity", "classInteger.html#a15c6054effdc5aba1d6f53471153e055", null ],
     [ "abs", "classInteger.html#a69139ffe1a5f920adfa1302b63d6c424", null ],
     [ "operator+", "classInteger.html#ad69a5b95379d5daa962a3f8d9042909b", null ],
+    [ "operator-", "classInteger.html#aef3fcc257cf59cc82cf5f6db20959989", null ],
     [ "operator<<", "classInteger.html#a5921c24569de78d9d4e9214926761484", null ],
     [ "operator>>", "classInteger.html#a992423e53ec0794560e902ebfe04d4bb", null ]
 ];

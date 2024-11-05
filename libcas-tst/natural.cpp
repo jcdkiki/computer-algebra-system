@@ -271,3 +271,19 @@ TEST(NATURAL, MOD)
     Natural n1("100"), n2("0");
     EXPECT_THROW(n1%n2, std::runtime_error);
 }
+
+TEST(NATURAL, GCF)
+{
+    using tuple = std::tuple<const char*, const char*, const char*>;
+    for (auto [input1, input2, expected] : {
+        tuple { "100", "11", "1" },
+        tuple { "12", "18", "6" },
+        tuple { "13", "13", "13" },
+        tuple { "16", "256", "16" }
+    })
+    {
+        Natural n1(input1), n2(input2);
+        EXPECT_EQ(greatCommDiv(n1, n2).asString(), expected);
+
+    }
+}

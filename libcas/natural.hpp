@@ -176,6 +176,8 @@ public:
     ///@}
     
     friend Natural subNDN(const Natural &rhs, const Natural &lhs, const Natural::Digit& digit);
+
+    friend Natural greatCommDiv(const Natural &lhs, const Natural &rhs);
 };
 
 /**
@@ -242,5 +244,12 @@ Natural getDivDigitInPower(const Natural &lhs, const Natural &rhs);
  * @returns Разность натурального и натурального, умноженного на цифру
  */
 Natural subNDN(const Natural &lhs, const Natural &rhs, const Natural::Digit& digit);
+
+/**
+ * @brief GCF_NN_N - НОД натуральных чисел
+ * @param[in] lhs,rhs - Натуральные числа, НОД которых требуется найти
+ * @returns НОД двух чисел
+ */
+Natural greatCommDiv(const Natural &lhs, const Natural &rhs);
 
 #endif

@@ -52,8 +52,8 @@ public:
 
     /**
      * @brief DIV_NN_N - Вычисляет неполное частное от деления на поданное число
-     * @param[in] n Число, на которое делится
-     * @returns Неполное частное \a number
+     * @param[in] number Делитель
+     * @returns Неполное частное от деления двух чисел
      */
     Natural& operator/=(const Natural &number);
 
@@ -189,7 +189,7 @@ std::istream& operator>>(std::istream& is, Natural& number);
 /**
  * @brief DIV_NN_N - Вычисляет неполное частное двух натуральных чисел
  * @param[in] lhs,rhs Делимое и делитель
- * @returns Неполное частное двух чисел двух чисел
+ * @returns Неполное частное от деления двух чисел
  */
 Natural operator/(const Natural &lhs, const Natural &rhs);
 

@@ -246,4 +246,7 @@ TEST(NATURAL, DIV)
         n1 /= n2;
         EXPECT_EQ(n1.asString(), expected);
     }
+
+    Natural n1("100"), n2("0");
+    EXPECT_THROW(n1/n2, std::runtime_error);
 }

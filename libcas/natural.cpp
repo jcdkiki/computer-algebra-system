@@ -129,15 +129,13 @@ Natural& Natural::operator/=(const Natural &number) {
     }
 
     Natural current = *this;
-    *this -= *this;
+    *this = Natural();
     
-    if (number <= current){
-        Natural part;
-        while (current >= number){
-            part = getDivDigitInPower(current, number);
-            *this += part;
-            current -= part * number;
-        }
+    Natural part;
+    while (current >= number){
+        part = getDivDigitInPower(current, number);
+        *this += part;
+        current -= part * number;
     }
     
     return *this;

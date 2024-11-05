@@ -64,6 +64,40 @@ TEST(INTEGER, ADDITION)
     }
 }
 
+TEST(Integer, CMP)
+{
+    using pair = std::pair<const char*, const char*>;
+    for (auto [input1, input2] : {
+        pair { "321",       "322" },
+        pair { "-521",       "522" },
+        pair { "-1",         "0" },
+        pair { "-987654321", "987654322" },
+        pair { "123456789", "123456790" },
+        pair { "-99",        "100" },
+        pair { "999",       "1000" },
+        pair { "-100",      "-99" },
+        pair { "0",        "124" },
+    }){
+        Integer n1(input1), n2(input2);
+
+        ASSERT_LT(n1, n2);
+        ASSERT_LE(n1, n2);
+        ASSERT_NE(n1, n2);
+
+        ASSERT_GT(n2, n1);
+        ASSERT_GE(n2, n1);
+        ASSERT_NE(n2, n1);
+        
+        ASSERT_LE(n1, n1);
+        ASSERT_GE(n1, n1);
+        ASSERT_EQ(n1, n1);
+
+        ASSERT_LE(n2, n2);
+        ASSERT_GE(n2, n2);
+        ASSERT_EQ(n2, n2);
+    }
+}
+
 TEST(INTEGER, INC) 
 {
     using pair = std::pair<const char*, const char*>;
@@ -84,6 +118,36 @@ TEST(INTEGER, INC)
         n1++;
         EXPECT_EQ((n1).asString(), expected);
         EXPECT_EQ((++n2).asString(), expected);
+    }
+}
+
+TEST(INTEGER, SUB)
+{
+    using pair = std::pair<const char*, const char*>;
+    for (auto [input, expected] : {
+        pair { "100 1", "99" },
+        pair { "1 1", "0" },
+        pair { "0 -55", "55" },
+        pair { "137 155", "-18" },
+        pair { "321 -123", "444" },
+        pair { "-900 -101", "-799" },
+        pair { "-228 137", "-365" },
+        pair { "100 101", "-1" },
+        pair { "-100 -125", "25" },
+        pair { "0 0", "0"},
+        pair { "55 0", "55"},
+        pair { "-12 0", "-12"}
+    })
+    {
+        std::stringstream ss;
+        ss << input;
+
+        Integer n1, n2;
+        ss >> n1 >> n2;
+
+        std::stringstream output;
+        output << (n1 - n2);
+        EXPECT_EQ(output.str(), expected);
     }
 }
 

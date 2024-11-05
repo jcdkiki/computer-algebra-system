@@ -42,32 +42,47 @@ public:
      * @returns true, если число не равно нулю.
      * @returns false, если число равно нулю. 
      */
-    operator bool();
+    operator bool() const;
 
     friend std::ostream& operator<<(std::ostream& os, const Integer& number);
     friend std::istream& operator>>(std::istream& is, Integer& number);
 
-    /**
-     * @brief ADD_1I_I - Увеличивает целое число на единицу
-     * @returns Себя \b после увеличения
-     */
-    Integer& operator++();
+
+    /** @brief Префиксный декремент */
+    Integer& operator--();
+
+    /** @brief Постфиксный декремент */
+    Integer operator--(int);
 
     /**
-     * @brief ADD_1I_I - Увеличивает целое число на единицу
-     * @returns Себя \b перед увеличением
+     * @brief SUB_ZZ_Z - Вычисляет разность двух натуральных чисел
+     * @param[in] n Вычитаемое число
+     * @returns Разность, которая сохраняется в текущем левом числе
      */
+    Integer& operator-=(const Integer &n);
+
+    /**
+     * @brief SUB_ZZ_Z - Вычисляет разность двух натуральных чисел
+     * @param[in] lhs,rhs Вычитаемые числа
+     * @returns Разность двух чисел
+     */
+    friend Integer operator-(const Integer &lhs, const Integer &rhs);
+
+   /** @brief Префиксный инкремент */
+    Integer& operator++();
+
+    /** @brief Постфиксный инкремент */
     Integer operator++(int);
 
     /**
-     * @brief ADD_II_I - Прибавляет целое число
+     * @brief ADD_ZZ_Z - Прибавляет целое число
      * @param[in] n Число, которое нужно прибавить
      * @returns Результат прибавления \a n
      */
     Integer& operator+=(const Integer &n);
 
     /**
-     * @brief ADD_II_I - Вычисляет сумму двух целых чисел
+     * @brief ADD_ZZ_Z - Вычисляет сумму двух целых чисел
      * @param[in] lhs,rhs Складываемые числа
      * @returns Cумму двух чисел
      */
@@ -79,7 +94,26 @@ public:
      * @returns 1, если число отрицательное
      * @returns 0, если число равно 0
      */
-    int positivity();
+    int positivity() const;
+
+
+     /** @brief Два числа равны */
+    bool operator==(const Integer &rhs) const;
+    
+    /** @brief Два числа не равны */
+    bool operator!=(const Integer &rhs) const;
+    
+    /** @brief Первое число больше второго */
+    bool operator>(const Integer &rhs) const;
+    
+    /** @brief Первое число меньше второго */
+    bool operator<(const Integer &rhs) const;
+    
+    /** @brief Первое число больше либо равно второго */
+    bool operator>=(const Integer &rhs) const;
+    
+    /** @brief Первое число меньше либо равно второго */
+    bool operator<=(const Integer &rhs) const;
 
     friend Natural abs(const Integer&number);
 };

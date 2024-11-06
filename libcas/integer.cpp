@@ -243,6 +243,34 @@ Integer Integer::operator-() const{
     return std::move(new_int);
 }
 
+Integer& Integer::operator/=(const Integer &number){
+    natural /= number.natural;
+    sign = sign xor number.sign;
+    this->fix_zero();
+    return *this;
+}
+
+Integer& Integer::operator%=(const Integer &number)
+{
+    natural %= number.natural;
+    if(sign && *this){
+        *this += number.natural;
+    }
+    this->fix_zero();
+    return *this;
+}
+
+
+Integer operator/(const Integer &lhs, const Integer &rhs){
+    Integer res(lhs);
+    return res/=rhs;
+}
+
+Integer operator%(const Integer &lhs, const Integer &rhs){
+    Integer res(lhs);
+    return res%=rhs;
+}
+
 Integer::operator Natural() const{
     if(sign){
         throw std::runtime_error("cannot convert negative to natural");

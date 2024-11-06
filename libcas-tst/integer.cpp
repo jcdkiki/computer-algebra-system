@@ -221,6 +221,54 @@ TEST(INTEGER, NEG)
     }
 }
 
+TEST(INTEGER, DIV)
+{
+    using tuple = std::tuple<const char*, const char*, const char*>;
+    for (auto [input1, input2, expected] : {
+        tuple { "-100", "11", "-9" },
+        tuple { "12", "-12", "-1" },
+        tuple { "-12", "13", "0" },
+        tuple { "0", "-1", "0" },
+        tuple { "-1", "-1", "1" },
+        tuple { "-123", "-1", "123" },
+    })
+    {
+        Integer n1(input1), n2(input2);
+        EXPECT_EQ((n1 / n2).asString(), expected);
+
+        n1 /= n2;
+        EXPECT_EQ(n1.asString(), expected);
+    }
+
+    Integer n1("100"), n2("0");
+    EXPECT_THROW(n1/n2, std::runtime_error);
+}
+
+TEST(INTEGER, MOD)
+{
+    using tuple = std::tuple<const char*, const char*, const char*>;
+    for (auto [input1, input2, expected] : {
+        tuple { "100", "-11", "1" },
+        tuple { "12", "-12", "0" },
+        tuple { "-12", "13", "1" },
+        tuple { "0", "1", "0" },
+        tuple { "12", "13", "12" },
+        tuple { "12", "-13", "12" },
+        tuple { "-12556", "12", "8"},
+        tuple { "-15", "-7", "6"}
+    })
+    {
+        Integer n1(input1), n2(input2);
+        EXPECT_EQ((n1 % n2).asString(), expected);
+
+        n1 %= n2;
+        EXPECT_EQ(n1.asString(), expected);
+    }
+
+    Integer n1("100"), n2("0");
+    EXPECT_THROW(n1%n2, std::runtime_error);
+}
+
 TEST(INTEGER_TO_NATURAL, CONVERT)
 {
     for (Integer number1 :
@@ -236,4 +284,3 @@ TEST(INTEGER_TO_NATURAL, CONVERT)
     EXPECT_THROW((number2 = Integer("-12")), std::runtime_error);
     EXPECT_THROW((number2 = Integer("-999999999999999999")), std::runtime_error);
 }
-

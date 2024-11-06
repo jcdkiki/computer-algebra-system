@@ -178,6 +178,8 @@ public:
     friend Natural subNDN(const Natural &rhs, const Natural &lhs, const Natural::Digit& digit);
 
     friend Natural greatCommDiv(const Natural &lhs, const Natural &rhs);
+
+    friend Natural leastCommMul(const Natural &lhs, const Natural &rhs);
 };
 
 /**
@@ -251,5 +253,12 @@ Natural subNDN(const Natural &lhs, const Natural &rhs, const Natural::Digit& dig
  * @returns НОД двух чисел
  */
 Natural greatCommDiv(const Natural &lhs, const Natural &rhs);
+
+/**
+ * @brief LCM_NN_N - НОК натуральных чисел
+ * @param[in] lhs,rhs - Натуральные числа, НОК которых требуется найти
+ * @returns НОК двух чисел
+ */
+Natural leastCommMul(const Natural &lhs, const Natural &rhs);
 
 #endif

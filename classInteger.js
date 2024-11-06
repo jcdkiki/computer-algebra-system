@@ -7,6 +7,7 @@ var classInteger =
     [ "operator bool", "classInteger.html#ac9e36d7aecfa5d4788c65988e27c8809", null ],
     [ "operator Natural", "classInteger.html#ad68d2c80e3aa3baf4b868b6ae012c8f5", null ],
     [ "operator!=", "classInteger.html#aeb663b146e79b6ca78e00b1d2a4e61b3", null ],
+    [ "operator%=", "classInteger.html#a2cdb6d5199141ff858838beac2524281", null ],
     [ "operator*=", "classInteger.html#ac8d3e5b465e4f514e38107f1c7fc266a", null ],
     [ "operator++", "classInteger.html#a4290bf7f6763b27a51e216bdbfdea68f", null ],
     [ "operator++", "classInteger.html#a1666444f09484e482b2f94dd263c7dc9", null ],
@@ -15,6 +16,7 @@ var classInteger =
     [ "operator--", "classInteger.html#a5b3dd03530b31f3839c75dcdc4322ee6", null ],
     [ "operator--", "classInteger.html#a000120734ad8ba84af5c5ac7f5f84925", null ],
     [ "operator-=", "classInteger.html#a68746de07b3ddc4cad22add0e2017eae", null ],
+    [ "operator/=", "classInteger.html#a9c16a4c169959dd294a1093b7ba2088e", null ],
     [ "operator<", "classInteger.html#a75fa8d5f314fe9beb94551c8d5992fee", null ],
     [ "operator<=", "classInteger.html#a8c7f79130c285fde09deb495f4cf83f4", null ],
     [ "operator==", "classInteger.html#ad240f86fa2603aa874f43996b2240d8a", null ],
@@ -22,9 +24,11 @@ var classInteger =
     [ "operator>=", "classInteger.html#a1b88cf824241dee72eba620c86b5d23b", null ],
     [ "positivity", "classInteger.html#a15c6054effdc5aba1d6f53471153e055", null ],
     [ "abs", "classInteger.html#a69139ffe1a5f920adfa1302b63d6c424", null ],
+    [ "operator%", "classInteger.html#af32aa702e3e896c7d475f0727a2955c5", null ],
     [ "operator*", "classInteger.html#aefcc785ddcfe606e7fa294ebc7267819", null ],
     [ "operator+", "classInteger.html#ad69a5b95379d5daa962a3f8d9042909b", null ],
     [ "operator-", "classInteger.html#aef3fcc257cf59cc82cf5f6db20959989", null ],
+    [ "operator/", "classInteger.html#a5f280436378c648b88d5e35248fb4e63", null ],
     [ "operator<<", "classInteger.html#a5921c24569de78d9d4e9214926761484", null ],
     [ "operator>>", "classInteger.html#a992423e53ec0794560e902ebfe04d4bb", null ]
 ];

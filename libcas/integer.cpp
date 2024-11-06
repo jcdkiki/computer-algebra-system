@@ -230,3 +230,10 @@ Integer Integer::operator-() const{
     new_int.fix_zero();
     return std::move(new_int);
 }
+
+Integer::operator Natural() const{
+    if(sign){
+        throw std::runtime_error("cannot convert negative to natural");
+    }
+    return natural;
+}

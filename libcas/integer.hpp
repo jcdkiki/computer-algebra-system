@@ -122,6 +122,35 @@ public:
      * @returns возвращает копию числа
     */
     Integer operator-() const;
+
+    /**
+     * @brief DIV_ZZ_Z - Вычисляет неполное частное от деления на поданное число
+     * @param[in] number Делитель
+     * @returns Неполное частное от деления двух чисел
+     */
+    Integer& operator/=(const Integer &number);
+
+    /**
+     * @brief MOD_ZZ_Z - Вычисляет остаток от деления на поданное число
+     * @param[in] number Делитель
+     * @returns Остаток от деления двух чисел
+     */
+    Integer& operator%=(const Integer &number);
+
+    /**
+     * @brief DIV_ZZ_Z - Вычисляет неполное частное двух натуральных чисел
+     * @param[in] lhs,rhs Делимое и делитель
+     * @returns Неполное частное от деления двух чисел
+     */
+    friend Integer operator/(const Integer &lhs, const Integer &rhs);
+
+    /**
+     * @brief MOD_ZZ_Z - Вычисляет остаток от деления двух натуральных чисел
+     * @param[in] lhs,rhs Делимое и делитель
+     * @returns Остаток от деления двух чисел
+     */
+    friend Integer operator%(const Integer &lhs, const Integer &rhs);
+
 };
 
 /**

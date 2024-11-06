@@ -187,12 +187,7 @@ Natural abs(const Integer&number) {
 
 Integer Integer::operator*=(const Integer &number) {
     natural *= number.natural;
-    if(sign == number.sign){
-        sign = false;
-    }
-    else{
-        sign = true;
-    }
+    sign = sign xor number.sign;
     fix_zero();
     return *this;
 }

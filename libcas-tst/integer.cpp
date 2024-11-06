@@ -181,6 +181,29 @@ TEST(INTEGER, ABS)
     }
 }
 
+TEST(INTEGER, MUL)
+{
+    using tuple = std::tuple<const char*, const char*, const char*>;
+    for (auto [input1, input2, expected] : {
+        tuple { "-100", "10", "-1000" },
+        tuple { "12", "-12", "-144" },
+        tuple { "-12", "0", "0" },
+        tuple { "0", "0", "0" },
+        tuple { "12", "123", "1476" },
+        tuple { "-123", "-12", "1476" },
+        tuple { "1", "-1", "-1" },
+        tuple { "-999", "-1", "999" },
+        tuple { "-99999999", "999", "-99899999001" },
+    })
+    {
+        Integer n1(input1), n2(input2);
+        EXPECT_EQ((n1 * n2).asString(), expected);
+
+        n1 *= n2;
+        EXPECT_EQ(n1.asString(), expected);
+    }
+}
+
 TEST(INTEGER, NEG) 
 {
     using pair = std::pair<const char*, const char*>;
@@ -197,7 +220,6 @@ TEST(INTEGER, NEG)
         EXPECT_EQ(number.asString(), expected);
     }
 }
-
 
 TEST(INTEGER, DIV)
 {
@@ -222,7 +244,6 @@ TEST(INTEGER, DIV)
     EXPECT_THROW(n1/n2, std::runtime_error);
 }
 
-
 TEST(INTEGER, MOD)
 {
     using tuple = std::tuple<const char*, const char*, const char*>;
@@ -246,4 +267,20 @@ TEST(INTEGER, MOD)
 
     Integer n1("100"), n2("0");
     EXPECT_THROW(n1%n2, std::runtime_error);
+}
+
+TEST(INTEGER_TO_NATURAL, CONVERT)
+{
+    for (Integer number1 :
+        {
+            Integer("0"), Integer("200"), Integer("999999999999999999999999999999999999999999"),
+            Integer("0123"), Integer("123457"), Integer("000000000")
+        })
+    {
+        Natural number2 = number1;
+        ASSERT_EQ(number2.asString(), number1.asString());
+    }
+    Natural number2;
+    EXPECT_THROW((number2 = Integer("-12")), std::runtime_error);
+    EXPECT_THROW((number2 = Integer("-999999999999999999")), std::runtime_error);
 }

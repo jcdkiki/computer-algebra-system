@@ -224,6 +224,18 @@ Natural abs(const Integer&number) {
     return res;
 }
 
+Integer Integer::operator*=(const Integer &number) {
+    natural *= number.natural;
+    sign = sign xor number.sign;
+    fix_zero();
+    return *this;
+}
+
+Integer operator * (const Integer &lhs, const Integer &rhs){
+    Integer res(lhs);
+    return res*=rhs;
+}
+
 Integer Integer::operator-() const{
     Integer new_int(natural);
     new_int.sign = !sign;
@@ -257,4 +269,11 @@ Integer operator/(const Integer &lhs, const Integer &rhs){
 Integer operator%(const Integer &lhs, const Integer &rhs){
     Integer res(lhs);
     return res%=rhs;
+}
+
+Integer::operator Natural() const{
+    if(sign){
+        throw std::runtime_error("cannot convert negative to natural");
+    }
+    return natural;
 }

@@ -31,7 +31,7 @@ public:
     /** @brief Создает новое целое число из строки */
     explicit Integer(const char *str);
 
-    /** @brief Создает новое целое число из натурального числа */
+    /** @brief TRANS_N_Z Создает новое целое число из натурального числа */
     Integer(const Natural & number);
 
     /** @brief Преобразует число в его строковое представление */
@@ -115,8 +115,21 @@ public:
     /** @brief Первое число меньше либо равно второго */
     bool operator<=(const Integer &rhs) const;
 
-    friend Natural abs(const Integer &number);
+    /**
+     * @brief MUL_ZZ_Z - Вычисляет произведение двух натуральных чисел
+     * @param[in] number Число, на которое мы умножаем наше текущее
+     * @returns Произведение, которое сохраняется в текущую переменную
+     */
+    Integer operator*=(const Integer &number);
 
+    /**
+     * @brief MUL_ZZ_Z - Вычисляет произведение двух натуральных чисел
+     * @param[in] lhs,rhs Умножаемые числа
+     * @returns Произведение двух чисел
+     */
+    friend Integer operator*(const Integer &lhs, const Integer &rhs);
+    
+    friend Natural abs(const Integer &number);
     
     /** @brief MUL_ZM_Z - Меняет знак числа 
      * @returns возвращает копию числа
@@ -151,6 +164,10 @@ public:
      */
     friend Integer operator%(const Integer &lhs, const Integer &rhs);
 
+    /** @brief TRANS_Z_N Создает новое натуральное число из целого числа 
+     *  @returns возвращает копию числа
+    */
+    operator Natural() const;
 };
 
 /**
@@ -175,5 +192,7 @@ std::istream& operator>>(std::istream& is, Integer& number);
  * @returns Натуральное число
  */
 Natural abs(const Integer&number);
+
+
 
 #endif

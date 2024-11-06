@@ -181,6 +181,29 @@ TEST(INTEGER, ABS)
     }
 }
 
+TEST(INTEGER, MUL)
+{
+    using tuple = std::tuple<const char*, const char*, const char*>;
+    for (auto [input1, input2, expected] : {
+        tuple { "-100", "10", "-1000" },
+        tuple { "12", "-12", "-144" },
+        tuple { "-12", "0", "0" },
+        tuple { "0", "0", "0" },
+        tuple { "12", "123", "1476" },
+        tuple { "-123", "-12", "1476" },
+        tuple { "1", "-1", "-1" },
+        tuple { "-999", "-1", "999" },
+        tuple { "-99999999", "999", "-99899999001" },
+    })
+    {
+        Integer n1(input1), n2(input2);
+        EXPECT_EQ((n1 * n2).asString(), expected);
+
+        n1 *= n2;
+        EXPECT_EQ(n1.asString(), expected);
+    }
+}
+
 TEST(INTEGER, NEG) 
 {
     using pair = std::pair<const char*, const char*>;

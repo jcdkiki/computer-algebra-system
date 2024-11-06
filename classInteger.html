@@ -178,6 +178,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>operator&gt;=</b> (co
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>operator&lt;=</b> (const <a class="el" href="classInteger.html">Integer</a> &amp;rhs) const</td></tr>
 <tr class="memdesc:a8c7f79130c285fde09deb495f4cf83f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Первое число меньше либо равно второго <br /></td></tr>
 <tr class="separator:a8c7f79130c285fde09deb495f4cf83f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8d3e5b465e4f514e38107f1c7fc266a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classInteger.html">Integer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInteger.html#ac8d3e5b465e4f514e38107f1c7fc266a">operator*=</a> (const <a class="el" href="classInteger.html">Integer</a> &amp;number)</td></tr>
+<tr class="memdesc:ac8d3e5b465e4f514e38107f1c7fc266a"><td class="mdescLeft">&#160;</td><td class="mdescRight">MUL_ZZ_Z - Вычисляет произведение двух натуральных чисел  <br /></td></tr>
+<tr class="separator:ac8d3e5b465e4f514e38107f1c7fc266a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2ea2f60e46acea85fa4dd414dd9f9435"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classInteger.html">Integer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInteger.html#a2ea2f60e46acea85fa4dd414dd9f9435">operator-</a> () const</td></tr>
 <tr class="memdesc:a2ea2f60e46acea85fa4dd414dd9f9435"><td class="mdescLeft">&#160;</td><td class="mdescRight">MUL_ZM_Z - Меняет знак числа  <br /></td></tr>
 <tr class="separator:a2ea2f60e46acea85fa4dd414dd9f9435"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -199,6 +202,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>operator&lt;=</b> (co
 <tr class="memitem:ad69a5b95379d5daa962a3f8d9042909b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classInteger.html">Integer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInteger.html#ad69a5b95379d5daa962a3f8d9042909b">operator+</a> (const <a class="el" href="classInteger.html">Integer</a> &amp;lhs, const <a class="el" href="classInteger.html">Integer</a> &amp;rhs)</td></tr>
 <tr class="memdesc:ad69a5b95379d5daa962a3f8d9042909b"><td class="mdescLeft">&#160;</td><td class="mdescRight">ADD_ZZ_Z - Вычисляет сумму двух целых чисел  <br /></td></tr>
 <tr class="separator:ad69a5b95379d5daa962a3f8d9042909b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aefcc785ddcfe606e7fa294ebc7267819"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classInteger.html">Integer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInteger.html#aefcc785ddcfe606e7fa294ebc7267819">operator*</a> (const <a class="el" href="classInteger.html">Integer</a> &amp;lhs, const <a class="el" href="classInteger.html">Integer</a> &amp;rhs)</td></tr>
+<tr class="memdesc:aefcc785ddcfe606e7fa294ebc7267819"><td class="mdescLeft">&#160;</td><td class="mdescRight">MUL_ZZ_Z - Вычисляет произведение двух натуральных чисел  <br /></td></tr>
+<tr class="separator:aefcc785ddcfe606e7fa294ebc7267819"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a69139ffe1a5f920adfa1302b63d6c424"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classNatural.html">Natural</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInteger.html#a69139ffe1a5f920adfa1302b63d6c424">abs</a> (const <a class="el" href="classInteger.html">Integer</a> &amp;number)</td></tr>
 <tr class="memdesc:a69139ffe1a5f920adfa1302b63d6c424"><td class="mdescLeft">&#160;</td><td class="mdescRight">ABS_Z_N - Возвращает абсолютную величину числа  <br /></td></tr>
 <tr class="separator:a69139ffe1a5f920adfa1302b63d6c424"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -243,6 +249,33 @@ false, если число равно нулю. </dd></dl>
 
 <p>TRANS_Z_N Создает новое натуральное число из целого числа </p>
 <dl class="section return"><dt>Возвращает</dt><dd>возвращает копию числа </dd></dl>
+
+</div>
+</div>
+<a id="ac8d3e5b465e4f514e38107f1c7fc266a" name="ac8d3e5b465e4f514e38107f1c7fc266a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac8d3e5b465e4f514e38107f1c7fc266a">&#9670;&#160;</a></span>operator*=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classInteger.html">Integer</a> Integer::operator*= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classInteger.html">Integer</a> &amp;&#160;</td>
+          <td class="paramname"><em>number</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>MUL_ZZ_Z - Вычисляет произведение двух натуральных чисел </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">number</td><td>Число, на которое мы умножаем наше текущее </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>Произведение, которое сохраняется в текущую переменную </dd></dl>
 
 </div>
 </div>
@@ -377,6 +410,51 @@ false, если число равно нулю. </dd></dl>
   </dd>
 </dl>
 <dl class="section return"><dt>Возвращает</dt><dd>Натуральное число </dd></dl>
+
+</div>
+</div>
+<a id="aefcc785ddcfe606e7fa294ebc7267819" name="aefcc785ddcfe606e7fa294ebc7267819"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aefcc785ddcfe606e7fa294ebc7267819">&#9670;&#160;</a></span>operator*</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classInteger.html">Integer</a> operator* </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classInteger.html">Integer</a> &amp;&#160;</td>
+          <td class="paramname"><em>lhs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classInteger.html">Integer</a> &amp;&#160;</td>
+          <td class="paramname"><em>rhs</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>MUL_ZZ_Z - Вычисляет произведение двух натуральных чисел </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">lhs,rhs</td><td>Умножаемые числа </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>Произведение двух чисел </dd></dl>
 
 </div>
 </div>

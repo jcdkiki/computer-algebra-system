@@ -1,7 +1,7 @@
 var searchData=
 [
   ['operator_25_0',['operator%',['../classNatural.html#a10d694b4546539b2d785c354e8fea847',1,'Natural']]],
-  ['operator_2a_1',['operator*',['../classNatural.html#a33b7b6db3a076468847c41bf6bc420eb',1,'Natural']]],
+  ['operator_2a_1',['operator*',['../classInteger.html#aefcc785ddcfe606e7fa294ebc7267819',1,'Integer::operator*()'],['../classNatural.html#a33b7b6db3a076468847c41bf6bc420eb',1,'Natural::operator*()']]],
   ['operator_2b_2',['operator+',['../classInteger.html#ad69a5b95379d5daa962a3f8d9042909b',1,'Integer::operator+()'],['../classNatural.html#aeb3428745d0811066099a6cfb09ef2c4',1,'Natural::operator+()']]],
   ['operator_2d_3',['operator-',['../classInteger.html#aef3fcc257cf59cc82cf5f6db20959989',1,'Integer::operator-()'],['../classNatural.html#a7202bc20f86303e93687035afe343b89',1,'Natural::operator-()']]],
   ['operator_2f_4',['operator/',['../classNatural.html#a7134514f505f3986195e31b43325278c',1,'Natural']]],

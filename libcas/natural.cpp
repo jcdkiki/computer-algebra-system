@@ -141,6 +141,19 @@ Natural& Natural::operator/=(const Natural &number) {
     return *this;
 }
 
+Natural& Natural::operator%=(const Natural &number) {
+    if(!number){
+        throw std::runtime_error("cannot div from a null");
+    }
+    *this -= (*this / number) * number;
+    return *this;
+}
+
+Natural operator%(const Natural &lhs, const Natural &rhs) {
+    Natural res(lhs);
+    return res %= rhs;
+}
+
 Natural operator/(const Natural &lhs, const Natural &rhs) {
     Natural res(lhs);
     return res /= rhs;
@@ -334,4 +347,24 @@ Natural::operator bool() const
 Natural subNDN(const Natural &lhs, const Natural &rhs, const Natural::Digit& digit){
     Natural res = lhs - (rhs * digit);
     return res;
+}
+
+Natural greatCommDiv(const Natural &lhs, const Natural &rhs){
+    Natural left(lhs), right(rhs);
+
+    while (left && right){
+        if (left > right){
+            left %= right;
+        }
+        else{
+            right %= left;
+        }
+    }
+    
+    return left + right;
+}
+
+Natural leastCommMul(const Natural &lhs, const Natural &rhs){
+    Natural GCF = greatCommDiv(lhs, rhs);
+    return (lhs * rhs) / GCF;
 }

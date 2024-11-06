@@ -31,7 +31,7 @@ public:
     /** @brief Создает новое целое число из строки */
     explicit Integer(const char *str);
 
-    /** @brief Создает новое целое число из натурального числа */
+    /** @brief TRANS_N_Z Создает новое целое число из натурального числа */
     Integer(const Natural & number);
 
     /** @brief Преобразует число в его строковое представление */
@@ -135,6 +135,11 @@ public:
      * @returns возвращает копию числа
     */
     Integer operator-() const;
+
+    /** @brief TRANS_Z_N Создает новое натуральное число из целого числа 
+     *  @returns возвращает копию числа
+    */
+    operator Natural() const;
 };
 
 /**
@@ -159,5 +164,7 @@ std::istream& operator>>(std::istream& is, Integer& number);
  * @returns Натуральное число
  */
 Natural abs(const Integer&number);
+
+
 
 #endif

@@ -49,6 +49,7 @@ public:
     friend Natural operator-(const Natural &lhs, const Natural &rhs);
     friend Natural getDivDigitInPower(const Natural &lhs, const Natural &rhs);
     friend Natural operator/(const Natural &lhs, const Natural &rhs);
+    friend Natural operator%(const Natural &lhs, const Natural &rhs);
 
     /**
      * @brief DIV_NN_N - Вычисляет неполное частное от деления на поданное число
@@ -56,6 +57,13 @@ public:
      * @returns Неполное частное от деления двух чисел
      */
     Natural& operator/=(const Natural &number);
+
+    /**
+     * @brief MOD_NN_N - Вычисляет остаток от деления на поданное число
+     * @param[in] number Делитель
+     * @returns Остаток от деления двух чисел
+     */
+    Natural& operator%=(const Natural &number);
 
     /**
      * @brief SUB_NN_N - Вычисляет разность двух натуральных чисел
@@ -168,6 +176,10 @@ public:
     ///@}
     
     friend Natural subNDN(const Natural &rhs, const Natural &lhs, const Natural::Digit& digit);
+
+    friend Natural greatCommDiv(const Natural &lhs, const Natural &rhs);
+
+    friend Natural leastCommMul(const Natural &lhs, const Natural &rhs);
 };
 
 /**
@@ -192,6 +204,13 @@ std::istream& operator>>(std::istream& is, Natural& number);
  * @returns Неполное частное от деления двух чисел
  */
 Natural operator/(const Natural &lhs, const Natural &rhs);
+
+/**
+ * @brief MOD_NN_N - Вычисляет остаток от деления двух натуральных чисел
+ * @param[in] lhs,rhs Делимое и делитель
+ * @returns Остаток от деления двух чисел
+ */
+Natural operator%(const Natural &lhs, const Natural &rhs);
 
 /**
  * @brief ADD_NN_N - Вычисляет сумму двух натуральных чисел
@@ -227,5 +246,19 @@ Natural getDivDigitInPower(const Natural &lhs, const Natural &rhs);
  * @returns Разность натурального и натурального, умноженного на цифру
  */
 Natural subNDN(const Natural &lhs, const Natural &rhs, const Natural::Digit& digit);
+
+/**
+ * @brief GCF_NN_N - НОД натуральных чисел
+ * @param[in] lhs,rhs - Натуральные числа, НОД которых требуется найти
+ * @returns НОД двух чисел
+ */
+Natural greatCommDiv(const Natural &lhs, const Natural &rhs);
+
+/**
+ * @brief LCM_NN_N - НОК натуральных чисел
+ * @param[in] lhs,rhs - Натуральные числа, НОК которых требуется найти
+ * @returns НОК двух чисел
+ */
+Natural leastCommMul(const Natural &lhs, const Natural &rhs);
 
 #endif

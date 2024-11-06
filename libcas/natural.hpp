@@ -48,6 +48,14 @@ public:
     friend Natural operator+(const Natural &lhs, const Natural &rhs);
     friend Natural operator-(const Natural &lhs, const Natural &rhs);
     friend Natural getDivDigitInPower(const Natural &lhs, const Natural &rhs);
+    friend Natural operator/(const Natural &lhs, const Natural &rhs);
+
+    /**
+     * @brief DIV_NN_N - Вычисляет неполное частное от деления на поданное число
+     * @param[in] number Делитель
+     * @returns Неполное частное от деления двух чисел
+     */
+    Natural& operator/=(const Natural &number);
 
     /**
      * @brief SUB_NN_N - Вычисляет разность двух натуральных чисел
@@ -158,6 +166,8 @@ public:
     /** @brief Первое число меньше либо равно второго */
     bool operator<=(const Natural &rhs) const;
     ///@}
+    
+    friend Natural subNDN(const Natural &rhs, const Natural &lhs, const Natural::Digit& digit);
 };
 
 /**
@@ -175,6 +185,13 @@ std::ostream& operator<<(std::ostream& os, const Natural& number);
  * @param[out] number   Ссылка на число, в которое будет записан результат
  */
 std::istream& operator>>(std::istream& is, Natural& number);
+
+/**
+ * @brief DIV_NN_N - Вычисляет неполное частное двух натуральных чисел
+ * @param[in] lhs,rhs Делимое и делитель
+ * @returns Неполное частное от деления двух чисел
+ */
+Natural operator/(const Natural &lhs, const Natural &rhs);
 
 /**
  * @brief ADD_NN_N - Вычисляет сумму двух натуральных чисел
@@ -203,5 +220,12 @@ Natural operator-(const Natural &lhs, const Natural &rhs);
  * @returns Первая цифра деления, домноженная на 10^k
  */
 Natural getDivDigitInPower(const Natural &lhs, const Natural &rhs);
+
+/**
+ * @brief SUB_NDN_N - Вычисляет разность натурального большего и натурального меньшего, умноженного на цифру
+ * @param[in] lhs,rhs,digit Уменьшаемое, вычитаемое и цифра, на которую надо умножить вычитаемое
+ * @returns Разность натурального и натурального, умноженного на цифру
+ */
+Natural subNDN(const Natural &lhs, const Natural &rhs, const Natural::Digit& digit);
 
 #endif

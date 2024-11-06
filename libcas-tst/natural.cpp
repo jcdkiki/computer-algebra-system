@@ -211,3 +211,42 @@ TEST(NATURAL, DIVDK)
         EXPECT_EQ((getDivDigitInPower(n1, n2)).asString(), expected);
     }
 }
+
+TEST(NATURAL, SUBNDN) 
+{
+    using tuple = std::tuple<const char*, const char *, Natural::Digit, const char*>;
+    for (auto [input1, input2, digit, expected] : {
+        tuple { "12", "3", 4, "0" },
+        tuple { "100", "5", 0, "100"},
+        tuple { "100", "5", 12, "40"}
+    })
+    {
+        Natural n1(input1);
+        Natural n2(input2);
+        EXPECT_EQ(subNDN(n1, n2, digit).asString(), expected);
+    }
+
+    Natural n1("100"), n2("50");
+    EXPECT_THROW(subNDN(n1, n2, 3), std::runtime_error);
+}
+
+TEST(NATURAL, DIV)
+{
+    using tuple = std::tuple<const char*, const char*, const char*>;
+    for (auto [input1, input2, expected] : {
+        tuple { "100", "11", "9" },
+        tuple { "12", "12", "1" },
+        tuple { "12", "13", "0" },
+        tuple { "0", "1", "0" },
+    })
+    {
+        Natural n1(input1), n2(input2);
+        EXPECT_EQ((n1 / n2).asString(), expected);
+
+        n1 /= n2;
+        EXPECT_EQ(n1.asString(), expected);
+    }
+
+    Natural n1("100"), n2("0");
+    EXPECT_THROW(n1/n2, std::runtime_error);
+}

@@ -121,6 +121,36 @@ TEST(INTEGER, INC)
     }
 }
 
+TEST(INTEGER, SUB)
+{
+    using pair = std::pair<const char*, const char*>;
+    for (auto [input, expected] : {
+        pair { "100 1", "99" },
+        pair { "1 1", "0" },
+        pair { "0 -55", "55" },
+        pair { "137 155", "-18" },
+        pair { "321 -123", "444" },
+        pair { "-900 -101", "-799" },
+        pair { "-228 137", "-365" },
+        pair { "100 101", "-1" },
+        pair { "-100 -125", "25" },
+        pair { "0 0", "0"},
+        pair { "55 0", "55"},
+        pair { "-12 0", "-12"}
+    })
+    {
+        std::stringstream ss;
+        ss << input;
+
+        Integer n1, n2;
+        ss >> n1 >> n2;
+
+        std::stringstream output;
+        output << (n1 - n2);
+        EXPECT_EQ(output.str(), expected);
+    }
+}
+
 TEST(INTEGER, POZ)
 {
     using pair = std::pair<const char*, int>;
@@ -151,7 +181,6 @@ TEST(INTEGER, ABS)
     }
 }
 
-
 TEST(INTEGER, MUL)
 {
     using tuple = std::tuple<const char*, const char*, const char*>;
@@ -175,3 +204,19 @@ TEST(INTEGER, MUL)
     }
 }
 
+TEST(INTEGER, NEG) 
+{
+    using pair = std::pair<const char*, const char*>;
+    for (auto [input, expected] : {
+        pair { "1",  "-1" },
+        pair { "0",  "0" },
+        pair { "-1", "1" },
+        pair { "12551251", "-12551251" },
+        pair { "-99999999", "99999999" },
+    })
+    {
+        Integer number(input);
+        number = -number;
+        EXPECT_EQ(number.asString(), expected);
+    }
+}

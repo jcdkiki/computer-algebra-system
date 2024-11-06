@@ -287,3 +287,19 @@ TEST(NATURAL, GCF)
 
     }
 }
+
+TEST(NATURAL, LCM)
+{
+    using tuple = std::tuple<const char*, const char*, const char*>;
+    for (auto [input1, input2, expected] : {
+        tuple { "100", "11", "1100" },
+        tuple { "12", "18", "36" },
+        tuple { "13", "13", "13" },
+        tuple { "16", "256", "256" }
+    })
+    {
+        Natural n1(input1), n2(input2);
+        EXPECT_EQ(leastCommMul(n1, n2).asString(), expected);
+
+    }
+}

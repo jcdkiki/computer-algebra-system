@@ -363,3 +363,8 @@ Natural greatCommDiv(const Natural &lhs, const Natural &rhs){
     
     return left + right;
 }
+
+Natural leastCommMul(const Natural &lhs, const Natural &rhs){
+    Natural GCF = greatCommDiv(lhs, rhs);
+    return (lhs * rhs) / GCF;
+}

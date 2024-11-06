@@ -120,7 +120,7 @@ $(document).ready(function(){initNavTree('classInteger.html',''); initResizable(
 <tr class="separator:a9e8bf8c72458dff4ceb5d6cdf9e5c97a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acde8b5f47d3081f5c359d21449669756"><td class="memItemLeft" align="right" valign="top"><a id="acde8b5f47d3081f5c359d21449669756" name="acde8b5f47d3081f5c359d21449669756"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>Integer</b> (const <a class="el" href="classNatural.html">Natural</a> &amp;number)</td></tr>
-<tr class="memdesc:acde8b5f47d3081f5c359d21449669756"><td class="mdescLeft">&#160;</td><td class="mdescRight">Создает новое целое число из натурального числа <br /></td></tr>
+<tr class="memdesc:acde8b5f47d3081f5c359d21449669756"><td class="mdescLeft">&#160;</td><td class="mdescRight">TRANS_N_Z Создает новое целое число из натурального числа <br /></td></tr>
 <tr class="separator:acde8b5f47d3081f5c359d21449669756"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaeb4cc3b4e4bf39322a49130a6c58c45"><td class="memItemLeft" align="right" valign="top"><a id="aaeb4cc3b4e4bf39322a49130a6c58c45" name="aaeb4cc3b4e4bf39322a49130a6c58c45"></a>
 std::string&#160;</td><td class="memItemRight" valign="bottom"><b>asString</b> ()</td></tr>
@@ -181,6 +181,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>operator&lt;=</b> (co
 <tr class="memitem:a2ea2f60e46acea85fa4dd414dd9f9435"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classInteger.html">Integer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInteger.html#a2ea2f60e46acea85fa4dd414dd9f9435">operator-</a> () const</td></tr>
 <tr class="memdesc:a2ea2f60e46acea85fa4dd414dd9f9435"><td class="mdescLeft">&#160;</td><td class="mdescRight">MUL_ZM_Z - Меняет знак числа  <br /></td></tr>
 <tr class="separator:a2ea2f60e46acea85fa4dd414dd9f9435"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad68d2c80e3aa3baf4b868b6ae012c8f5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInteger.html#ad68d2c80e3aa3baf4b868b6ae012c8f5">operator Natural</a> () const</td></tr>
+<tr class="memdesc:ad68d2c80e3aa3baf4b868b6ae012c8f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">TRANS_Z_N Создает новое натуральное число из целого числа  <br /></td></tr>
+<tr class="separator:ad68d2c80e3aa3baf4b868b6ae012c8f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
 Друзья</h2></td></tr>
@@ -220,6 +223,26 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>operator&lt;=</b> (co
 <dl class="section return"><dt>Возвращает</dt><dd>true, если число не равно нулю. </dd>
 <dd>
 false, если число равно нулю. </dd></dl>
+
+</div>
+</div>
+<a id="ad68d2c80e3aa3baf4b868b6ae012c8f5" name="ad68d2c80e3aa3baf4b868b6ae012c8f5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad68d2c80e3aa3baf4b868b6ae012c8f5">&#9670;&#160;</a></span>operator Natural()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Integer::operator <a class="el" href="classNatural.html">Natural</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>TRANS_Z_N Создает новое натуральное число из целого числа </p>
+<dl class="section return"><dt>Возвращает</dt><dd>возвращает копию числа </dd></dl>
 
 </div>
 </div>

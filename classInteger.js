@@ -5,6 +5,7 @@ var classInteger =
     [ "Integer", "classInteger.html#acde8b5f47d3081f5c359d21449669756", null ],
     [ "asString", "classInteger.html#aaeb4cc3b4e4bf39322a49130a6c58c45", null ],
     [ "operator bool", "classInteger.html#ac9e36d7aecfa5d4788c65988e27c8809", null ],
+    [ "operator Natural", "classInteger.html#ad68d2c80e3aa3baf4b868b6ae012c8f5", null ],
     [ "operator!=", "classInteger.html#aeb663b146e79b6ca78e00b1d2a4e61b3", null ],
     [ "operator++", "classInteger.html#a4290bf7f6763b27a51e216bdbfdea68f", null ],
     [ "operator++", "classInteger.html#a1666444f09484e482b2f94dd263c7dc9", null ],

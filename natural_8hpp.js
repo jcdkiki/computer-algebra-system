@@ -3,6 +3,7 @@ var natural_8hpp =
     [ "Natural", "classNatural.html", "classNatural" ],
     [ "getDivDigitInPower", "natural_8hpp.html#a56fab5de99caafc6435dda4259a859a7", null ],
     [ "greatCommDiv", "natural_8hpp.html#ad9db39e985a8da26ebd5eea3087aeb6a", null ],
+    [ "leastCommMul", "natural_8hpp.html#aeda6551bace911d9a5ff2bf0404aed18", null ],
     [ "operator%", "natural_8hpp.html#a10d694b4546539b2d785c354e8fea847", null ],
     [ "operator*", "natural_8hpp.html#a33b7b6db3a076468847c41bf6bc420eb", null ],
     [ "operator+", "natural_8hpp.html#aeb3428745d0811066099a6cfb09ef2c4", null ],

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['subndn_0',['subNDN',['../natural_8hpp.html#a5623e91aff75f7d9b057799386f226c3',1,'natural.cpp']]]
+  ['rational_0',['Rational',['../classRational.html#a3bbd6ff67c590da76ddfcbd48cd3de0a',1,'Rational::Rational()'],['../classRational.html#a32a09888b437d30cc0c2496845242c2e',1,'Rational::Rational(const char *str)']]]
 ];

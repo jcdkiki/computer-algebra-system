@@ -108,3 +108,15 @@ Rational Rational::operator*(const Rational& other) {
     reduce();
     return *this;
 }
+
+Rational Rational::operator/(const Rational& other) {
+    numerator = numerator * Integer(other.denominator);
+    denominator = denominator * abs(other.numerator);
+    reduce();
+    if(numerator.positivity() == 1 && other.numerator.positivity() == 1) {
+        numerator *= Integer("-1");
+    } else if(numerator.positivity() == 2 && other.numerator.positivity() == 1) {
+        numerator *= Integer("-1");
+    }
+    return *this;
+}

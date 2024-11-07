@@ -22,3 +22,35 @@ TEST(POLYNOMIAL, IO)
         ASSERT_EQ(polynomial.asString(), expected);
     }
 }
+
+TEST(POLYNOMIAL, DEG)
+{
+    using pair = std::pair<const char*, const int>;
+    for (auto [input, expected] : 
+        {
+            pair { "0", 0 },
+            pair { "1", 0 },
+            pair { "x", 1 },
+            pair { "42x^100 + 67x^90 + 29", 100 }
+        })
+    {
+        Polynomial<int, 0, 1> polynomial(input);
+        ASSERT_EQ(polynomial.deg(), expected);
+    }
+}
+
+TEST(POLYNOMIAL, LEAD)
+{
+    using pair = std::pair<const char*, const int>;
+    for (auto [input, expected] : 
+        {
+            pair { "0", 0 },
+            pair { "1", 1 },
+            pair { "2x", 2 },
+            pair { "19x^71 + 83x^67 + 17", 19 }
+        })
+    {
+        Polynomial<int, 0, 1> polynomial(input);
+        ASSERT_EQ(polynomial.lead(), expected);
+    }
+}

@@ -66,6 +66,18 @@ public:
         ss >> *this;
     }
 
+    /** @brief Возвращает степень полинома. */
+    int deg() 
+    {
+        return monoms.back().power;
+    }
+
+    /** @brief Возвращает старший коэффициент полинома. */
+    T lead() 
+    {
+        return monoms.back().coeff;
+    }
+
     /** @brief Возвращает строковое представление многочлена. */
     std::string asString()
     {

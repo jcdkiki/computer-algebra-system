@@ -8,6 +8,7 @@
 
 #include "natural.hpp"
 #include "integer.hpp"
+#include <cstring>
 
 /**
  * @brief Длинное Рациональное число.
@@ -20,6 +21,7 @@ class Rational {
     Integer numerator;
     Natural denominator;
 public:
+
     /** @brief Создает новое рациональное число, равное нулю */
     Rational();
 
@@ -36,6 +38,43 @@ public:
 
     /** @brief Возвращает строковое представление числа */
     std::string asString();
+
+    /** @brief Возвращает числитель числа */
+    Integer get_numerator() { return numerator; }
+
+    /** @brief Возвращает делитель числа */
+    Natural get_denominator() { return denominator; }
+
+    /**
+     * @brief рекурсивно вычислляет НОД (вспомогательная функция)
+     * @param[in] numerator,denominator Ссылки класса натурального и целого цисла
+     * @returns Возвращает вычисленую НОД в виде одного из классов
+     */
+    Integer gcd_recursive(const Integer& numerator, const Integer& denominator);
+
+    /**
+     * @brief Вычислляет НОД и преобразовывает её
+     * @param[in] numerator,denominator Ссылки класса натурального и целого цисла
+     * @returns Возвращает НОД в виде строки
+     */
+    const char* greatest_common_divisor(const Integer& numerator, const Natural& denominator);
+
+    /**
+     * @brief RED_Q_Q - Сокращение дроби
+    */
+    void reduce();
+
+    /**
+     * @brief Вспомогательная функция для конвертирования натурального в целое
+    */
+    Integer convert_denominator_to_integer(const Rational& other) const { return Integer(other.denominator); }
+
+    /**
+     * @brief ADD_QQ_Q - Сложение двух дробей
+     * @param[in] other - Правый операнд в сложении
+     * @returns Возвращает текущий объект
+     */
+    Rational& operator+(const Rational& other);
 
     friend std::ostream& operator<<(std::ostream& os, const Rational& number);
     friend std::istream& operator>>(std::istream& is, Rational& number);

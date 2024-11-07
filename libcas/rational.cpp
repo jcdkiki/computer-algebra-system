@@ -90,3 +90,13 @@ Rational& Rational::operator+(const Rational& other) {
     reduce();
     return *this;
 }
+
+Rational& Rational::operator-(const Rational& other) {
+    Rational temp = other; 
+    Integer new_denominator = convert_denominator_to_integer(temp);
+
+    numerator = numerator * new_denominator - other.numerator * Integer(denominator);
+    denominator = denominator * temp.denominator;
+    reduce();
+    return *this;
+}

@@ -76,6 +76,13 @@ public:
      */
     Rational& operator+(const Rational& other);
 
+    /**
+     * @brief SUB_QQ_Q - Вычитание двух дробей
+     * @param[in] other - Правый операнд в вычитании
+     * @returns Возвращает текущий объект
+     */
+    Rational& operator-(const Rational& other);
+
     friend std::ostream& operator<<(std::ostream& os, const Rational& number);
     friend std::istream& operator>>(std::istream& is, Rational& number);
 };

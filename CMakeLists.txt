@@ -13,13 +13,11 @@ add_executable(libcas-tst ${LIBCAS_TST_SOURCES})
 target_include_directories(libcas-tst PRIVATE "libcas")
 target_link_libraries(libcas-tst PRIVATE gtest gtest_main libcas)
 
-add_executable(cas ${CAS_SOURCES})
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(GTK4 REQUIRED IMPORTED_TARGET gtkmm-4.0)
 
-find_package(wxWidgets REQUIRED COMPONENTS net core base)
-if(wxWidgets_USE_FILE) # not defined in CONFIG mode
-    include(${wxWidgets_USE_FILE})
-endif()
-target_link_libraries(cas ${wxWidgets_LIBRARIES} "libcas")
+add_executable(cas ${CAS_SOURCES})
+target_link_libraries(cas PkgConfig::GTK4 "libcas")
 target_include_directories(cas PRIVATE "libcas")
 
 enable_testing()

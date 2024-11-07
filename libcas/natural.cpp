@@ -1,6 +1,7 @@
 #include "natural.hpp"
 
 #include <algorithm>
+#include <ios>
 #include <iostream>
 #include <cctype>
 
@@ -67,6 +68,7 @@ std::istream& operator>>(std::istream& is, Natural& number)
     is.unget();
 
     if (number.digits.size() == 0) {
+        is.setstate(std::ios::failbit);
         number.digits.push_back(0);
     }
 

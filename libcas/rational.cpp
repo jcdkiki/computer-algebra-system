@@ -48,21 +48,21 @@ std::istream& operator>>(std::istream& is, Rational& number)
     return is;
 }
 
-Integer Rational::gcd_recursive(const Integer& numerator, const Integer& denominator) {
+Integer Rational::gcd_iterative(const Integer& numerator, const Integer& denominator) {
     Natural natur_numerator = abs(numerator);
     Natural natur_denominator = abs(denominator);
 
-    if (natur_numerator % natur_denominator == 0)
-        return natur_denominator;
-    if (natur_denominator % natur_numerator == 0)
-        return natur_numerator;
-    if (natur_numerator > natur_denominator)
-        return gcd_recursive(natur_numerator % natur_denominator, natur_denominator);
-    return gcd_recursive(natur_numerator, natur_denominator % natur_numerator);
+    while (natur_denominator != 0) {
+        Natural temp = natur_denominator;
+        natur_denominator = natur_numerator % natur_denominator;
+        natur_numerator = temp;
+    }
+
+    return natur_numerator;
 }
 
 const char* Rational::greatest_common_divisor(const Integer& numerator, const Natural& denominator) {
-    Integer gcd_result = gcd_recursive(numerator, denominator);
+    Integer gcd_result = gcd_iterative(numerator, denominator);
     std::string result_str = gcd_result.asString();
     char* cstr = new char[result_str.length() + 1];
     std::strcpy(cstr, result_str.c_str());
@@ -81,12 +81,15 @@ void Rational::reduce() {
     denominator = denominator / del_den;
 }
 
-Rational& Rational::operator+(const Rational& other) {
-    Rational temp = other; 
-    Integer new_denominator = convert_denominator_to_integer(temp);
-
-    numerator = numerator * new_denominator + temp.numerator * Integer(denominator);
-    denominator = denominator * temp.denominator;
-    reduce();
-    return *this;
+Rational operator+(const Rational& lhs, const Rational& rhs) {
+    Integer new_numerator = lhs.numerator * Integer(rhs.denominator) + rhs.numerator * Integer(lhs.denominator);
+    Natural new_denominator = lhs.denominator * rhs.denominator;
+    
+    Rational result;
+    result.numerator = new_numerator;
+    result.denominator = new_denominator;
+    
+    result.reduce();
+    
+    return result;
 }

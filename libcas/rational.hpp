@@ -46,11 +46,11 @@ public:
     Natural get_denominator() { return denominator; }
 
     /**
-     * @brief рекурсивно вычислляет НОД (вспомогательная функция)
+     * @brief Вычислляет НОД (вспомогательная функция)
      * @param[in] numerator,denominator Ссылки класса натурального и целого цисла
      * @returns Возвращает вычисленую НОД в виде одного из классов
      */
-    Integer gcd_recursive(const Integer& numerator, const Integer& denominator);
+    Integer gcd_iterative(const Integer& numerator, const Integer& denominator);
 
     /**
      * @brief Вычислляет НОД и преобразовывает её
@@ -63,18 +63,13 @@ public:
      * @brief RED_Q_Q - Сокращение дроби
     */
     void reduce();
-
-    /**
-     * @brief Вспомогательная функция для конвертирования натурального в целое
-    */
-    Integer convert_denominator_to_integer(const Rational& other) const { return Integer(other.denominator); }
-
+    
     /**
      * @brief ADD_QQ_Q - Сложение двух дробей
      * @param[in] other - Правый операнд в сложении
      * @returns Возвращает текущий объект
      */
-    Rational& operator+(const Rational& other);
+    friend Rational operator+(const Rational& lhs, const Rational& rhs);
 
     friend std::ostream& operator<<(std::ostream& os, const Rational& number);
     friend std::istream& operator>>(std::istream& is, Rational& number);

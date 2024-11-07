@@ -6,7 +6,7 @@
 #ifndef CAS_NUMBERS_POLYNOMIAL_HPP_
 #define CAS_NUMBERS_POLYNOMIAL_HPP_
 
-#include <vector>
+#include <list>
 #include <string>
 #include <istream>
 #include <ostream>
@@ -15,46 +15,37 @@
 /**
  * @brief Многочлен.
  *
- * Использует \c std::vector для хранения коэффициентов.
+ * Использует \c std::list для хранения мономов, представленных структурой Monomial.
  * Для этого класса перегружены основные арифметические операторы, что позволяет красиво записывать различные вычисления.
  * Также перегружены операторы ввода и вывода, позволяющие в красивой форме вводить и выводить многочлены.
  * 
- * @tparam T                Тип, используемый для коэффициентов
- * @tparam zero             Значение коэффициента по умолчанию. Для чисел должен быть равен нулю
-                            (если вы конечно не упоролись чем-нибудь)
- * @tparam one              Значение коэффициента, который не будет выводиться при использовании оператора << или метода asString().
-                            Для чисел может быть равен, например, единице.
+ * @tparam T                Тип, используемый для коэффициентов.
+ * @tparam zero             Значение коэффициента по умолчанию, тождественен нулю.
+ * @tparam one              Значение коэффициента, тождественнен единице, который не будет выводиться при использовании оператора << или метода asString().
  */
 template<class T, T zero, T one>
 class Polynomial {
-    std::vector<T> coeff;
 
-    /** @brief При необходимости расширяет вектор коэффициентов до размера \a size */
-    void resizeAtLeast(size_t size)
-    {
-        if (coeff.size() < size) {
-            coeff.resize(size, zero);
-        }
-    }
+    /**
+     * @brief Одночлен от одной переменной 'x'.
+     *
+     * Содержит информацию о коэффициенте и степени одночлена.
+     */
+    struct Monomial {
+        int power;
+        T coeff;
 
-    /** @brief Удаляет лидирующие нули */
-    void strip()
-    {
-        for (size_t i = coeff.size() - 1; i > 0; i--) { // don`t touch free term
-            if (coeff[i] != 0) {
-                coeff.resize(i + 1);
-                return;
-            }
-        }
+        Monomial() {}
+        Monomial(int power, T coeff) : power(power), coeff(coeff) {}
+    };
 
-        coeff.resize(1);
-    }
-
+    std::list<Monomial> monoms;
+ 
 public:
-    /** @brief Создает новый многочлен, равный нулю */
-    Polynomial() : coeff(1, zero) {}
+    /** @brief Создает новый многочлен, равный нулю. */
+    Polynomial() : monoms(1, Monomial(0, zero)) {}
 
-    /** @brief Создает новый многочлен из строки
+    /** @brief Создает новый многочлен из строки.
      * 
      * Примеры корректного ввода для многочлена с целочисленными коэффициентами:
      *  - \c "100"
@@ -75,7 +66,7 @@ public:
         ss >> *this;
     }
 
-    /** @brief Возвращает строковое представление многочлена */
+    /** @brief Возвращает строковое представление многочлена. */
     std::string asString()
     {
         std::stringstream ss;
@@ -84,33 +75,35 @@ public:
     }
 
     /**
-     * @brief Выводит многочлен в поток вывода
+     * @brief Выводит многочлен в поток вывода.
      * 
-     * @param os                Поток вывода, в который будет выведен многочлен
-     * @param[in] polynomial    Многочлен, который будет выведет в поток вывода
+     * @param os                Поток вывода, в который будет выведен многочлен.
+     * @param[in] polynomial    Многочлен, который будет выведет в поток вывода.
      */
     friend std::ostream& operator<<(std::ostream& os, const Polynomial& polynomial)
     {
         bool has_x = false;
         bool first = true;
-        for (size_t i = 1; i < polynomial.coeff.size(); i++) {
-            if (polynomial.coeff[i] != 0) {
+
+
+        for (auto& m : polynomial.monoms) {
+            if (m.power != 0) {
                 has_x = true;
                 break;
             }
         }
 
-        if ((bool)polynomial.coeff[0] || !has_x) {
-            os << polynomial.coeff[0];
+
+        if (polynomial.monoms.front().coeff != 0 || !has_x) {
+            os << polynomial.monoms.front().coeff;
             first = false;
         }
 
-        for (size_t i = 1; i < polynomial.coeff.size(); i++) {
-            T coeff = polynomial.coeff[i];
-            if (!coeff) {
-                continue;
-            }
-
+        auto iter = polynomial.monoms.begin();
+        ++iter;
+        while (iter != polynomial.monoms.end()) {
+            T coeff = iter->coeff;
+            
             bool sign = (coeff < 0);
 
             if (!first) {
@@ -130,25 +123,31 @@ public:
             }
 
             os << "x";
-            if (i != 1) {
-                os << '^' << i;
+            if (iter->power != 1) {
+                os << '^' << iter->power;
             }
+
+            ++iter;
         }
+
         return os;
     }
 
     /**
-     * @brief Вводит многочлен из потока ввода
+     * @brief Вводит многочлен из потока ввода.
      * 
-     * Примеры корректного ввода для многочлена с целочисленными коэффициентами аналогичны \c Polynomial(const char *str)
+     * Примеры корректного ввода для многочлена с целочисленными коэффициентами аналогичны \c Polynomial(const char *str).
      *
-     * @param is                Поток ввода, из которого будет введен многочлен
-     * @param[out] polynomial   Ссылка на многочлен, в который будет записан результат
+     * @throws std::invalid_argument если используется форма коэффициентов со скобками и не будет найдена закрывающаяся скобка
+     *
+     * @param is                Поток ввода, из которого будет введен многочлен.
+     * @param[out] polynomial   Ссылка на многочлен, в который будет записан результат, предварительно он будет очищен.
      */
     friend std::istream& operator>>(std::istream& is, Polynomial& polynomial)
     {
-        polynomial.coeff.resize(1);
-        polynomial.coeff[0] = 0;
+        polynomial.monoms.resize(1);
+        polynomial.monoms.front().power = 0;
+        polynomial.monoms.front().coeff = 0;
 
         char c;
         bool should_close = false;
@@ -187,18 +186,33 @@ public:
 
             if (c != 'x') {
                 is.unget();
-                polynomial.coeff[0] += sign ? -coeff : coeff;
+                polynomial.monoms.front().coeff += sign ? -coeff : coeff;
             }
             else {
                 is >> c;
-                size_t power = 1;
+                int power = 1;
                 if (c == '^') {
                     is >> power;
                 }
                 else is.unget();
 
-                polynomial.resizeAtLeast(power + 1);
-                polynomial.coeff[power] += sign ? -coeff : coeff;
+                if (coeff != 0) {
+                    Monomial m(power, sign ? -coeff : coeff);
+                    if (polynomial.monoms.back().power < m.power)  
+                        polynomial.monoms.push_back(m);
+                    else {
+                        for(auto iter = polynomial.monoms.begin(); iter != polynomial.monoms.end(); iter++) {
+                            if (iter->power == m.power) {
+                                iter->coeff += m.coeff;
+                                break;
+                            }
+                            else if (iter->power > m.power) {
+                                polynomial.monoms.insert(iter, m);
+                                break;
+                            }
+                        }
+                    }
+                }
             }
 
             is >> c;
@@ -214,7 +228,6 @@ public:
             }
         }
 
-        polynomial.strip();
         return is;
     }
 };

@@ -99,6 +99,68 @@ int Natural::cmp(const Natural &n1, const Natural &n2) {
     return 0; // n1 == n2
 }
 
+Natural getDivDigitInPower(const Natural &lhs, const Natural &rhs){
+    if (lhs < rhs){
+        throw std::runtime_error("cannot div from a smaller number");
+    }
+
+    if (!rhs){
+        throw std::runtime_error("cannot div from a null");
+    }
+
+    size_t k = lhs.digits.size() - rhs.digits.size();
+    if (lhs < (rhs << k)){
+        k -= 1;
+    }
+
+    Natural sub = rhs << k;
+    Natural minuend = lhs;
+    Natural res("0");
+    
+    while (minuend >= sub){
+        res++;
+        minuend -= sub;
+    }
+
+    return res << k;
+}
+
+Natural& Natural::operator/=(const Natural &number) {
+    if(!number){
+        throw std::runtime_error("cannot div from a null");
+    }
+
+    Natural current = *this;
+    *this = Natural();
+    
+    Natural part;
+    while (current >= number){
+        part = getDivDigitInPower(current, number);
+        *this += part;
+        current -= part * number;
+    }
+    
+    return *this;
+}
+
+Natural& Natural::operator%=(const Natural &number) {
+    if(!number){
+        throw std::runtime_error("cannot div from a null");
+    }
+    *this -= (*this / number) * number;
+    return *this;
+}
+
+Natural operator%(const Natural &lhs, const Natural &rhs) {
+    Natural res(lhs);
+    return res %= rhs;
+}
+
+Natural operator/(const Natural &lhs, const Natural &rhs) {
+    Natural res(lhs);
+    return res /= rhs;
+}
+
 Natural operator-(const Natural &lhs, const Natural &rhs) {
     Natural res(lhs);
     return res -= rhs;
@@ -178,6 +240,44 @@ bool Natural::operator<=(const Natural &rhs) const
     return (res == 1) || (res == 0);
 }
 
+Natural Natural::operator*(const Natural::Digit& digit) const {
+    Natural res(*this);
+    return res *= digit;
+}
+
+Natural &Natural::operator*=(const Natural::Digit& digit) {
+    Natural::Digit carry = 0;
+    for (size_t i = 0; i < this->digits.size() || carry; ++i) {
+        if (i == this->digits.size()) {
+            this->digits.push_back(0);
+        }
+
+        size_t temp = carry + this->digits[i] * digit;
+
+        this->digits[i] = temp % Natural::BASE;
+        carry = temp / Natural::BASE;
+    }
+
+    this->strip();
+    return *this;
+}
+
+Natural &Natural::mul_by_10_in_k(size_t k) {
+    this->digits.insert(this->digits.begin(), k, 0);
+    this->strip();
+    return *this;
+}
+
+Natural Natural::operator<<(size_t k) const {
+    Natural res(*this);
+    return res <<= k;
+}
+
+Natural &Natural::operator<<=(size_t k) {
+    this->mul_by_10_in_k(k);
+    return *this;
+}
+
 Natural operator*(const Natural &lhs, const Natural &rhs) {
     Natural::Digit carry = 0;
     Natural res;
@@ -241,7 +341,32 @@ Natural Natural::operator++(int) {
     return old;
 }
 
-Natural::operator bool()
+Natural::operator bool() const
 {
     return (digits.size() > 1) || (digits[0] != 0);
+}
+
+Natural subNDN(const Natural &lhs, const Natural &rhs, const Natural::Digit& digit){
+    Natural res = lhs - (rhs * digit);
+    return res;
+}
+
+Natural greatCommDiv(const Natural &lhs, const Natural &rhs){
+    Natural left(lhs), right(rhs);
+
+    while (left && right){
+        if (left > right){
+            left %= right;
+        }
+        else{
+            right %= left;
+        }
+    }
+    
+    return left + right;
+}
+
+Natural leastCommMul(const Natural &lhs, const Natural &rhs){
+    Natural GCF = greatCommDiv(lhs, rhs);
+    return (lhs * rhs) / GCF;
 }

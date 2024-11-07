@@ -22,8 +22,9 @@
 
 /** @brief оператор преобразования должен знать о классе, чтобы в него преобразовывать*/
 class Natural {
-protected:
+public:
     using Digit = char;         /**< Тип цифры */
+private:
     std::vector<Digit> digits;  /**< Вектор цифр */
 
     /** @brief Убирает незначащие нули */
@@ -46,6 +47,23 @@ public:
     friend std::istream& operator>>(std::istream& is, Natural& number);
     friend Natural operator+(const Natural &lhs, const Natural &rhs);
     friend Natural operator-(const Natural &lhs, const Natural &rhs);
+    friend Natural getDivDigitInPower(const Natural &lhs, const Natural &rhs);
+    friend Natural operator/(const Natural &lhs, const Natural &rhs);
+    friend Natural operator%(const Natural &lhs, const Natural &rhs);
+
+    /**
+     * @brief DIV_NN_N - Вычисляет неполное частное от деления на поданное число
+     * @param[in] number Делитель
+     * @returns Неполное частное от деления двух чисел
+     */
+    Natural& operator/=(const Natural &number);
+
+    /**
+     * @brief MOD_NN_N - Вычисляет остаток от деления на поданное число
+     * @param[in] number Делитель
+     * @returns Остаток от деления двух чисел
+     */
+    Natural& operator%=(const Natural &number);
 
     /**
      * @brief SUB_NN_N - Вычисляет разность двух натуральных чисел
@@ -87,6 +105,36 @@ public:
      * @returns 2, если n1 > n2
      */
     static int cmp(const Natural &n1, const Natural &n2);
+
+    /**
+     * @brief MUL_ND_N - Умножение натурального числа на цифру.
+     * @param[in] digit - Цифра, на которую умножаем.
+     * @returns Возвращает натуральное число умноженное на цифру. Создается копия.
+     */
+    Natural operator*(const Natural::Digit& digit) const;
+
+    /**
+     * @brief Возвращает натуральное число умноженное на цифру. Не создается копия.
+     */
+    Natural &operator*=(const Natural::Digit& digit);
+
+    /**
+     * @brief MUL_Nk_N - Умножает натуральное число на 10^k. Не создает копию.
+     * @param[in] k - Натуральное число, степень 10.
+     * @returns Возвращает натуральное число, умноженное на 10^k.
+     */
+    Natural &mul_by_10_in_k(size_t k);
+
+    /**
+     * @brief Аналог битового сдвига для натуральных чисел с основанием 10. Создает копию.
+     */
+    Natural operator<<(size_t k) const;
+
+    /**
+     * @brief Аналог битового сдвига для натуральных чисел с основанием 10. Не создает копию.
+     */
+    Natural &operator<<=(size_t k);
+
     friend Natural operator*(const Natural &lhs, const Natural &rhs);
     /**
      * @brief MUL_NN_N - Вычисляет произведение двух натуральных чисел
@@ -100,7 +148,7 @@ public:
      * @returns true, если число не равно нулю.
      * @returns false, если число равно нулю. 
      */
-    operator bool();
+    operator bool() const;
 
     /** @name Операторы сравнения (обёртка над методом cmp)
      * @param[in] this,rhs Сравниваемые числа
@@ -126,6 +174,12 @@ public:
     /** @brief Первое число меньше либо равно второго */
     bool operator<=(const Natural &rhs) const;
     ///@}
+    
+    friend Natural subNDN(const Natural &rhs, const Natural &lhs, const Natural::Digit& digit);
+
+    friend Natural greatCommDiv(const Natural &lhs, const Natural &rhs);
+
+    friend Natural leastCommMul(const Natural &lhs, const Natural &rhs);
 };
 
 /**
@@ -143,6 +197,20 @@ std::ostream& operator<<(std::ostream& os, const Natural& number);
  * @param[out] number   Ссылка на число, в которое будет записан результат
  */
 std::istream& operator>>(std::istream& is, Natural& number);
+
+/**
+ * @brief DIV_NN_N - Вычисляет неполное частное двух натуральных чисел
+ * @param[in] lhs,rhs Делимое и делитель
+ * @returns Неполное частное от деления двух чисел
+ */
+Natural operator/(const Natural &lhs, const Natural &rhs);
+
+/**
+ * @brief MOD_NN_N - Вычисляет остаток от деления двух натуральных чисел
+ * @param[in] lhs,rhs Делимое и делитель
+ * @returns Остаток от деления двух чисел
+ */
+Natural operator%(const Natural &lhs, const Natural &rhs);
 
 /**
  * @brief ADD_NN_N - Вычисляет сумму двух натуральных чисел
@@ -164,5 +232,33 @@ Natural operator*(const Natural &lhs, const Natural &rhs);
  * @returns Разность двух чисел
  */
 Natural operator-(const Natural &lhs, const Natural &rhs);
+
+/**
+ * @brief DIV_NN_Dk - Вычисляет первую цифру деления большего натурального на меньшее, домноженное на 10^k
+ * @param[in] lhs,rhs Делимое и делитель
+ * @returns Первая цифра деления, домноженная на 10^k
+ */
+Natural getDivDigitInPower(const Natural &lhs, const Natural &rhs);
+
+/**
+ * @brief SUB_NDN_N - Вычисляет разность натурального большего и натурального меньшего, умноженного на цифру
+ * @param[in] lhs,rhs,digit Уменьшаемое, вычитаемое и цифра, на которую надо умножить вычитаемое
+ * @returns Разность натурального и натурального, умноженного на цифру
+ */
+Natural subNDN(const Natural &lhs, const Natural &rhs, const Natural::Digit& digit);
+
+/**
+ * @brief GCF_NN_N - НОД натуральных чисел
+ * @param[in] lhs,rhs - Натуральные числа, НОД которых требуется найти
+ * @returns НОД двух чисел
+ */
+Natural greatCommDiv(const Natural &lhs, const Natural &rhs);
+
+/**
+ * @brief LCM_NN_N - НОК натуральных чисел
+ * @param[in] lhs,rhs - Натуральные числа, НОК которых требуется найти
+ * @returns НОК двух чисел
+ */
+Natural leastCommMul(const Natural &lhs, const Natural &rhs);
 
 #endif

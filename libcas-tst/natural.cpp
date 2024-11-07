@@ -1,5 +1,6 @@
 #include "natural.hpp"
 #include <gtest/gtest.h>
+#include <sstream>
 #include <stdexcept>
 
 TEST(NATURAL, CMP)
@@ -21,6 +22,52 @@ TEST(NATURAL, CMP)
     ASSERT_LE(n2, n2);
     ASSERT_GE(n2, n2);
     ASSERT_EQ(n2, n2);
+}
+
+TEST(NATURAL, MULBYDIGIT) 
+{
+    using tuple = std::tuple<const char*, Natural::Digit, const char*>;
+    for (auto [input, digit, expected] : {
+        tuple { "123", 9, "1107" },
+        tuple { "521", 0, "0" },
+        tuple { "0", 0, "0" },
+        tuple { "0", 5, "0" },
+        tuple { "5", 5, "25" },
+        tuple { "10", 6, "60" },
+        tuple { "999", 1, "999" },
+    })
+    {
+        Natural n(input);
+        EXPECT_EQ((n * digit).asString(), expected);
+        
+        n *= digit;
+        EXPECT_EQ(n.asString(), expected);
+    }
+}
+
+TEST(NATURAL, MULBY10K)
+{
+    using pair = std::pair<const char*, const char*>;
+    for (auto [input, expected] : {
+        pair { "100 1", "1000" },
+        pair { "1 1", "10" },
+        pair { "123 0", "123" },
+        pair { "137 2", "13700" },
+        pair { "321 2", "32100" },
+        pair { "0 2", "0" },
+    })
+    {
+        std::stringstream ss;
+        ss << input;
+        
+        Natural n;
+        size_t k;
+        ss >> n >> k;
+
+        std::stringstream output;
+        output << (n << k);
+        EXPECT_EQ(output.str(), expected);
+    }
 }
 
 TEST(NATURAL, MUL)
@@ -84,7 +131,7 @@ TEST(NATURAL, DEC)
     {
         std::stringstream ss;
         ss << input;
-
+      
         Natural n1;
         ss >> n1;
 
@@ -147,4 +194,112 @@ TEST(NATURAL, IO)
 
     ASSERT_EQ(Natural("00001337").asString(), "1337");
     ASSERT_EQ(Natural("000000000").asString(), "0");
+}
+
+TEST(NATURAL, DIVDK)
+{
+    using tuple = std::tuple<const char*, const char*, const char*>;
+    for (auto [input1, input2, expected] : {
+        tuple { "100", "10", "10" },
+        tuple { "1", "1", "1" },
+        tuple { "50", "3", "10" },
+        tuple { "39900", "5", "7000" },
+        tuple { "1019", "34", "20" },
+    })
+    {
+        Natural n1(input1), n2(input2);
+        EXPECT_EQ((getDivDigitInPower(n1, n2)).asString(), expected);
+    }
+}
+
+TEST(NATURAL, SUBNDN) 
+{
+    using tuple = std::tuple<const char*, const char *, Natural::Digit, const char*>;
+    for (auto [input1, input2, digit, expected] : {
+        tuple { "12", "3", 4, "0" },
+        tuple { "100", "5", 0, "100"},
+        tuple { "100", "5", 12, "40"}
+    })
+    {
+        Natural n1(input1);
+        Natural n2(input2);
+        EXPECT_EQ(subNDN(n1, n2, digit).asString(), expected);
+    }
+
+    Natural n1("100"), n2("50");
+    EXPECT_THROW(subNDN(n1, n2, 3), std::runtime_error);
+}
+
+TEST(NATURAL, DIV)
+{
+    using tuple = std::tuple<const char*, const char*, const char*>;
+    for (auto [input1, input2, expected] : {
+        tuple { "100", "11", "9" },
+        tuple { "12", "12", "1" },
+        tuple { "12", "13", "0" },
+        tuple { "0", "1", "0" },
+    })
+    {
+        Natural n1(input1), n2(input2);
+        EXPECT_EQ((n1 / n2).asString(), expected);
+
+        n1 /= n2;
+        EXPECT_EQ(n1.asString(), expected);
+    }
+
+    Natural n1("100"), n2("0");
+    EXPECT_THROW(n1/n2, std::runtime_error);
+}
+
+TEST(NATURAL, MOD)
+{
+    using tuple = std::tuple<const char*, const char*, const char*>;
+    for (auto [input1, input2, expected] : {
+        tuple { "100", "11", "1" },
+        tuple { "12", "12", "0" },
+        tuple { "12", "13", "12" },
+        tuple { "0", "1", "0" },
+    })
+    {
+        Natural n1(input1), n2(input2);
+        EXPECT_EQ((n1 % n2).asString(), expected);
+
+        n1 %= n2;
+        EXPECT_EQ(n1.asString(), expected);
+    }
+
+    Natural n1("100"), n2("0");
+    EXPECT_THROW(n1%n2, std::runtime_error);
+}
+
+TEST(NATURAL, GCF)
+{
+    using tuple = std::tuple<const char*, const char*, const char*>;
+    for (auto [input1, input2, expected] : {
+        tuple { "100", "11", "1" },
+        tuple { "12", "18", "6" },
+        tuple { "13", "13", "13" },
+        tuple { "16", "256", "16" }
+    })
+    {
+        Natural n1(input1), n2(input2);
+        EXPECT_EQ(greatCommDiv(n1, n2).asString(), expected);
+
+    }
+}
+
+TEST(NATURAL, LCM)
+{
+    using tuple = std::tuple<const char*, const char*, const char*>;
+    for (auto [input1, input2, expected] : {
+        tuple { "100", "11", "1100" },
+        tuple { "12", "18", "36" },
+        tuple { "13", "13", "13" },
+        tuple { "16", "256", "256" }
+    })
+    {
+        Natural n1(input1), n2(input2);
+        EXPECT_EQ(leastCommMul(n1, n2).asString(), expected);
+
+    }
 }

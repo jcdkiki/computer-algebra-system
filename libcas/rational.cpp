@@ -100,3 +100,11 @@ Rational& Rational::operator-(const Rational& other) {
     reduce();
     return *this;
 }
+
+Rational Rational::operator*(const Rational& other) {
+    numerator = numerator * other.numerator;
+    denominator = denominator * other.denominator;
+
+    reduce();
+    return *this;
+}

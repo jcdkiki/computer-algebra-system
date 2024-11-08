@@ -8,7 +8,6 @@
 
 #include "natural.hpp"
 #include "integer.hpp"
-#include <cstring>
 
 /**
  * @brief Длинное Рациональное число.

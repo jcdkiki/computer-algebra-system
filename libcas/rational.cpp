@@ -48,29 +48,14 @@ std::istream& operator>>(std::istream& is, Rational& number)
     return is;
 }
 
-Natural Rational::greatest_common_divisor(const Integer& numerator, const Natural& denominator) {
-    Natural natur_numerator = abs(numerator);
-    Natural natur_denominator = denominator;
-
-    while (natur_denominator != 0) {
-        Natural temp = natur_denominator;
-        natur_denominator = natur_numerator % natur_denominator;
-        natur_numerator = temp;
-    }
-
-    return natur_numerator;
-}
-
 void Rational::reduce() {
-    Natural common_divisor = greatest_common_divisor(numerator, denominator);
     if (!numerator) {
         denominator = Natural("1");
         return;
     }
-    Integer del_nem(common_divisor);
-    Natural del_den(common_divisor);
-    numerator = numerator / del_nem;
-    denominator = denominator / del_den;
+    Natural common_divisor = greatCommDiv( abs(numerator), denominator);
+    numerator /= Integer(common_divisor);
+    denominator /= common_divisor;
 }
 
 Rational operator+(const Rational& lhs, const Rational& rhs) {
@@ -83,8 +68,8 @@ Rational& Rational::operator+=(const Rational& rhs) {
     Integer new_numerator = this->numerator * Integer(rhs.denominator) + rhs.numerator * Integer(this->denominator);
     Natural new_denominator = this->denominator * rhs.denominator;
 
-    this->numerator = new_numerator;
-    this->denominator = new_denominator;
+    this->numerator = std::move(new_numerator);
+    this->denominator = std::move(new_denominator);
 
     this->reduce();
 

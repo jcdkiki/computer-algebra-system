@@ -24,30 +24,6 @@ TEST(RATIONAL, IO)
     ASSERT_EQ(Integer("-0").asString(), "0");
 }
 
-TEST(RATIONAL, GCD)
-{
-    using pair = std::pair<const char*, const char*>;
-    for (auto [input, expected] : {
-        pair { "48/18", "6" },
-        pair { "54/24", "6" },
-        pair { "100/10", "10" },
-        pair { "17/34", "17" },
-        pair { "-231/140", "7" },
-        pair { "0/100", "100" },
-        pair { "345654633/867876", "3" },
-        pair { "10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000/10", "10" },
-        pair { "345654633546456756756765756/867876567765886797890456546", "2" },
-        pair { "8931749619201839516395476287219493412960/2794927242316834532807463226089536046445", "5" },
-
-    })  
-    {
-        Rational number(input);
-        Natural gcd_result = number.greatest_common_divisor(number.get_numerator(), number.get_denominator());
-        Natural expected_num(expected);
-        ASSERT_EQ(gcd_result, expected_num);
-    }
-}
-
 TEST(RATIONAL, REDUCE)
 {
     using pair = std::pair<const char*, const char*>;

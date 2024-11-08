@@ -42,15 +42,8 @@ public:
     /** @brief Возвращает числитель числа */
     Integer get_numerator() { return numerator; }
 
-    /** @brief Возвращает делитель числа */
+    /** @brief Возвращает знаменатель числа */
     Natural get_denominator() { return denominator; }
-
-    /**
-     * @brief Вычислляет НОД
-     * @param[in] numerator,denominator Ссылки класса натурального и целого цисла
-     * @returns Возвращает НОД в виде строки
-     */
-    Natural greatest_common_divisor(const Integer& numerator, const Natural& denominator);
 
     /**
      * @brief RED_Q_Q - Сокращение дроби

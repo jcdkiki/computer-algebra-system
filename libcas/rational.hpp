@@ -72,7 +72,7 @@ public:
 
     /**
      * @brief DIV_QQ_Q - Деление двух дробей
-     * @param[in] other - Правый операнд в вычитании
+     * @param[in] lhs,rhs - Левый и правый операнд
      * @returns Возвращает текущий объект
      */
     friend Rational operator/(const Rational& lhs, const Rational& rhs);

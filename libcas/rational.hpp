@@ -73,7 +73,7 @@ public:
 
     /**
      * @brief ADD_QQ_Q - Прибавляет рационального числа
-     * @param[in] lhs,rhs - Число, которое нужно прибавить
+     * @param[in] rhs - Число, которое нужно прибавить
      * @returns Результат прибавления
      */
     Rational& operator+=(const Rational& rhs);

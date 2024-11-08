@@ -46,18 +46,11 @@ public:
     Natural get_denominator() { return denominator; }
 
     /**
-     * @brief Вычислляет НОД (вспомогательная функция)
-     * @param[in] numerator,denominator Ссылки класса натурального и целого цисла
-     * @returns Возвращает вычисленую НОД в виде одного из классов
-     */
-    Integer gcd_iterative(const Integer& numerator, const Integer& denominator);
-
-    /**
-     * @brief Вычислляет НОД и преобразовывает её
+     * @brief Вычислляет НОД
      * @param[in] numerator,denominator Ссылки класса натурального и целого цисла
      * @returns Возвращает НОД в виде строки
      */
-    const char* greatest_common_divisor(const Integer& numerator, const Natural& denominator);
+    Natural greatest_common_divisor(const Integer& numerator, const Natural& denominator);
 
     /**
      * @brief RED_Q_Q - Сокращение дроби

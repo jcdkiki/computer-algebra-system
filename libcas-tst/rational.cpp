@@ -42,9 +42,9 @@ TEST(RATIONAL, GCD)
     })  
     {
         Rational number(input);
-        const char* gcd_result = number.greatest_common_divisor(number.get_numerator(), number.get_denominator());
-        std::string temp = expected;
-        ASSERT_EQ(gcd_result, temp);
+        Natural gcd_result = number.greatest_common_divisor(number.get_numerator(), number.get_denominator());
+        Natural expected_num(expected);
+        ASSERT_EQ(gcd_result, expected_num);
     }
 }
 

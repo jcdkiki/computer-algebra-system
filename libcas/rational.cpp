@@ -48,9 +48,9 @@ std::istream& operator>>(std::istream& is, Rational& number)
     return is;
 }
 
-Integer Rational::gcd_iterative(const Integer& numerator, const Integer& denominator) {
+Natural Rational::greatest_common_divisor(const Integer& numerator, const Natural& denominator) {
     Natural natur_numerator = abs(numerator);
-    Natural natur_denominator = abs(denominator);
+    Natural natur_denominator = denominator;
 
     while (natur_denominator != 0) {
         Natural temp = natur_denominator;
@@ -61,18 +61,10 @@ Integer Rational::gcd_iterative(const Integer& numerator, const Integer& denomin
     return natur_numerator;
 }
 
-const char* Rational::greatest_common_divisor(const Integer& numerator, const Natural& denominator) {
-    Integer gcd_result = gcd_iterative(numerator, denominator);
-    std::string result_str = gcd_result.asString();
-    char* cstr = new char[result_str.length() + 1];
-    std::strcpy(cstr, result_str.c_str());
-    return cstr; 
-}
-
 void Rational::reduce() {
-    const char* common_divisor = greatest_common_divisor(numerator, denominator);
-    if(numerator.asString() == "0") {
-        denominator = denominator / denominator;
+    Natural common_divisor = greatest_common_divisor(numerator, denominator);
+    if (!numerator) {
+        denominator = Natural("1");
         return;
     }
     Integer del_nem(common_divisor);
@@ -80,19 +72,6 @@ void Rational::reduce() {
     numerator = numerator / del_nem;
     denominator = denominator / del_den;
 }
-
-// Rational operator+(const Rational& lhs, const Rational& rhs) {
-//     Integer new_numerator = lhs.numerator * Integer(rhs.denominator) + rhs.numerator * Integer(lhs.denominator);
-//     Natural new_denominator = lhs.denominator * rhs.denominator;
-    
-//     Rational result;
-//     result.numerator = new_numerator;
-//     result.denominator = new_denominator;
-    
-//     result.reduce();
-    
-//     return result;
-// }
 
 Rational operator+(const Rational& lhs, const Rational& rhs) {
     Rational res(lhs);

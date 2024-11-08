@@ -86,7 +86,7 @@ TEST(RATIONAL, ADDITION)
     })
     {
         Rational n1(input1), n2(input2);
-        Rational result = n1 + n2;
-        EXPECT_EQ(result.asString(), expected);
+        n1 += n2;
+        EXPECT_EQ(n1.asString(), expected);
     }
 }

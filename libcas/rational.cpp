@@ -81,15 +81,33 @@ void Rational::reduce() {
     denominator = denominator / del_den;
 }
 
+// Rational operator+(const Rational& lhs, const Rational& rhs) {
+//     Integer new_numerator = lhs.numerator * Integer(rhs.denominator) + rhs.numerator * Integer(lhs.denominator);
+//     Natural new_denominator = lhs.denominator * rhs.denominator;
+    
+//     Rational result;
+//     result.numerator = new_numerator;
+//     result.denominator = new_denominator;
+    
+//     result.reduce();
+    
+//     return result;
+// }
+
 Rational operator+(const Rational& lhs, const Rational& rhs) {
-    Integer new_numerator = lhs.numerator * Integer(rhs.denominator) + rhs.numerator * Integer(lhs.denominator);
-    Natural new_denominator = lhs.denominator * rhs.denominator;
-    
-    Rational result;
-    result.numerator = new_numerator;
-    result.denominator = new_denominator;
-    
-    result.reduce();
-    
-    return result;
+    Rational res(lhs);
+    return res += rhs;
+}
+
+Rational& Rational::operator+=(const Rational& rhs) {
+
+    Integer new_numerator = this->numerator * Integer(rhs.denominator) + rhs.numerator * Integer(this->denominator);
+    Natural new_denominator = this->denominator * rhs.denominator;
+
+    this->numerator = new_numerator;
+    this->denominator = new_denominator;
+
+    this->reduce();
+
+    return *this;
 }

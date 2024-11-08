@@ -46,42 +46,45 @@ public:
     Natural get_denominator() { return denominator; }
 
     /**
-     * @brief рекурсивно вычислляет НОД (вспомогательная функция)
-     * @param[in] numerator,denominator Ссылки класса натурального и целого цисла
-     * @returns Возвращает вычисленую НОД в виде одного из классов
-     */
-    Integer gcd_recursive(const Integer& numerator, const Integer& denominator);
-
-    /**
-     * @brief Вычислляет НОД и преобразовывает её
+     * @brief Вычислляет НОД
      * @param[in] numerator,denominator Ссылки класса натурального и целого цисла
      * @returns Возвращает НОД в виде строки
      */
-    const char* greatest_common_divisor(const Integer& numerator, const Natural& denominator);
+    Natural greatest_common_divisor(const Integer& numerator, const Natural& denominator);
 
     /**
      * @brief RED_Q_Q - Сокращение дроби
     */
     void reduce();
-
-    /**
-     * @brief Вспомогательная функция для конвертирования натурального в целое
-    */
-    Integer convert_denominator_to_integer(const Rational& other) const { return Integer(other.denominator); }
-
+    
     /**
      * @brief ADD_QQ_Q - Сложение двух дробей
-     * @param[in] other - Правый операнд в сложении
-     * @returns Возвращает текущий объект
+     * @param[in] lhs,rhs - Левый и правый операнд
+     * @returns Cумму двух чисел
      */
-    Rational& operator+(const Rational& other);
+    friend Rational operator+(const Rational& lhs, const Rational& rhs);
 
     /**
      * @brief SUB_QQ_Q - Вычитание двух дробей
-     * @param[in] other - Правый операнд в вычитании
-     * @returns Возвращает текущий объект
+     * @param[in] lhs,rhs - Левый и правый операнд
+     * @returns Разность двух чисел
      */
-    Rational& operator-(const Rational& other);
+    friend Rational operator-(const Rational& lhs, const Rational& rhs);
+
+    /**
+     * @brief ADD_QQ_Q - Прибавляет рационального числа
+     * @param[in] rhs - Число, которое нужно прибавить
+     * @returns Результат прибавления
+     */
+    Rational& operator+=(const Rational& rhs);
+
+    /**
+     * @brief SUB_QQ_Q - Вычитание рационального числа
+     * @param[in] rhs - Число, которое нужно отнять
+     * @returns Результат вычитания
+     */
+    Rational& operator-=(const Rational& rhs);
+
 
     friend std::ostream& operator<<(std::ostream& os, const Rational& number);
     friend std::istream& operator>>(std::istream& is, Rational& number);

@@ -42,9 +42,9 @@ TEST(RATIONAL, GCD)
     })  
     {
         Rational number(input);
-        const char* gcd_result = number.greatest_common_divisor(number.get_numerator(), number.get_denominator());
-        std::string temp = expected;
-        ASSERT_EQ(gcd_result, temp);
+        Natural gcd_result = number.greatest_common_divisor(number.get_numerator(), number.get_denominator());
+        Natural expected_num(expected);
+        ASSERT_EQ(gcd_result, expected_num);
     }
 }
 
@@ -86,8 +86,8 @@ TEST(RATIONAL, ADDITION)
     })
     {
         Rational n1(input1), n2(input2);
-        Rational result = n1 + n2;
-        EXPECT_EQ(result.asString(), expected);
+        n1 += n2;
+        EXPECT_EQ(n1.asString(), expected);
     }
 }
 

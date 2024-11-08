@@ -100,7 +100,7 @@ public:
 
     /**
      * @brief DIV_QQ_Q - Деление двух дробей
-     * @param[in] other - Правый операнд в деления
+     * @param[in] rhs - Правый операнд в деления
      * @returns Возвращает текущий объект
      */
     Rational& operator/=(const Rational& rhs);

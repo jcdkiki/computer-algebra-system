@@ -10,10 +10,10 @@ TEST(INTEGER, IO)
         })
     {
         Integer number(str);
-        ASSERT_EQ(number.asString(), str);
+        ASSERT_EQ(number.as_string(), str);
     }
 
-    ASSERT_EQ(Integer("-0").asString(), "0");
+    ASSERT_EQ(Integer("-0").as_string(), "0");
 }
 
 TEST(NATURAL_TO_INTEGER, CONSTRUCTOR)
@@ -25,7 +25,7 @@ TEST(NATURAL_TO_INTEGER, CONSTRUCTOR)
         })
     {
         Integer number2(number1);
-        ASSERT_EQ(number2.asString(), number1.asString());
+        ASSERT_EQ(number2.as_string(), number1.as_string());
     }
 }
 
@@ -38,7 +38,7 @@ TEST(NATURAL_TO_INTEGER, CONVERT)
         })
     {
         Integer number2 = number1;
-        ASSERT_EQ(number2.asString(), number1.asString());
+        ASSERT_EQ(number2.as_string(), number1.as_string());
     }
 }
 
@@ -60,7 +60,7 @@ TEST(INTEGER, ADDITION)
     {
         Integer n1(input1), n2(input2);
         Integer result = n1 + n2;
-        EXPECT_EQ(result.asString(), expected);
+        EXPECT_EQ(result.as_string(), expected);
     }
 }
 
@@ -116,8 +116,8 @@ TEST(INTEGER, INC)
         Integer n1(input);
         Integer n2(input);
         n1++;
-        EXPECT_EQ((n1).asString(), expected);
-        EXPECT_EQ((++n2).asString(), expected);
+        EXPECT_EQ((n1).as_string(), expected);
+        EXPECT_EQ((++n2).as_string(), expected);
     }
 }
 
@@ -155,14 +155,14 @@ TEST(INTEGER, POZ)
 {
     using pair = std::pair<const char*, int>;
     for (auto [input, expected] : {
-        pair { "1", 2 },
-        pair { "-1", 1 },
+        pair { "1", 1 },
+        pair { "-1", -1 },
         pair { "0", 0 },
         pair { "-0", 0 },
     })
     {
         Integer number(input);
-        EXPECT_EQ(number.positivity(), expected);
+        EXPECT_EQ(sign(number), expected);
     }
 }
 
@@ -177,7 +177,7 @@ TEST(INTEGER, ABS)
     {
         Integer number(input);
         Natural res = abs(number);
-        EXPECT_EQ(res.asString(), expected);
+        EXPECT_EQ(res.as_string(), expected);
     }
 }
 
@@ -197,10 +197,10 @@ TEST(INTEGER, MUL)
     })
     {
         Integer n1(input1), n2(input2);
-        EXPECT_EQ((n1 * n2).asString(), expected);
+        EXPECT_EQ((n1 * n2).as_string(), expected);
 
         n1 *= n2;
-        EXPECT_EQ(n1.asString(), expected);
+        EXPECT_EQ(n1.as_string(), expected);
     }
 }
 
@@ -217,7 +217,7 @@ TEST(INTEGER, NEG)
     {
         Integer number(input);
         number = -number;
-        EXPECT_EQ(number.asString(), expected);
+        EXPECT_EQ(number.as_string(), expected);
     }
 }
 
@@ -234,10 +234,10 @@ TEST(INTEGER, DIV)
     })
     {
         Integer n1(input1), n2(input2);
-        EXPECT_EQ((n1 / n2).asString(), expected);
+        EXPECT_EQ((n1 / n2).as_string(), expected);
 
         n1 /= n2;
-        EXPECT_EQ(n1.asString(), expected);
+        EXPECT_EQ(n1.as_string(), expected);
     }
 
     Integer n1("100"), n2("0");
@@ -259,10 +259,10 @@ TEST(INTEGER, MOD)
     })
     {
         Integer n1(input1), n2(input2);
-        EXPECT_EQ((n1 % n2).asString(), expected);
+        EXPECT_EQ((n1 % n2).as_string(), expected);
 
         n1 %= n2;
-        EXPECT_EQ(n1.asString(), expected);
+        EXPECT_EQ(n1.as_string(), expected);
     }
 
     Integer n1("100"), n2("0");
@@ -278,7 +278,7 @@ TEST(INTEGER_TO_NATURAL, CONVERT)
         })
     {
         Natural number2 = number1;
-        ASSERT_EQ(number2.asString(), number1.asString());
+        ASSERT_EQ(number2.as_string(), number1.as_string());
     }
     Natural number2;
     EXPECT_THROW((number2 = Integer("-12")), std::runtime_error);

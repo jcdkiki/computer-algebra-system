@@ -16,29 +16,31 @@
  *
  * Использует \c std::vector для хранения цифр. Используется десятичная система счисления.
  * Для этого класса перегружены основные арифметические операторы, что позволяет красиво записывать различные вычисления.
+ * 
+ * @authors Поздеев Вадим (гр. 3384) Рудаков Александр (гр. 3384)
  */
 class Integer {
     Natural natural;
     bool sign;
 
-    /** @brief Если число равно нулю, устанавливает ему знак плюс */
+    /** @brief Если число равно нулю - устанавливает ему знак плюс. */
     void fix_zero();
 
 public:
-    /** @brief Создает новое целое число, равное нулю */
+    /** @brief Создает новое целое число, равное нулю. */
     Integer();
 
-    /** @brief Создает новое целое число из строки */
+    /** @brief Создает новое целое число из строки. */
     explicit Integer(const char *str);
 
-    /** @brief TRANS_N_Z Создает новое целое число из натурального числа */
+    /** @brief TRANS_N_Z Создает новое целое число из натурального числа. */
     Integer(const Natural & number);
 
-    /** @brief Преобразует число в его строковое представление */
-    std::string asString();
+    /** @brief Преобразует число в его строковое представление. */
+    std::string as_string();
 
     /**
-     * @brief NZER_N_B - Выполняет проверку на ноль для целого числа
+     * @brief NZER_N_B - Выполняет проверку на ноль для целого числа.
      * @returns true, если число не равно нулю.
      * @returns false, если число равно нулю. 
      */
@@ -48,151 +50,152 @@ public:
     friend std::istream& operator>>(std::istream& is, Integer& number);
 
 
-    /** @brief Префиксный декремент */
+    /** @brief Префиксный декремент. */
     Integer& operator--();
 
-    /** @brief Постфиксный декремент */
+    /** @brief Постфиксный декремент. */
     Integer operator--(int);
 
     /**
-     * @brief SUB_ZZ_Z - Вычисляет разность двух натуральных чисел
-     * @param[in] n Вычитаемое число
-     * @returns Разность, которая сохраняется в текущем левом числе
+     * @brief SUB_ZZ_Z - Вычисляет разность двух натуральных чисел.
+     * @param[in] n Вычитаемое число.
+     * @returns Разность, которая сохраняется в текущем левом числе.
      */
     Integer& operator-=(const Integer &n);
 
     /**
-     * @brief SUB_ZZ_Z - Вычисляет разность двух натуральных чисел
-     * @param[in] lhs,rhs Вычитаемые числа
-     * @returns Разность двух чисел
+     * @brief SUB_ZZ_Z - Вычисляет разность двух натуральных чисел.
+     * @param[in] lhs, rhs Вычитаемые числа.
+     * @returns Разность двух чисел.
      */
     friend Integer operator-(const Integer &lhs, const Integer &rhs);
 
-   /** @brief Префиксный инкремент */
+   /** @brief Префиксный инкремент. */
     Integer& operator++();
 
-    /** @brief Постфиксный инкремент */
+    /** @brief Постфиксный инкремент. */
     Integer operator++(int);
 
     /**
-     * @brief ADD_ZZ_Z - Прибавляет целое число
-     * @param[in] n Число, которое нужно прибавить
-     * @returns Результат прибавления \a n
+     * @brief ADD_ZZ_Z - Прибавляет целое число.
+     * @param[in] n Правое слагаемое.
+     * @returns Результат сложения. \a n
      */
     Integer& operator+=(const Integer &n);
 
     /**
-     * @brief ADD_ZZ_Z - Вычисляет сумму двух целых чисел
-     * @param[in] lhs,rhs Складываемые числа
-     * @returns Cумму двух чисел
+     * @brief ADD_ZZ_Z - Вычисляет сумму двух целых чисел.
+     * @param[in] lhs,rhs Слагаемые.
+     * @returns Cумму двух чисел.
      */
     friend Integer operator+(const Integer &lhs, const Integer &rhs);
     
     /**
-     * @brief POZ_Z_D - Определяет положительность числа
-     * @returns 2, если число положительное
-     * @returns 1, если число отрицательное
-     * @returns 0, если число равно 0
+     * @brief POZ_Z_D - Определяет положительность числа.
+     * @returns 1, если число положительное.
+     * @returns -1, если число отрицательное.
+     * @returns 0, если число равно 0.
      */
-    int positivity() const;
+    friend int sign(const Integer& number);
 
 
-     /** @brief Два числа равны */
+     /** @brief Два числа равны. */
     bool operator==(const Integer &rhs) const;
     
-    /** @brief Два числа не равны */
+    /** @brief Два числа не равны. */
     bool operator!=(const Integer &rhs) const;
     
-    /** @brief Первое число больше второго */
+    /** @brief Первое число больше второго. */
     bool operator>(const Integer &rhs) const;
     
-    /** @brief Первое число меньше второго */
+    /** @brief Первое число меньше второго. */
     bool operator<(const Integer &rhs) const;
     
-    /** @brief Первое число больше либо равно второго */
+    /** @brief Первое число больше либо равно второго. */
     bool operator>=(const Integer &rhs) const;
     
-    /** @brief Первое число меньше либо равно второго */
+    /** @brief Первое число меньше либо равно второго. */
     bool operator<=(const Integer &rhs) const;
 
     /**
-     * @brief MUL_ZZ_Z - Вычисляет произведение двух натуральных чисел
-     * @param[in] number Число, на которое мы умножаем наше текущее
-     * @returns Произведение, которое сохраняется в текущую переменную
+     * @brief MUL_ZZ_Z - Вычисляет произведение двух натуральных чисел.
+     * @param[in] number Множитель.
+     * @returns Произведение, которое сохраняется в текущую переменную.
      */
     Integer operator*=(const Integer &number);
 
     /**
-     * @brief MUL_ZZ_Z - Вычисляет произведение двух натуральных чисел
-     * @param[in] lhs,rhs Умножаемые числа
-     * @returns Произведение двух чисел
+     * @brief MUL_ZZ_Z - Вычисляет произведение двух натуральных чисел.
+     * @param[in] lhs,rhs Умножаемые числа.
+     * @returns Произведение двух чисел.
      */
     friend Integer operator*(const Integer &lhs, const Integer &rhs);
     
     friend Natural abs(const Integer &number);
     
-    /** @brief MUL_ZM_Z - Меняет знак числа 
-     * @returns возвращает копию числа
+    /** @brief MUL_ZM_Z - Меняет знак числа .
+     * @returns возвращает копию числа.
     */
     Integer operator-() const;
 
     /**
-     * @brief DIV_ZZ_Z - Вычисляет неполное частное от деления на поданное число
-     * @param[in] number Делитель
-     * @returns Неполное частное от деления двух чисел
+     * @brief DIV_ZZ_Z - Вычисляет неполное частное от деления на число.
+     * @param[in] number Делитель.
+     * @returns Неполное частное от деления чисел.
      */
     Integer& operator/=(const Integer &number);
 
     /**
-     * @brief MOD_ZZ_Z - Вычисляет остаток от деления на поданное число
-     * @param[in] number Делитель
-     * @returns Остаток от деления двух чисел
+     * @brief MOD_ZZ_Z - Вычисляет остаток от деления на число.
+     * @param[in] number Делитель.
+     * @returns Остаток от деления чисел.
      */
     Integer& operator%=(const Integer &number);
 
     /**
-     * @brief DIV_ZZ_Z - Вычисляет неполное частное двух натуральных чисел
-     * @param[in] lhs,rhs Делимое и делитель
-     * @returns Неполное частное от деления двух чисел
+     * @brief DIV_ZZ_Z - Вычисляет неполное частное двух натуральных чисел.
+     * @param[in] lhs,rhs Делимое и делитель.
+     * @returns Неполное частное от деления двух чисел.
      */
     friend Integer operator/(const Integer &lhs, const Integer &rhs);
 
     /**
-     * @brief MOD_ZZ_Z - Вычисляет остаток от деления двух натуральных чисел
-     * @param[in] lhs,rhs Делимое и делитель
-     * @returns Остаток от деления двух чисел
+     * @brief MOD_ZZ_Z - Вычисляет остаток от деления натуральных чисел.
+     * @param[in] lhs,rhs Делимое и делитель.
+     * @returns Остаток от деления чисел.
      */
     friend Integer operator%(const Integer &lhs, const Integer &rhs);
 
-    /** @brief TRANS_Z_N Создает новое натуральное число из целого числа 
-     *  @returns возвращает копию числа
+    /** @brief TRANS_Z_N Создает новое натуральное число из целого числа.
+     *  @returns возвращает копию числа.
     */
     operator Natural() const;
 };
 
 /**
- * @brief Выводит целое число в поток вывода
+ * @brief Выводит целое число в поток вывода.
  * 
- * @param os            Поток вывода, в который будет выведено число
- * @param[in] number    Число, которое будет выведено
+ * @param os            Поток вывода, в который будет выведено число.
+ * @param[in] number    Число, которое будет выведено.
  */
 std::ostream& operator<<(std::ostream& os, const Integer& number);
 
 /**
- * @brief Вводит целое число из потока ввода
+ * @brief Вводит целое число из потока ввода.
  * 
- * @param is            Поток ввода, из которого будет введено число
- * @param[out] number   Ссылка на число, в которое будет записан результат
+ * @param is            Поток ввода, из которого будет введено число.
+ * @param[out] number   Ссылка на число, в которое будет записан результат.
  */
 std::istream& operator>>(std::istream& is, Integer& number);
 
 /**
- * @brief ABS_Z_N -  Возвращает абсолютную величину числа
- * @param[in] number Целое число, абсолютную вечличину которого нужно вернуть
- * @returns Натуральное число
+ * @brief ABS_Z_N -  Возвращает абсолютную величину числа.
+ * @param[in] number Целое число.
+ * @returns Натуральное число.
  */
-Natural abs(const Integer&number);
+Natural abs(const Integer& number);
 
+int sign(const Integer& number);
 
 
 #endif

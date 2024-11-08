@@ -36,7 +36,7 @@ std::ostream& operator<<(std::ostream& os, const Natural& number)
     return os;
 }
 
-std::string Natural::asString()
+std::string Natural::as_string()
 {
     std::string res;
     for (ssize_t i = digits.size() - 1; i >= 0; --i) {
@@ -97,7 +97,7 @@ int Natural::cmp(const Natural &n1, const Natural &n2) {
     return 0; // n1 == n2
 }
 
-Natural getDivDigitInPower(const Natural &lhs, const Natural &rhs){
+Natural get_div_digit_in_power(const Natural &lhs, const Natural &rhs){
     if (lhs < rhs){
         throw std::runtime_error("cannot div from a smaller number");
     }
@@ -133,7 +133,7 @@ Natural& Natural::operator/=(const Natural &number) {
     
     Natural part;
     while (current >= number){
-        part = getDivDigitInPower(current, number);
+        part = get_div_digit_in_power(current, number);
         *this += part;
         current -= part * number;
     }
@@ -344,12 +344,12 @@ Natural::operator bool() const
     return (digits.size() > 1) || (digits[0] != 0);
 }
 
-Natural subNDN(const Natural &lhs, const Natural &rhs, const Natural::Digit& digit){
+Natural sub_n_dn(const Natural &lhs, const Natural &rhs, const Natural::Digit& digit){
     Natural res = lhs - (rhs * digit);
     return res;
 }
 
-Natural greatCommDiv(const Natural &lhs, const Natural &rhs){
+Natural gcd(const Natural &lhs, const Natural &rhs){
     Natural left(lhs), right(rhs);
 
     while (left && right){
@@ -364,7 +364,7 @@ Natural greatCommDiv(const Natural &lhs, const Natural &rhs){
     return left + right;
 }
 
-Natural leastCommMul(const Natural &lhs, const Natural &rhs){
-    Natural GCF = greatCommDiv(lhs, rhs);
-    return (lhs * rhs) / GCF;
+Natural lcm(const Natural &lhs, const Natural &rhs){
+    Natural g = gcd(lhs, rhs);
+    return (lhs * rhs) / g;
 }

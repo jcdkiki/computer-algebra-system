@@ -12,12 +12,12 @@ Rational::Rational(const char *str)
     ss >> *this;
 }
 
-std::string Rational::asString()
+std::string Rational::as_string()
 {
     if (denominator == Natural("1")) {
-        return numerator.asString();
+        return numerator.as_string();
     }
-    return numerator.asString() + '/' + denominator.asString();
+    return numerator.as_string() + '/' + denominator.as_string();
 }
 
 std::ostream& operator<<(std::ostream& os, const Rational& number)

@@ -16,13 +16,13 @@ Integer::Integer(const char *str) : sign(false)
 
 Integer::Integer(const Natural &number) : sign(false), natural(number) {}
 
-std::string Integer::asString()
+std::string Integer::as_string()
 {
     std::string res;
     if (sign) {
         res += "-";
     }
-    res += natural.asString();
+    res += natural.as_string();
     return res;
 }
 
@@ -115,13 +115,13 @@ Integer operator+(const Integer &lhs, const Integer &rhs)
     return res += rhs;
 }
 
-int Integer::positivity() const
+int sign(const Integer& number)
 {
-    if (sign){
-        return 1; // number < 0
+    if (number.sign){
+        return -1; // number < 0
     }
-    if (natural){
-        return 2; // number > 0
+    if (number.natural){
+        return 1; // number > 0
     }
     return 0; //number == 0
 }

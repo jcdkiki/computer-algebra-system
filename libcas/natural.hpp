@@ -17,7 +17,7 @@
  * Использует \c std::vector для хранения цифр. Используется десятичная система счисления.
  * Для этого класса перегружены основные арифметические операторы, что позволяет красиво записывать различные вычисления.
  * 
- * @authors Берлет Максим (гр. 3384)
+ * @authors Берлет Максим (гр. 3384) Рудаков Александр (гр. 3384)
  */
 
 /** @brief оператор преобразования должен знать о классе, чтобы в него преобразовывать*/
@@ -41,34 +41,34 @@ public:
     explicit Natural(const char *str);
     
     /** @brief Преобразует натуральное число в его строковое представление */
-    std::string asString();
+    std::string as_string();
 
     friend std::ostream& operator<<(std::ostream& os, const Natural& number);
     friend std::istream& operator>>(std::istream& is, Natural& number);
     friend Natural operator+(const Natural &lhs, const Natural &rhs);
     friend Natural operator-(const Natural &lhs, const Natural &rhs);
-    friend Natural getDivDigitInPower(const Natural &lhs, const Natural &rhs);
+    friend Natural get_div_digit_in_power(const Natural &lhs, const Natural &rhs);
     friend Natural operator/(const Natural &lhs, const Natural &rhs);
     friend Natural operator%(const Natural &lhs, const Natural &rhs);
 
     /**
-     * @brief DIV_NN_N - Вычисляет неполное частное от деления на поданное число
-     * @param[in] number Делитель
-     * @returns Неполное частное от деления двух чисел
+     * @brief DIV_NN_N - Вычисляет неполное частное от деления на число.
+     * @param[in] number Делитель.
+     * @returns Неполное частное от деления двух чисел.
      */
     Natural& operator/=(const Natural &number);
 
     /**
-     * @brief MOD_NN_N - Вычисляет остаток от деления на поданное число
-     * @param[in] number Делитель
-     * @returns Остаток от деления двух чисел
+     * @brief MOD_NN_N - Вычисляет остаток от деления на число.
+     * @param[in] number Делитель.
+     * @returns Остаток от деления двух чисел.
      */
     Natural& operator%=(const Natural &number);
 
     /**
-     * @brief SUB_NN_N - Вычисляет разность двух натуральных чисел
-     * @param[in] number Вычитаемое число
-     * @returns Разность, которая сохраняется в текущем левом числе
+     * @brief SUB_NN_N - Вычисляет разность двух натуральных чисел.
+     * @param[in] number Вычитаемое число.
+     * @returns Разность, которая сохраняется в текущем левом числе.
      */
     Natural& operator-=(const Natural &number);
 
@@ -79,27 +79,27 @@ public:
     Natural operator--(int); 
 
     /**
-     * @brief ADD_NN_N - Прибавляет натуральное число
-     * @param[in] n Число, которое нужно прибавить
-     * @returns Результат прибавления \a n
+     * @brief ADD_NN_N - Прибавляет натуральное число.
+     * @param[in] n Правое слагаемое.
+     * @returns Результат сложения \a n.
      */
     Natural& operator+=(const Natural &n);
     
     /**
-     * @brief ADD_1N_N - Увеличивает натуральное число на единицу
-     * @returns Себя \b после увеличения
+     * @brief ADD_1N_N - Увеличивает натуральное число на единицу.
+     * @returns Себя \b после увеличения.
      */
     Natural& operator++();
 
     /**
-     * @brief ADD_1N_N - Увеличивает натуральное число на единицу
-     * @returns Себя \b перед увеличением
+     * @brief ADD_1N_N - Увеличивает натуральное число на единицу.
+     * @returns Себя \b перед увеличением.
      */
     Natural operator++(int);
 
     /**
-     * @brief COM_NN_D - Сравнивает два натуральных числа
-     * @param[in] n1,n2 Сравниваемые числа
+     * @brief COM_NN_D - Сравнивает два натуральных числа.
+     * @param[in] n1,n2 Сравниваемые числа.
      * @returns 0, если n1 == n2
      * @returns 1, если n1 < n2
      * @returns 2, если n1 > n2
@@ -108,20 +108,20 @@ public:
 
     /**
      * @brief MUL_ND_N - Умножение натурального числа на цифру.
-     * @param[in] digit - Цифра, на которую умножаем.
-     * @returns Возвращает натуральное число умноженное на цифру. Создается копия.
+     * @param[in] digit - Второй множитель.
+     * @returns Возвращает результат умножения. Создается копия.
      */
     Natural operator*(const Natural::Digit& digit) const;
 
     /**
-     * @brief Возвращает натуральное число умноженное на цифру. Не создается копия.
+     * @brief Возвращает результат умножения на цифру. Не создается копия.
      */
     Natural &operator*=(const Natural::Digit& digit);
 
     /**
      * @brief MUL_Nk_N - Умножает натуральное число на 10^k. Не создает копию.
-     * @param[in] k - Натуральное число, степень 10.
-     * @returns Возвращает натуральное число, умноженное на 10^k.
+     * @param[in] k - Натуральное число - степень 10.
+     * @returns Возвращает результат умножения.
      */
     Natural &mul_by_10_in_k(size_t k);
 
@@ -137,23 +137,23 @@ public:
 
     friend Natural operator*(const Natural &lhs, const Natural &rhs);
     /**
-     * @brief MUL_NN_N - Вычисляет произведение двух натуральных чисел
-     * @param[in] number Число, на которое мы умножаем наше текущее
-     * @returns Произведение, которое сохраняется в текущую переменную
+     * @brief MUL_NN_N - Вычисляет произведение двух натуральных чисел.
+     * @param[in] number Правый множитель.
+     * @returns Результат умножения, который сохраняется в текущую переменную.
      */
     Natural operator*=(const Natural &number);
     
     /**
-     * @brief NZER_N_B - Выполняет проверку на ноль
+     * @brief NZER_N_B - Выполняет проверку на ноль.
      * @returns true, если число не равно нулю.
      * @returns false, если число равно нулю. 
      */
     operator bool() const;
 
-    /** @name Операторы сравнения (обёртка над методом cmp)
-     * @param[in] this,rhs Сравниваемые числа
-     * @returns true, если условие верно
-     * @returns в противном случае false
+    /** @name Операторы сравнения (обёртка над методом cmp).
+     * @param[in] this,rhs Сравниваемые числа.
+     * @returns true, если условие верно.
+     * @returns в противном случае false.
      */
     ///@{
     /** @brief Два числа равны */
@@ -175,90 +175,90 @@ public:
     bool operator<=(const Natural &rhs) const;
     ///@}
     
-    friend Natural subNDN(const Natural &rhs, const Natural &lhs, const Natural::Digit& digit);
+    friend Natural sub_n_dn(const Natural &rhs, const Natural &lhs, const Natural::Digit& digit);
 
-    friend Natural greatCommDiv(const Natural &lhs, const Natural &rhs);
+    friend Natural gcd(const Natural &lhs, const Natural &rhs);
 
-    friend Natural leastCommMul(const Natural &lhs, const Natural &rhs);
+    friend Natural lcm(const Natural &lhs, const Natural &rhs);
 };
 
 /**
- * @brief Выводит натуральное число в поток вывода
+ * @brief Выводит натуральное число в поток вывода.
  * 
- * @param os            Поток вывода, в который будет выведено число
- * @param[in] number    Число, которое будет выведено
+ * @param os            Поток вывода, в который будет выведено число.
+ * @param[in] number    Число, которое будет выведено.
  */
 std::ostream& operator<<(std::ostream& os, const Natural& number);
 
 /**
- * @brief Вводит натуральное число из потока ввода
+ * @brief Вводит натуральное число из потока ввода.
  * 
- * @param is            Поток ввода, из которого будет введено число
- * @param[out] number   Ссылка на число, в которое будет записан результат
+ * @param is            Поток ввода, из которого будет введено число.
+ * @param[out] number   Ссылка на число, в которое будет записан результат.
  */
 std::istream& operator>>(std::istream& is, Natural& number);
 
 /**
- * @brief DIV_NN_N - Вычисляет неполное частное двух натуральных чисел
- * @param[in] lhs,rhs Делимое и делитель
- * @returns Неполное частное от деления двух чисел
+ * @brief DIV_NN_N - Вычисляет неполное частное двух натуральных чисел.
+ * @param[in] lhs,rhs Делимое и делитель.
+ * @returns Неполное частное от деления двух чисел.
  */
 Natural operator/(const Natural &lhs, const Natural &rhs);
 
 /**
- * @brief MOD_NN_N - Вычисляет остаток от деления двух натуральных чисел
- * @param[in] lhs,rhs Делимое и делитель
- * @returns Остаток от деления двух чисел
+ * @brief MOD_NN_N - Вычисляет остаток от деления двух натуральных чисел.
+ * @param[in] lhs,rhs Делимое и делитель.
+ * @returns Остаток от деления двух чисел.
  */
 Natural operator%(const Natural &lhs, const Natural &rhs);
 
 /**
- * @brief ADD_NN_N - Вычисляет сумму двух натуральных чисел
- * @param[in] lhs,rhs Складываемые числа
- * @returns Cумму двух чисел
+ * @brief ADD_NN_N - Вычисляет сумму двух натуральных чисел.
+ * @param[in] lhs,rhs Складываемые числа.
+ * @returns Cумму двух чисел.
  */
 Natural operator+(const Natural &lhs, const Natural &rhs);
 
 /**
- * @brief MUL_NN_N - Вычисляет произведение двух натуральных чисел
- * @param[in] lhs,rhs Умножаемые числа
- * @returns Произведение двух чисел
+ * @brief MUL_NN_N - Вычисляет произведение двух натуральных чисел.
+ * @param[in] lhs,rhs Умножаемые числа.
+ * @returns Произведение двух чисел.
  */
 Natural operator*(const Natural &lhs, const Natural &rhs);
 
 /**
- * @brief SUB_NN_N - Вычисляет разность двух натуральных чисел
- * @param[in] lhs,rhs Вычитаемые числа
- * @returns Разность двух чисел
+ * @brief SUB_NN_N - Вычисляет разность двух натуральных чисел.
+ * @param[in] lhs,rhs Вычитаемые числа.
+ * @returns Разность двух чисел.
  */
 Natural operator-(const Natural &lhs, const Natural &rhs);
 
 /**
- * @brief DIV_NN_Dk - Вычисляет первую цифру деления большего натурального на меньшее, домноженное на 10^k
- * @param[in] lhs,rhs Делимое и делитель
- * @returns Первая цифра деления, домноженная на 10^k
+ * @brief DIV_NN_Dk - Вычисляет первую цифру деления большего натурального на меньшее, домноженное на 10^k.
+ * @param[in] lhs,rhs Делимое и делитель.
+ * @returns Первая цифра деления, домноженная на 10^k.
  */
-Natural getDivDigitInPower(const Natural &lhs, const Natural &rhs);
+Natural get_div_digit_in_power(const Natural &lhs, const Natural &rhs);
 
 /**
- * @brief SUB_NDN_N - Вычисляет разность натурального большего и натурального меньшего, умноженного на цифру
- * @param[in] lhs,rhs,digit Уменьшаемое, вычитаемое и цифра, на которую надо умножить вычитаемое
- * @returns Разность натурального и натурального, умноженного на цифру
+ * @brief SUB_NDN_N - Вычисляет разность натурального большего и натурального меньшего, умноженного на цифру.
+ * @param[in] lhs, rhs, digit Уменьшаемое, вычитаемое и цифра, на которую надо умножить вычитаемое.
+ * @returns Разность натурального и натурального, умноженного на цифру.
  */
-Natural subNDN(const Natural &lhs, const Natural &rhs, const Natural::Digit& digit);
+Natural sub_n_dn(const Natural &lhs, const Natural &rhs, const Natural::Digit& digit);
 
 /**
- * @brief GCF_NN_N - НОД натуральных чисел
- * @param[in] lhs,rhs - Натуральные числа, НОД которых требуется найти
- * @returns НОД двух чисел
+ * @brief GCF_NN_N - НОД натуральных чисел.
+ * @param[in] lhs,rhs - Натуральные числа, у которых вычисляется НОД.
+ * @returns НОД двух чисел.
  */
-Natural greatCommDiv(const Natural &lhs, const Natural &rhs);
+Natural gcd(const Natural &lhs, const Natural &rhs);
 
 /**
- * @brief LCM_NN_N - НОК натуральных чисел
- * @param[in] lhs,rhs - Натуральные числа, НОК которых требуется найти
- * @returns НОК двух чисел
+ * @brief LCM_NN_N - НОК натуральных чисел.
+ * @param[in] lhs,rhs - Натуральные числа, у которых вычисляется НОК.
+ * @returns НОК двух чисел.
  */
-Natural leastCommMul(const Natural &lhs, const Natural &rhs);
+Natural lcm(const Natural &lhs, const Natural &rhs);
 
 #endif

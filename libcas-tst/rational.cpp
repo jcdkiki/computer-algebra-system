@@ -17,9 +17,9 @@ TEST(RATIONAL, IO)
         })  
     {
         Rational number(input);
-        ASSERT_EQ(number.asString(), expected);
+        ASSERT_EQ(number.as_string(), expected);
     }
 
     EXPECT_THROW(Rational("100/0"), std::runtime_error);
-    ASSERT_EQ(Integer("-0").asString(), "0");
+    ASSERT_EQ(Integer("-0").as_string(), "0");
 }

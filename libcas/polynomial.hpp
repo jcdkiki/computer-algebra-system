@@ -20,24 +20,25 @@
  * Также перегружены операторы ввода и вывода, позволяющие в красивой форме вводить и выводить многочлены.
  * 
  * @tparam T                Тип, используемый для коэффициентов
- * @tparam zero             Значение коэффициента по умолчанию. Для чисел должен быть равен нулю
+ * @tparam zero             Значение коэффициента по умолчанию. Для чисел должен быть равен нулю.
                             (если вы конечно не упоролись чем-нибудь)
- * @tparam one              Значение коэффициента, который не будет выводиться при использовании оператора << или метода asString().
+ * @tparam one              Значение коэффициента, который не будет выводиться при использовании оператора << или метода as_string().
                             Для чисел может быть равен, например, единице.
+ * @authors Питеров Александр (гр. 3384)
  */
 template<class T, T zero, T one>
 class Polynomial {
     std::vector<T> coeff;
 
-    /** @brief При необходимости расширяет вектор коэффициентов до размера \a size */
-    void resizeAtLeast(size_t size)
+    /** @brief При необходимости расширяет вектор коэффициентов до размера \a size. */
+    void resize_at_least(size_t size)
     {
         if (coeff.size() < size) {
             coeff.resize(size, zero);
         }
     }
 
-    /** @brief Удаляет лидирующие нули */
+    /** @brief Удаляет лидирующие нули. */
     void strip()
     {
         for (size_t i = coeff.size() - 1; i > 0; i--) { // don`t touch free term
@@ -51,10 +52,10 @@ class Polynomial {
     }
 
 public:
-    /** @brief Создает новый многочлен, равный нулю */
+    /** @brief Создает новый многочлен, равный нулю. */
     Polynomial() : coeff(1, zero) {}
 
-    /** @brief Создает новый многочлен из строки
+    /** @brief Создает новый многочлен из строки.
      * 
      * Примеры корректного ввода для многочлена с целочисленными коэффициентами:
      *  - \c "100"
@@ -75,8 +76,8 @@ public:
         ss >> *this;
     }
 
-    /** @brief Возвращает строковое представление многочлена */
-    std::string asString()
+    /** @brief Возвращает строковое представление многочлена. */
+    std::string as_string()
     {
         std::stringstream ss;
         ss << *this;
@@ -84,10 +85,10 @@ public:
     }
 
     /**
-     * @brief Выводит многочлен в поток вывода
+     * @brief Выводит многочлен в поток вывода.
      * 
-     * @param os                Поток вывода, в который будет выведен многочлен
-     * @param[in] polynomial    Многочлен, который будет выведет в поток вывода
+     * @param os                Поток вывода, в который будет выведен многочлен.
+     * @param[in] polynomial    Многочлен, который будет выведет в поток вывода.
      */
     friend std::ostream& operator<<(std::ostream& os, const Polynomial& polynomial)
     {
@@ -138,12 +139,12 @@ public:
     }
 
     /**
-     * @brief Вводит многочлен из потока ввода
+     * @brief Вводит многочлен из потока ввода.
      * 
-     * Примеры корректного ввода для многочлена с целочисленными коэффициентами аналогичны \c Polynomial(const char *str)
+     * Примеры корректного ввода для многочлена с целочисленными коэффициентами аналогичны \c Polynomial(const char *str).
      *
-     * @param is                Поток ввода, из которого будет введен многочлен
-     * @param[out] polynomial   Ссылка на многочлен, в который будет записан результат
+     * @param is                Поток ввода, из которого будет введен многочлен.
+     * @param[out] polynomial   Ссылка на многочлен, в который будет записан результат.
      */
     friend std::istream& operator>>(std::istream& is, Polynomial& polynomial)
     {
@@ -180,7 +181,7 @@ public:
             is >> c;
             if (should_close) {
                 if (c != ')') {
-                    throw std::invalid_argument("bad polynomial input");
+                    throw std::invalid_argument("Bad polynomial input.");
                 }
                 is >> c;
             }
@@ -197,7 +198,7 @@ public:
                 }
                 else is.unget();
 
-                polynomial.resizeAtLeast(power + 1);
+                polynomial.resize_at_least(power + 1);
                 polynomial.coeff[power] += sign ? -coeff : coeff;
             }
 

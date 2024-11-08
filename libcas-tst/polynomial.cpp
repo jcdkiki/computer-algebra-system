@@ -19,6 +19,6 @@ TEST(POLYNOMIAL, IO)
         })  
     {
         Polynomial<int, 0, 1> polynomial(input);
-        ASSERT_EQ(polynomial.asString(), expected);
+        ASSERT_EQ(polynomial.as_string(), expected);
     }
 }

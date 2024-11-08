@@ -38,10 +38,10 @@ TEST(NATURAL, MULBYDIGIT)
     })
     {
         Natural n(input);
-        EXPECT_EQ((n * digit).asString(), expected);
+        EXPECT_EQ((n * digit).as_string(), expected);
         
         n *= digit;
-        EXPECT_EQ(n.asString(), expected);
+        EXPECT_EQ(n.as_string(), expected);
     }
 }
 
@@ -85,10 +85,10 @@ TEST(NATURAL, MUL)
     })
     {
         Natural n1(input1), n2(input2);
-        EXPECT_EQ((n1 * n2).asString(), expected);
+        EXPECT_EQ((n1 * n2).as_string(), expected);
 
         n1 *= n2;
-        EXPECT_EQ(n1.asString(), expected);
+        EXPECT_EQ(n1.as_string(), expected);
     }
 }
 
@@ -160,7 +160,7 @@ TEST(NATURAL, ADDITION)
     {
         Natural n1(input1), n2(input2);
         Natural result = n1 + n2;
-        EXPECT_EQ(result.asString(), expected);
+        EXPECT_EQ(result.as_string(), expected);
     }
 }
 
@@ -181,7 +181,7 @@ TEST(NATURAL, INC)
         Natural n2(input);
 
         EXPECT_EQ(n1++, n2);
-        EXPECT_EQ((++n2).asString(), expected);
+        EXPECT_EQ((++n2).as_string(), expected);
     }
 }
 
@@ -189,11 +189,11 @@ TEST(NATURAL, IO)
 {
     for (const char *str : { "0", "200", "999999999999999999999999999999999999999999" }) {
         Natural number(str);
-        ASSERT_EQ(number.asString(), str);
+        ASSERT_EQ(number.as_string(), str);
     }
 
-    ASSERT_EQ(Natural("00001337").asString(), "1337");
-    ASSERT_EQ(Natural("000000000").asString(), "0");
+    ASSERT_EQ(Natural("00001337").as_string(), "1337");
+    ASSERT_EQ(Natural("000000000").as_string(), "0");
 }
 
 TEST(NATURAL, DIVDK)
@@ -208,11 +208,11 @@ TEST(NATURAL, DIVDK)
     })
     {
         Natural n1(input1), n2(input2);
-        EXPECT_EQ((getDivDigitInPower(n1, n2)).asString(), expected);
+        EXPECT_EQ((get_div_digit_in_power(n1, n2)).as_string(), expected);
     }
 }
 
-TEST(NATURAL, SUBNDN) 
+TEST(NATURAL, sub_n_dn) 
 {
     using tuple = std::tuple<const char*, const char *, Natural::Digit, const char*>;
     for (auto [input1, input2, digit, expected] : {
@@ -223,11 +223,11 @@ TEST(NATURAL, SUBNDN)
     {
         Natural n1(input1);
         Natural n2(input2);
-        EXPECT_EQ(subNDN(n1, n2, digit).asString(), expected);
+        EXPECT_EQ(sub_n_dn(n1, n2, digit).as_string(), expected);
     }
 
     Natural n1("100"), n2("50");
-    EXPECT_THROW(subNDN(n1, n2, 3), std::runtime_error);
+    EXPECT_THROW(sub_n_dn(n1, n2, 3), std::runtime_error);
 }
 
 TEST(NATURAL, DIV)
@@ -241,10 +241,10 @@ TEST(NATURAL, DIV)
     })
     {
         Natural n1(input1), n2(input2);
-        EXPECT_EQ((n1 / n2).asString(), expected);
+        EXPECT_EQ((n1 / n2).as_string(), expected);
 
         n1 /= n2;
-        EXPECT_EQ(n1.asString(), expected);
+        EXPECT_EQ(n1.as_string(), expected);
     }
 
     Natural n1("100"), n2("0");
@@ -262,10 +262,10 @@ TEST(NATURAL, MOD)
     })
     {
         Natural n1(input1), n2(input2);
-        EXPECT_EQ((n1 % n2).asString(), expected);
+        EXPECT_EQ((n1 % n2).as_string(), expected);
 
         n1 %= n2;
-        EXPECT_EQ(n1.asString(), expected);
+        EXPECT_EQ(n1.as_string(), expected);
     }
 
     Natural n1("100"), n2("0");
@@ -283,7 +283,7 @@ TEST(NATURAL, GCF)
     })
     {
         Natural n1(input1), n2(input2);
-        EXPECT_EQ(greatCommDiv(n1, n2).asString(), expected);
+        EXPECT_EQ(gcd(n1, n2).as_string(), expected);
 
     }
 }
@@ -299,7 +299,7 @@ TEST(NATURAL, LCM)
     })
     {
         Natural n1(input1), n2(input2);
-        EXPECT_EQ(leastCommMul(n1, n2).asString(), expected);
+        EXPECT_EQ(lcm(n1, n2).as_string(), expected);
 
     }
 }

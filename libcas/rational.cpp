@@ -47,3 +47,31 @@ std::istream& operator>>(std::istream& is, Rational& number)
     }
     return is;
 }
+
+void Rational::reduce() {
+    if (!numerator) {
+        denominator = Natural("1");
+        return;
+    }
+    Natural common_divisor = greatCommDiv( abs(numerator), denominator);
+    numerator /= Integer(common_divisor);
+    denominator /= common_divisor;
+}
+
+Rational operator+(const Rational& lhs, const Rational& rhs) {
+    Rational res(lhs);
+    return res += rhs;
+}
+
+Rational& Rational::operator+=(const Rational& rhs) {
+
+    Integer new_numerator = this->numerator * Integer(rhs.denominator) + rhs.numerator * Integer(this->denominator);
+    Natural new_denominator = this->denominator * rhs.denominator;
+
+    this->numerator = std::move(new_numerator);
+    this->denominator = std::move(new_denominator);
+
+    this->reduce();
+
+    return *this;
+}

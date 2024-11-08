@@ -20,6 +20,7 @@ class Rational {
     Integer numerator;
     Natural denominator;
 public:
+
     /** @brief Создает новое рациональное число, равное нулю */
     Rational();
 
@@ -36,6 +37,31 @@ public:
 
     /** @brief Возвращает строковое представление числа */
     std::string asString();
+
+    /** @brief Возвращает числитель числа */
+    Integer get_numerator() { return numerator; }
+
+    /** @brief Возвращает знаменатель числа */
+    Natural get_denominator() { return denominator; }
+
+    /**
+     * @brief RED_Q_Q - Сокращение дроби
+    */
+    void reduce();
+    
+    /**
+     * @brief ADD_QQ_Q - Сложение двух дробей
+     * @param[in] lhs,rhs - Левый и правый операнд
+     * @returns Cумму двух чисел
+     */
+    friend Rational operator+(const Rational& lhs, const Rational& rhs);
+
+    /**
+     * @brief ADD_QQ_Q - Прибавляет рационального числа
+     * @param[in] rhs - Число, которое нужно прибавить
+     * @returns Результат прибавления
+     */
+    Rational& operator+=(const Rational& rhs);
 
     friend std::ostream& operator<<(std::ostream& os, const Rational& number);
     friend std::istream& operator>>(std::istream& is, Rational& number);

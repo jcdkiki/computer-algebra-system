@@ -48,31 +48,23 @@ std::istream& operator>>(std::istream& is, Rational& number)
     return is;
 }
 
-Integer Rational::gcd_recursive(const Integer& numerator, const Integer& denominator) {
+Natural Rational::greatest_common_divisor(const Integer& numerator, const Natural& denominator) {
     Natural natur_numerator = abs(numerator);
-    Natural natur_denominator = abs(denominator);
+    Natural natur_denominator = denominator;
 
-    if (natur_numerator % natur_denominator == 0)
-        return natur_denominator;
-    if (natur_denominator % natur_numerator == 0)
-        return natur_numerator;
-    if (natur_numerator > natur_denominator)
-        return gcd_recursive(natur_numerator % natur_denominator, natur_denominator);
-    return gcd_recursive(natur_numerator, natur_denominator % natur_numerator);
-}
+    while (natur_denominator != 0) {
+        Natural temp = natur_denominator;
+        natur_denominator = natur_numerator % natur_denominator;
+        natur_numerator = temp;
+    }
 
-const char* Rational::greatest_common_divisor(const Integer& numerator, const Natural& denominator) {
-    Integer gcd_result = gcd_recursive(numerator, denominator);
-    std::string result_str = gcd_result.asString();
-    char* cstr = new char[result_str.length() + 1];
-    std::strcpy(cstr, result_str.c_str());
-    return cstr; 
+    return natur_numerator;
 }
 
 void Rational::reduce() {
-    const char* common_divisor = greatest_common_divisor(numerator, denominator);
-    if(numerator.asString() == "0") {
-        denominator = denominator / denominator;
+    Natural common_divisor = greatest_common_divisor(numerator, denominator);
+    if (!numerator) {
+        denominator = Natural("1");
         return;
     }
     Integer del_nem(common_divisor);
@@ -81,29 +73,48 @@ void Rational::reduce() {
     denominator = denominator / del_den;
 }
 
-Rational& Rational::operator+(const Rational& other) {
-    Rational temp = other; 
-    Integer new_denominator = convert_denominator_to_integer(temp);
+Rational operator+(const Rational& lhs, const Rational& rhs) {
+    Rational res(lhs);
+    return res += rhs;
+}
 
-    numerator = numerator * new_denominator + temp.numerator * Integer(denominator);
-    denominator = denominator * temp.denominator;
-    reduce();
+Rational& Rational::operator+=(const Rational& rhs) {
+
+    Integer new_numerator = this->numerator * Integer(rhs.denominator) + rhs.numerator * Integer(this->denominator);
+    Natural new_denominator = this->denominator * rhs.denominator;
+
+    this->numerator = new_numerator;
+    this->denominator = new_denominator;
+
+    this->reduce();
+
     return *this;
 }
 
-Rational& Rational::operator-(const Rational& other) {
-    Rational temp = other; 
-    Integer new_denominator = convert_denominator_to_integer(temp);
+Rational operator-(const Rational& lhs, const Rational& rhs) {
+    Rational res(lhs);
+    return res -= rhs;
+}
 
-    numerator = numerator * new_denominator - other.numerator * Integer(denominator);
-    denominator = denominator * temp.denominator;
-    reduce();
+Rational& Rational::operator-=(const Rational& rhs) {
+    Integer new_numerator = this->numerator * Integer(rhs.denominator) - rhs.numerator * Integer(this->denominator);
+    Natural new_denominator = this->denominator * rhs.denominator;
+
+    this->numerator = new_numerator;
+    this->denominator = new_denominator;
+    
+    this->reduce();
     return *this;
 }
 
-Rational Rational::operator*(const Rational& other) {
-    numerator = numerator * other.numerator;
-    denominator = denominator * other.denominator;
+Rational operator*(const Rational& lhs, const Rational& rhs) {
+    Rational res(lhs);
+    return res *= rhs;
+}
+
+Rational& Rational::operator*=(const Rational& rhs) {
+    numerator = numerator * rhs.numerator;
+    denominator = denominator * rhs.denominator;
 
     reduce();
     return *this;

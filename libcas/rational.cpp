@@ -85,8 +85,8 @@ Rational& Rational::operator-=(const Rational& rhs) {
     Integer new_numerator = this->numerator * Integer(rhs.denominator) - rhs.numerator * Integer(this->denominator);
     Natural new_denominator = this->denominator * rhs.denominator;
 
-    this->numerator = new_numerator;
-    this->denominator = new_denominator;
+    this->numerator = std::move(new_numerator);
+    this->denominator = std::move(new_denominator);
     
     this->reduce();
     return *this;
@@ -99,9 +99,26 @@ Rational operator*(const Rational& lhs, const Rational& rhs) {
 }
 
 Rational& Rational::operator*=(const Rational& rhs) {
-    numerator = numerator * rhs.numerator;
-    denominator = denominator * rhs.denominator;
+    this->numerator *= std::move(rhs.numerator);
+    this->denominator *= std::move(rhs.denominator);
 
-    reduce();
+    this->reduce();
+    return *this;
+}
+
+Rational operator/(const Rational& lhs, const Rational& rhs) {
+    Rational res(lhs);
+    return res /= rhs;
+}
+
+Rational& Rational::operator/=(const Rational& rhs) {
+    this->numerator *= Integer(rhs.denominator);
+    this->denominator *= abs(rhs.numerator);
+    this->reduce();
+    if(this->numerator.positivity() == 1 && rhs.numerator.positivity() == 1) {
+        this->numerator *= Integer("-1");
+    } else if(this->numerator.positivity() == 2 && rhs.numerator.positivity() == 1) {
+        this->numerator *= Integer("-1");
+    }
     return *this;
 }

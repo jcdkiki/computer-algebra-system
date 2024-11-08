@@ -64,6 +64,13 @@ public:
     friend Rational operator-(const Rational& lhs, const Rational& rhs);
 
     /**
+     * @brief MUL_QQ_Q - Умножение двух дробей
+     * @param[in] lhs,rhs - Левый и правый операнд
+     * @returns Возвращает текущий объект
+     */
+    friend Rational operator*(const Rational& lhs, const Rational& rhs);
+
+    /**
      * @brief ADD_QQ_Q - Прибавляет рационального числа
      * @param[in] rhs - Число, которое нужно прибавить
      * @returns Результат прибавления
@@ -76,6 +83,13 @@ public:
      * @returns Результат вычитания
      */
     Rational& operator-=(const Rational& rhs);
+
+    /**
+     * @brief SUB_QQ_Q - Умножение двух дробей
+     * @param[in] rhs - Число, на уоторе нужно умножить
+     * @returns Произведение двух чисел
+     */
+    Rational& operator*=(const Rational& rhs);
 
     friend std::ostream& operator<<(std::ostream& os, const Rational& number);
     friend std::istream& operator>>(std::istream& is, Rational& number);

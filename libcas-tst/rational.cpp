@@ -85,3 +85,21 @@ TEST(RATIONAL, SUBTRACTION)
         EXPECT_EQ(result.asString(), expected);
     }
 }
+
+TEST(RATIONAL, MULTIPLICATION) 
+{
+    using tuple = std::tuple<const char*, const char*, const char*>;
+    for (auto [input1, input2, expected] : {
+        tuple { "6/5", "7/6",  "7/5" },
+        tuple { "5/5", "10/10",  "1" },
+        tuple { "-12/17", "41/17",  "-492/289" },
+        tuple { "-10/175", "-10/30",  "2/105" },
+        tuple { "0/175", "10/30",  "0" },
+        tuple { "6693275894100451472543720934941029648074/0036722054891261307866672864157889296645", "6647110722548418390910218342050589834651/2579664835732039155993130984532211077982",  "823906406752777094887903307823763546161638823930743701173513214659995414455781/1754270253681639384605503913702911159624243790984114912598786331430652332785" },
+    })
+    {
+        Rational n1(input1), n2(input2);
+        Rational result = n1 * n2;
+        EXPECT_EQ(result.asString(), expected);
+    }
+}

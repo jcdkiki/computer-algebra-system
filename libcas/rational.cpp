@@ -92,3 +92,16 @@ Rational& Rational::operator-=(const Rational& rhs) {
     return *this;
 }
 
+
+Rational operator*(const Rational& lhs, const Rational& rhs) {
+    Rational res(lhs);
+    return res *= rhs;
+}
+
+Rational& Rational::operator*=(const Rational& rhs) {
+    numerator = numerator * rhs.numerator;
+    denominator = denominator * rhs.denominator;
+
+    reduce();
+    return *this;
+}

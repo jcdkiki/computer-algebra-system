@@ -121,9 +121,27 @@ $(document).ready(function(){initNavTree('classRational.html',''); initResizable
 std::string&#160;</td><td class="memItemRight" valign="bottom"><b>asString</b> ()</td></tr>
 <tr class="memdesc:af4093366d0d86d21036b8ad3147af274"><td class="mdescLeft">&#160;</td><td class="mdescRight">Возвращает строковое представление числа <br /></td></tr>
 <tr class="separator:af4093366d0d86d21036b8ad3147af274"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adf9b6afbfc81067f1fb65600072ae5b9"><td class="memItemLeft" align="right" valign="top"><a id="adf9b6afbfc81067f1fb65600072ae5b9" name="adf9b6afbfc81067f1fb65600072ae5b9"></a>
+<a class="el" href="classInteger.html">Integer</a>&#160;</td><td class="memItemRight" valign="bottom"><b>get_numerator</b> ()</td></tr>
+<tr class="memdesc:adf9b6afbfc81067f1fb65600072ae5b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Возвращает числитель числа <br /></td></tr>
+<tr class="separator:adf9b6afbfc81067f1fb65600072ae5b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab00dd18c2cf045f2eedc0fb4eeffd184"><td class="memItemLeft" align="right" valign="top"><a id="ab00dd18c2cf045f2eedc0fb4eeffd184" name="ab00dd18c2cf045f2eedc0fb4eeffd184"></a>
+<a class="el" href="classNatural.html">Natural</a>&#160;</td><td class="memItemRight" valign="bottom"><b>get_denominator</b> ()</td></tr>
+<tr class="memdesc:ab00dd18c2cf045f2eedc0fb4eeffd184"><td class="mdescLeft">&#160;</td><td class="mdescRight">Возвращает знаменатель числа <br /></td></tr>
+<tr class="separator:ab00dd18c2cf045f2eedc0fb4eeffd184"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adbc97e55a7fd24a86b3b0b98b9ddddb8"><td class="memItemLeft" align="right" valign="top"><a id="adbc97e55a7fd24a86b3b0b98b9ddddb8" name="adbc97e55a7fd24a86b3b0b98b9ddddb8"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>reduce</b> ()</td></tr>
+<tr class="memdesc:adbc97e55a7fd24a86b3b0b98b9ddddb8"><td class="mdescLeft">&#160;</td><td class="mdescRight">RED_Q_Q - Сокращение дроби <br /></td></tr>
+<tr class="separator:adbc97e55a7fd24a86b3b0b98b9ddddb8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac1d2537646823dc3777f471dd53ca4a0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classRational.html">Rational</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRational.html#ac1d2537646823dc3777f471dd53ca4a0">operator+=</a> (const <a class="el" href="classRational.html">Rational</a> &amp;rhs)</td></tr>
+<tr class="memdesc:ac1d2537646823dc3777f471dd53ca4a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">ADD_QQ_Q - Прибавляет рационального числа  <br /></td></tr>
+<tr class="separator:ac1d2537646823dc3777f471dd53ca4a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
 Друзья</h2></td></tr>
+<tr class="memitem:ac8cb30f89699c836f45a8b6e66d94f58"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classRational.html">Rational</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRational.html#ac8cb30f89699c836f45a8b6e66d94f58">operator+</a> (const <a class="el" href="classRational.html">Rational</a> &amp;lhs, const <a class="el" href="classRational.html">Rational</a> &amp;rhs)</td></tr>
+<tr class="memdesc:ac8cb30f89699c836f45a8b6e66d94f58"><td class="mdescLeft">&#160;</td><td class="mdescRight">ADD_QQ_Q - Сложение двух дробей  <br /></td></tr>
+<tr class="separator:ac8cb30f89699c836f45a8b6e66d94f58"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:addb0a29270883190578358da0097fbe8"><td class="memItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRational.html#addb0a29270883190578358da0097fbe8">operator&lt;&lt;</a> (std::ostream &amp;os, const <a class="el" href="classRational.html">Rational</a> &amp;number)</td></tr>
 <tr class="memdesc:addb0a29270883190578358da0097fbe8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Выводит рациональное число в поток вывода  <br /></td></tr>
 <tr class="separator:addb0a29270883190578358da0097fbe8"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -166,7 +184,80 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>asString</b> (
 
 </div>
 </div>
+<h2 class="groupheader">Методы</h2>
+<a id="ac1d2537646823dc3777f471dd53ca4a0" name="ac1d2537646823dc3777f471dd53ca4a0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac1d2537646823dc3777f471dd53ca4a0">&#9670;&#160;</a></span>operator+=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classRational.html">Rational</a> &amp; Rational::operator+= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classRational.html">Rational</a> &amp;&#160;</td>
+          <td class="paramname"><em>rhs</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>ADD_QQ_Q - Прибавляет рационального числа </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">rhs</td><td>- Число, которое нужно прибавить </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>Результат прибавления </dd></dl>
+
+</div>
+</div>
 <h2 class="groupheader">Документация по друзьям класса и функциям, относящимся к классу</h2>
+<a id="ac8cb30f89699c836f45a8b6e66d94f58" name="ac8cb30f89699c836f45a8b6e66d94f58"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac8cb30f89699c836f45a8b6e66d94f58">&#9670;&#160;</a></span>operator+</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classRational.html">Rational</a> operator+ </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classRational.html">Rational</a> &amp;&#160;</td>
+          <td class="paramname"><em>lhs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classRational.html">Rational</a> &amp;&#160;</td>
+          <td class="paramname"><em>rhs</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>ADD_QQ_Q - Сложение двух дробей </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">lhs,rhs</td><td>- Левый и правый операнд </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>Cумму двух чисел </dd></dl>
+
+</div>
+</div>
 <a id="addb0a29270883190578358da0097fbe8" name="addb0a29270883190578358da0097fbe8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#addb0a29270883190578358da0097fbe8">&#9670;&#160;</a></span>operator&lt;&lt;</h2>
 

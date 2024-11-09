@@ -123,3 +123,18 @@ TEST(RATIONAL, DIVISION)
         EXPECT_EQ(result.asString(), expected);
     }
 }
+
+
+TEST(RATIONAL, CONVERT_INTEGER_TO_RATIONAL) 
+{
+    using pair = std::pair<const char*, const char*>;
+    for (auto [input, expected] : {
+        pair { "5", "5/1"},
+        pair { "-54754676567", "-54754676567/1"}
+    })
+    {   
+        Integer integer(input);
+        Rational n1(integer);
+        EXPECT_EQ(n1.asStringWithOneInDenominator(), expected);
+    }
+}

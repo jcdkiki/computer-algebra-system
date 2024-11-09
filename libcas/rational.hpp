@@ -24,6 +24,13 @@ public:
     /** @brief Создает новое рациональное число, равное нулю */
     Rational();
 
+
+    /**
+     * @brief TRANS_Z_Q - преобразование целого в дробное
+     * @param[in] number - целое число
+     */
+    Rational(Integer number) : numerator(number), denominator("1") { }
+
     /**
      * @brief Создает новое рациональное число из строки
      * 
@@ -37,6 +44,9 @@ public:
 
     /** @brief Возвращает строковое представление числа */
     std::string asString();
+
+    /** @brief Возвращает строковое представление числа с единицей в знаменателе */
+    std::string asStringWithOneInDenominator();
 
     /** @brief Возвращает числитель числа */
     Integer get_numerator() { return numerator; }

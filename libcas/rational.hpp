@@ -105,6 +105,10 @@ public:
      */
     Rational& operator/=(const Rational& rhs);
 
+    /**
+     * @brief INT_Q_B - Проверка сокращенного дробного на целое
+     * @returns Возвращает значения буливое значение
+     */
     bool isInteger() {
         this->reduce();
         return denominator != 0 && numerator % Integer(denominator) == 0;

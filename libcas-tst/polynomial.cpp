@@ -23,6 +23,22 @@ TEST(POLYNOMIAL, IO)
     }
 }
 
+TEST(POLYNOMIAL, LEAD)
+{
+    using pair = std::pair<const char*, int>;
+    for (auto [input, expected] :
+        {
+            pair { "0", 0 },
+            pair { "42", 42 },
+            pair { "23x + 19", 23 },
+            pair { "1023x^100 + 47x^19 + 87", 1023 },
+        })  
+    {
+        Polynomial<int, 0, 1> polynomial(input);
+        ASSERT_EQ(polynomial.lead(), expected);
+    }
+}
+
 TEST(POLYNOMIAL, DEG) 
 {
     using pair = std::pair<const char*, size_t>;

@@ -75,6 +75,12 @@ public:
         ss >> *this;
     }
 
+    /** @brief LED_P_Q - Возвращает старший коэффициент многочлена. */
+    T lead() 
+    {
+        return coeff.back();
+    }
+    
     /** @brief DEG_P_N - Возвращает степень многочлена. */
     size_t deg() 
     {

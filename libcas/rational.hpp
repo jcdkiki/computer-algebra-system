@@ -105,6 +105,11 @@ public:
      */
     Rational& operator/=(const Rational& rhs);
 
+    bool isInteger() {
+        this->reduce();
+        return denominator != 0 && numerator % Integer(denominator) == 0;
+    }
+
     friend std::ostream& operator<<(std::ostream& os, const Rational& number);
     friend std::istream& operator>>(std::istream& is, Rational& number);
 };

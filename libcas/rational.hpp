@@ -57,11 +57,53 @@ public:
     friend Rational operator+(const Rational& lhs, const Rational& rhs);
 
     /**
+     * @brief SUB_QQ_Q - Вычитание двух дробей
+     * @param[in] lhs,rhs - Левый и правый операнд
+     * @returns Разность двух чисел
+     */
+    friend Rational operator-(const Rational& lhs, const Rational& rhs);
+
+    /**
+     * @brief MUL_QQ_Q - Умножение двух дробей
+     * @param[in] lhs,rhs - Левый и правый операнд
+     * @returns Возвращает текущий объект
+     */
+    friend Rational operator*(const Rational& lhs, const Rational& rhs);
+
+    /**
+     * @brief DIV_QQ_Q - Деление двух дробей
+     * @param[in] lhs,rhs - Левый и правый операнд
+     * @returns Возвращает текущий объект
+     */
+    friend Rational operator/(const Rational& lhs, const Rational& rhs);
+
+    /**
      * @brief ADD_QQ_Q - Прибавляет рационального числа
      * @param[in] rhs - Число, которое нужно прибавить
      * @returns Результат прибавления
      */
     Rational& operator+=(const Rational& rhs);
+
+    /**
+     * @brief SUB_QQ_Q - Вычитание рационального числа
+     * @param[in] rhs - Число, которое нужно отнять
+     * @returns Результат вычитания
+     */
+    Rational& operator-=(const Rational& rhs);
+
+    /**
+     * @brief SUB_QQ_Q - Умножение двух дробей
+     * @param[in] rhs - Число, на которое нужно умножить
+     * @returns Произведение двух чисел
+     */
+    Rational& operator*=(const Rational& rhs);
+
+    /**
+     * @brief DIV_QQ_Q - Деление двух дробей
+     * @param[in] rhs - Правый операнд в деления
+     * @returns Возвращает текущий объект
+     */
+    Rational& operator/=(const Rational& rhs);
 
     friend std::ostream& operator<<(std::ostream& os, const Rational& number);
     friend std::istream& operator>>(std::istream& is, Rational& number);

@@ -2,7 +2,10 @@
 #define CAS_WINDOW_HPP_
 
 #include <gtkmm.h>
-#include "modes.hpp"
+#include "modes/natural_mode.hpp"
+#include "modes/integer_mode.hpp"
+#include "modes/rational_mode.hpp"
+#include "modes/polynomial_mode.hpp"
 
 class CasWindow : public Gtk::Window
 {

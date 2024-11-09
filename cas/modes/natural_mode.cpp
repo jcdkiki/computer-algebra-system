@@ -1,20 +1,18 @@
-#include "../modes.hpp"
+#include "natural_mode.hpp"
+#include "../parsers/natural_parser.hpp"
 
 NaturalMode::NaturalMode() : b_gcd("gcd"), b_lcm("lcm")
 {
-    b_gcd.signal_clicked().connect([this] { this->AddText("gcd"); });
-    b_lcm.signal_clicked().connect([this] { this->AddText("lcm"); });
+    b_gcd.signal_clicked().connect([this] { this->add_text("gcd"); });
+    b_lcm.signal_clicked().connect([this] { this->add_text("lcm"); });
 
-    b_evaluate.signal_clicked().connect([this] {
-        Natural res = this->parser.evaluate(entry.get_text().c_str());
-        if (this->parser.get_error().size() > 0) {
-            entry.set_text(this->parser.get_error());
-        }
-        else {
-            entry.set_text(res.asString());
-        }
-    });
+    b_evaluate.signal_clicked().connect([this] { this->evaluate(); });
 
     grid3.attach(b_gcd, 0, 0);
     grid3.attach(b_lcm, 0, 1);
+}
+
+Parser *NaturalMode::create_parser(const char *str)
+{
+    return new NaturalParser(str);
 }

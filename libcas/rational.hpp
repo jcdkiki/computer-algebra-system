@@ -109,10 +109,7 @@ public:
      * @brief INT_Q_B - Проверка сокращенного дробного на целое
      * @returns Возвращает значения буливое значение
      */
-    bool isInteger() {
-        this->reduce();
-        return denominator != 0 && numerator % Integer(denominator) == 0;
-    }
+    bool isInteger();
 
     friend std::ostream& operator<<(std::ostream& os, const Rational& number);
     friend std::istream& operator>>(std::istream& is, Rational& number);

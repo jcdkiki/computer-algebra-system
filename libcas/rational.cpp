@@ -120,3 +120,8 @@ Rational& Rational::operator/=(const Rational& rhs) {
     }
     return *this;
 }
+
+bool Rational::isInteger() {
+    this->reduce();
+    return denominator != 0 && numerator % Integer(denominator) == 0;
+}

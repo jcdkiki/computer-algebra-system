@@ -126,14 +126,18 @@ class Polynomial&lt; T, zero, one &gt;</div><p>Многочлен. </p>
 <tr class="memitem:a698ce5a408ab7fdace3ac7e79348e386"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPolynomial.html#a698ce5a408ab7fdace3ac7e79348e386">Polynomial</a> (const char *str)</td></tr>
 <tr class="memdesc:a698ce5a408ab7fdace3ac7e79348e386"><td class="mdescLeft">&#160;</td><td class="mdescRight">Создает новый многочлен из строки  <br /></td></tr>
 <tr class="separator:a698ce5a408ab7fdace3ac7e79348e386"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2dc88c9ced0f51949d3be31e0858f9cf"><td class="memItemLeft" align="right" valign="top"><a id="a2dc88c9ced0f51949d3be31e0858f9cf" name="a2dc88c9ced0f51949d3be31e0858f9cf"></a>
-T&#160;</td><td class="memItemRight" valign="bottom"><b>lead</b> ()</td></tr>
-<tr class="memdesc:a2dc88c9ced0f51949d3be31e0858f9cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">LED_P_Q - Возвращает старший коэффициент многочлена. <br /></td></tr>
-<tr class="separator:a2dc88c9ced0f51949d3be31e0858f9cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa5139b3eda5913ec2333ff09e9693eca"><td class="memItemLeft" align="right" valign="top"><a id="aa5139b3eda5913ec2333ff09e9693eca" name="aa5139b3eda5913ec2333ff09e9693eca"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><b>deg</b> ()</td></tr>
-<tr class="memdesc:aa5139b3eda5913ec2333ff09e9693eca"><td class="mdescLeft">&#160;</td><td class="mdescRight">DEG_P_N - Возвращает степень многочлена. <br /></td></tr>
-<tr class="separator:aa5139b3eda5913ec2333ff09e9693eca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ce8b7b3cb4a2694553abc704176cc69"><td class="memItemLeft" align="right" valign="top"><a id="a2ce8b7b3cb4a2694553abc704176cc69" name="a2ce8b7b3cb4a2694553abc704176cc69"></a>
+T&#160;</td><td class="memItemRight" valign="bottom"><b>lead</b> () const</td></tr>
+<tr class="memdesc:a2ce8b7b3cb4a2694553abc704176cc69"><td class="mdescLeft">&#160;</td><td class="mdescRight">LED_P_Q - Возвращает старший коэффициент многочлена. <br /></td></tr>
+<tr class="separator:a2ce8b7b3cb4a2694553abc704176cc69"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa6166df9714b41638085d9d04ef4f1ac"><td class="memItemLeft" align="right" valign="top"><a id="aa6166df9714b41638085d9d04ef4f1ac" name="aa6166df9714b41638085d9d04ef4f1ac"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>deg</b> () const</td></tr>
+<tr class="memdesc:aa6166df9714b41638085d9d04ef4f1ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">DEG_P_N - Возвращает степень многочлена. <br /></td></tr>
+<tr class="separator:aa6166df9714b41638085d9d04ef4f1ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a36152e746e28dc4c53976a035bead505"><td class="memItemLeft" align="right" valign="top"><a id="a36152e746e28dc4c53976a035bead505" name="a36152e746e28dc4c53976a035bead505"></a>
+<a class="el" href="classPolynomial.html">Polynomial</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator*=</b> (const T &amp;rhs)</td></tr>
+<tr class="memdesc:a36152e746e28dc4c53976a035bead505"><td class="mdescLeft">&#160;</td><td class="mdescRight">MUL_PQ_P - Умножает многочлен на число. <br /></td></tr>
+<tr class="separator:a36152e746e28dc4c53976a035bead505"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae447985b42cad11acd1141f0a3edf28c"><td class="memItemLeft" align="right" valign="top"><a id="ae447985b42cad11acd1141f0a3edf28c" name="ae447985b42cad11acd1141f0a3edf28c"></a>
 std::string&#160;</td><td class="memItemRight" valign="bottom"><b>asString</b> ()</td></tr>
 <tr class="memdesc:ae447985b42cad11acd1141f0a3edf28c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Возвращает строковое представление многочлена <br /></td></tr>
@@ -141,6 +145,10 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>asString</b> (
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
 Друзья</h2></td></tr>
+<tr class="memitem:aa397c6e30cd66c3d1e4b1874c3c93dac"><td class="memItemLeft" align="right" valign="top"><a id="aa397c6e30cd66c3d1e4b1874c3c93dac" name="aa397c6e30cd66c3d1e4b1874c3c93dac"></a>
+<a class="el" href="classPolynomial.html">Polynomial</a>&#160;</td><td class="memItemRight" valign="bottom"><b>operator*</b> (const <a class="el" href="classPolynomial.html">Polynomial</a> &amp;lhs, const T &amp;rhs)</td></tr>
+<tr class="memdesc:aa397c6e30cd66c3d1e4b1874c3c93dac"><td class="mdescLeft">&#160;</td><td class="mdescRight">MUL_PQ_P - Умножает многочлен на число. <br /></td></tr>
+<tr class="separator:aa397c6e30cd66c3d1e4b1874c3c93dac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae8148672de86961263b190b707d63025"><td class="memItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPolynomial.html#ae8148672de86961263b190b707d63025">operator&lt;&lt;</a> (std::ostream &amp;os, const <a class="el" href="classPolynomial.html">Polynomial</a> &amp;polynomial)</td></tr>
 <tr class="memdesc:ae8148672de86961263b190b707d63025"><td class="mdescLeft">&#160;</td><td class="mdescRight">Выводит многочлен в поток вывода  <br /></td></tr>
 <tr class="separator:ae8148672de86961263b190b707d63025"><td class="memSeparator" colspan="2">&#160;</td></tr>

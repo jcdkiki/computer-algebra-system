@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['deg_0',['deg',['../classPolynomial.html#aa5139b3eda5913ec2333ff09e9693eca',1,'Polynomial']]]
+  ['deg_0',['deg',['../classPolynomial.html#aa6166df9714b41638085d9d04ef4f1ac',1,'Polynomial']]]
 ];

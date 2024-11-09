@@ -38,6 +38,10 @@ public:
     /** @brief Возвращает строковое представление числа */
     std::string asString();
 
+    /** @brief Возвращает строковое представление числа с единицей в знаменателе */
+    std::string asStringWithOneInDenominator();
+
+
     /** @brief Возвращает числитель числа */
     Integer get_numerator() { return numerator; }
 
@@ -48,6 +52,11 @@ public:
      * @brief RED_Q_Q - Сокращение дроби
     */
     void reduce();
+
+    /** @brief TRANS_Q_Z Создает новое целое число из рационального (если знаменатель равен 1)
+     *  @returns возвращает копию числа
+    */
+    operator Integer();
     
     /**
      * @brief ADD_QQ_Q - Сложение двух дробей

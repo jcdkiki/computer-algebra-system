@@ -20,6 +20,10 @@ std::string Rational::asString()
     return numerator.asString() + '/' + denominator.asString();
 }
 
+std::string Rational::asStringWithOneInDenominator() {
+    return numerator.asString() + '/' + denominator.asString();
+}
+
 std::ostream& operator<<(std::ostream& os, const Rational& number)
 {
     if (number.denominator == Natural("1")) {
@@ -119,4 +123,12 @@ Rational& Rational::operator/=(const Rational& rhs) {
         this->numerator *= Integer("-1");
     }
     return *this;
+}
+
+Rational::operator Integer() {
+    reduce();
+    if (denominator != Natural("1")) {
+        throw std::logic_error("Cannot convert to integer: denominator is not 1.");
+    }
+    return numerator;
 }

@@ -2,6 +2,7 @@
 
 int main(int argc, char* argv[])
 {
-    auto app = Gtk::Application::create("org.gtkmm.cas");
-    return app->make_window_and_run<CasWindow>(argc, argv);
+    auto app = Gtk::Application::create(argc, argv, "org.gtkmm.cas");
+    CasWindow window;
+    return app->run(window);
 }

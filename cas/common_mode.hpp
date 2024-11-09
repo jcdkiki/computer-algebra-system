@@ -2,14 +2,14 @@
 #define CAS_COMMON_MODE_HPP_
 
 #include <gtkmm.h>
+#include <gtkmm/widget.h>
 #include "button.hpp"
 #include "parser.hpp"
 
 class CommonMode : public Gtk::Box {
 protected:
     Gtk::Box box;
-    Gtk::Frame entry_frame;
-    Gtk::EditableLabel entry;
+    Gtk::Entry entry;
     Gtk::TextView status;
 
     Gtk::Grid grid1;

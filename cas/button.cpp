@@ -1,11 +1,14 @@
 #include "button.hpp"
+#include <glibmm/refptr.h>
+#include <gtkmm/cssprovider.h>
+#include <gtkmm/enums.h>
 
 CasButton::CasButton(Glib::ustring label) : Gtk::Button(label, true)
 {
-    set_has_frame(false);
+    this->set_relief(Gtk::RELIEF_NONE);
 }
 
 CasButton::CasButton()
 {
-    set_has_frame(false);
+    this->set_relief(Gtk::RELIEF_NONE);
 }

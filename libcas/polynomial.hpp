@@ -82,27 +82,31 @@ public:
     }
     
     /** @brief DEG_P_N - Возвращает степень многочлена. */
-    size_t deg() 
+    size_t deg() const
     {
         return coeff.size() - 1;
     }
 
 
-    /** @brief DER_P_P - Взятие первой производной от многочлена. */
-    Polynomial derivative() 
+    /** @brief DER_P_P - Взятие k-ой производной от многочлена. */
+    Polynomial derivative(unsigned int k = 1) const 
     {
-        Polynomial res;
+        Polynomial tmp, der(*this);
+        
+        if (deg() == 0 || deg() < k)
+            return tmp; // 0
 
-        if (deg() != 0) 
+        for (; k != 0; k--) 
         {
-            res.coeff.resize(coeff.size() - 1, zero);
-            for (size_t i = 0; i <= res.deg(); i++)  
-                res.coeff[i] = (i + 1) * coeff[i + 1];
-            
+            tmp.coeff.resize(der.coeff.size() - 1);
+            for (size_t i = 0; i <= tmp.deg(); i++)
+                tmp.coeff[i] = der.coeff[i + 1] * (i + 1);
+
+            der = tmp;
         }
 
-        return res;
-    } 
+        return der; 
+    }
 
     /** @brief Возвращает строковое представление многочлена */
     std::string asString()

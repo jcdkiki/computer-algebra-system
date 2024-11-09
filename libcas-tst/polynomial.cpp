@@ -72,4 +72,13 @@ TEST(POLYNOMIAL, MUL_T)
     ASSERT_EQ((p_not_zero * zero).asString(),       "0");
     ASSERT_EQ((p_not_zero * one).asString(),        "7 + 13x^100 + 42x^1000");
     ASSERT_EQ((p_not_zero * not_zero).asString(),   "14 + 26x^100 + 84x^1000");
+
+
+    ASSERT_EQ((p_zero *= not_zero).asString(), "0");
+    ASSERT_EQ((p_zero *= one).asString(),      "0");
+    ASSERT_EQ((p_zero *= zero).asString(),     "0");
+    
+    ASSERT_EQ((p_not_zero *= not_zero).asString(),   "14 + 26x^100 + 84x^1000");
+    ASSERT_EQ((p_not_zero *= one).asString(),        "14 + 26x^100 + 84x^1000");
+    ASSERT_EQ((p_not_zero *= zero).asString(),       "0");
 }

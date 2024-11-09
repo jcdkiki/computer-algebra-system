@@ -103,6 +103,24 @@ public:
         return res;
     }
 
+    /** @brief MUL_PQ_P - Умножает многочлен на число. */
+    Polynomial& operator*=(const T& rhs) 
+    {
+        if (rhs == zero) 
+        {
+            coeff.resize(1);
+            coeff[0] = zero;
+        }
+        else if (rhs != one)
+        {
+            for (auto& c : coeff)
+                c *= rhs;
+        }
+
+        return *this;
+
+    } 
+
     /** @brief Возвращает строковое представление многочлена */
     std::string asString()
     {

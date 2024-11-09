@@ -87,6 +87,23 @@ public:
         return coeff.size() - 1;
     }
 
+
+    /** @brief DER_P_P - Взятие первой производной от многочлена. */
+    Polynomial derivative() 
+    {
+        Polynomial res;
+
+        if (deg() != 0) 
+        {
+            res.coeff.resize(coeff.size() - 1, zero);
+            for (size_t i = 0; i <= res.deg(); i++)  
+                res.coeff[i] = (i + 1) * coeff[i + 1];
+            
+        }
+
+        return res;
+    } 
+
     /** @brief Возвращает строковое представление многочлена */
     std::string asString()
     {

@@ -53,3 +53,18 @@ TEST(POLYNOMIAL, DEG)
         ASSERT_EQ(polynomial.deg(), expected);
     }
 }
+
+TEST(POLYNOMIAL, DERIVATIVE) 
+{
+    using pair = std::pair<const char*, const char*>;
+    for (auto [input, expected] :
+        {
+            pair { "0", "0" },
+            pair { "2x + 3", "2" },
+            pair { "x^100 + 4x^50 + 7", "200x^49 + 100x^99" },
+        })  
+    {
+        Polynomial<int, 0, 1> polynomial(input);
+        ASSERT_EQ(polynomial.derivative().asString(), expected);
+    } 
+}

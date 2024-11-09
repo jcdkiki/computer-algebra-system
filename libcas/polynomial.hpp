@@ -87,7 +87,7 @@ public:
         return coeff.size() - 1;
     }
 
-    /** @brief MUL_Pxk_P - Умножает многочлен на x^k */
+    /** @brief MUL_Pxk_P - Умножает многочлен на x^k. */
     friend Polynomial operator>>(const Polynomial& lhs, size_t rhs) 
     {
         
@@ -101,6 +101,24 @@ public:
         }
 
         return res;
+    }
+
+    /** @brief MUL_Pxk_P - Умножает многочлен на x^k. */
+    Polynomial& operator>>=(size_t rhs) 
+    {        
+        if (!(rhs == 0 || deg() == 0 && coeff.back() == zero))
+        {
+            resizeAtLeast(deg() + rhs + 1);
+            for (size_t i = deg(); i > 0; i--) {
+                coeff[i + rhs] = coeff[i];
+                coeff[i] = zero;
+            }
+
+            coeff[rhs] = coeff[0];
+            coeff[0] = zero;
+        }
+
+        return *this;
     }
 
     /** @brief Возвращает строковое представление многочлена */

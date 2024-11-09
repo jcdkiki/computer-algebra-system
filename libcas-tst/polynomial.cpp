@@ -67,4 +67,11 @@ TEST(POLYNOMIAL, MUL_XK)
 
     ASSERT_EQ((p_not_zero >> k_zero).asString(),     "3 + 7x^19 + 29x^31");
     ASSERT_EQ((p_not_zero >> k_not_zero).asString(), "3x^3 + 7x^22 + 29x^34");
+
+
+    ASSERT_EQ((p_zero >>= k_zero).asString(),        "0");
+    ASSERT_EQ((p_zero >>= k_not_zero).asString(),    "0");
+
+    ASSERT_EQ((p_not_zero >>= k_zero).asString(),     "3 + 7x^19 + 29x^31");
+    ASSERT_EQ((p_not_zero >>= k_not_zero).asString(), "3x^3 + 7x^22 + 29x^34");
 }

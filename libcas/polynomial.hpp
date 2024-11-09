@@ -76,15 +76,31 @@ public:
     }
 
     /** @brief LED_P_Q - Возвращает старший коэффициент многочлена. */
-    T lead() 
+    T lead() const
     {
         return coeff.back();
     }
     
     /** @brief DEG_P_N - Возвращает степень многочлена. */
-    size_t deg() 
+    size_t deg() const
     {
         return coeff.size() - 1;
+    }
+
+    /** @brief MUL_Pxk_P - Умножает многочлен на x^k */
+    friend Polynomial operator>>(const Polynomial& lhs, size_t rhs) 
+    {
+        
+        if (rhs == 0 || lhs.deg() == 0 && lhs.coeff.back() == zero)
+            return Polynomial(lhs);
+
+        Polynomial res;
+        res.resizeAtLeast(lhs.deg() + rhs + 1);
+        for (size_t i = 0; i <= lhs.deg(); i++) {
+            res.coeff[i + rhs] = lhs.coeff[i];
+        }
+
+        return res;
     }
 
     /** @brief Возвращает строковое представление многочлена */

@@ -123,5 +123,5 @@ Rational& Rational::operator/=(const Rational& rhs) {
 
 bool Rational::isInteger() {
     this->reduce();
-    return denominator != 0 && numerator % Integer(denominator) == 0;
+    return denominator == Natural("1");
 }

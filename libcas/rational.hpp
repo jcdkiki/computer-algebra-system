@@ -45,9 +45,6 @@ public:
     /** @brief Возвращает строковое представление числа */
     std::string asString();
 
-    /** @brief Возвращает строковое представление числа с единицей в знаменателе */
-    std::string asStringWithOneInDenominator();
-
     /** @brief Возвращает числитель числа */
     Integer get_numerator() { return numerator; }
 

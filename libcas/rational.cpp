@@ -20,10 +20,6 @@ std::string Rational::asString()
     return numerator.asString() + '/' + denominator.asString();
 }
 
-std::string Rational::asStringWithOneInDenominator() {
-    return numerator.asString() + '/' + denominator.asString();
-}
-
 std::ostream& operator<<(std::ostream& os, const Rational& number)
 {
     if (number.denominator == Natural("1")) {

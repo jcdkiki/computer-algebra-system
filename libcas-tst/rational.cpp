@@ -129,12 +129,12 @@ TEST(RATIONAL, CONVERT_INTEGER_TO_RATIONAL)
 {
     using pair = std::pair<const char*, const char*>;
     for (auto [input, expected] : {
-        pair { "5", "5/1"},
-        pair { "-54754676567", "-54754676567/1"}
+        pair { "5", "5"},
+        pair { "-54754676567", "-54754676567"}
     })
     {   
         Integer integer(input);
         Rational n1(integer);
-        EXPECT_EQ(n1.asStringWithOneInDenominator(), expected);
+        EXPECT_EQ(n1.asString(), expected);
     }
 }

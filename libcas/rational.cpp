@@ -115,9 +115,7 @@ Rational& Rational::operator/=(const Rational& rhs) {
     this->numerator *= Integer(rhs.denominator);
     this->denominator *= abs(rhs.numerator);
     this->reduce();
-    if(this->numerator.positivity() == 1 && rhs.numerator.positivity() == 1) {
-        this->numerator *= Integer("-1");
-    } else if(this->numerator.positivity() == 2 && rhs.numerator.positivity() == 1) {
+    if (rhs.numerator.positivity() == 1) {
         this->numerator *= Integer("-1");
     }
     return *this;

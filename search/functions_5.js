@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['mul_5fby_5f10_5fin_5fk_0',['mul_by_10_in_k',['../classNatural.html#a767666849d38af5218da4fedb186e05f',1,'Natural']]]
+  ['leastcommmul_0',['leastCommMul',['../natural_8hpp.html#aeda6551bace911d9a5ff2bf0404aed18',1,'natural.cpp']]]
 ];

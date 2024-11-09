@@ -120,3 +120,11 @@ Rational& Rational::operator/=(const Rational& rhs) {
     }
     return *this;
 }
+
+Rational::operator Integer() {
+    reduce();
+    if (denominator != Natural("1")) {
+        throw std::logic_error("Cannot convert to integer: denominator is not 1.");
+    }
+    return numerator;
+}

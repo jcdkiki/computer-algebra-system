@@ -22,3 +22,18 @@ TEST(POLYNOMIAL, IO)
         ASSERT_EQ(polynomial.asString(), expected);
     }
 }
+
+TEST(POLYNOMIAL, DEG) 
+{
+    using pair = std::pair<const char*, size_t>;
+    for (auto [input, expected] :
+        {
+            pair { "0", 0 },
+            pair { "2x + 3", 1 },
+            pair { "x^100 + 4x^50 + 7", 100 },
+        })  
+    {
+        Polynomial<int, 0, 1> polynomial(input);
+        ASSERT_EQ(polynomial.deg(), expected);
+    }
+}

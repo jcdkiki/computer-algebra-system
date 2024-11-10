@@ -54,6 +54,54 @@ TEST(POLYNOMIAL, DEG)
     }
 }
 
+TEST(POLYNOMIAL, MUL_XK) 
+{
+    Polynomial<int, 0, 1> p_zero("0");
+    Polynomial<int, 0, 1> p_not_zero("3 + 7x^19 + 29x^31");
+
+    size_t k_zero = 0;
+    size_t k_not_zero = 3;
+
+    ASSERT_EQ((p_zero << k_zero).asString(),        "0");
+    ASSERT_EQ((p_zero << k_not_zero).asString(),    "0");
+
+    ASSERT_EQ((p_not_zero << k_zero).asString(),     "3 + 7x^19 + 29x^31");
+    ASSERT_EQ((p_not_zero << k_not_zero).asString(), "3x^3 + 7x^22 + 29x^34");
+
+
+    ASSERT_EQ((p_zero <<= k_zero).asString(),        "0");
+    ASSERT_EQ((p_zero <<= k_not_zero).asString(),    "0");
+
+    ASSERT_EQ((p_not_zero <<= k_zero).asString(),     "3 + 7x^19 + 29x^31");
+    ASSERT_EQ((p_not_zero <<= k_not_zero).asString(), "3x^3 + 7x^22 + 29x^34");
+}
+
+TEST(POLYNOMIAL, DERIVATIVE) 
+{
+    using pair = std::pair<const char*, const char*>;
+    for (auto [input, expected] :
+        {
+            pair { "0", "0" },
+            pair { "2x + 3", "2" },
+            pair { "x^100 + 4x^50 + 7", "200x^49 + 100x^99" },
+        })  
+    {
+        Polynomial<int, 0, 1> polynomial(input);
+        ASSERT_EQ(polynomial.derivative().asString(), expected);
+    } 
+    
+    for (auto [input, expected] :
+        {
+            pair { "0", "0" },
+            pair { "2x + 3", "0" },
+            pair { "x^5 + 4x^3 + 7", "24x + 20x^3" },
+        })  
+    {
+        Polynomial<int, 0, 1> polynomial(input);
+        ASSERT_EQ(polynomial.derivative(2).asString(), expected);
+    }
+}
+
 TEST(POLYNOMIAL, MUL_T) 
 {
     using pair = std::pair<const char*, const char*>;
@@ -81,4 +129,39 @@ TEST(POLYNOMIAL, MUL_T)
     ASSERT_EQ((p_not_zero *= not_zero).asString(),   "14 + 26x^100 + 84x^1000");
     ASSERT_EQ((p_not_zero *= one).asString(),        "14 + 26x^100 + 84x^1000");
     ASSERT_EQ((p_not_zero *= zero).asString(),       "0");
+}
+
+TEST(POLYNOMIAL, ADD) 
+{
+    using tuple = std::tuple<const char*, const char*, const char*>;
+    using poly = Polynomial<int, 0, 1>;
+    for (auto [input1, input2, expected] : {
+        tuple { "0", "0", "0" },
+        tuple { "1 + x^2", "7", "8 + x^2" },
+        tuple { "2 + x^3", "3 + 5x^3", "5 + 6x^3" },
+        tuple { "19x", "1 + 20x + 3x^2", "1 + 39x + 3x^2" },
+        tuple { "19x^2", "1 + x^3", "1 + 19x^2 + x^3" },
+        tuple { "-x^3", "x^3", "0" },
+        tuple { "2x^2 + x^3", "2x^2 - x^3", "4x^2" },
+    })
+    {
+        poly p1(input1), p2(input2), result = p1 + p2;
+        ASSERT_EQ(result.asString(), expected);
+    }
+
+    for (auto [input1, input2, expected] : {
+        tuple { "0", "0", "0" },
+        tuple { "1 + x^2", "7", "8 + x^2" },
+        tuple { "2 + x^3", "3 + 5x^3", "5 + 6x^3" },
+        tuple { "19x", "1 + 20x + 3x^2", "1 + 39x + 3x^2" },
+        tuple { "19x^2", "1 + x^3", "1 + 19x^2 + x^3" },
+        tuple { "-x^3", "x^3", "0" },
+        tuple { "2x^2 + x^3", "2x^2 - x^3", "4x^2" },
+    })
+    {
+        poly p1(input1), p2(input2);
+        p1 += p2;
+        ASSERT_EQ(p1.asString(), expected);
+    }
+
 }

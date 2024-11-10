@@ -24,6 +24,13 @@ public:
     /** @brief Создает новое рациональное число, равное нулю */
     Rational();
 
+
+    /**
+     * @brief TRANS_Z_Q - преобразование целого в дробное
+     * @param[in] number - целое число
+     */
+    Rational(Integer number) : numerator(number), denominator("1") { }
+
     /**
      * @brief Создает новое рациональное число из строки
      * 
@@ -109,6 +116,12 @@ public:
      * @returns Возвращает текущий объект
      */
     Rational& operator/=(const Rational& rhs);
+
+    /**
+     * @brief INT_Q_B - Проверка сокращенного дробного на целое
+     * @returns Возвращает значения буливое значение
+     */
+    bool isInteger();
 
     friend std::ostream& operator<<(std::ostream& os, const Rational& number);
     friend std::istream& operator>>(std::istream& is, Rational& number);

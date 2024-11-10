@@ -4,6 +4,7 @@ var classPolynomial =
     [ "Polynomial", "classPolynomial.html#a698ce5a408ab7fdace3ac7e79348e386", null ],
     [ "asString", "classPolynomial.html#ae447985b42cad11acd1141f0a3edf28c", null ],
     [ "deg", "classPolynomial.html#aa6166df9714b41638085d9d04ef4f1ac", null ],
+    [ "derivative", "classPolynomial.html#a325e000395c482f98fac04aafc0d5a5e", null ],
     [ "lead", "classPolynomial.html#a2ce8b7b3cb4a2694553abc704176cc69", null ],
     [ "operator*=", "classPolynomial.html#a36152e746e28dc4c53976a035bead505", null ],
     [ "operator*", "classPolynomial.html#aa397c6e30cd66c3d1e4b1874c3c93dac", null ],

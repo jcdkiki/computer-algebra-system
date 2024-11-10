@@ -8,9 +8,11 @@ var classPolynomial =
     [ "lead", "classPolynomial.html#a2ce8b7b3cb4a2694553abc704176cc69", null ],
     [ "operator*=", "classPolynomial.html#a36152e746e28dc4c53976a035bead505", null ],
     [ "operator+=", "classPolynomial.html#aaafe8536ae3d329d67ca926d0a6d4a53", null ],
+    [ "operator-=", "classPolynomial.html#a2a54b18fbdf95fb950e258bbc5fa30c8", null ],
     [ "operator<<=", "classPolynomial.html#a6fbaa89107133aad66ffaa0473aa880d", null ],
     [ "operator*", "classPolynomial.html#aa397c6e30cd66c3d1e4b1874c3c93dac", null ],
     [ "operator+", "classPolynomial.html#a17322d488780025a79cbe26dbc5deb69", null ],
+    [ "operator-", "classPolynomial.html#aabd5970891e551357df4c3e218aacfba", null ],
     [ "operator<<", "classPolynomial.html#aa4707c35f4e0090b5215fc00a555a8e9", null ],
     [ "operator<<", "classPolynomial.html#ae8148672de86961263b190b707d63025", null ],
     [ "operator>>", "classPolynomial.html#a07cf3f3483b39217fd77c7eb99a949fe", null ]

@@ -1,0 +1,608 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Computer Algebra System: Файл libcas/natural.hpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Computer Algebra System
+   </div>
+   <div id="projectbrief">Задание коллоквиума до ДМиТИ. 2024 год.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Поиск');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('natural_8hpp.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Классы</a> &#124;
+<a href="#func-members">Функции</a>  </div>
+  <div class="headertitle"><div class="title">Файл natural.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Содержит класс <a class="el" href="classNatural.html" title="Длинное натуральное число.">Natural</a>.  
+<a href="#details">Подробнее...</a></p>
+<div class="textblock"><code>#include &lt;vector&gt;</code><br />
+<code>#include &lt;ostream&gt;</code><br />
+<code>#include &lt;istream&gt;</code><br />
+<code>#include &lt;string&gt;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Граф включаемых заголовочных файлов для natural.hpp:</div>
+<div class="dyncontent">
+<div class="center"><img src="natural_8hpp__incl.png" border="0" usemap="#alibcas_2natural_8hpp" alt=""/></div>
+<map name="alibcas_2natural_8hpp" id="alibcas_2natural_8hpp">
+<area shape="rect" title="Содержит класс Natural." alt="" coords="105,5,229,31"/>
+<area shape="rect" title=" " alt="" coords="5,79,63,104"/>
+<area shape="poly" title=" " alt="" coords="147,33,69,74,67,70,145,28"/>
+<area shape="rect" title=" " alt="" coords="87,79,157,104"/>
+<area shape="poly" title=" " alt="" coords="162,32,139,69,134,66,158,30"/>
+<area shape="rect" title=" " alt="" coords="181,79,247,104"/>
+<area shape="poly" title=" " alt="" coords="177,30,201,66,197,69,173,32"/>
+<area shape="rect" title=" " alt="" coords="271,79,325,104"/>
+<area shape="poly" title=" " alt="" coords="190,28,266,70,264,74,187,33"/>
+</map>
+</div>
+</div><div class="textblock"><div class="dynheader">
+Граф файлов, в которые включается этот файл:</div>
+<div class="dyncontent">
+<div class="center"><img src="natural_8hpp__dep__incl.png" border="0" usemap="#alibcas_2natural_8hppdep" alt=""/></div>
+<map name="alibcas_2natural_8hppdep" id="alibcas_2natural_8hppdep">
+<area shape="rect" title="Содержит класс Natural." alt="" coords="55,5,179,31"/>
+<area shape="rect" href="integer_8hpp.html" title="Содержит класс Integer." alt="" coords="5,79,129,104"/>
+<area shape="poly" title=" " alt="" coords="103,44,78,80,73,77,99,41"/>
+<area shape="rect" href="rational_8hpp.html" title="Содержит класс Rational." alt="" coords="53,152,180,177"/>
+<area shape="poly" title=" " alt="" coords="132,42,142,71,143,104,135,131,125,153,120,151,130,129,138,104,137,72,127,44"/>
+<area shape="poly" title=" " alt="" coords="85,114,111,150,106,153,81,117"/>
+</map>
+</div>
+</div>
+<p><a href="natural_8hpp_source.html">См. исходные тексты.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Классы</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNatural.html">Natural</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Длинное натуральное число.  <a href="classNatural.html#details">Подробнее...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Функции</h2></td></tr>
+<tr class="memitem:a5507c0ccac2ef7932f2d0b0bbce238a5" id="r_a5507c0ccac2ef7932f2d0b0bbce238a5"><td class="memItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="natural_8hpp.html#a5507c0ccac2ef7932f2d0b0bbce238a5">operator&lt;&lt;</a> (std::ostream &amp;os, const <a class="el" href="classNatural.html">Natural</a> &amp;number)</td></tr>
+<tr class="memdesc:a5507c0ccac2ef7932f2d0b0bbce238a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Выводит натуральное число в поток вывода  <br /></td></tr>
+<tr class="separator:a5507c0ccac2ef7932f2d0b0bbce238a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af50e755a822231379576e166fbb883a3" id="r_af50e755a822231379576e166fbb883a3"><td class="memItemLeft" align="right" valign="top">std::istream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="natural_8hpp.html#af50e755a822231379576e166fbb883a3">operator&gt;&gt;</a> (std::istream &amp;is, <a class="el" href="classNatural.html">Natural</a> &amp;number)</td></tr>
+<tr class="memdesc:af50e755a822231379576e166fbb883a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Вводит натуральное число из потока ввода  <br /></td></tr>
+<tr class="separator:af50e755a822231379576e166fbb883a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7134514f505f3986195e31b43325278c" id="r_a7134514f505f3986195e31b43325278c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classNatural.html">Natural</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="natural_8hpp.html#a7134514f505f3986195e31b43325278c">operator/</a> (const <a class="el" href="classNatural.html">Natural</a> &amp;lhs, const <a class="el" href="classNatural.html">Natural</a> &amp;rhs)</td></tr>
+<tr class="memdesc:a7134514f505f3986195e31b43325278c"><td class="mdescLeft">&#160;</td><td class="mdescRight">DIV_NN_N - Вычисляет неполное частное двух натуральных чисел  <br /></td></tr>
+<tr class="separator:a7134514f505f3986195e31b43325278c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a10d694b4546539b2d785c354e8fea847" id="r_a10d694b4546539b2d785c354e8fea847"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classNatural.html">Natural</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="natural_8hpp.html#a10d694b4546539b2d785c354e8fea847">operator%</a> (const <a class="el" href="classNatural.html">Natural</a> &amp;lhs, const <a class="el" href="classNatural.html">Natural</a> &amp;rhs)</td></tr>
+<tr class="memdesc:a10d694b4546539b2d785c354e8fea847"><td class="mdescLeft">&#160;</td><td class="mdescRight">MOD_NN_N - Вычисляет остаток от деления двух натуральных чисел  <br /></td></tr>
+<tr class="separator:a10d694b4546539b2d785c354e8fea847"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb3428745d0811066099a6cfb09ef2c4" id="r_aeb3428745d0811066099a6cfb09ef2c4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classNatural.html">Natural</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="natural_8hpp.html#aeb3428745d0811066099a6cfb09ef2c4">operator+</a> (const <a class="el" href="classNatural.html">Natural</a> &amp;lhs, const <a class="el" href="classNatural.html">Natural</a> &amp;rhs)</td></tr>
+<tr class="memdesc:aeb3428745d0811066099a6cfb09ef2c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">ADD_NN_N - Вычисляет сумму двух натуральных чисел  <br /></td></tr>
+<tr class="separator:aeb3428745d0811066099a6cfb09ef2c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a33b7b6db3a076468847c41bf6bc420eb" id="r_a33b7b6db3a076468847c41bf6bc420eb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classNatural.html">Natural</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="natural_8hpp.html#a33b7b6db3a076468847c41bf6bc420eb">operator*</a> (const <a class="el" href="classNatural.html">Natural</a> &amp;lhs, const <a class="el" href="classNatural.html">Natural</a> &amp;rhs)</td></tr>
+<tr class="memdesc:a33b7b6db3a076468847c41bf6bc420eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">MUL_NN_N - Вычисляет произведение двух натуральных чисел  <br /></td></tr>
+<tr class="separator:a33b7b6db3a076468847c41bf6bc420eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7202bc20f86303e93687035afe343b89" id="r_a7202bc20f86303e93687035afe343b89"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classNatural.html">Natural</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="natural_8hpp.html#a7202bc20f86303e93687035afe343b89">operator-</a> (const <a class="el" href="classNatural.html">Natural</a> &amp;lhs, const <a class="el" href="classNatural.html">Natural</a> &amp;rhs)</td></tr>
+<tr class="memdesc:a7202bc20f86303e93687035afe343b89"><td class="mdescLeft">&#160;</td><td class="mdescRight">SUB_NN_N - Вычисляет разность двух натуральных чисел  <br /></td></tr>
+<tr class="separator:a7202bc20f86303e93687035afe343b89"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a56fab5de99caafc6435dda4259a859a7" id="r_a56fab5de99caafc6435dda4259a859a7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classNatural.html">Natural</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="natural_8hpp.html#a56fab5de99caafc6435dda4259a859a7">getDivDigitInPower</a> (const <a class="el" href="classNatural.html">Natural</a> &amp;lhs, const <a class="el" href="classNatural.html">Natural</a> &amp;rhs)</td></tr>
+<tr class="memdesc:a56fab5de99caafc6435dda4259a859a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">DIV_NN_Dk - Вычисляет первую цифру деления большего натурального на меньшее, домноженное на 10^k.  <br /></td></tr>
+<tr class="separator:a56fab5de99caafc6435dda4259a859a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5623e91aff75f7d9b057799386f226c3" id="r_a5623e91aff75f7d9b057799386f226c3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classNatural.html">Natural</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="natural_8hpp.html#a5623e91aff75f7d9b057799386f226c3">subNDN</a> (const <a class="el" href="classNatural.html">Natural</a> &amp;lhs, const <a class="el" href="classNatural.html">Natural</a> &amp;rhs, const <a class="el" href="classNatural.html#a2f6cfcb259f7b6a1bafb9242257e8fb5">Natural::Digit</a> &amp;digit)</td></tr>
+<tr class="memdesc:a5623e91aff75f7d9b057799386f226c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">SUB_NDN_N - Вычисляет разность натурального большего и натурального меньшего, умноженного на цифру  <br /></td></tr>
+<tr class="separator:a5623e91aff75f7d9b057799386f226c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad9db39e985a8da26ebd5eea3087aeb6a" id="r_ad9db39e985a8da26ebd5eea3087aeb6a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classNatural.html">Natural</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="natural_8hpp.html#ad9db39e985a8da26ebd5eea3087aeb6a">greatCommDiv</a> (const <a class="el" href="classNatural.html">Natural</a> &amp;lhs, const <a class="el" href="classNatural.html">Natural</a> &amp;rhs)</td></tr>
+<tr class="memdesc:ad9db39e985a8da26ebd5eea3087aeb6a"><td class="mdescLeft">&#160;</td><td class="mdescRight">GCF_NN_N - НОД натуральных чисел  <br /></td></tr>
+<tr class="separator:ad9db39e985a8da26ebd5eea3087aeb6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeda6551bace911d9a5ff2bf0404aed18" id="r_aeda6551bace911d9a5ff2bf0404aed18"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classNatural.html">Natural</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="natural_8hpp.html#aeda6551bace911d9a5ff2bf0404aed18">leastCommMul</a> (const <a class="el" href="classNatural.html">Natural</a> &amp;lhs, const <a class="el" href="classNatural.html">Natural</a> &amp;rhs)</td></tr>
+<tr class="memdesc:aeda6551bace911d9a5ff2bf0404aed18"><td class="mdescLeft">&#160;</td><td class="mdescRight">LCM_NN_N - НОК натуральных чисел  <br /></td></tr>
+<tr class="separator:aeda6551bace911d9a5ff2bf0404aed18"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Подробное описание</h2>
+<div class="textblock"><p>Содержит класс <a class="el" href="classNatural.html" title="Длинное натуральное число.">Natural</a>. </p>
+</div><h2 class="groupheader">Функции</h2>
+<a id="a56fab5de99caafc6435dda4259a859a7" name="a56fab5de99caafc6435dda4259a859a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a56fab5de99caafc6435dda4259a859a7">&#9670;&#160;</a></span>getDivDigitInPower()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classNatural.html">Natural</a> getDivDigitInPower </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classNatural.html">Natural</a> &amp;&#160;</td>
+          <td class="paramname"><em>lhs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classNatural.html">Natural</a> &amp;&#160;</td>
+          <td class="paramname"><em>rhs</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>DIV_NN_Dk - Вычисляет первую цифру деления большего натурального на меньшее, домноженное на 10^k. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">lhs,rhs</td><td>Делимое и делитель </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>Первая цифра деления, домноженная на 10^k </dd></dl>
+
+</div>
+</div>
+<a id="ad9db39e985a8da26ebd5eea3087aeb6a" name="ad9db39e985a8da26ebd5eea3087aeb6a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad9db39e985a8da26ebd5eea3087aeb6a">&#9670;&#160;</a></span>greatCommDiv()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classNatural.html">Natural</a> greatCommDiv </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classNatural.html">Natural</a> &amp;&#160;</td>
+          <td class="paramname"><em>lhs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classNatural.html">Natural</a> &amp;&#160;</td>
+          <td class="paramname"><em>rhs</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>GCF_NN_N - НОД натуральных чисел </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">lhs,rhs</td><td>- Натуральные числа, НОД которых требуется найти </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>НОД двух чисел </dd></dl>
+
+</div>
+</div>
+<a id="aeda6551bace911d9a5ff2bf0404aed18" name="aeda6551bace911d9a5ff2bf0404aed18"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeda6551bace911d9a5ff2bf0404aed18">&#9670;&#160;</a></span>leastCommMul()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classNatural.html">Natural</a> leastCommMul </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classNatural.html">Natural</a> &amp;&#160;</td>
+          <td class="paramname"><em>lhs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classNatural.html">Natural</a> &amp;&#160;</td>
+          <td class="paramname"><em>rhs</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>LCM_NN_N - НОК натуральных чисел </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">lhs,rhs</td><td>- Натуральные числа, НОК которых требуется найти </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>НОК двух чисел </dd></dl>
+
+</div>
+</div>
+<a id="a10d694b4546539b2d785c354e8fea847" name="a10d694b4546539b2d785c354e8fea847"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a10d694b4546539b2d785c354e8fea847">&#9670;&#160;</a></span>operator%()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classNatural.html">Natural</a> operator% </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classNatural.html">Natural</a> &amp;&#160;</td>
+          <td class="paramname"><em>lhs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classNatural.html">Natural</a> &amp;&#160;</td>
+          <td class="paramname"><em>rhs</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>MOD_NN_N - Вычисляет остаток от деления двух натуральных чисел </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">lhs,rhs</td><td>Делимое и делитель </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>Остаток от деления двух чисел </dd></dl>
+
+</div>
+</div>
+<a id="a33b7b6db3a076468847c41bf6bc420eb" name="a33b7b6db3a076468847c41bf6bc420eb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a33b7b6db3a076468847c41bf6bc420eb">&#9670;&#160;</a></span>operator*()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classNatural.html">Natural</a> operator* </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classNatural.html">Natural</a> &amp;&#160;</td>
+          <td class="paramname"><em>lhs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classNatural.html">Natural</a> &amp;&#160;</td>
+          <td class="paramname"><em>rhs</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>MUL_NN_N - Вычисляет произведение двух натуральных чисел </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">lhs,rhs</td><td>Умножаемые числа </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>Произведение двух чисел </dd></dl>
+
+</div>
+</div>
+<a id="aeb3428745d0811066099a6cfb09ef2c4" name="aeb3428745d0811066099a6cfb09ef2c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb3428745d0811066099a6cfb09ef2c4">&#9670;&#160;</a></span>operator+()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classNatural.html">Natural</a> operator+ </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classNatural.html">Natural</a> &amp;&#160;</td>
+          <td class="paramname"><em>lhs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classNatural.html">Natural</a> &amp;&#160;</td>
+          <td class="paramname"><em>rhs</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>ADD_NN_N - Вычисляет сумму двух натуральных чисел </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">lhs,rhs</td><td>Складываемые числа </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>Cумму двух чисел </dd></dl>
+
+</div>
+</div>
+<a id="a7202bc20f86303e93687035afe343b89" name="a7202bc20f86303e93687035afe343b89"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7202bc20f86303e93687035afe343b89">&#9670;&#160;</a></span>operator-()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classNatural.html">Natural</a> operator- </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classNatural.html">Natural</a> &amp;&#160;</td>
+          <td class="paramname"><em>lhs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classNatural.html">Natural</a> &amp;&#160;</td>
+          <td class="paramname"><em>rhs</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>SUB_NN_N - Вычисляет разность двух натуральных чисел </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">lhs,rhs</td><td>Вычитаемые числа </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>Разность двух чисел </dd></dl>
+
+</div>
+</div>
+<a id="a7134514f505f3986195e31b43325278c" name="a7134514f505f3986195e31b43325278c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7134514f505f3986195e31b43325278c">&#9670;&#160;</a></span>operator/()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classNatural.html">Natural</a> operator/ </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classNatural.html">Natural</a> &amp;&#160;</td>
+          <td class="paramname"><em>lhs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classNatural.html">Natural</a> &amp;&#160;</td>
+          <td class="paramname"><em>rhs</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>DIV_NN_N - Вычисляет неполное частное двух натуральных чисел </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">lhs,rhs</td><td>Делимое и делитель </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>Неполное частное от деления двух чисел </dd></dl>
+
+</div>
+</div>
+<a id="a5507c0ccac2ef7932f2d0b0bbce238a5" name="a5507c0ccac2ef7932f2d0b0bbce238a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5507c0ccac2ef7932f2d0b0bbce238a5">&#9670;&#160;</a></span>operator&lt;&lt;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::ostream &amp; operator&lt;&lt; </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>os</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classNatural.html">Natural</a> &amp;&#160;</td>
+          <td class="paramname"><em>number</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Выводит натуральное число в поток вывода </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir"></td><td class="paramname">os</td><td>Поток вывода, в который будет выведено число </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">number</td><td>Число, которое будет выведено </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="af50e755a822231379576e166fbb883a3" name="af50e755a822231379576e166fbb883a3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af50e755a822231379576e166fbb883a3">&#9670;&#160;</a></span>operator&gt;&gt;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::istream &amp; operator&gt;&gt; </td>
+          <td>(</td>
+          <td class="paramtype">std::istream &amp;&#160;</td>
+          <td class="paramname"><em>is</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classNatural.html">Natural</a> &amp;&#160;</td>
+          <td class="paramname"><em>number</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Вводит натуральное число из потока ввода </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir"></td><td class="paramname">is</td><td>Поток ввода, из которого будет введено число </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">number</td><td>Ссылка на число, в которое будет записан результат </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a5623e91aff75f7d9b057799386f226c3" name="a5623e91aff75f7d9b057799386f226c3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5623e91aff75f7d9b057799386f226c3">&#9670;&#160;</a></span>subNDN()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classNatural.html">Natural</a> subNDN </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classNatural.html">Natural</a> &amp;&#160;</td>
+          <td class="paramname"><em>lhs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classNatural.html">Natural</a> &amp;&#160;</td>
+          <td class="paramname"><em>rhs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classNatural.html#a2f6cfcb259f7b6a1bafb9242257e8fb5">Natural::Digit</a> &amp;&#160;</td>
+          <td class="paramname"><em>digit</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>SUB_NDN_N - Вычисляет разность натурального большего и натурального меньшего, умноженного на цифру </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">lhs,rhs,digit</td><td>Уменьшаемое, вычитаемое и цифра, на которую надо умножить вычитаемое </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>Разность натурального и натурального, умноженного на цифру </dd></dl>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_c4a5c15d62d7e176e993cdd3af34dfb6.html">libcas</a></li><li class="navelem"><a class="el" href="natural_8hpp.html">natural.hpp</a></li>
+    <li class="footer">Создано системой <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+  </ul>
+</div>
+</body>
+</html>

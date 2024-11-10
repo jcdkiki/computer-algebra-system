@@ -32,6 +32,8 @@ public:
     /** @brief Основание системы счисления */
     constexpr static int BASE = 10;
 
+    constexpr static int THRESHOLD = 1;
+
     /** @brief Создает новое натуральное число, равное нулю. */
     Natural();
 
@@ -178,6 +180,8 @@ public:
     friend Natural greatCommDiv(const Natural &lhs, const Natural &rhs);
 
     friend Natural leastCommMul(const Natural &lhs, const Natural &rhs);
+
+    friend Natural karatsuba_mul(const Natural &lhs, const Natural &rhs);
 };
 
 /**
@@ -258,5 +262,12 @@ Natural greatCommDiv(const Natural &lhs, const Natural &rhs);
  * @returns НОК двух чисел
  */
 Natural leastCommMul(const Natural &lhs, const Natural &rhs);
+
+/**
+ * @brief Произведение натуральных чисел с помощью алгоритма Карацубы. (Лучше не использовать на маленьких числах.)
+ * @param[in] lhs,rhs - Натуральные числа.
+ * @returns Результат произведения чисел.
+ */
+Natural karatsuba_mul(const Natural &lhs, const Natural &rhs);
 
 #endif

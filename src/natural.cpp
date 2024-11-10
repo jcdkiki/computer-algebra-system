@@ -370,3 +370,42 @@ Natural leastCommMul(const Natural &lhs, const Natural &rhs){
     Natural GCF = greatCommDiv(lhs, rhs);
     return (lhs * rhs) / GCF;
 }
+
+Natural karatsuba_mul(const Natural &lhs, const Natural &rhs) {
+    //recursion base if lhs or rhs < 10 -> digit * digit
+    if (lhs.digits.size() <= Natural::THRESHOLD || rhs.digits.size() <= Natural::THRESHOLD) {
+        return lhs * rhs;
+    }
+
+    size_t len = std::max(lhs.digits.size(), rhs.digits.size());
+    size_t k = len / 2;
+
+    //parts if original lhs, rhs
+    Natural lhs_l, lhs_r, rhs_l, rhs_r;
+
+    // 10^k to split numbers in middle
+    Natural d("10");
+    d << (k);
+
+    //spliting lhs and rhs into to parts (low and high)
+    lhs_r = lhs / d;
+    lhs_l = lhs % d;
+
+    rhs_r = rhs / d;
+    rhs_l = rhs % d;
+
+    //temporary tricky sum
+    Natural t1 = lhs_r + lhs_l;
+    Natural t2 = rhs_r + rhs_l;
+
+    //counting 3 products instead of 4
+    Natural p1 = karatsuba_mul(lhs_r, rhs_r);
+    Natural p2 = karatsuba_mul(lhs_l, rhs_l);
+    Natural p3 = karatsuba_mul(t1, t2);
+    
+    //couting result = p1*10^(2k) + (p3 - p2 - p1)*10^k + p2
+    Natural res = (p1 << (2*(k))) + ((p3 - p2 - p1) << (k)) + p2;
+
+    //difficulty O(n^log2(3))
+    return res;
+}

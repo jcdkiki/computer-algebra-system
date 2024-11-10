@@ -55,6 +55,11 @@ public:
      * @brief RED_Q_Q - Сокращение дроби
     */
     void reduce();
+
+    /** @brief TRANS_Q_Z Создает новое целое число из рационального (если знаменатель равен 1)
+     *  @returns возвращает копию числа
+    */
+    operator Integer();
     
     /**
      * @brief ADD_QQ_Q - Сложение двух дробей
@@ -111,6 +116,12 @@ public:
      * @returns Возвращает текущий объект
      */
     Rational& operator/=(const Rational& rhs);
+
+    /**
+     * @brief INT_Q_B - Проверка сокращенного дробного на целое
+     * @returns Возвращает значения буливое значение
+     */
+    bool isInteger();
 
     friend std::ostream& operator<<(std::ostream& os, const Rational& number);
     friend std::istream& operator>>(std::istream& is, Rational& number);

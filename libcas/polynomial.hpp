@@ -76,16 +76,70 @@ public:
     }
 
     /** @brief LED_P_Q - Возвращает старший коэффициент многочлена. */
-    T lead() 
+    T lead() const
     {
         return coeff.back();
     }
     
     /** @brief DEG_P_N - Возвращает степень многочлена. */
-    size_t deg() 
+    size_t deg() const
     {
         return coeff.size() - 1;
     }
+
+    /** @brief DER_P_P - Взятие k-ой производной от многочлена. */
+    Polynomial derivative(unsigned int k = 1) const 
+    {
+        Polynomial tmp, der(*this);
+        
+        if (deg() == 0 || deg() < k)
+            return tmp; // 0
+
+        for (; k != 0; k--) 
+        {
+            tmp.coeff.resize(der.coeff.size() - 1);
+            for (size_t i = 0; i <= tmp.deg(); i++)
+                tmp.coeff[i] = der.coeff[i + 1] * (i + 1);
+
+            der = tmp;
+        }
+
+        return der; 
+    }
+
+    /** @brief MUL_PQ_P - Умножает многочлен на число. */
+    friend Polynomial operator*(const Polynomial& lhs, const T& rhs) 
+    {
+        if (rhs == zero)
+            return Polynomial();
+
+        Polynomial res(lhs);
+        if (rhs != one)
+        {
+            for (size_t i = 0; i <= lhs.deg(); i++)
+               res.coeff[i] = lhs.coeff[i] * rhs;
+        }
+
+        return res;
+    }
+
+    /** @brief MUL_PQ_P - Умножает многочлен на число. */
+    Polynomial& operator*=(const T& rhs) 
+    {
+        if (rhs == zero) 
+        {
+            coeff.resize(1);
+            coeff[0] = zero;
+        }
+        else if (rhs != one)
+        {
+            for (auto& c : coeff)
+                c *= rhs;
+        }
+
+        return *this;
+
+    } 
 
     /** @brief Возвращает строковое представление многочлена */
     std::string asString()

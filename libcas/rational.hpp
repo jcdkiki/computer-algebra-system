@@ -110,6 +110,12 @@ public:
      */
     Rational& operator/=(const Rational& rhs);
 
+    /**
+     * @brief INT_Q_B - Проверка сокращенного дробного на целое
+     * @returns Возвращает значения буливое значение
+     */
+    bool isInteger();
+
     friend std::ostream& operator<<(std::ostream& os, const Rational& number);
     friend std::istream& operator>>(std::istream& is, Rational& number);
 };

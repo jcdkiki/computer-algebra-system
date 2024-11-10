@@ -124,6 +124,25 @@ TEST(RATIONAL, DIVISION)
     }
 }
 
+TEST(RATIONAL, ISINTEGER) 
+{
+    using pair = std::pair<const char*, bool>;
+    for (auto [input1, expected] : {
+        pair { "8/5",  0},
+        pair { "16/8",  1},
+        pair { "20/20",  1},
+        pair { "-20/10",  1},
+        pair { "-20/10",  1},
+        pair { "0/10",  1},
+        pair { "9999999999999999999999999999999999999999999999999/9999999999999999999999999999999999999999999999999",  1},
+    })
+    {
+        Rational n1(input1);
+        bool result = n1.isInteger();
+        EXPECT_EQ(result, expected);
+    }
+}
+
 TEST(RATIONAL, CONVERT_RATIONAL_TO_INTEGER) 
 {
     using pair = std::pair<const char*, const char*>;

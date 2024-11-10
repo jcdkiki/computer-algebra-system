@@ -121,6 +121,11 @@ Rational& Rational::operator/=(const Rational& rhs) {
     return *this;
 }
 
+bool Rational::isInteger() {
+    this->reduce();
+    return denominator == Natural("1");
+}
+
 Rational::operator Integer() {
     reduce();
     if (denominator != Natural("1")) {

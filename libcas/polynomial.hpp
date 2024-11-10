@@ -88,7 +88,7 @@ public:
     }
 
     /** @brief MUL_Pxk_P - Умножает многочлен на x^k. */
-    friend Polynomial operator>>(const Polynomial& lhs, size_t rhs) 
+    friend Polynomial operator<<(const Polynomial& lhs, size_t rhs) 
     {
         
         if (rhs == 0 || lhs.deg() == 0 && lhs.coeff.back() == zero)
@@ -104,7 +104,7 @@ public:
     }
 
     /** @brief MUL_Pxk_P - Умножает многочлен на x^k. */
-    Polynomial& operator>>=(size_t rhs) 
+    Polynomial& operator<<=(size_t rhs) 
     {        
         if (!(rhs == 0 || deg() == 0 && coeff.back() == zero))
         {

@@ -75,6 +75,17 @@ public:
         ss >> *this;
     }
 
+    /**
+     * @brief Создает моном.
+     * 
+     * @param[in] coeff Коэффициент монома. 
+     * @param[in] power Степень монома.
+     */
+    Polynomial(T coeff, int power) : coeff(power + 1)
+    {
+        this->coeff[power] = coeff;
+    }
+
     /** @brief LED_P_Q - Возвращает старший коэффициент многочлена. */
     T lead() const
     {

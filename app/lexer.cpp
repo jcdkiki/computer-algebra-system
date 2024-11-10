@@ -48,5 +48,12 @@ Token Lexer::identifier() noexcept {
     const char* start = m_beg;
     get();
     while (is_identifier_char(peek())) get();
+
+    std::string_view str(start, m_beg - start);
+
+    if (str == "x") {
+        return Token(Token::Kind::X, start, m_beg);
+    }
+
     return Token(Token::Kind::Identifier, start, m_beg);
 }

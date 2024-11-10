@@ -25,6 +25,7 @@ public:
         Percent,
         Comma,
         Caret,
+        X,
         End,
         Unexpected,
     };

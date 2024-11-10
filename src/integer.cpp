@@ -1,4 +1,4 @@
-#include "integer.hpp"
+#include "rznumbers/integer.hpp"
 #include <cctype>
 
 Integer::Integer() : sign(false), natural(Natural()) {}

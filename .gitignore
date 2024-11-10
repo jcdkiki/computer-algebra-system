@@ -1,4 +1,4 @@
 .cache
 build
 .vscode/
-docs
+docs/build

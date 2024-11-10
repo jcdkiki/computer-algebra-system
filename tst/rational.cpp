@@ -1,4 +1,4 @@
-#include "rational.hpp"
+#include "rznumbers/rational.hpp"
 #include <gtest/gtest.h>
 
 TEST(RATIONAL, IO)

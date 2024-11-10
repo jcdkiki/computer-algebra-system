@@ -120,7 +120,14 @@ public:
     /** @brief SUB_PP_P - Вычисляет разность двух многочленов. */
     Polynomial& operator-=(const Polynomial& rhs) 
     {
-        *this += rhs * (-one);
+        if (deg() <= rhs.deg()) 
+            coeff.resize(rhs.coeff.size(), zero);
+        
+        for (size_t i = 0; i <= rhs.deg(); i++)
+            coeff[i] -= rhs.coeff[i];
+
+        strip();
+
         return *this;
     }
 

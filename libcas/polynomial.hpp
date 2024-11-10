@@ -11,7 +11,6 @@
 #include <istream>
 #include <ostream>
 #include <sstream>
-#include <iostream>
 
 /**
  * @brief Многочлен.

@@ -131,6 +131,24 @@ TEST(POLYNOMIAL, MUL_T)
     ASSERT_EQ((p_not_zero *= zero).asString(),       "0");
 }
 
+TEST(POLYNOMIAL, MUL) 
+{
+    using tuple = std::tuple<const char*, const char*, const char*>;
+    using poly = Polynomial<int, 0, 1>;
+    for (auto [input1, input2, expected] : {
+        tuple { "0", "0", "0" },
+        tuple { "1", "1 + 2x", "1 + 2x" },
+        tuple { "2 + 2x", "1 + 2x", "2 + 6x + 4x^2" },
+    })
+    {
+        poly p1(input1), p2(input2), result = p1 * p2;
+        ASSERT_EQ(result.asString(), expected);
+
+        p1 *= p2;
+        ASSERT_EQ(p1.asString(), expected);
+    }
+}
+
 TEST(POLYNOMIAL, ADD) 
 {
     using tuple = std::tuple<const char*, const char*, const char*>;

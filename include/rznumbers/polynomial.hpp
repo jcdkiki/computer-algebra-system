@@ -219,6 +219,27 @@ public:
 
     }
 
+    /** @brief MUL_PP_P - Вычисляет произведение двух многочленов. */
+    friend Polynomial operator*(const Polynomial& lhs, const Polynomial& rhs) 
+    {
+       Polynomial res, shift(rhs);
+
+       for (size_t i = 0; i <= lhs.deg(); i++) 
+       {
+            res += shift * lhs.coeff[i];
+            shift <<= 1;
+       }
+
+       return res;
+    }
+
+    /** @brief MUL_PP_P - Вычисляет произведение двух многочленов. */
+    Polynomial& operator*=(const Polynomial& rhs) 
+    {
+        *this = *this * rhs;
+        return *this; 
+    }
+    
     /** @brief Возвращает строковое представление многочлена */
     std::string asString()
     {

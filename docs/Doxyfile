@@ -1,8 +1,8 @@
 PROJECT_NAME = "Computer Algebra System"
 PROJECT_BRIEF = "Задание коллоквиума до ДМиТИ. 2024 год."
-OUTPUT_DIRECTORY = .
+OUTPUT_DIRECTORY = build
 GENERATE_LATEX = NO
-INPUT = ../../include/rznumbers/
+INPUT = ../include/rznumbers/
 RECURSIVE = YES
 OUTPUT_LANGUAGE = Russian
 WARN_AS_ERROR = Yes
@@ -11,5 +11,5 @@ WARN_AS_ERROR = Yes
 GENERATE_TREEVIEW      = YES # required!
 DISABLE_INDEX          = NO
 FULL_SIDEBAR           = NO
-HTML_EXTRA_STYLESHEET  = ../../3rd/doxygen-awesome-css/doxygen-awesome.css \
-                         ../../3rd/doxygen-awesome-css/doxygen-awesome-sidebar-only.css
+HTML_EXTRA_STYLESHEET  = ../3rd/doxygen-awesome-css/doxygen-awesome.css \
+                         ../3rd/doxygen-awesome-css/doxygen-awesome-sidebar-only.css

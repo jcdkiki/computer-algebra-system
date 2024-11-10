@@ -65,6 +65,7 @@ public:
      *  - \c "x^3 + 3x + 100x^40 + 5x^30"
      *  - \c "(5)x^5 + 7x^6 + (8)x^10"
      *  - \c "-10x - 3x^2"
+-l gtest
      *  - \c "5 + 2 + 3x + 5x"
      *  - \c "5 - 2 + 3x - 5x"
      */
@@ -219,6 +220,29 @@ public:
 
     }
 
+    /** @brief MUL_PP_P - Вычисляет произведение двух многочленов. */
+    friend Polynomial operator*(const Polynomial& lhs, const Polynomial& rhs) 
+    {
+        Polynomial res;
+        res.coeff.resize(lhs.coeff.size() + rhs.coeff.size());
+
+        for (size_t i = 0; i <= lhs.deg(); ++i) {
+            for (size_t j = 0; j <= rhs.deg(); ++j) {
+                res.coeff[i + j] += lhs.coeff[i] * rhs.coeff[j];
+            }
+        }
+
+        res.strip();
+        return res;
+    }
+
+    /** @brief MUL_PP_P - Вычисляет произведение двух многочленов. */
+    Polynomial& operator*=(const Polynomial& rhs) 
+    {
+        *this = *this * rhs;
+        return *this; 
+    }
+    
     /** @brief Возвращает строковое представление многочлена */
     std::string asString()
     {

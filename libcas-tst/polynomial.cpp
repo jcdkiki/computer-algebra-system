@@ -54,6 +54,54 @@ TEST(POLYNOMIAL, DEG)
     }
 }
 
+TEST(POLYNOMIAL, MUL_XK) 
+{
+    Polynomial<int, 0, 1> p_zero("0");
+    Polynomial<int, 0, 1> p_not_zero("3 + 7x^19 + 29x^31");
+
+    size_t k_zero = 0;
+    size_t k_not_zero = 3;
+
+    ASSERT_EQ((p_zero << k_zero).asString(),        "0");
+    ASSERT_EQ((p_zero << k_not_zero).asString(),    "0");
+
+    ASSERT_EQ((p_not_zero << k_zero).asString(),     "3 + 7x^19 + 29x^31");
+    ASSERT_EQ((p_not_zero << k_not_zero).asString(), "3x^3 + 7x^22 + 29x^34");
+
+
+    ASSERT_EQ((p_zero <<= k_zero).asString(),        "0");
+    ASSERT_EQ((p_zero <<= k_not_zero).asString(),    "0");
+
+    ASSERT_EQ((p_not_zero <<= k_zero).asString(),     "3 + 7x^19 + 29x^31");
+    ASSERT_EQ((p_not_zero <<= k_not_zero).asString(), "3x^3 + 7x^22 + 29x^34");
+}
+
+TEST(POLYNOMIAL, DERIVATIVE) 
+{
+    using pair = std::pair<const char*, const char*>;
+    for (auto [input, expected] :
+        {
+            pair { "0", "0" },
+            pair { "2x + 3", "2" },
+            pair { "x^100 + 4x^50 + 7", "200x^49 + 100x^99" },
+        })  
+    {
+        Polynomial<int, 0, 1> polynomial(input);
+        ASSERT_EQ(polynomial.derivative().asString(), expected);
+    } 
+    
+    for (auto [input, expected] :
+        {
+            pair { "0", "0" },
+            pair { "2x + 3", "0" },
+            pair { "x^5 + 4x^3 + 7", "24x + 20x^3" },
+        })  
+    {
+        Polynomial<int, 0, 1> polynomial(input);
+        ASSERT_EQ(polynomial.derivative(2).asString(), expected);
+    }
+}
+
 TEST(POLYNOMIAL, MUL_T) 
 {
     using pair = std::pair<const char*, const char*>;

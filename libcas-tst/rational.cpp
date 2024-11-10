@@ -123,3 +123,51 @@ TEST(RATIONAL, DIVISION)
         EXPECT_EQ(result.asString(), expected);
     }
 }
+
+TEST(RATIONAL, CONVERT_INTEGER_TO_RATIONAL) 
+{
+    using pair = std::pair<const char*, const char*>;
+    for (auto [input, expected] : {
+        pair { "5", "5"},
+        pair { "-54754676567", "-54754676567"}
+    })
+    {   
+        Integer integer(input);
+        Rational n1(integer);
+        EXPECT_EQ(n1.asString(), expected);
+    }
+}
+
+TEST(RATIONAL, ISINTEGER) 
+{
+    using pair = std::pair<const char*, bool>;
+    for (auto [input1, expected] : {
+        pair { "8/5",  0},
+        pair { "16/8",  1},
+        pair { "20/20",  1},
+        pair { "-20/10",  1},
+        pair { "-20/10",  1},
+        pair { "0/10",  1},
+        pair { "9999999999999999999999999999999999999999999999999/9999999999999999999999999999999999999999999999999",  1},
+    })
+    {
+        Rational n1(input1);
+        bool result = n1.isInteger();
+        EXPECT_EQ(result, expected);
+    }
+}
+
+TEST(RATIONAL, CONVERT_RATIONAL_TO_INTEGER) 
+{
+    using pair = std::pair<const char*, const char*>;
+    for (auto [input1, expected] : {
+        pair { "8/1", "8"},
+        pair { "-2008/1", "-2008"},
+        pair { "555/555", "1"},
+        pair { "500/250", "2"},
+    })
+    {
+        Rational n1(input1);
+        EXPECT_EQ(Integer(n1).asString(), expected);
+    }
+}

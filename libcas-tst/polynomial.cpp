@@ -54,6 +54,32 @@ TEST(POLYNOMIAL, DEG)
     }
 }
 
+TEST(POLYNOMIAL, DERIVATIVE) 
+{
+    using pair = std::pair<const char*, const char*>;
+    for (auto [input, expected] :
+        {
+            pair { "0", "0" },
+            pair { "2x + 3", "2" },
+            pair { "x^100 + 4x^50 + 7", "200x^49 + 100x^99" },
+        })  
+    {
+        Polynomial<int, 0, 1> polynomial(input);
+        ASSERT_EQ(polynomial.derivative().asString(), expected);
+    } 
+    
+    for (auto [input, expected] :
+        {
+            pair { "0", "0" },
+            pair { "2x + 3", "0" },
+            pair { "x^5 + 4x^3 + 7", "24x + 20x^3" },
+        })  
+    {
+        Polynomial<int, 0, 1> polynomial(input);
+        ASSERT_EQ(polynomial.derivative(2).asString(), expected);
+    }
+}
+
 TEST(POLYNOMIAL, MUL_T) 
 {
     using pair = std::pair<const char*, const char*>;

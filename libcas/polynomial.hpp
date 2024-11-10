@@ -82,9 +82,29 @@ public:
     }
     
     /** @brief DEG_P_N - Возвращает степень многочлена. */
-    size_t deg() const 
+    size_t deg() const
     {
         return coeff.size() - 1;
+    }
+
+    /** @brief DER_P_P - Взятие k-ой производной от многочлена. */
+    Polynomial derivative(unsigned int k = 1) const 
+    {
+        Polynomial tmp, der(*this);
+        
+        if (deg() == 0 || deg() < k)
+            return tmp; // 0
+
+        for (; k != 0; k--) 
+        {
+            tmp.coeff.resize(der.coeff.size() - 1);
+            for (size_t i = 0; i <= tmp.deg(); i++)
+                tmp.coeff[i] = der.coeff[i + 1] * (i + 1);
+
+            der = tmp;
+        }
+
+        return der; 
     }
 
     /** @brief MUL_PQ_P - Умножает многочлен на число. */

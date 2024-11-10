@@ -5,6 +5,7 @@ var classRational =
     [ "asString", "classRational.html#af4093366d0d86d21036b8ad3147af274", null ],
     [ "get_denominator", "classRational.html#ab00dd18c2cf045f2eedc0fb4eeffd184", null ],
     [ "get_numerator", "classRational.html#adf9b6afbfc81067f1fb65600072ae5b9", null ],
+    [ "isInteger", "classRational.html#a9470f58f7dbc02d1d006293adc395341", null ],
     [ "operator Integer", "classRational.html#a03ef3b861ae897e6ad2dfd172cf103b6", null ],
     [ "operator*=", "classRational.html#a2cbd4e7a44f88bf62444a9ac16123b17", null ],
     [ "operator+=", "classRational.html#ac1d2537646823dc3777f471dd53ca4a0", null ],

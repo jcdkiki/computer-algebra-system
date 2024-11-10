@@ -1,0 +1,10 @@
+find_package(GTest)
+
+if(GTest_FOUND)
+    enable_testing()
+    add_executable(tst natural.cpp integer.cpp rational.cpp polynomial.cpp)
+    target_link_libraries(tst PRIVATE rznumbers gtest gtest_main)
+    add_test(NAME tst COMMAND tst)
+else()
+    message(STATUS "GTests not found, not building tests")
+endif()

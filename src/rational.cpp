@@ -1,5 +1,5 @@
-#include "rational.hpp"
-#include "natural.hpp"
+#include "rznumbers/rational.hpp"
+#include "rznumbers/natural.hpp"
 #include <sstream>
 #include <stdexcept>
 

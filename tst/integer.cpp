@@ -1,4 +1,4 @@
-#include "integer.hpp"
+#include "rznumbers/integer.hpp"
 #include <gtest/gtest.h>
 
 TEST(INTEGER, IO)

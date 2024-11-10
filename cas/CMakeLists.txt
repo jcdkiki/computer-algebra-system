@@ -1,3 +1,0 @@
-list(APPEND CAS_SOURCES
-    ${CMAKE_CURRENT_LIST_DIR}/main.cpp
-)

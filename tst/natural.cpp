@@ -1,4 +1,4 @@
-#include "natural.hpp"
+#include "rznumbers/natural.hpp"
 #include <gtest/gtest.h>
 #include <sstream>
 #include <stdexcept>

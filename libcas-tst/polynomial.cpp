@@ -82,3 +82,38 @@ TEST(POLYNOMIAL, MUL_T)
     ASSERT_EQ((p_not_zero *= one).asString(),        "14 + 26x^100 + 84x^1000");
     ASSERT_EQ((p_not_zero *= zero).asString(),       "0");
 }
+
+TEST(POLYNOMIAL, ADD) 
+{
+    using tuple = std::tuple<const char*, const char*, const char*>;
+    using poly = Polynomial<int, 0, 1>;
+    for (auto [input1, input2, expected] : {
+        tuple { "0", "0", "0" },
+        tuple { "1 + x^2", "7", "8 + x^2" },
+        tuple { "2 + x^3", "3 + 5x^3", "5 + 6x^3" },
+        tuple { "19x", "1 + 20x + 3x^2", "1 + 39x + 3x^2" },
+        tuple { "19x^2", "1 + x^3", "1 + 19x^2 + x^3" },
+        tuple { "-x^3", "x^3", "0" },
+        tuple { "2x^2 + x^3", "2x^2 - x^3", "4x^2" },
+    })
+    {
+        poly p1(input1), p2(input2), result = p1 + p2;
+        ASSERT_EQ(result.asString(), expected);
+    }
+
+    for (auto [input1, input2, expected] : {
+        tuple { "0", "0", "0" },
+        tuple { "1 + x^2", "7", "8 + x^2" },
+        tuple { "2 + x^3", "3 + 5x^3", "5 + 6x^3" },
+        tuple { "19x", "1 + 20x + 3x^2", "1 + 39x + 3x^2" },
+        tuple { "19x^2", "1 + x^3", "1 + 19x^2 + x^3" },
+        tuple { "-x^3", "x^3", "0" },
+        tuple { "2x^2 + x^3", "2x^2 - x^3", "4x^2" },
+    })
+    {
+        poly p1(input1), p2(input2);
+        p1 += p2;
+        ASSERT_EQ(p1.asString(), expected);
+    }
+
+}

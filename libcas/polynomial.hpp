@@ -11,6 +11,7 @@
 #include <istream>
 #include <ostream>
 #include <sstream>
+#include <iostream>
 
 /**
  * @brief Многочлен.
@@ -85,6 +86,44 @@ public:
     size_t deg() const 
     {
         return coeff.size() - 1;
+    }
+
+    /** @brief ADD_PP_P - Вычисляет сумму двух многочленов. */
+    friend Polynomial operator+(const Polynomial& lhs, const Polynomial& rhs) 
+    {
+        Polynomial res, a(lhs), b(rhs);
+
+        if (a.deg() > b.deg())
+            std::swap(a, b);
+
+        res.coeff.resize(b.coeff.size(), zero);
+        for (size_t i = 0; i <= a.deg(); i++) 
+        {
+            res.coeff[i] = a.coeff[i] + b.coeff[i];
+        }
+
+        for (size_t i = a.deg() + 1; i <= b.deg(); i++) 
+        {
+            res.coeff[i] = b.coeff[i];
+        }
+
+        res.strip();
+
+        return res;
+    }
+
+    /** @brief ADD_PP_P - Вычисляет сумму двух многочленов. */
+    Polynomial& operator+=(const Polynomial& rhs) 
+    {
+        if (deg() <= rhs.deg()) 
+            coeff.resize(rhs.coeff.size(), zero);
+        
+        for (size_t i = 0; i <= rhs.deg(); i++)
+            coeff[i] += rhs.coeff[i];
+
+        strip();
+
+        return *this;
     }
 
     /** @brief MUL_PQ_P - Умножает многочлен на число. */

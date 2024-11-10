@@ -87,6 +87,27 @@ public:
         return coeff.size() - 1;
     }
 
+    /** @brief ADD_PP_P - Вычисляет сумму двух многочленов. */
+    friend Polynomial operator+(const Polynomial& lhs, const Polynomial& rhs) 
+    {
+        Polynomial res(lhs);
+        return res += rhs;
+    }
+
+    /** @brief ADD_PP_P - Вычисляет сумму двух многочленов. */
+    Polynomial& operator+=(const Polynomial& rhs) 
+    {
+        if (deg() <= rhs.deg()) 
+            coeff.resize(rhs.coeff.size(), zero);
+        
+        for (size_t i = 0; i <= rhs.deg(); i++)
+            coeff[i] += rhs.coeff[i];
+
+        strip();
+
+        return *this;
+    }
+    
     /** @brief MUL_Pxk_P - Умножает многочлен на x^k. */
     friend Polynomial operator<<(const Polynomial& lhs, size_t rhs) 
     {

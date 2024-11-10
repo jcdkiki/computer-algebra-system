@@ -162,6 +162,29 @@ public:
         return der; 
     }
 
+    /** @brief SUB_PP_P - Вычисляет разность двух многочленов. */
+    friend Polynomial operator-(const Polynomial& lhs, const Polynomial& rhs) 
+    {
+        Polynomial res(rhs);
+        res *= -one;
+        res += lhs;
+        return res; 
+    }
+
+    /** @brief SUB_PP_P - Вычисляет разность двух многочленов. */
+    Polynomial& operator-=(const Polynomial& rhs) 
+    {
+        if (deg() <= rhs.deg()) 
+            coeff.resize(rhs.coeff.size(), zero);
+        
+        for (size_t i = 0; i <= rhs.deg(); i++)
+            coeff[i] -= rhs.coeff[i];
+
+        strip();
+
+        return *this;
+    }
+
     /** @brief MUL_PQ_P - Умножает многочлен на число. */
     friend Polynomial operator*(const Polynomial& lhs, const T& rhs) 
     {

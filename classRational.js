@@ -1,6 +1,7 @@
 var classRational =
 [
     [ "Rational", "classRational.html#a3bbd6ff67c590da76ddfcbd48cd3de0a", null ],
+    [ "Rational", "classRational.html#afffdee8c8f30a68ee09be4c26b39f8e4", null ],
     [ "Rational", "classRational.html#a32a09888b437d30cc0c2496845242c2e", null ],
     [ "asString", "classRational.html#af4093366d0d86d21036b8ad3147af274", null ],
     [ "get_denominator", "classRational.html#ab00dd18c2cf045f2eedc0fb4eeffd184", null ],

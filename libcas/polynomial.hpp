@@ -90,25 +90,8 @@ public:
     /** @brief ADD_PP_P - Вычисляет сумму двух многочленов. */
     friend Polynomial operator+(const Polynomial& lhs, const Polynomial& rhs) 
     {
-        Polynomial res, a(lhs), b(rhs);
-
-        if (a.deg() > b.deg())
-            std::swap(a, b);
-
-        res.coeff.resize(b.coeff.size(), zero);
-        for (size_t i = 0; i <= a.deg(); i++) 
-        {
-            res.coeff[i] = a.coeff[i] + b.coeff[i];
-        }
-
-        for (size_t i = a.deg() + 1; i <= b.deg(); i++) 
-        {
-            res.coeff[i] = b.coeff[i];
-        }
-
-        res.strip();
-
-        return res;
+        Polynomial res(lhs);
+        return res += rhs;
     }
 
     /** @brief ADD_PP_P - Вычисляет сумму двух многочленов. */

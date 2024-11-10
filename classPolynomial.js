@@ -7,7 +7,9 @@ var classPolynomial =
     [ "derivative", "classPolynomial.html#a325e000395c482f98fac04aafc0d5a5e", null ],
     [ "lead", "classPolynomial.html#a2ce8b7b3cb4a2694553abc704176cc69", null ],
     [ "operator*=", "classPolynomial.html#a36152e746e28dc4c53976a035bead505", null ],
+    [ "operator<<=", "classPolynomial.html#a6fbaa89107133aad66ffaa0473aa880d", null ],
     [ "operator*", "classPolynomial.html#aa397c6e30cd66c3d1e4b1874c3c93dac", null ],
+    [ "operator<<", "classPolynomial.html#aa4707c35f4e0090b5215fc00a555a8e9", null ],
     [ "operator<<", "classPolynomial.html#ae8148672de86961263b190b707d63025", null ],
     [ "operator>>", "classPolynomial.html#a07cf3f3483b39217fd77c7eb99a949fe", null ]
 ];

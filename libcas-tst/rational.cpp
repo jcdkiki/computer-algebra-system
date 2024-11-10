@@ -142,3 +142,18 @@ TEST(RATIONAL, ISINTEGER)
         EXPECT_EQ(result, expected);
     }
 }
+
+TEST(RATIONAL, CONVERT_RATIONAL_TO_INTEGER) 
+{
+    using pair = std::pair<const char*, const char*>;
+    for (auto [input1, expected] : {
+        pair { "8/1", "8"},
+        pair { "-2008/1", "-2008"},
+        pair { "555/555", "1"},
+        pair { "500/250", "2"},
+    })
+    {
+        Rational n1(input1);
+        EXPECT_EQ(Integer(n1).asString(), expected);
+    }
+}

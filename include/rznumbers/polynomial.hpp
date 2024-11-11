@@ -6,7 +6,6 @@
 #ifndef CAS_NUMBERS_POLYNOMIAL_HPP_
 #define CAS_NUMBERS_POLYNOMIAL_HPP_
 
-#include <stdexcept>
 #include <vector>
 #include <string>
 #include <istream>

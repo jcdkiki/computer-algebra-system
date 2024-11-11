@@ -1,5 +1,4 @@
 #include "rznumbers/polynomial.hpp"
-#include "rznumbers/rational.hpp"
 #include <gtest/gtest.h>
 
 TEST(POLYNOMIAL, IO)

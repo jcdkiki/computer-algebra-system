@@ -6,6 +6,7 @@
 #ifndef CAS_NUMBERS_POLYNOMIAL_HPP_
 #define CAS_NUMBERS_POLYNOMIAL_HPP_
 
+#include <stdexcept>
 #include <vector>
 #include <string>
 #include <istream>
@@ -65,7 +66,6 @@ public:
      *  - \c "x^3 + 3x + 100x^40 + 5x^30"
      *  - \c "(5)x^5 + 7x^6 + (8)x^10"
      *  - \c "-10x - 3x^2"
--l gtest
      *  - \c "5 + 2 + 3x + 5x"
      *  - \c "5 - 2 + 3x - 5x"
      */
@@ -242,7 +242,69 @@ public:
         *this = *this * rhs;
         return *this; 
     }
-    
+
+    /** @brief DIV_PP_P - Вычисляет частное от деления многочлена на многочлен при делении с остатком. */
+    friend Polynomial operator/(const Polynomial& lhs, const Polynomial& rhs) 
+    {
+        if (rhs.lead() == zero)
+            throw std::runtime_error("cannot div from a null");
+
+        Polynomial K;
+
+        if (lhs.deg() >= rhs.deg())
+        {
+            Polynomial P(lhs);
+            K.coeff.resize(P.deg() - rhs.deg() + 1, zero);
+
+            while (P.deg() >= rhs.deg()) 
+            {
+                T c = P.lead() / rhs.lead();
+                size_t p = P.deg() - rhs.deg();
+
+                K.coeff[p] = c;
+
+                P -= (rhs << p) * c;
+                P.strip();
+            }
+        }
+
+        return K;
+    }
+
+    /** @brief DIV_PP_P - Вычисляет частное от деления многочлена на многочлен при делении с остатком. */
+    Polynomial& operator/=(const Polynomial& rhs) 
+    {
+        *this = *this / rhs;
+        return *this;
+    }
+
+    /** @brief MOD_PP_P - Вычисляет остаток от деления многочлена на многочлен при делении с остатком. */
+    friend Polynomial operator%(const Polynomial& lhs, const Polynomial& rhs) 
+    {
+        Polynomial res(lhs);
+        return res %= rhs;
+    }
+
+    /** @brief MOD_PP_P - Вычисляет остаток от деления многочлена на многочлен при делении с остатком. */
+    Polynomial& operator%=(const Polynomial& rhs) 
+    {
+        if (rhs.lead() == zero)
+            throw std::runtime_error("cannot div from a null");
+
+        T rhs_lead = rhs.lead();
+        size_t rhs_deg = rhs.deg();
+        while (deg() >= rhs_deg) 
+        {
+            T c = lead() / rhs_lead;
+            size_t p = deg() - rhs_deg;
+
+            *this -= (rhs << p) * c;
+            strip();
+        }
+
+        return *this;
+    }
+
     /** @brief Возвращает строковое представление многочлена */
     std::string asString()
     {

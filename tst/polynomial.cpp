@@ -1,4 +1,5 @@
 #include "rznumbers/polynomial.hpp"
+#include "rznumbers/rational.hpp"
 #include <gtest/gtest.h>
 
 TEST(POLYNOMIAL, IO)
@@ -146,6 +147,29 @@ TEST(POLYNOMIAL, MUL)
 
         p1 *= p2;
         ASSERT_EQ(p1.asString(), expected);
+    }
+}
+
+TEST(POLYNOMIAL, DIV_MOD) 
+{
+    using tuple = std::tuple<const char*, const char*, const char*, const char*>;
+    using poly = Polynomial<int, 0, 1>;
+    for (auto [input1, input2, expected_div, expected_mod] : {
+        tuple { "9 + 4x + x^2", "2 + x", "2 + x", "5" },
+        tuple { "4x", "1 + x", "4", "-4" },
+        tuple { "-1 + x", "1 + x + x^2", "0", "-1 + x" }
+    })
+    {
+        poly p1(input1), p2(input2);
+        poly div = p1 / p2, mod = p1 % p2;
+        ASSERT_EQ(div.asString(), expected_div);
+        ASSERT_EQ(mod.asString(), expected_mod);
+
+        p1 /= p2;
+        ASSERT_EQ(p1.asString(), expected_div);
+        p1 = poly(input1);
+        p1 %= p2;
+        ASSERT_EQ(p1.asString(), expected_mod);
     }
 }
 

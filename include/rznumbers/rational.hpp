@@ -32,6 +32,13 @@ public:
     Rational(Integer number) : numerator(number), denominator("1") { }
 
     /**
+     * @brief Создает новое рациональное число
+     * @param[in] numerator - числитель
+     * @param[in] denominator - знаменатель
+     */
+    Rational(const Integer &numerator, const Natural &denominator);
+
+    /**
      * @brief Создает новое рациональное число из строки
      * 
      * Примеры корректного ввода:

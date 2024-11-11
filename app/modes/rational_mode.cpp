@@ -1,14 +1,15 @@
 #include "rational_mode.hpp"
-#include "../parsers/natural_parser.hpp"
+#include "../parsers/rational_parser.hpp"
 
 RationalMode::RationalMode() :
-    b_reduce("red")
+    b_inverse("inv")
 {
-    b_reduce.signal_clicked().connect([this] { this->add_text("red"); });
-    grid3.attach(b_reduce, 0, 0);
+    b_inverse.signal_clicked().connect([this] { this->add_text("inv"); });
+    grid3.attach(b_inverse, 0, 0);
+    grid2.remove(b_mod);
 }
 
 Parser *RationalMode::create_parser(const char *str)
 {
-    return new NaturalParser(str);
+    return new RationalParser(str);
 }

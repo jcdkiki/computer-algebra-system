@@ -1,5 +1,5 @@
 #include "polynomial_mode.hpp"
-#include "../parsers/natural_parser.hpp"
+#include "../parsers/polynomial_parser.hpp"
 
 PolynomialMode::PolynomialMode() :
     b_derivative("d/dx"), b_multiple_roots("nmr"), b_x("x"), b_power("^")
@@ -17,5 +17,5 @@ PolynomialMode::PolynomialMode() :
 
 Parser *PolynomialMode::create_parser(const char *str)
 {
-    return new NaturalParser(str);
+    return new PolynomialParser(str);
 }

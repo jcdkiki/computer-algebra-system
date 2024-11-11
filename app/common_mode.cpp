@@ -65,6 +65,7 @@ CommonMode::CommonMode() :
     b_rparen.signal_clicked().connect([this] { this->add_text(")"); });
     b_comma.signal_clicked().connect([this] { this->add_text(","); });
     b_erase.signal_clicked().connect([this] { this->erase(); });
+    b_evaluate.signal_clicked().connect([this] { this->evaluate(); });
 
     grid1.attach(b_evaluate, 0, 3);
     grid1.attach(b_zero, 1, 3);

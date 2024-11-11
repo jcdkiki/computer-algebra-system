@@ -1,9 +1,16 @@
 #include "rznumbers/rational.hpp"
+#include "rznumbers/integer.hpp"
 #include "rznumbers/natural.hpp"
 #include <sstream>
 #include <stdexcept>
 
 Rational::Rational() : numerator("0"), denominator("1") {}
+
+Rational::Rational(const Integer &numerator, const Natural &denominator)
+    : numerator(numerator), denominator(denominator)
+{
+    this->reduce();
+}
 
 Rational::Rational(const char *str)
 {
@@ -45,6 +52,8 @@ std::istream& operator>>(std::istream& is, Rational& number)
     if (!number.denominator) {
         throw std::runtime_error("denominator cannot be zero");
     }
+
+    number.reduce();
     return is;
 }
 

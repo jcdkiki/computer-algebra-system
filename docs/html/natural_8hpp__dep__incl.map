@@ -1,8 +1,0 @@
-<map id="libcas/natural.hpp" name="libcas/natural.hpp">
-<area shape="rect" id="Node000001" title="Содержит класс Natural." alt="" coords="55,5,179,31"/>
-<area shape="rect" id="Node000002" href="$integer_8hpp.html" title="Содержит класс Integer." alt="" coords="5,79,129,104"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="103,44,78,80,73,77,99,41"/>
-<area shape="rect" id="Node000003" href="$rational_8hpp.html" title="Содержит класс Rational." alt="" coords="53,152,180,177"/>
-<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="132,42,142,71,143,104,135,131,125,153,120,151,130,129,138,104,137,72,127,44"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="85,114,111,150,106,153,81,117"/>
-</map>

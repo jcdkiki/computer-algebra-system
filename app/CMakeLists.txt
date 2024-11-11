@@ -14,6 +14,7 @@ endif()
 
 add_executable(rzcas)
 target_link_libraries(rzcas PkgConfig::GTK rznumbers)
+target_compile_features(rzcas PRIVATE cxx_std_17)
 
 target_sources(rzcas PRIVATE main.cpp window.cpp button.cpp lexer.cpp parser.cpp common_mode.cpp)
 add_subdirectory(modes)

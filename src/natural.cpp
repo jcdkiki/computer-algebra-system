@@ -371,6 +371,28 @@ Natural leastCommMul(const Natural &lhs, const Natural &rhs){
     return (lhs * rhs) / GCF;
 }
 
+Natural mod10k(const Natural &number, const size_t &k) {
+    Natural res = number;
+
+    //taking first k numbers from lower and cutting others
+    res.digits.resize(k);
+
+    return res;
+}
+
+Natural div10k(const Natural &number, const size_t &k) {
+    Natural res = number;
+
+    std::reverse(res.digits.begin(), res.digits.end());
+
+    //taking last len(number) - k numbers and cutting fist k numbers
+    res.digits.resize(number.digits.size() - k);
+
+    std::reverse(res.digits.begin(), res.digits.end());
+
+    return res;
+}
+
 Natural karatsuba_mul(const Natural &lhs, const Natural &rhs) {
     //recursion base if lhs or rhs < 10 -> digit * digit
     if (lhs.digits.size() <= Natural::THRESHOLD || rhs.digits.size() <= Natural::THRESHOLD) {
@@ -383,16 +405,12 @@ Natural karatsuba_mul(const Natural &lhs, const Natural &rhs) {
     //parts if original lhs, rhs
     Natural lhs_l, lhs_r, rhs_l, rhs_r;
 
-    // 10^k to split numbers in middle
-    Natural d("10");
-    d << (k);
+    //spliting lhs and rhs into to parts - left and right (low and high)
+    lhs_r = div10k(lhs, k);
+    lhs_l = mod10k(lhs, k);
 
-    //spliting lhs and rhs into to parts (low and high)
-    lhs_r = lhs / d;
-    lhs_l = lhs % d;
-
-    rhs_r = rhs / d;
-    rhs_l = rhs % d;
+    rhs_r = div10k(rhs, k);
+    rhs_l = mod10k(rhs, k);
 
     //temporary tricky sum
     Natural t1 = lhs_r + lhs_l;

@@ -19,6 +19,8 @@ class CasWindow : public Gtk::Window
 public:
     CasWindow();
     ~CasWindow() = default;
+    
+    bool key_controller_cb(guint keyval, guint, Gdk::ModifierType state);
 };
 
 #endif

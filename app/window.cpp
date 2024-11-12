@@ -1,8 +1,27 @@
 #include "window.hpp"
 
+bool CasWindow::key_controller_cb(guint keyval, guint, Gdk::ModifierType state)
+{
+	if (keyval == GDK_KEY_Return)
+  	{
+		int current_page = notebook.get_current_page();
+	    CommonMode* widget = (CommonMode*)notebook.get_nth_page(current_page);
+	    
+	    widget->evaluate();
+	    
+    	return true;
+  	}
+	
+  	return false;
+}
+
 CasWindow::CasWindow()
 {
     using Glib::ustring;
+
+	auto controller = Gtk::EventControllerKey::create();
+	controller->signal_key_pressed().connect(sigc::mem_fun(*this, &CasWindow::key_controller_cb), false);
+	add_controller(controller);
 
     set_resizable(false);
     set_title("Computer Algebra System");

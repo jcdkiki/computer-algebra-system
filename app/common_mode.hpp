@@ -36,12 +36,13 @@ protected:
     void add_text(Glib::ustring str);
     void set_status(const std::string &str);
     void erase();
-    void evaluate();
 
     virtual Parser *create_parser(const char *str) = 0;
 
 public:
     CommonMode();
+    
+    void evaluate();
 };
 
 #endif

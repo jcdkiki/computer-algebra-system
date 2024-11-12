@@ -1,4 +1,5 @@
 #include "rznumbers/polynomial.hpp"
+#include <sstream>
 
 void Polynomial::resizeAtLeast(size_t size)
 {

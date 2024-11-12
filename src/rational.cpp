@@ -169,3 +169,8 @@ Rational Rational::operator-()
 {
     return Rational(-numerator, denominator);
 }
+
+Rational::operator bool() const
+{
+    return (bool)numerator;
+}

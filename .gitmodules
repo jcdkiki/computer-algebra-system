@@ -1,3 +1,6 @@
 [submodule "doxygen-awesome-css"]
 	path = 3rd/doxygen-awesome-css
 	url = https://github.com/jothepro/doxygen-awesome-css.git
+[submodule "3rd/args"]
+	path = 3rd/args
+	url = https://github.com/pfultz2/args.git

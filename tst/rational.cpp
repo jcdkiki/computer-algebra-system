@@ -171,8 +171,3 @@ TEST(RATIONAL, CONVERT_RATIONAL_TO_INTEGER)
         EXPECT_EQ(Integer(n1).asString(), expected);
     }
 }
-
-Rational::operator bool() const
-{
-    return (bool)numerator;
-}

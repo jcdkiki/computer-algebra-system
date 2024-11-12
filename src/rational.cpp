@@ -12,6 +12,12 @@ Rational::Rational(const Integer &numerator, const Natural &denominator)
     this->reduce();
 }
 
+Rational::Rational(int numerator, unsigned int denominator)
+    : numerator(numerator), denominator(denominator)
+{
+    this->reduce();
+}
+
 Rational::Rational(const char *str)
 {
     std::stringstream ss;
@@ -141,4 +147,23 @@ Rational::operator Integer() {
         throw std::logic_error("Cannot convert to integer: denominator is not 1.");
     }
     return numerator;
+}
+
+bool operator==(const Rational &lhs, const Rational &rhs)
+{
+    return lhs.numerator == rhs.numerator && lhs.denominator == rhs.denominator;
+}
+
+bool operator!=(const Rational &lhs, const Rational &rhs)
+{
+    return lhs.numerator != rhs.numerator || lhs.denominator != rhs.denominator;
+}
+
+int sign(const Rational &number)
+{
+    switch (number.numerator.positivity()) {
+        case 1: return -1;
+        case 2: return 1;
+        default: return 0;
+    }
 }

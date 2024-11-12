@@ -39,6 +39,13 @@ public:
     Rational(const Integer &numerator, const Natural &denominator);
 
     /**
+     * @brief Создает новое рациональное число
+     * @param[in] numerator - числитель
+     * @param[in] denominator - знаменатель
+     */
+    Rational(int numerator, unsigned int denominator = 1);
+
+    /**
      * @brief Создает новое рациональное число из строки
      * 
      * Примеры корректного ввода:
@@ -129,6 +136,39 @@ public:
      * @returns Возвращает значения буливое значение
      */
     bool isInteger();
+
+    /**
+     * @brief Проверяет, равно ли число нулю.
+     * 
+     * @return true, если число не равно нулю.
+     * @return false, если число равно нулю.
+     */
+    operator bool() const;
+
+    /** @name Операторы сравнения
+     * @param[in] this,rhs Сравниваемые числа
+     * @returns true, если условие верно
+     * @returns в противном случае false
+     */
+    ///@{
+
+    /** @brief Два числа равны */
+    friend bool operator==(const Rational &lhs, const Rational &rhs);
+
+    /** @brief Два числа не равны */
+    friend bool operator!=(const Rational &lhs, const Rational &rhs);
+    
+    ///@}
+
+    /**
+     * @brief Проверяет положительность числа.
+     * 
+     * @param number    число.
+     * @returns 1, если число больше нуля
+     * @returns 0, елси число равно нулю
+     * @returns -1, если число меньше нуля
+     */
+    friend int sign(const Rational &number);
 
     friend std::ostream& operator<<(std::ostream& os, const Rational& number);
     friend std::istream& operator>>(std::istream& is, Rational& number);

@@ -7,6 +7,14 @@
 
 Natural::Natural() : digits(1, 0) {}
 
+Natural::Natural(unsigned int number)
+{
+    do {
+        digits.push_back(number % 10);
+        number /= 10;
+    } while (number != 0);
+}
+
 Natural::Natural(const char *str)
 {
     while (std::isdigit(*str)) {

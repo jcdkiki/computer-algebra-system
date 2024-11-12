@@ -38,6 +38,9 @@ public:
     /** @brief Создает новое натуральное число из строки */
     explicit Natural(const char *str);
     
+    /** @brief Создает новое натуральное число из unsigned int'а */
+    explicit Natural(unsigned int number);
+
     /** @brief Преобразует натуральное число в его строковое представление */
     std::string asString();
 

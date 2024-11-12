@@ -31,6 +31,9 @@ public:
     /** @brief Создает новое целое число из строки */
     explicit Integer(const char *str);
 
+    /** @brief Создает новое целое число из int'а */
+    explicit Integer(int number);
+
     /** @brief TRANS_N_Z Создает новое целое число из натурального числа */
     Integer(const Natural & number);
 

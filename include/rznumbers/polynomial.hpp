@@ -12,28 +12,23 @@
 #include <ostream>
 #include <sstream>
 
+#include "rznumbers/rational.hpp"
+
 /**
- * @brief Многочлен.
+ * @brief Многочлен с рациональными коэффициетнами.
  *
  * Использует \c std::vector для хранения коэффициентов.
  * Для этого класса перегружены основные арифметические операторы, что позволяет красиво записывать различные вычисления.
- * Также перегружены операторы ввода и вывода, позволяющие в красивой форме вводить и выводить многочлены.
- * 
- * @tparam T                Тип, используемый для коэффициентов
- * @tparam zero             Значение коэффициента по умолчанию. Для чисел должен быть равен нулю
-                            (если вы конечно не упоролись чем-нибудь)
- * @tparam one              Значение коэффициента, который не будет выводиться при использовании оператора << или метода asString().
-                            Для чисел может быть равен, например, единице.
+ * Также перегружены операторы ввода и вывода, позволяющие в красивой форме вводить и выводить многочлены. 
  */
-template<class T, T zero, T one>
 class Polynomial {
-    std::vector<T> coeff;
+    std::vector<Rational> coeff;
 
     /** @brief При необходимости расширяет вектор коэффициентов до размера \a size */
     void resizeAtLeast(size_t size)
     {
         if (coeff.size() < size) {
-            coeff.resize(size, zero);
+            coeff.resize(size);
         }
     }
 
@@ -41,7 +36,7 @@ class Polynomial {
     void strip()
     {
         for (size_t i = coeff.size() - 1; i > 0; i--) { // don`t touch free term
-            if (coeff[i] != 0) {
+            if (coeff[i]) {
                 coeff.resize(i + 1);
                 return;
             }
@@ -52,7 +47,7 @@ class Polynomial {
 
 public:
     /** @brief Создает новый многочлен, равный нулю */
-    Polynomial() : coeff(1, zero) {}
+    Polynomial() : coeff(1) {}
 
     /** @brief Создает новый многочлен из строки
      * 
@@ -81,13 +76,13 @@ public:
      * @param[in] coeff Коэффициент монома. 
      * @param[in] power Степень монома.
      */
-    Polynomial(T coeff, int power) : coeff(power + 1)
+    Polynomial(const Rational& coeff, int power) : coeff(power + 1)
     {
         this->coeff[power] = coeff;
     }
 
     /** @brief LED_P_Q - Возвращает старший коэффициент многочлена. */
-    T lead() const
+    const Rational& lead() const
     {
         return coeff.back();
     }
@@ -109,7 +104,7 @@ public:
     Polynomial& operator+=(const Polynomial& rhs) 
     {
         if (deg() <= rhs.deg()) 
-            coeff.resize(rhs.coeff.size(), zero);
+            coeff.resize(rhs.coeff.size());
         
         for (size_t i = 0; i <= rhs.deg(); i++)
             coeff[i] += rhs.coeff[i];
@@ -122,32 +117,25 @@ public:
     /** @brief MUL_Pxk_P - Умножает многочлен на x^k. */
     friend Polynomial operator<<(const Polynomial& lhs, size_t rhs) 
     {
-        
-        if (rhs == 0 || lhs.deg() == 0 && lhs.coeff.back() == zero)
-            return Polynomial(lhs);
-
-        Polynomial res;
-        res.resizeAtLeast(lhs.deg() + rhs + 1);
-        for (size_t i = 0; i <= lhs.deg(); i++) {
-            res.coeff[i + rhs] = lhs.coeff[i];
-        }
-
-        return res;
+        Polynomial res(lhs);
+        return res <<= rhs;
     }
 
     /** @brief MUL_Pxk_P - Умножает многочлен на x^k. */
     Polynomial& operator<<=(size_t rhs) 
     {        
-        if (!(rhs == 0 || deg() == 0 && coeff.back() == zero))
+        if (!(rhs == 0 || deg() == 0 && !coeff.back()))
         {
-            resizeAtLeast(deg() + rhs + 1);
-            for (size_t i = deg(); i > 0; i--) {
-                coeff[i + rhs] = coeff[i];
-                coeff[i] = zero;
+            ssize_t old_size = coeff.size();
+            coeff.resize(coeff.size() + rhs);
+
+            for (ssize_t i = old_size - 1; i >= 0; i--) {
+                coeff[i + rhs] = std::move(coeff[i]);
             }
 
-            coeff[rhs] = coeff[0];
-            coeff[0] = zero;
+            for (ssize_t i = 0; i < rhs; i++) {
+                coeff[i] = Rational();
+            }
         }
 
         return *this;
@@ -165,7 +153,7 @@ public:
         {
             tmp.coeff.resize(der.coeff.size() - 1);
             for (size_t i = 0; i <= tmp.deg(); i++)
-                tmp.coeff[i] = der.coeff[i + 1] * (i + 1);
+                tmp.coeff[i] = der.coeff[i + 1] * Rational(i + 1);
 
             der = tmp;
         }
@@ -176,17 +164,15 @@ public:
     /** @brief SUB_PP_P - Вычисляет разность двух многочленов. */
     friend Polynomial operator-(const Polynomial& lhs, const Polynomial& rhs) 
     {
-        Polynomial res(rhs);
-        res *= -one;
-        res += lhs;
-        return res; 
+        Polynomial res(lhs);
+        return res -= rhs; 
     }
 
     /** @brief SUB_PP_P - Вычисляет разность двух многочленов. */
     Polynomial& operator-=(const Polynomial& rhs) 
     {
         if (deg() <= rhs.deg()) 
-            coeff.resize(rhs.coeff.size(), zero);
+            coeff.resize(rhs.coeff.size());
         
         for (size_t i = 0; i <= rhs.deg(); i++)
             coeff[i] -= rhs.coeff[i];
@@ -197,13 +183,13 @@ public:
     }
 
     /** @brief MUL_PQ_P - Умножает многочлен на число. */
-    friend Polynomial operator*(const Polynomial& lhs, const T& rhs) 
+    friend Polynomial operator*(const Polynomial& lhs, const Rational& rhs) 
     {
-        if (rhs == zero)
+        if (!rhs)
             return Polynomial();
 
         Polynomial res(lhs);
-        if (rhs != one)
+        if (rhs != Rational(1))
         {
             for (size_t i = 0; i <= lhs.deg(); i++)
                res.coeff[i] = lhs.coeff[i] * rhs;
@@ -213,14 +199,14 @@ public:
     }
 
     /** @brief MUL_PQ_P - Умножает многочлен на число. */
-    Polynomial& operator*=(const T& rhs) 
+    Polynomial& operator*=(const Rational& rhs) 
     {
-        if (rhs == zero) 
+        if (!rhs) 
         {
             coeff.resize(1);
-            coeff[0] = zero;
+            coeff[0] = Rational();
         }
-        else if (rhs != one)
+        else if (rhs != Rational(1))
         {
             for (auto& c : coeff)
                 c *= rhs;
@@ -256,7 +242,7 @@ public:
     /** @brief DIV_PP_P - Вычисляет частное от деления многочлена на многочлен при делении с остатком. */
     friend Polynomial operator/(const Polynomial& lhs, const Polynomial& rhs) 
     {
-        if (rhs.lead() == zero)
+        if (!rhs.lead())
             throw std::runtime_error("cannot div from a null");
 
         Polynomial K;
@@ -264,13 +250,11 @@ public:
         if (lhs.deg() >= rhs.deg())
         {
             Polynomial P(lhs);
-            K.coeff.resize(P.deg() - rhs.deg() + 1, zero);
+            K.coeff.resize(P.deg() - rhs.deg() + 1);
 
-            while (P.deg() >= rhs.deg()) 
+            for (ssize_t p = P.deg() - rhs.deg(); p >= 0; p--) 
             {
-                T c = P.lead() / rhs.lead();
-                size_t p = P.deg() - rhs.deg();
-
+                Rational c = P.lead() / rhs.lead();
                 K.coeff[p] = c;
 
                 P -= (rhs << p) * c;
@@ -298,16 +282,13 @@ public:
     /** @brief MOD_PP_P - Вычисляет остаток от деления многочлена на многочлен при делении с остатком. */
     Polynomial& operator%=(const Polynomial& rhs) 
     {
-        if (rhs.lead() == zero)
-            throw std::runtime_error("cannot div from a null");
+        if (!rhs.lead())
+            throw std::runtime_error("cannot divide by zero");
 
-        T rhs_lead = rhs.lead();
-        size_t rhs_deg = rhs.deg();
-        while (deg() >= rhs_deg) 
+        for (ssize_t p = deg() - rhs.deg(); p >= 0; p--)
         {
-            T c = lead() / rhs_lead;
-            size_t p = deg() - rhs_deg;
-
+            Rational c = lead() / rhs.lead();
+            
             *this -= (rhs << p) * c;
             strip();
         }
@@ -334,7 +315,7 @@ public:
         bool has_x = false;
         bool first = true;
         for (size_t i = 1; i < polynomial.coeff.size(); i++) {
-            if (polynomial.coeff[i] != 0) {
+            if ((bool)polynomial.coeff[i]) {
                 has_x = true;
                 break;
             }
@@ -346,26 +327,26 @@ public:
         }
 
         for (size_t i = 1; i < polynomial.coeff.size(); i++) {
-            T coeff = polynomial.coeff[i];
+            Rational coeff = polynomial.coeff[i];
             if (!coeff) {
                 continue;
             }
 
-            bool sign = (coeff < 0);
+            bool is_negative = (sign(coeff) == -1);
 
             if (!first) {
-                os << (sign ? " - " : " + ");
-                if (sign) coeff = -coeff;
+                os << (is_negative ? " - " : " + ");
+                if (is_negative) coeff = -coeff;
             }
             else {
                 first = false;
-                if (sign) {
+                if (is_negative) {
                     coeff = -coeff;
                     os << "-";
                 }
             }
 
-            if (coeff != one) {
+            if (coeff != Rational(1)) {
                 os << coeff;
             }
 
@@ -391,7 +372,6 @@ public:
         polynomial.coeff[0] = 0;
 
         char c;
-        bool should_close = false;
         bool sign = false;
 
         is >> c;
@@ -401,33 +381,20 @@ public:
             is.unget();
 
         while (true) {
-            should_close = false;
-
-            is >> c;        
-            if (c == '(')
-                should_close = true;
-            else
-                is.unget();
-
-            T coeff;
-            is >> coeff;
+            int tmp;
+            is >> tmp;
+            Rational coeff(tmp);
 
             if (is.fail()) {
-                coeff = one;
+                coeff = Rational(1);
                 is.clear();
             }
 
             is >> c;
-            if (should_close) {
-                if (c != ')') {
-                    throw std::invalid_argument("bad polynomial input");
-                }
-                is >> c;
-            }
-
             if (c != 'x') {
                 is.unget();
-                polynomial.coeff[0] += sign ? -coeff : coeff;
+                if (sign) polynomial.coeff[0] -= coeff;
+                else      polynomial.coeff[0] += coeff;
             }
             else {
                 is >> c;
@@ -438,7 +405,8 @@ public:
                 else is.unget();
 
                 polynomial.resizeAtLeast(power + 1);
-                polynomial.coeff[power] += sign ? -coeff : coeff;
+                if (sign) polynomial.coeff[power] -= coeff;
+                else      polynomial.coeff[power] += coeff;
             }
 
             is >> c;

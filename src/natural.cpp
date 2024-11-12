@@ -4,6 +4,7 @@
 #include <ios>
 #include <iostream>
 #include <cctype>
+#include <stdexcept>
 
 Natural::Natural() : digits(1, 0) {}
 
@@ -55,29 +56,23 @@ std::string Natural::asString()
 }
 
 std::istream& operator>>(std::istream& is, Natural& number)
-{
-    char c;
+{   
     number.digits.resize(0);
 
+    is >> std::ws;
     while (true) {
-        c = is.get();
-        if (is.fail() || !std::isspace(c))
+        char c = is.peek();
+        if (is.eof() || is.fail() || !std::isdigit(c)) {
             break;
-    }
-
-    while (true) {
-        if (is.fail() || !std::isdigit(c))
-            break;
+        }
         
+        is.get();
         number.digits.push_back(c - '0');
-        c = is.get();
     }
-
-    is.unget();
 
     if (number.digits.size() == 0) {
-        is.setstate(std::ios::failbit);
         number.digits.push_back(0);
+        throw std::runtime_error("number cannot be empty");
     }
 
     std::reverse(number.digits.begin(), number.digits.end());

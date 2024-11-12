@@ -29,21 +29,21 @@ public:
      * @brief TRANS_Z_Q - преобразование целого в дробное
      * @param[in] number - целое число
      */
-    Rational(Integer number) : numerator(number), denominator("1") { }
+    explicit Rational(Integer number) : numerator(number), denominator("1") { }
 
     /**
      * @brief Создает новое рациональное число
      * @param[in] numerator - числитель
      * @param[in] denominator - знаменатель
      */
-    Rational(const Integer &numerator, const Natural &denominator);
+    explicit Rational(const Integer &numerator, const Natural &denominator);
 
     /**
      * @brief Создает новое рациональное число
      * @param[in] numerator - числитель
      * @param[in] denominator - знаменатель
      */
-    Rational(int numerator, unsigned int denominator = 1);
+    explicit Rational(int numerator, unsigned int denominator = 1);
 
     /**
      * @brief Создает новое рациональное число из строки
@@ -143,7 +143,7 @@ public:
      * @return true, если число не равно нулю.
      * @return false, если число равно нулю.
      */
-    operator bool() const;
+    explicit operator bool() const;
 
     /** @name Операторы сравнения
      * @param[in] this,rhs Сравниваемые числа
@@ -169,6 +169,9 @@ public:
      * @returns -1, если число меньше нуля
      */
     friend int sign(const Rational &number);
+
+    /** @brief Создает рациональное число с противоположным знаком. */
+    Rational operator-();
 
     friend std::ostream& operator<<(std::ostream& os, const Rational& number);
     friend std::istream& operator>>(std::istream& is, Rational& number);

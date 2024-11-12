@@ -53,25 +53,14 @@ std::istream& operator>>(std::istream& is, Integer& number)
     number.sign = false;
     char c;
 
-    while (true) {
-        c = is.get();
-        if (is.fail() || !std::isspace(c))
-            break;
-    }
-    
-    if (c == '-') {
+    if ((is >> std::ws).peek() == '-') {
         number.sign = true;
-    }
-    else {
-        is.unget();
+        is.get();
     }
 
     is >> number.natural;
 
-    if (!number.natural) {
-        number.sign = false;
-    }
-
+    number.fix_zero();
     return is;
 }
 

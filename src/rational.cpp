@@ -1,6 +1,7 @@
 #include "rznumbers/rational.hpp"
 #include "rznumbers/integer.hpp"
 #include "rznumbers/natural.hpp"
+#include <cctype>
 #include <sstream>
 #include <stdexcept>
 
@@ -43,17 +44,13 @@ std::ostream& operator<<(std::ostream& os, const Rational& number)
 
 std::istream& operator>>(std::istream& is, Rational& number)
 {
-    char c;
     is >> number.numerator;
+    number.denominator = Natural(1);
     
-    is >> c;
-    if (c != '/') {
-        is.unget();
-        number.denominator = Natural("1");
-        return is;
+    if ((is >> std::ws).peek() == '/') {
+        is.get();
+        is >> number.denominator;
     }
-    
-    is >> number.denominator;
 
     if (!number.denominator) {
         throw std::runtime_error("denominator cannot be zero");
@@ -166,4 +163,9 @@ int sign(const Rational &number)
         case 2: return 1;
         default: return 0;
     }
+}
+
+Rational Rational::operator-()
+{
+    return Rational(-numerator, denominator);
 }

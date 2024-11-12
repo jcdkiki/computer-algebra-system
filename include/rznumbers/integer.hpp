@@ -45,7 +45,7 @@ public:
      * @returns true, если число не равно нулю.
      * @returns false, если число равно нулю. 
      */
-    operator bool() const;
+    explicit operator bool() const;
 
     friend std::ostream& operator<<(std::ostream& os, const Integer& number);
     friend std::istream& operator>>(std::istream& is, Integer& number);

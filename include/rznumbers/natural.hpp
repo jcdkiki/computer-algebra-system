@@ -38,6 +38,9 @@ public:
     /** @brief Создает новое натуральное число из строки */
     explicit Natural(const char *str);
     
+    /** @brief Создает новое натуральное число из unsigned int'а */
+    explicit Natural(unsigned int number);
+
     /** @brief Преобразует натуральное число в его строковое представление */
     std::string asString();
 
@@ -146,7 +149,7 @@ public:
      * @returns true, если число не равно нулю.
      * @returns false, если число равно нулю. 
      */
-    operator bool() const;
+    explicit operator bool() const;
 
     /** @name Операторы сравнения (обёртка над методом cmp)
      * @param[in] this,rhs Сравниваемые числа

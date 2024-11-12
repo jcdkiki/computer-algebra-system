@@ -1,4 +1,5 @@
 #include "rznumbers/integer.hpp"
+#include "rznumbers/natural.hpp"
 #include <cctype>
 
 Integer::Integer() : sign(false), natural(Natural()) {}
@@ -12,6 +13,18 @@ Integer::Integer(const char *str) : sign(false)
     
     natural = Natural(str);
     this->fix_zero();
+}
+
+Integer::Integer(int number)
+{
+    if (number < 0) {
+        sign = true;
+        natural = Natural(-number);
+    }
+    else {
+        sign = false;
+        natural = Natural(number);
+    }
 }
 
 Integer::Integer(const Natural &number) : sign(false), natural(number) {}
@@ -40,25 +53,14 @@ std::istream& operator>>(std::istream& is, Integer& number)
     number.sign = false;
     char c;
 
-    while (true) {
-        c = is.get();
-        if (is.fail() || !std::isspace(c))
-            break;
-    }
-    
-    if (c == '-') {
+    if ((is >> std::ws).peek() == '-') {
         number.sign = true;
-    }
-    else {
-        is.unget();
+        is.get();
     }
 
     is >> number.natural;
 
-    if (!number.natural) {
-        number.sign = false;
-    }
-
+    number.fix_zero();
     return is;
 }
 

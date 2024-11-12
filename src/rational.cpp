@@ -1,12 +1,19 @@
 #include "rznumbers/rational.hpp"
 #include "rznumbers/integer.hpp"
 #include "rznumbers/natural.hpp"
+#include <cctype>
 #include <sstream>
 #include <stdexcept>
 
 Rational::Rational() : numerator("0"), denominator("1") {}
 
 Rational::Rational(const Integer &numerator, const Natural &denominator)
+    : numerator(numerator), denominator(denominator)
+{
+    this->reduce();
+}
+
+Rational::Rational(int numerator, unsigned int denominator)
     : numerator(numerator), denominator(denominator)
 {
     this->reduce();
@@ -37,17 +44,13 @@ std::ostream& operator<<(std::ostream& os, const Rational& number)
 
 std::istream& operator>>(std::istream& is, Rational& number)
 {
-    char c;
     is >> number.numerator;
+    number.denominator = Natural(1);
     
-    is >> c;
-    if (c != '/') {
-        is.unget();
-        number.denominator = Natural("1");
-        return is;
+    if ((is >> std::ws).peek() == '/') {
+        is.get();
+        is >> number.denominator;
     }
-    
-    is >> number.denominator;
 
     if (!number.denominator) {
         throw std::runtime_error("denominator cannot be zero");
@@ -141,4 +144,28 @@ Rational::operator Integer() {
         throw std::logic_error("Cannot convert to integer: denominator is not 1.");
     }
     return numerator;
+}
+
+bool operator==(const Rational &lhs, const Rational &rhs)
+{
+    return lhs.numerator == rhs.numerator && lhs.denominator == rhs.denominator;
+}
+
+bool operator!=(const Rational &lhs, const Rational &rhs)
+{
+    return lhs.numerator != rhs.numerator || lhs.denominator != rhs.denominator;
+}
+
+int sign(const Rational &number)
+{
+    switch (number.numerator.positivity()) {
+        case 1: return -1;
+        case 2: return 1;
+        default: return 0;
+    }
+}
+
+Rational Rational::operator-()
+{
+    return Rational(-numerator, denominator);
 }

@@ -6,53 +6,34 @@
 #ifndef CAS_NUMBERS_POLYNOMIAL_HPP_
 #define CAS_NUMBERS_POLYNOMIAL_HPP_
 
+#include <stdexcept>
 #include <vector>
 #include <string>
 #include <istream>
 #include <ostream>
 #include <sstream>
 
+#include "rznumbers/rational.hpp"
+
 /**
- * @brief Многочлен.
+ * @brief Многочлен с рациональными коэффициетнами.
  *
  * Использует \c std::vector для хранения коэффициентов.
  * Для этого класса перегружены основные арифметические операторы, что позволяет красиво записывать различные вычисления.
- * Также перегружены операторы ввода и вывода, позволяющие в красивой форме вводить и выводить многочлены.
- * 
- * @tparam T                Тип, используемый для коэффициентов
- * @tparam zero             Значение коэффициента по умолчанию. Для чисел должен быть равен нулю
-                            (если вы конечно не упоролись чем-нибудь)
- * @tparam one              Значение коэффициента, который не будет выводиться при использовании оператора << или метода asString().
-                            Для чисел может быть равен, например, единице.
+ * Также перегружены операторы ввода и вывода, позволяющие в красивой форме вводить и выводить многочлены. 
  */
-template<class T, T zero, T one>
 class Polynomial {
-    std::vector<T> coeff;
+    std::vector<Rational> coeff;
 
     /** @brief При необходимости расширяет вектор коэффициентов до размера \a size */
-    void resizeAtLeast(size_t size)
-    {
-        if (coeff.size() < size) {
-            coeff.resize(size, zero);
-        }
-    }
+    void resizeAtLeast(size_t size);
 
     /** @brief Удаляет лидирующие нули */
-    void strip()
-    {
-        for (size_t i = coeff.size() - 1; i > 0; i--) { // don`t touch free term
-            if (coeff[i] != 0) {
-                coeff.resize(i + 1);
-                return;
-            }
-        }
-
-        coeff.resize(1);
-    }
+    void strip();
 
 public:
     /** @brief Создает новый многочлен, равный нулю */
-    Polynomial() : coeff(1, zero) {}
+    Polynomial();
 
     /** @brief Создает новый многочлен из строки
      * 
@@ -68,12 +49,7 @@ public:
      *  - \c "5 + 2 + 3x + 5x"
      *  - \c "5 - 2 + 3x - 5x"
      */
-    Polynomial(const char *str)
-    {
-        std::stringstream ss;
-        ss << str;
-        ss >> *this;
-    }
+    Polynomial(const char *str);
 
     /**
      * @brief Создает моном.
@@ -81,247 +57,61 @@ public:
      * @param[in] coeff Коэффициент монома. 
      * @param[in] power Степень монома.
      */
-    Polynomial(T coeff, int power) : coeff(power + 1)
-    {
-        this->coeff[power] = coeff;
-    }
+    Polynomial(const Rational& coeff, int power);
 
     /** @brief LED_P_Q - Возвращает старший коэффициент многочлена. */
-    T lead() const
-    {
-        return coeff.back();
-    }
+    const Rational& lead() const;
     
     /** @brief DEG_P_N - Возвращает степень многочлена. */
-    size_t deg() const
-    {
-        return coeff.size() - 1;
-    }
+    size_t deg() const;
 
     /** @brief ADD_PP_P - Вычисляет сумму двух многочленов. */
-    friend Polynomial operator+(const Polynomial& lhs, const Polynomial& rhs) 
-    {
-        Polynomial res(lhs);
-        return res += rhs;
-    }
+    friend Polynomial operator+(const Polynomial& lhs, const Polynomial& rhs);
 
     /** @brief ADD_PP_P - Вычисляет сумму двух многочленов. */
-    Polynomial& operator+=(const Polynomial& rhs) 
-    {
-        if (deg() <= rhs.deg()) 
-            coeff.resize(rhs.coeff.size(), zero);
-        
-        for (size_t i = 0; i <= rhs.deg(); i++)
-            coeff[i] += rhs.coeff[i];
-
-        strip();
-
-        return *this;
-    }
+    Polynomial& operator+=(const Polynomial& rhs);
     
     /** @brief MUL_Pxk_P - Умножает многочлен на x^k. */
-    friend Polynomial operator<<(const Polynomial& lhs, size_t rhs) 
-    {
-        
-        if (rhs == 0 || lhs.deg() == 0 && lhs.coeff.back() == zero)
-            return Polynomial(lhs);
-
-        Polynomial res;
-        res.resizeAtLeast(lhs.deg() + rhs + 1);
-        for (size_t i = 0; i <= lhs.deg(); i++) {
-            res.coeff[i + rhs] = lhs.coeff[i];
-        }
-
-        return res;
-    }
+    friend Polynomial operator<<(const Polynomial& lhs, size_t rhs);
 
     /** @brief MUL_Pxk_P - Умножает многочлен на x^k. */
-    Polynomial& operator<<=(size_t rhs) 
-    {        
-        if (!(rhs == 0 || deg() == 0 && coeff.back() == zero))
-        {
-            resizeAtLeast(deg() + rhs + 1);
-            for (size_t i = deg(); i > 0; i--) {
-                coeff[i + rhs] = coeff[i];
-                coeff[i] = zero;
-            }
-
-            coeff[rhs] = coeff[0];
-            coeff[0] = zero;
-        }
-
-        return *this;
-    }
+    Polynomial& operator<<=(size_t rhs);
     
     /** @brief DER_P_P - Взятие k-ой производной от многочлена. */
-    Polynomial derivative(unsigned int k = 1) const 
-    {
-        Polynomial tmp, der(*this);
-        
-        if (deg() == 0 || deg() < k)
-            return tmp; // 0
-
-        for (; k != 0; k--) 
-        {
-            tmp.coeff.resize(der.coeff.size() - 1);
-            for (size_t i = 0; i <= tmp.deg(); i++)
-                tmp.coeff[i] = der.coeff[i + 1] * (i + 1);
-
-            der = tmp;
-        }
-
-        return der; 
-    }
+    Polynomial derivative(unsigned int k = 1) const;
 
     /** @brief SUB_PP_P - Вычисляет разность двух многочленов. */
-    friend Polynomial operator-(const Polynomial& lhs, const Polynomial& rhs) 
-    {
-        Polynomial res(rhs);
-        res *= -one;
-        res += lhs;
-        return res; 
-    }
+    friend Polynomial operator-(const Polynomial& lhs, const Polynomial& rhs);
 
     /** @brief SUB_PP_P - Вычисляет разность двух многочленов. */
-    Polynomial& operator-=(const Polynomial& rhs) 
-    {
-        if (deg() <= rhs.deg()) 
-            coeff.resize(rhs.coeff.size(), zero);
-        
-        for (size_t i = 0; i <= rhs.deg(); i++)
-            coeff[i] -= rhs.coeff[i];
-
-        strip();
-
-        return *this;
-    }
+    Polynomial& operator-=(const Polynomial& rhs);
 
     /** @brief MUL_PQ_P - Умножает многочлен на число. */
-    friend Polynomial operator*(const Polynomial& lhs, const T& rhs) 
-    {
-        if (rhs == zero)
-            return Polynomial();
-
-        Polynomial res(lhs);
-        if (rhs != one)
-        {
-            for (size_t i = 0; i <= lhs.deg(); i++)
-               res.coeff[i] = lhs.coeff[i] * rhs;
-        }
-
-        return res;
-    }
+    friend Polynomial operator*(const Polynomial& lhs, const Rational& rhs);
 
     /** @brief MUL_PQ_P - Умножает многочлен на число. */
-    Polynomial& operator*=(const T& rhs) 
-    {
-        if (rhs == zero) 
-        {
-            coeff.resize(1);
-            coeff[0] = zero;
-        }
-        else if (rhs != one)
-        {
-            for (auto& c : coeff)
-                c *= rhs;
-        }
-
-        return *this;
-
-    }
+    Polynomial& operator*=(const Rational& rhs);
 
     /** @brief MUL_PP_P - Вычисляет произведение двух многочленов. */
-    friend Polynomial operator*(const Polynomial& lhs, const Polynomial& rhs) 
-    {
-        Polynomial res;
-        res.coeff.resize(lhs.coeff.size() + rhs.coeff.size());
-
-        for (size_t i = 0; i <= lhs.deg(); ++i) {
-            for (size_t j = 0; j <= rhs.deg(); ++j) {
-                res.coeff[i + j] += lhs.coeff[i] * rhs.coeff[j];
-            }
-        }
-
-        res.strip();
-        return res;
-    }
+    friend Polynomial operator*(const Polynomial& lhs, const Polynomial& rhs);
 
     /** @brief MUL_PP_P - Вычисляет произведение двух многочленов. */
-    Polynomial& operator*=(const Polynomial& rhs) 
-    {
-        *this = *this * rhs;
-        return *this; 
-    }
+    Polynomial& operator*=(const Polynomial& rhs);
 
     /** @brief DIV_PP_P - Вычисляет частное от деления многочлена на многочлен при делении с остатком. */
-    friend Polynomial operator/(const Polynomial& lhs, const Polynomial& rhs) 
-    {
-        if (rhs.lead() == zero)
-            throw std::runtime_error("cannot div from a null");
-
-        Polynomial K;
-
-        if (lhs.deg() >= rhs.deg())
-        {
-            Polynomial P(lhs);
-            K.coeff.resize(P.deg() - rhs.deg() + 1, zero);
-
-            while (P.deg() >= rhs.deg()) 
-            {
-                T c = P.lead() / rhs.lead();
-                size_t p = P.deg() - rhs.deg();
-
-                K.coeff[p] = c;
-
-                P -= (rhs << p) * c;
-                P.strip();
-            }
-        }
-
-        return K;
-    }
+    friend Polynomial operator/(const Polynomial& lhs, const Polynomial& rhs);
 
     /** @brief DIV_PP_P - Вычисляет частное от деления многочлена на многочлен при делении с остатком. */
-    Polynomial& operator/=(const Polynomial& rhs) 
-    {
-        *this = *this / rhs;
-        return *this;
-    }
+    Polynomial& operator/=(const Polynomial& rhs);
 
     /** @brief MOD_PP_P - Вычисляет остаток от деления многочлена на многочлен при делении с остатком. */
-    friend Polynomial operator%(const Polynomial& lhs, const Polynomial& rhs) 
-    {
-        Polynomial res(lhs);
-        return res %= rhs;
-    }
+    friend Polynomial operator%(const Polynomial& lhs, const Polynomial& rhs);
 
     /** @brief MOD_PP_P - Вычисляет остаток от деления многочлена на многочлен при делении с остатком. */
-    Polynomial& operator%=(const Polynomial& rhs) 
-    {
-        if (rhs.lead() == zero)
-            throw std::runtime_error("cannot div from a null");
-
-        T rhs_lead = rhs.lead();
-        size_t rhs_deg = rhs.deg();
-        while (deg() >= rhs_deg) 
-        {
-            T c = lead() / rhs_lead;
-            size_t p = deg() - rhs_deg;
-
-            *this -= (rhs << p) * c;
-            strip();
-        }
-
-        return *this;
-    }
+    Polynomial& operator%=(const Polynomial& rhs);
 
     /** @brief Возвращает строковое представление многочлена */
-    std::string asString()
-    {
-        std::stringstream ss;
-        ss << *this;
-        return ss.str();
-    }
+    std::string asString();
 
     /**
      * @brief Выводит многочлен в поток вывода
@@ -329,53 +119,7 @@ public:
      * @param os                Поток вывода, в который будет выведен многочлен
      * @param[in] polynomial    Многочлен, который будет выведет в поток вывода
      */
-    friend std::ostream& operator<<(std::ostream& os, const Polynomial& polynomial)
-    {
-        bool has_x = false;
-        bool first = true;
-        for (size_t i = 1; i < polynomial.coeff.size(); i++) {
-            if (polynomial.coeff[i] != 0) {
-                has_x = true;
-                break;
-            }
-        }
-
-        if ((bool)polynomial.coeff[0] || !has_x) {
-            os << polynomial.coeff[0];
-            first = false;
-        }
-
-        for (size_t i = 1; i < polynomial.coeff.size(); i++) {
-            T coeff = polynomial.coeff[i];
-            if (!coeff) {
-                continue;
-            }
-
-            bool sign = (coeff < 0);
-
-            if (!first) {
-                os << (sign ? " - " : " + ");
-                if (sign) coeff = -coeff;
-            }
-            else {
-                first = false;
-                if (sign) {
-                    coeff = -coeff;
-                    os << "-";
-                }
-            }
-
-            if (coeff != one) {
-                os << coeff;
-            }
-
-            os << "x";
-            if (i != 1) {
-                os << '^' << i;
-            }
-        }
-        return os;
-    }
+    friend std::ostream& operator<<(std::ostream& os, const Polynomial& polynomial);
 
     /**
      * @brief Вводит многочлен из потока ввода
@@ -385,78 +129,7 @@ public:
      * @param is                Поток ввода, из которого будет введен многочлен
      * @param[out] polynomial   Ссылка на многочлен, в который будет записан результат
      */
-    friend std::istream& operator>>(std::istream& is, Polynomial& polynomial)
-    {
-        polynomial.coeff.resize(1);
-        polynomial.coeff[0] = 0;
-
-        char c;
-        bool should_close = false;
-        bool sign = false;
-
-        is >> c;
-        if (c == '-')
-            sign = true;
-        else
-            is.unget();
-
-        while (true) {
-            should_close = false;
-
-            is >> c;        
-            if (c == '(')
-                should_close = true;
-            else
-                is.unget();
-
-            T coeff;
-            is >> coeff;
-
-            if (is.fail()) {
-                coeff = one;
-                is.clear();
-            }
-
-            is >> c;
-            if (should_close) {
-                if (c != ')') {
-                    throw std::invalid_argument("bad polynomial input");
-                }
-                is >> c;
-            }
-
-            if (c != 'x') {
-                is.unget();
-                polynomial.coeff[0] += sign ? -coeff : coeff;
-            }
-            else {
-                is >> c;
-                size_t power = 1;
-                if (c == '^') {
-                    is >> power;
-                }
-                else is.unget();
-
-                polynomial.resizeAtLeast(power + 1);
-                polynomial.coeff[power] += sign ? -coeff : coeff;
-            }
-
-            is >> c;
-            if (c == '-') {
-                sign = true;
-            }
-            else if (c == '+') {
-                sign = false;
-            }
-            else {
-                is.unget();
-                break;
-            }
-        }
-
-        polynomial.strip();
-        return is;
-    }
+    friend std::istream& operator>>(std::istream& is, Polynomial& polynomial);
 };
 
 #endif

@@ -44,10 +44,9 @@ Polynomial Parser::evaluate_value<Polynomial>()
 
     if (token.is(Token::Kind::D)) {             // hardcoded pretty badly
         eat();
-        eat_expected(Token::Kind::Slash, "d/dx * ...");
-        eat_expected(Token::Kind::DX, "d/dx * ...");
-        eat_expected(Token::Kind::Asterisk, "d/dx * ...");
-        return evaluate_unary<Polynomial>().derivative();
+        eat_expected(Token::Kind::Slash, "d/dx(...)");
+        eat_expected(Token::Kind::DX, "d/dx(...)");
+        return evaluate_parenthesis<Polynomial>().derivative();
     }
 
     Rational coeff = Rational(1);

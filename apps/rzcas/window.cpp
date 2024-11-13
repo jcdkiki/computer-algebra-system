@@ -13,5 +13,6 @@ CasWindow::CasWindow()
     notebook.append_page(polynomial, "\xE2\x84\x99");
     notebook.set_current_page(0);
 
-    set_child(notebook);
+    add(notebook);
+    show_all();
 }

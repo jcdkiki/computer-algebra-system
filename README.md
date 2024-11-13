@@ -12,7 +12,7 @@
 ## Зависимости
 
 Ubutnu/Debian:
- * Зависимости rzcas: libgtkmm-4.0-dev
+ * Зависимости rzcas: libgtkmm-3.0-dev
  * Зависимости tst: googletest
 
 ## Сборка

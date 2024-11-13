@@ -5,7 +5,7 @@ if(NOT PkgConfig_FOUND)
     return()
 endif()
 
-pkg_check_modules(GTK IMPORTED_TARGET gtkmm-4.0)
+pkg_check_modules(GTK IMPORTED_TARGET gtkmm-3.0)
 
 if(NOT GTK_FOUND)
     message("GTK not found. Can't build rzcas")

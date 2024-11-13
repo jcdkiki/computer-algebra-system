@@ -2,10 +2,10 @@
 
 CasButton::CasButton(Glib::ustring label) : Gtk::Button(label, true)
 {
-    set_has_frame(false);
+    set_relief(Gtk::RELIEF_NONE);
 }
 
 CasButton::CasButton()
 {
-    set_has_frame(false);
+    set_relief(Gtk::RELIEF_NONE);
 }

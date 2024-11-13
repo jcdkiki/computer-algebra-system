@@ -362,7 +362,7 @@ Polynomial Polynomial::factorize()
 {
     Polynomial polynomial(*this);
 
-    if (lead())
+    if (deg())
     {
         Natural general_lcm = polynomial.lead().get_denominator(); 
         for (auto& c : polynomial.coeff) 
@@ -370,7 +370,7 @@ Polynomial Polynomial::factorize()
             general_lcm = leastCommMul(general_lcm, c.get_denominator()); 
         }
     
-        Natural general_gcd = polynomial.lead().get_numerator();
+        Natural general_gcd = abs(polynomial.lead().get_numerator());
         for (auto& c : polynomial.coeff) 
         {
             c *= Rational(general_lcm);
@@ -379,8 +379,27 @@ Polynomial Polynomial::factorize()
 
         for (auto& c : polynomial.coeff)
             c /= Rational(general_gcd);
+
+        if (polynomial.lead().get_numerator() < Integer(0))
+            polynomial *= Rational(-1);
     }
 
     return polynomial;
+}
+
+Polynomial gcd(const Polynomial &lhs, const Polynomial &rhs)
+{
+    Polynomial left(lhs), right(rhs);
+
+    while (left.lead() && right.lead())
+    {
+        if (left.deg() > right.deg())
+            left %= right;
+        else 
+            right %= left;
+    } 
+  
+    Polynomial res = (left + right).factorize();
+    return res;
 }
 

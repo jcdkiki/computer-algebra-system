@@ -129,8 +129,11 @@ public:
      */
     friend std::istream& operator>>(std::istream& is, Polynomial& polynomial);
 
-    /** @brief FAC_P_Q - Выносит рациональную часть из многочлена, делая коэффициенты целыми. */
+    /** @brief FAC_P_Q - Выносит рациональную часть из многочлена, делая коэффициенты целыми, старший член положительным. */
     Polynomial factorize();
+
+    /** @brief GCF_PP_P - Вычисляет НОД двух многочленов. */
+    friend Polynomial gcd(const Polynomial &lhs, const Polynomial &rhs); 
 };
 
 #endif

@@ -225,14 +225,30 @@ TEST(POLYNOMIAL, FAC)
     using poly = Polynomial;
     for (auto [input, expected] : {
         tuple { "0", "0" },
-        tuple { "1", "1" },
         tuple { "1/12 + 1/6x + 2/3x^2", "1 + 2x + 8x^2" },
-        tuple { "5/36x", "x" },
-        tuple { "5/36", "1" },
+        tuple {  "5/36x", "x" },
+        tuple { "-5/36x", "x" },
+        tuple {  "5/36",  "5/36" },
+        tuple { "-5/36",  "-5/36" },
     })
     {
         poly p(input); 
         ASSERT_EQ(p.factorize().asString(), expected);
+    }
+}
+
+TEST(POLYNOMIAL, GCD) 
+{
+    using tuple = std::tuple<const char*, const char*, const char*>;
+    for (auto [input1, input2, expected] : {
+        tuple { "2 - 3x + x^2", "3 - 4x + x^2", "-1 + x" },
+        tuple { "3 - 4x + x^2", "2 - 3x+x^2", "-1 + x" },
+        tuple { "1 + x", "2 + x", "1"},
+        tuple { "1 + x", "1/2", "1/2"}
+    })
+    {
+        Polynomial p1(input1), p2(input2);
+        EXPECT_EQ(gcd(p1, p2).asString(), expected);
     }
 }
 

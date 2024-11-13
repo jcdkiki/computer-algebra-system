@@ -252,3 +252,19 @@ TEST(POLYNOMIAL, GCD)
     }
 }
 
+TEST(POLYNOMIAL, NMR) 
+{
+    using tuple = std::tuple<const char*, const char*>;
+    for (auto [input, expected] : {
+        tuple { "1 + 2x + x^2", "1 + x"},
+        tuple { "-2 + 5x -4x^2 + x^3", "2 - 3x + x^2" },
+        tuple { "-46 + 101x - 59x^2 +3x^4 + x^5", "46 - 55x + 4x^2 + 4x^3 + x^4" },
+        tuple { "42", "42" },
+        tuple { "1 + x", "1 + x" }
+    })
+    {
+        Polynomial p(input);
+        EXPECT_EQ(p.nmr().asString(), expected);
+    }
+}
+

@@ -133,7 +133,10 @@ public:
     Polynomial factorize();
 
     /** @brief GCF_PP_P - Вычисляет НОД двух многочленов. */
-    friend Polynomial gcd(const Polynomial &lhs, const Polynomial &rhs); 
+    friend Polynomial gcd(const Polynomial &lhs, const Polynomial &rhs);
+
+    /** @brief NMR_P_P - Возвращает многочлен буз кратных корней. */
+    Polynomial nmr();
 };
 
 #endif

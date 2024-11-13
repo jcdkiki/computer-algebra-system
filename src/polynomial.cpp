@@ -403,3 +403,10 @@ Polynomial gcd(const Polynomial &lhs, const Polynomial &rhs)
     return res;
 }
 
+Polynomial Polynomial::nmr() {
+    if (deg() > 1)
+        return *this / gcd(*this, this->derivative());
+    
+    return Polynomial(*this);
+}
+

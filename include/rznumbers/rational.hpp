@@ -60,10 +60,10 @@ public:
     std::string asString();
 
     /** @brief Возвращает числитель числа */
-    Integer get_numerator() { return numerator; }
+    Integer get_numerator() const { return numerator; }
 
     /** @brief Возвращает знаменатель числа */
-    Natural get_denominator() { return denominator; }
+    Natural get_denominator() const { return denominator; }
 
     /**
      * @brief RED_Q_Q - Сокращение дроби

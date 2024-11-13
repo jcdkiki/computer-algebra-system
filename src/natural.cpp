@@ -394,7 +394,7 @@ Natural div10k(const Natural &number, const size_t &k) {
 }
 
 Natural karatsuba_mul(const Natural &lhs, const Natural &rhs) {
-    //recursion base if lhs or rhs < 10 -> digit * digit
+    //recursion base if lhs or rhs < 10 -> digit * number
     if (lhs.digits.size() <= Natural::THRESHOLD || rhs.digits.size() <= Natural::THRESHOLD) {
         return lhs * rhs;
     }
@@ -422,8 +422,14 @@ Natural karatsuba_mul(const Natural &lhs, const Natural &rhs) {
     Natural p3 = karatsuba_mul(t1, t2);
     
     //couting result = p1*10^(2k) + (p3 - p2 - p1)*10^k + p2
-    Natural res = (p1 << (2*(k))) + ((p3 - p2 - p1) << (k)) + p2;
+    //doing that faster without copying
+    p3 -= p2;
+    p3 -= p1;
+    p3 <<= k;
+    p1 <<= 2*k;
+    p1 += p3;
+    p1 += p2;
 
     //difficulty O(n^log2(3))
-    return res;
+    return p1;
 }

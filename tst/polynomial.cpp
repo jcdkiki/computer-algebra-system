@@ -218,3 +218,21 @@ TEST(POLYNOMIAL, SUB)
     }
 
 }
+
+TEST(POLYNOMIAL, FAC) 
+{
+    using tuple = std::tuple<const char*, const char*>;
+    using poly = Polynomial;
+    for (auto [input, expected] : {
+        tuple { "0", "0" },
+        tuple { "1", "1" },
+        tuple { "1/12 + 1/6x + 2/3x^2", "1 + 2x + 8x^2" },
+        tuple { "5/36x", "x" },
+        tuple { "5/36", "1" },
+    })
+    {
+        poly p(input); 
+        ASSERT_EQ(p.factorize().asString(), expected);
+    }
+}
+

@@ -128,6 +128,9 @@ public:
      * @param[out] polynomial   Ссылка на многочлен, в который будет записан результат
      */
     friend std::istream& operator>>(std::istream& is, Polynomial& polynomial);
+
+    /** @brief FAC_P_Q - Выносит рациональную часть из многочлена, делая коэффициенты целыми. */
+    Polynomial factorize();
 };
 
 #endif

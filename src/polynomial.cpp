@@ -357,3 +357,30 @@ std::istream& operator>>(std::istream& is, Polynomial& polynomial)
     polynomial.strip();
     return is;
 }
+
+Polynomial Polynomial::factorize() 
+{
+    Polynomial polynomial(*this);
+
+    if (lead())
+    {
+        Natural general_lcm = polynomial.lead().get_denominator(); 
+        for (auto& c : polynomial.coeff) 
+        {
+            general_lcm = leastCommMul(general_lcm, c.get_denominator()); 
+        }
+    
+        Natural general_gcd = polynomial.lead().get_numerator();
+        for (auto& c : polynomial.coeff) 
+        {
+            c *= Rational(general_lcm);
+            general_gcd = greatCommDiv(general_gcd, abs(c.get_numerator()));
+        }
+
+        for (auto& c : polynomial.coeff)
+            c /= Rational(general_gcd);
+    }
+
+    return polynomial;
+}
+

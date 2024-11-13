@@ -2,18 +2,28 @@
 #include "rznumbers/polynomial.hpp"
 #include "rznumbers/rational.hpp"
 
-static void derivative(Polynomial *data, size_t n, Polynomial *out)
+static void nmr(Polynomial *data, size_t n, Polynomial *out)
 {
     if (n != 1) {
         throw FunctionException("fucntion reqires 1 argument");
     }
 
-    *out = data->derivative();
+    *out = data->nmr();
+}
+
+static void factorize(Polynomial *data, size_t n, Polynomial *out)
+{
+    if (n != 1) {
+        throw FunctionException("fucntion reqires 1 argument");
+    }
+
+    *out = data->factorize();
 }
 
 PolynomialParser::PolynomialParser(const char *str) : Parser(str)
 {
-    functions["derivative"][std::type_index(typeid(Polynomial))] = (Parser::FunctionPtr)derivative;
+    functions["fac"][std::type_index(typeid(Polynomial))] = (Parser::FunctionPtr)factorize;
+    functions["nmr"][std::type_index(typeid(Polynomial))] = (Parser::FunctionPtr)nmr;
 }
 
 std::string PolynomialParser::evaluate()
@@ -27,6 +37,19 @@ Rational Parser::evaluate_mul<Rational>();
 template<>
 Polynomial Parser::evaluate_value<Polynomial>()
 {
+    if (token.is(Token::Kind::Minus)) {         // unary "-"
+        eat();                                  // dirty but ok for now...
+        return evaluate_unary<Polynomial>();    // want to rewrite all this crap later......
+    }
+
+    if (token.is(Token::Kind::D)) {             // hardcoded pretty badly
+        eat();
+        eat_expected(Token::Kind::Slash, "d/dx * ...");
+        eat_expected(Token::Kind::DX, "d/dx * ...");
+        eat_expected(Token::Kind::Asterisk, "d/dx * ...");
+        return evaluate_unary<Polynomial>().derivative();
+    }
+
     Rational coeff = Rational(1);
     
     if (token.is_not(Token::Kind::X)) {

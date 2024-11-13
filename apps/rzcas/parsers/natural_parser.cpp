@@ -3,15 +3,11 @@
 
 static void gcd_wrapper(Natural *data, size_t n, Natural *out)
 {
-    if (n <= 1) {
+    if (n != 2) {
         throw FunctionException("fucntion reqires at least 2 arguments");
     }
 
-    *out = Natural(data[0]);
-
-    for (size_t i = 1; i < n; i++) {
-        *out = greatCommDiv(*out, data[i]);
-    }
+    *out = greatCommDiv(data[0], data[1]);
 }
 
 static void lcm_wrapper(Natural *data, size_t n, Natural *out)
@@ -20,11 +16,7 @@ static void lcm_wrapper(Natural *data, size_t n, Natural *out)
         throw FunctionException("fucntion reqires 2 arguments");
     }
 
-    *out = Natural(data[0]);
-
-    for (size_t i = 1; i < n; i++) {
-        *out = leastCommMul(*out, data[i]);
-    }
+    *out = leastCommMul(data[0], data[1]);
 }
 
 NaturalParser::NaturalParser(const char *str) : Parser(str)

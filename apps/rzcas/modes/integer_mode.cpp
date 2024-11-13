@@ -3,6 +3,7 @@
 
 IntegerMode::IntegerMode() : b_abs("abs")
 {
+    b_abs.signal_clicked().connect([this] { this->add_text("abs"); });
     grid3.attach(b_abs, 0, 2);
 }
 

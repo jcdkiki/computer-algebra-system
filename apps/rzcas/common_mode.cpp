@@ -94,10 +94,9 @@ CommonMode::CommonMode() :
     status.set_buffer(Gtk::TextBuffer::create());
     status.get_buffer()->set_text("Welcome to Computer Algebra System");
     
-    entry_frame.set_child(entry);
     entry.set_margin(6);
 
-    append(entry_frame);
+    append(entry);
     append(box);
     append(status);
 

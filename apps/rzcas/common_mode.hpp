@@ -8,8 +8,7 @@
 class CommonMode : public Gtk::Box {
 protected:
     Gtk::Box box;
-    Gtk::Frame entry_frame;
-    Gtk::EditableLabel entry;
+    Gtk::Entry entry;
     Gtk::TextView status;
 
     Gtk::Grid grid1;

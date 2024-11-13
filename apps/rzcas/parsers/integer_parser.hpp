@@ -5,7 +5,7 @@
 
 class IntegerParser : public Parser {
 public:
-    using Parser::Parser;
+    IntegerParser(const char *str);
     std::string evaluate();
 };
 

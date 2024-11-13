@@ -6,8 +6,9 @@
 class PolynomialMode : public CommonMode {
     CasButton b_derivative;
     CasButton b_x;
-    CasButton b_multiple_roots;
+    CasButton b_nmr;
     CasButton b_power;
+    CasButton b_factorize;
 public:
     Parser *create_parser(const char *str);
     PolynomialMode();

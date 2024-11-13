@@ -26,6 +26,8 @@ public:
         Comma,
         Caret,
         X,
+        D,
+        DX,
         End,
         Unexpected,
     };

@@ -54,6 +54,12 @@ Token Lexer::identifier() noexcept {
     if (str == "x") {
         return Token(Token::Kind::X, start, m_beg);
     }
+    else if (str == "dx") {
+        return Token(Token::Kind::DX, start, m_beg);
+    }
+    else if (str == "d") {
+        return Token(Token::Kind::D, start, m_beg);
+    }
 
     return Token(Token::Kind::Identifier, start, m_beg);
 }

@@ -1,4 +1,6 @@
 #include "common_mode.hpp"
+#include <chrono>
+#include <fstream>
 
 void CommonMode::add_text(Glib::ustring str)
 {
@@ -21,10 +23,31 @@ void CommonMode::evaluate()
     std::string text = entry.get_text().c_str();
     std::unique_ptr<Parser> parser(this->create_parser(text.c_str()));
 
+    using namespace std::literals::chrono_literals;
+
     try {
+        auto start = std::chrono::high_resolution_clock().now();
         std::string res = parser->evaluate();
-        entry.set_text(res);
-        set_status("OK");
+        auto end = std::chrono::high_resolution_clock().now();
+
+        float time = std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count() / 1000.f;
+        std::string ok = "OK (" + std::to_string(time) +  "s). ";
+
+        if (res.size() > entry.get_max_length()) {
+            set_status(ok + "Answer was dumped to 'result.txt'");
+            std::ofstream file("result.txt");
+            file << res;
+            file.close();
+
+            if (fork() == 0) {
+                system("xdg-open result.txt");
+                exit(0);
+            }
+        }
+        else {
+            entry.set_text(res);
+            set_status(ok);
+        }
     }
     catch (ParserException &e) {
         set_status(std::string("Syntax error: ") + e.what().data());
@@ -95,6 +118,7 @@ CommonMode::CommonMode() :
     status.get_buffer()->set_text("Welcome to Computer Algebra System");
     
     entry.set_margin(6);
+    entry.set_max_length(1000);
 
     append(entry);
     append(box);

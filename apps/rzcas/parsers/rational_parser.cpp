@@ -17,7 +17,7 @@ RationalParser::RationalParser(const char *str) : Parser(str)
 
 std::string RationalParser::evaluate()
 {
-    return evaluate_whole_expression<Rational>().asString();
+    return std::move(evaluate_whole_expression<Rational>().asString());
 }
 
 template<>

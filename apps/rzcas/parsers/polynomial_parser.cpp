@@ -28,7 +28,7 @@ PolynomialParser::PolynomialParser(const char *str) : Parser(str)
 
 std::string PolynomialParser::evaluate()
 {
-    return evaluate_whole_expression<Polynomial>().asString();
+    return std::move(evaluate_whole_expression<Polynomial>().asString());
 }
 
 template<>
@@ -37,16 +37,16 @@ Rational Parser::evaluate_mul<Rational>();
 template<>
 Polynomial Parser::evaluate_value<Polynomial>()
 {
-    if (token.is(Token::Kind::Minus)) {         // unary "-"
-        eat();                                  // dirty but ok for now...
-        return evaluate_unary<Polynomial>();    // want to rewrite all this crap later......
+    if (token.is(Token::Kind::Minus)) {                 // unary "-"
+        eat();                                          // dirty but ok for now...
+        return std::move(evaluate_unary<Polynomial>()); // want to rewrite all this crap later......
     }
 
     if (token.is(Token::Kind::D)) {             // hardcoded pretty badly
         eat();
         eat_expected(Token::Kind::Slash, "d/dx(...)");
         eat_expected(Token::Kind::DX, "d/dx(...)");
-        return evaluate_parenthesis<Polynomial>().derivative();
+        return std::move(evaluate_parenthesis<Polynomial>().derivative());
     }
 
     Rational coeff = Rational(1);

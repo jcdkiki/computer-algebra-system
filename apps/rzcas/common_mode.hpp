@@ -2,6 +2,7 @@
 #define CAS_COMMON_MODE_HPP_
 
 #include <gtkmm.h>
+#include <gtkmm/messagedialog.h>
 #include "button.hpp"
 #include "parser.hpp"
 

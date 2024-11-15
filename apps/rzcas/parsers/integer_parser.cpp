@@ -51,5 +51,8 @@ Integer Parser::evaluate_value<Integer>()
     }
     
     eat_expected(Token::Kind::Minus, "number or '-'");
-    return evaluate_unary<Integer>() * Integer("-1");
+    
+    Integer res = evaluate_unary<Integer>();
+    res *= Integer(-1);
+    return std::move(res);
 }

@@ -90,7 +90,7 @@ ValueType Parser::evaluate_function()
 
     if (token.is(Token::Kind::RightParen)) {
         eat();
-        return execute_function(function_name, arguments);
+        return std::move(execute_function(function_name, arguments));
     }
 
     while (true) {
@@ -108,7 +108,7 @@ ValueType Parser::evaluate_function()
         expect(Token::Kind::Nothing, "')' or ','");
     }
 
-    return execute_function(function_name, arguments);
+    return std::move(execute_function(function_name, arguments));
 }
 
 template<class ValueType>
@@ -127,7 +127,7 @@ ValueType Parser::execute_function(std::string &name, std::vector<ValueType> &ar
     try {
         ValueType res;
         function_by_type->second(args.data(), args.size(), &res);
-        return res;
+        return std::move(res);
     }
     catch (FunctionException &e) {
         throw error("when calling function '" + name + "': " + e.what().data());
@@ -141,16 +141,16 @@ ValueType Parser::evaluate_parenthesis()
     ValueType res = evaluate_sum<ValueType>();
     eat_expected(Token::Kind::RightParen, "')'");
     
-    return res;
+    return std::move(res);
 }
 
 template<class ValueType>
 ValueType Parser::evaluate_unary()
 {
     switch (token.kind()) {
-        case Token::Kind::LeftParen:    return evaluate_parenthesis<ValueType>();
-        case Token::Kind::Identifier:   return evaluate_function<ValueType>();
-        default:                        return evaluate_value<ValueType>();
+        case Token::Kind::LeftParen:    return std::move(evaluate_parenthesis<ValueType>());
+        case Token::Kind::Identifier:   return std::move(evaluate_function<ValueType>());
+        default:                        return std::move(evaluate_value<ValueType>());
     }
 }
 
@@ -172,7 +172,7 @@ ValueType Parser::evaluate_sum()
         switch (token.kind()) {
             case Token::Kind::Plus:     sign = false; break;
             case Token::Kind::Minus:    sign = true; break;
-            default:                    return res;
+            default:                    return std::move(res);
         }
         
         eat();
@@ -200,7 +200,7 @@ ValueType Parser::evaluate_mul()
             case Token::Kind::Asterisk: operation = Operation::Mul; break;
             case Token::Kind::Slash:    operation = Operation::Div; break;
             case Token::Kind::Percent:  operation = Operation::Mod; break;
-            default:                    return res;
+            default:                    return std::move(res);
         }
 
         eat();

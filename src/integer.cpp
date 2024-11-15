@@ -245,9 +245,17 @@ Integer Integer::operator-() const{
     return std::move(new_int);
 }
 
-Integer& Integer::operator/=(const Integer &number){
-    natural /= number.natural;
+Integer& Integer::operator/=(const Integer &number)
+{
     sign = sign xor number.sign;
+
+    bool flag = sign && *this % number;
+    natural /= number.natural;
+    
+    if (flag) {
+        natural++;
+    }
+    
     this->fix_zero();
     return *this;
 }

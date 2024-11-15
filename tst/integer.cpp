@@ -225,9 +225,9 @@ TEST(INTEGER, DIV)
 {
     using tuple = std::tuple<const char*, const char*, const char*>;
     for (auto [input1, input2, expected] : {
-        tuple { "-100", "11", "-9" },
+        tuple { "-100", "11", "-10" },
         tuple { "12", "-12", "-1" },
-        tuple { "-12", "13", "0" },
+        tuple { "-12", "13", "-1" },
         tuple { "0", "-1", "0" },
         tuple { "-1", "-1", "1" },
         tuple { "-123", "-1", "123" },

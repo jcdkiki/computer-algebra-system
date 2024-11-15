@@ -373,3 +373,66 @@ Natural leastCommMul(const Natural &lhs, const Natural &rhs){
     Natural GCF = greatCommDiv(lhs, rhs);
     return (lhs * rhs) / GCF;
 }
+
+Natural mod10k(const Natural &number, const size_t &k) {
+    Natural res = number;
+
+    //taking first k numbers from lower and cutting others
+    res.digits.resize(k);
+
+    return res;
+}
+
+Natural div10k(const Natural &number, const size_t &k) {
+    Natural res = number;
+
+    std::reverse(res.digits.begin(), res.digits.end());
+
+    //taking last len(number) - k numbers and cutting fist k numbers
+    res.digits.resize(number.digits.size() - k);
+
+    std::reverse(res.digits.begin(), res.digits.end());
+
+    return res;
+}
+
+Natural karatsuba_mul(const Natural &lhs, const Natural &rhs) {
+    //recursion base if lhs or rhs < 10 -> digit * number
+    if (lhs.digits.size() <= Natural::THRESHOLD || rhs.digits.size() <= Natural::THRESHOLD) {
+        return lhs * rhs;
+    }
+
+    size_t len = std::max(lhs.digits.size(), rhs.digits.size());
+    size_t k = len / 2;
+
+    //parts if original lhs, rhs
+    Natural lhs_l, lhs_r, rhs_l, rhs_r;
+
+    //spliting lhs and rhs into to parts - left and right (low and high)
+    lhs_r = div10k(lhs, k);
+    lhs_l = mod10k(lhs, k);
+
+    rhs_r = div10k(rhs, k);
+    rhs_l = mod10k(rhs, k);
+
+    //temporary tricky sum
+    Natural t1 = lhs_r + lhs_l;
+    Natural t2 = rhs_r + rhs_l;
+
+    //counting 3 products instead of 4
+    Natural p1 = karatsuba_mul(lhs_r, rhs_r);
+    Natural p2 = karatsuba_mul(lhs_l, rhs_l);
+    Natural p3 = karatsuba_mul(t1, t2);
+    
+    //couting result = p1*10^(2k) + (p3 - p2 - p1)*10^k + p2
+    //doing that faster without copying
+    p3 -= p2;
+    p3 -= p1;
+    p3 <<= k;
+    p1 <<= 2*k;
+    p1 += p3;
+    p1 += p2;
+
+    //difficulty O(n^log2(3))
+    return p1;
+}

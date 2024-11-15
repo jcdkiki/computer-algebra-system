@@ -33,6 +33,9 @@ public:
     /** @brief Основание системы счисления */
     constexpr static int BASE = 10;
 
+    /** @brief Пороговое значение для алгоритма Карацубы */
+    constexpr static int THRESHOLD = 1;
+
     /** @brief Создает новое натуральное число, равное нулю. */
     Natural();
 
@@ -182,6 +185,12 @@ public:
     friend Natural greatCommDiv(const Natural &lhs, const Natural &rhs);
 
     friend Natural leastCommMul(const Natural &lhs, const Natural &rhs);
+
+    friend Natural karatsuba_mul(const Natural &lhs, const Natural &rhs);
+
+    friend Natural mod10k(const Natural &number, const size_t &k);
+    
+    friend Natural div10k(const Natural &number, const size_t &k);
 };
 
 /**
@@ -262,5 +271,26 @@ Natural greatCommDiv(const Natural &lhs, const Natural &rhs);
  * @returns НОК двух чисел
  */
 Natural leastCommMul(const Natural &lhs, const Natural &rhs);
+
+/**
+ * @brief Вычисляет остаток от числа по модулю 10^k.
+ * @param[in] number,k - Натуральное число и беззнаковое целое число - степень 10.
+ * @returns Остаток от деления.
+ */
+Natural mod10k(const Natural &number, const size_t &k);
+
+/**
+ * @brief Вычисляет целочисленно деление на 10^k.
+ * @param[in] number,k - Натуральное число и беззнаковое целое число - степень 10.
+ * @returns Неполное частное.
+ */ 
+Natural div10k(const Natural &number, const size_t &k);
+
+/**
+ * @brief Произведение натуральных чисел с помощью алгоритма Карацубы. (Лучше не использовать на маленьких числах.)
+ * @param[in] lhs,rhs - Натуральные числа.
+ * @returns Результат произведения чисел.
+ */
+Natural karatsuba_mul(const Natural &lhs, const Natural &rhs);
 
 #endif

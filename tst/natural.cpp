@@ -87,6 +87,8 @@ TEST(NATURAL, MUL)
         Natural n1(input1), n2(input2);
         EXPECT_EQ((n1 * n2).asString(), expected);
 
+        EXPECT_EQ(karatsuba_mul(n1, n2).asString(), expected);
+
         n1 *= n2;
         EXPECT_EQ(n1.asString(), expected);
     }
